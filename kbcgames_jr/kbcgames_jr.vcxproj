@@ -82,6 +82,8 @@
     <ClCompile Include="Source\GraphicsDevice.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\C3DObject.cpp" />
+    <ClCompile Include="Source\test\TestObj.cpp" />
+    <ClCompile Include="Source\test\TestScene.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +94,8 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\SceCommon.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\test\TestObj.h" />
+    <ClInclude Include="Source\test\TestScene.h" />
     <ClInclude Include="Source\WinMain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

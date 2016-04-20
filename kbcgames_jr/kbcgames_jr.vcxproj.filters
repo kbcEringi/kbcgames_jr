@@ -16,6 +16,15 @@
     <Filter Include="3D">
       <UniqueIdentifier>{bbc3145f-f35f-49c9-8184-9dba336cb208}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{581c9284-48e7-4909-9973-be98aed4e9c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Scene">
+      <UniqueIdentifier>{65cad721-ee6a-4a9a-a80d-ea6f8f79a40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\TestObj">
+      <UniqueIdentifier>{a7dc21af-67c3-47cf-bcd8-bc409c40bc71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\camera.cpp">
@@ -32,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="Source\C3DObject.cpp">
       <Filter>3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\test\TestScene.cpp">
+      <Filter>Test\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\test\TestObj.cpp">
+      <Filter>Test\TestObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="Source\C3DObject.h">
       <Filter>3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\test\TestScene.h">
+      <Filter>Test\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\test\TestObj.h">
+      <Filter>Test\TestObj</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

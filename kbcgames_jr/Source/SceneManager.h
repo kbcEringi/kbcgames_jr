@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 class CScene;
-//enum SCENE {TEST=0};
+enum SCENE {TEST=0};
 
 #define SINSTANCE(p) p::getInstance()
 

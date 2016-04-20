@@ -11,10 +11,10 @@
 //==========================================
 CCamera::CCamera()
 {
-	m_Distance = 50.0f;
+	m_Distance = 5.0f;
 	m_Base = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Up = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
+	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
 }
 
 //====================================

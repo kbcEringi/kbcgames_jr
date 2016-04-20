@@ -21,7 +21,7 @@ public:
 
 	HRESULT SerBase(D3DXVECTOR3);
 	D3DXVECTOR3 GetVector(){ return m_Eye; }
-	D3DXMATRIX Getm_View(){ return m_View; }
+	D3DXMATRIX GetView(){ return m_View; }
 private:
 	D3DXVECTOR3 m_Eye;	//カメラの位置
 	D3DXVECTOR3 m_At;	//カメラの視点
