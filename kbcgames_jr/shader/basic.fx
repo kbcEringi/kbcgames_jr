@@ -7,7 +7,7 @@ float4x4 g_worldMatrix;			//ワールド行列。
 float4x4 g_viewMatrix;			//ビュー行列。
 float4x4 g_projectionMatrix;	//プロジェクション行列。
 
-#define DIFFUSE_LIGHT_NUM 1
+#define DIFFUSE_LIGHT_NUM 4
 float4 g_diffuseLightDirection[DIFFUSE_LIGHT_NUM];
 float4 g_diffuseLightColor[DIFFUSE_LIGHT_NUM];
 float4 g_ambientLight;
