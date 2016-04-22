@@ -99,6 +99,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 void Initialize()
 {
 	graphicsDevice().InitD3d(hWnd);
+	GetKeyDevice().Initialize(hWnd);
 	//SceneManager‚Ìinitialize
 	SINSTANCE(CSceneManager)->InitializeScene();
 }

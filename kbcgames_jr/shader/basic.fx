@@ -44,71 +44,69 @@ struct VS_OUTPUT{
 *@brief	頂点シェーダー。
 */
 //通常
-	VS_OUTPUT VSMain(VS_INPUT In)
+VS_OUTPUT VSMain(VS_INPUT In)
+{
+	VS_OUTPUT Out = (VS_OUTPUT)0;
+
+	float3 N = normalize(mul(In.normal, (float3x3)g_worldMatrix));
+		float4 lig = 0.0f;
 	{
-		VS_OUTPUT Out = (VS_OUTPUT)0;
-
-		float3 N = normalize(mul(In.normal, (float3x3)g_worldMatrix));
-			float4 lig = 0.0f;
-		{
-			for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
-			{
-				lig.xyz += max(0.0f, dot(N, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
-			}
-			lig += g_ambientLight;
-		}
-		Out.color = lig;
-		//座標変換
-		float4 pos;
-		pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
-		pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
-		pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
-		Out.pos = pos;
-		Out.uv = In.uv;
-		return Out;
-	}
-	/*!
-	 *@brief	ピクセルシェーダー。
-	 */
-	float4 PSMain(VS_OUTPUT In) : COLOR
-	{
-		return tex2D(g_diffuseTextureSampler, In.uv) * In.color;
-	}
-
-
-
-	VS_OUTPUT VSSpecular(VS_INPUT In)
-	{
-		VS_OUTPUT Out = (VS_OUTPUT)0;
-
-		float3 eye = normalize(vEyePos.xyz - In.pos);//オブジェクトからのカメラの目線
-			float3 N = In.normal.xyz;
-			float3 R = -eye + 2.0f*dot(N, eye)*N;//反射ベクトル
-
-			float4 lig = 0.0f;
-			float4 spec = 0.0f;
 		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
 		{
-			lig.xyz += max(0.0, dot(N, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
-			lig.xyz += pow(max(0.0f, dot(-g_diffuseLightDirection[i].xyz, R)), 10) * g_diffuseLightColor[i].w;	//10=鏡面反射指数
+			lig.xyz += max(0.0f, dot(N, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
 		}
-		lig += g_ambientLight;//環境光プラス
-		Out.color = lig;
-
-		//座標変換
-		float4 pos;
-		pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
-		pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
-		pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
-		Out.pos = pos;
-		Out.uv = In.uv;
-		return Out;
+		lig += g_ambientLight;
 	}
+	Out.color = lig;
+	//座標変換
+	float4 pos;
+	pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
+	pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
+	pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
+	Out.pos = pos;
+	Out.uv = In.uv;
+	return Out;
+}
+/*!
+	*@brief	ピクセルシェーダー。
+	*/
+float4 PSMain(VS_OUTPUT In) : COLOR
+{
+	return tex2D(g_diffuseTextureSampler, In.uv) * In.color;
+}
 
-	float4 PSSpecular(VS_OUTPUT In) : COLOR
-	{
-		return /*tex2D(g_diffuseTextureSampler, In.uv) */ In.color;
+VS_OUTPUT VSSpecular(VS_INPUT In)
+{
+	VS_OUTPUT Out = (VS_OUTPUT)0;
+
+	float3 eye = normalize(vEyePos.xyz - In.pos);//オブジェクトからのカメラの目線
+		float3 N = In.normal.xyz;
+		float3 R = -eye + 2.0f*dot(N, eye)*N;//反射ベクトル
+
+		float4 lig = 0.0f;
+		float4 spec = 0.0f;
+	for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
+{
+		lig.xyz += max(0.0, dot(N, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
+		lig.xyz += pow(max(0.0f, dot(-g_diffuseLightDirection[i].xyz, R)), 10) * g_diffuseLightColor[i].w;	//10=鏡面反射指数
 	}
+	lig += g_ambientLight;//環境光プラス
+	Out.color = lig;
+
+	//座標変換
+	float4 pos;
+	pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
+	pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
+	pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
+	Out.pos = pos;
+	Out.uv = In.uv;
+	return Out;
+}
+
+float4 PSSpecular(VS_OUTPUT In) : COLOR
+{
+	return /*tex2D(g_diffuseTextureSampler, In.uv) */ In.color;
+}
 
 
 technique SkinModel

@@ -61,7 +61,7 @@ HRESULT CCamera::SetView(D3DXVECTOR3 &eye, D3DXVECTOR3 &at, D3DXVECTOR3 &up)
 	m_Eye = eye;
 	m_At = at;
 	m_Up = up;
-	D3DXMatrixLookAtLH(&m_View, &eye, &at, &up);
+	D3DXMatrixLookAtLH(&m_View, &m_Eye, &m_At, &m_Up);
 	(*graphicsDevice()).SetTransform(D3DTS_VIEW, &m_View);
 	return S_OK;
 }

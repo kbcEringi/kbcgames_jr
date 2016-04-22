@@ -25,6 +25,9 @@
     <Filter Include="Test\TestObj">
       <UniqueIdentifier>{a7dc21af-67c3-47cf-bcd8-bc409c40bc71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{7d3acdc2-e98c-42ee-b356-ba65e54479c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\camera.cpp">
@@ -46,6 +49,18 @@
       <Filter>Test\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\test\TestObj.cpp">
+      <Filter>Test\TestObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\C2DObject.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\test\jimen.cpp">
+      <Filter>Test\TestObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\test\gazou.cpp">
       <Filter>Test\TestObj</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +93,15 @@
       <Filter>Test\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\test\TestObj.h">
+      <Filter>Test\TestObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\C2DObject.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\test\jimen.h">
+      <Filter>Test\TestObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\test\gazou.h">
       <Filter>Test\TestObj</Filter>
     </ClInclude>
   </ItemGroup>
