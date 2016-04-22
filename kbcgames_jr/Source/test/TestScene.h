@@ -6,10 +6,10 @@
 #include"..\SceneManager.h"
 
 #include"..\camera.h"
-#include"TestObj.h"
-#include"jimen.h"
-#include"gazou.h"
-
+//#include"TestObj.h"
+#include "..\Player.h"
+#include "..\stage1.h"
+#include "..\AABB.h"
 #include"..\Input.h"
 
 class CSceneManager;
@@ -24,10 +24,11 @@ public:
 
 private:
 	CCamera camera;
-
-	CTestObj test;
-	CTestjimen jimen;
-	Cgazou gazou;
+	//CTestObj test;
+	CPlayer m_Player;
+	CStage1 m_stage1;
+	CAabb m_aabb;
 
 	BYTE diks[256];
+
 };
