@@ -10,6 +10,7 @@
 #include "..\Player.h"
 #include "..\stage1.h"
 #include "..\AABB.h"
+#include"..\Input.h"
 
 class CSceneManager;
 
@@ -27,4 +28,7 @@ private:
 	CPlayer m_Player;
 	CStage1 m_stage1;
 	CAabb m_aabb;
+
+	BYTE diks[256];
+
 };

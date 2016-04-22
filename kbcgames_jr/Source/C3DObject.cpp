@@ -2,11 +2,9 @@
 
 
 /*
- *第一引数　Xファイル名（例："XFile\\kyu.x"）
- *
- *
- *
- */
+*第一引数　Xファイル名（例："XFile\\kyu.x"）
+*第二引数　グラフィックパス（デフォルト＝０、スペキュラ＝１）
+*/
 void C3DObject::Initialize(LPCSTR FileName,int pass)
 {
 	D3DXLoadMeshFromX(FileName,D3DXMESH_MANAGED,graphicsDevice(),NULL,&m_D3DXMtrlBuffer,NULL,&m_NumMaterials,&m_Mesh);
@@ -51,21 +49,30 @@ void C3DObject::Initialize(LPCSTR FileName,int pass)
 		m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
 		m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
 		m_diffuseLightDirection[3] = D3DXVECTOR4(0.0f, 0.0f, -1.0f, 1.0f);
+		//m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+		//m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, -1.0f, 0.0f, 1.0f);
 		for (int i = 0; i < LIGHT_NUM; i++)
 		{
 			D3DXVec4Normalize(&m_diffuseLightDirection[i], &m_diffuseLightDirection[i]);
 		}
 		//ディフューズライト色
 		m_diffuseLightColor[0] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
-		m_diffuseLightColor[1] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-		m_diffuseLightColor[2] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-		m_diffuseLightColor[3] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+		m_diffuseLightColor[1] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
+		m_diffuseLightColor[2] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
+		m_diffuseLightColor[3] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
+		//m_diffuseLightColor[4] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
+		//m_diffuseLightColor[5] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
 		//環境光。
 		m_ambientLight = D3DXVECTOR4(0.1f, 0.1f, 0.1f, 1.0f);
 	}
 
 }
 
+
+/*
+*第一引数　ワールドマトリクス（自分の位置）
+*第二引数　ビューマトリクス（カメラの位置）
+*/
 void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix)
 {
 	//シェーダー適用開始。
@@ -97,13 +104,6 @@ void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix)
 	D3DMATERIAL9 *pMat1 = (D3DMATERIAL9*)m_D3DXMtrlBuffer->GetBufferPointer();
 	for (DWORD i = 0; i < m_NumMaterials; i++)
 	{
-		D3DXVECTOR4 v;
-		v.x = pMat1->Diffuse.r;
-		v.y = pMat1->Diffuse.g;
-		v.z = pMat1->Diffuse.b;
-		v.w = pMat1->Diffuse.a;
-		m_pEffect->SetVector("K_a", &v);
-		m_pEffect->SetVector("K_d", &v);
 		m_pEffect->SetTexture("g_diffuseTexture", m_pMeshTextures[i]);
 		m_Mesh->DrawSubset(i);
 	}

@@ -6,7 +6,15 @@
 class C3DObject
 {
 public:
+	/*
+	*第一引数　Xファイル名（例："XFile\\kyu.x"）
+	*第二引数　グラフィックパス（デフォルト＝０、スペキュラ＝１）
+	*/
 	void Initialize(LPCSTR , int pass = 0);
+	/*
+	*第一引数　ワールドマトリクス（自分の位置）
+	*第二引数　ビューマトリクス（カメラの位置）
+	*/
 	void Draw(D3DXMATRIX, D3DXMATRIX);
 	~C3DObject();
 protected:

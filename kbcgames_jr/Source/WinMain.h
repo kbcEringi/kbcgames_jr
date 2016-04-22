@@ -4,11 +4,14 @@
 #include"SceneManager.h"
 #include <windows.h>
 #include <tchar.h>
+#include"Input.h"
+
 TCHAR gName[100] = _T("3DRogueDungeons");
 
 HINSTANCE hInst;
 HWND hWnd;
 CGraphicsDevice g_graphicsDevice;
+Dinput g_input;
 #define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 540
 

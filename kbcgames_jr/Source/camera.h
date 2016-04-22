@@ -27,7 +27,7 @@ private:
 	D3DXVECTOR3 m_At;	//カメラの視点
 	D3DXVECTOR3 m_Up;	//カメラの上方向
 	
-	D3DXVECTOR3 m_Base;	//カメラの位置
+	D3DXVECTOR3 m_Base;	//カメラの視点
 	D3DXVECTOR3 m_NormalizeObject;	//正規化された対象点
 	D3DXVECTOR3 m_Object;	//対象点の位置
 
