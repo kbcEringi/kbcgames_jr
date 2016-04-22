@@ -6,7 +6,10 @@
 #include"..\SceneManager.h"
 
 #include"..\camera.h"
-#include"TestObj.h"
+//#include"TestObj.h"
+#include "..\Player.h"
+#include "..\stage1.h"
+#include "..\AABB.h"
 
 class CSceneManager;
 
@@ -20,5 +23,8 @@ public:
 
 private:
 	CCamera camera;
-	CTestObj test;
+	//CTestObj test;
+	CPlayer m_Player;
+	CStage1 m_stage1;
+	CAabb m_aabb;
 };

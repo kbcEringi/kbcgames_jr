@@ -19,11 +19,14 @@
     <Filter Include="Test">
       <UniqueIdentifier>{581c9284-48e7-4909-9973-be98aed4e9c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test\Scene">
-      <UniqueIdentifier>{65cad721-ee6a-4a9a-a80d-ea6f8f79a40d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Test\TestObj">
       <UniqueIdentifier>{a7dc21af-67c3-47cf-bcd8-bc409c40bc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{536cd511-df87-4179-97e4-b14ae5ad5324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{6be550c3-0dcf-4ae2-ad62-8fa1d06fd4ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,11 +45,23 @@
     <ClCompile Include="Source\C3DObject.cpp">
       <Filter>3D</Filter>
     </ClCompile>
-    <ClCompile Include="Source\test\TestScene.cpp">
-      <Filter>Test\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\test\TestObj.cpp">
       <Filter>Test\TestObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\stage1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AABB.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene1.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,11 +89,23 @@
     <ClInclude Include="Source\C3DObject.h">
       <Filter>3D</Filter>
     </ClInclude>
-    <ClInclude Include="Source\test\TestScene.h">
-      <Filter>Test\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Source\test\TestObj.h">
       <Filter>Test\TestObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stage1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AABB.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene1.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -78,24 +78,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AABB.cpp" />
+    <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\camera.cpp" />
     <ClCompile Include="Source\GraphicsDevice.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Scene1.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\C3DObject.cpp" />
+    <ClCompile Include="Source\stage1.cpp" />
     <ClCompile Include="Source\test\TestObj.cpp" />
-    <ClCompile Include="Source\test\TestScene.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AABB.h" />
+    <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\camera.h" />
     <ClInclude Include="Source\DXCommon.h" />
     <ClInclude Include="Source\GraphicsDevice.h" />
     <ClInclude Include="Source\C3DObject.h" />
     <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\SceCommon.h" />
+    <ClInclude Include="Source\Scene1.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\stage1.h" />
     <ClInclude Include="Source\test\TestObj.h" />
-    <ClInclude Include="Source\test\TestScene.h" />
     <ClInclude Include="Source\WinMain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
