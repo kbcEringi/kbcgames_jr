@@ -1,5 +1,5 @@
 #include"gazou.h"
-
+ 
 void Cgazou::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\ClearBack.jpg");
@@ -9,7 +9,39 @@ void Cgazou::Initialize()
 
 void Cgazou::Update()
 {
-
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+	if (KEYDOWN(diks, DIK_W) & 0x80)
+	{
+		vec3Position.y += -2.0;
+	}
+	if (KEYDOWN(diks, DIK_S) & 0x80)
+	{
+		vec3Position.y += 2.0;
+	}
+	if (KEYDOWN(diks, DIK_A) & 0x80)
+	{
+		vec3Position.x += -2.0;
+	}
+	if (KEYDOWN(diks, DIK_D) & 0x80)
+	{
+		vec3Position.x += 2.0;
+	}
+	if (KEYDOWN(diks, DIK_Z) & 0x80)
+	{
+		vec3Scale.x += 2.0;
+		vec3Scale.y += 1.0;
+	}
+	if (KEYDOWN(diks, DIK_X) & 0x80)
+	{
+		vec3Scale.x += -2.0;
+		vec3Scale.y += -1.0;
+	}
+	else
+	{
+		(*GetKeyDevice()).Acquire();
+	}
 }
 
 void Cgazou::Draw()

@@ -41,7 +41,7 @@ VS_OUT vs_main(VS_IN In)
 
 float4 ps_main(VS_OUT In) : COLOR0
 {
-	return tex2D(g_diffuseTextureSampler, In.uv);//+In.color;
+	return tex2D(g_diffuseTextureSampler, In.uv) * In.color;
 }
 
 technique Tech

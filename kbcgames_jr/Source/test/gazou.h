@@ -1,6 +1,8 @@
 #pragma once
 
 #include"..\C2DObject.h"
+#include"..\Input.h"
+
 
 class Cgazou
 {
@@ -14,4 +16,7 @@ private:
 
 	D3DXVECTOR3 vec3Position;
 	D3DXVECTOR3 vec3Scale;
+
+	BYTE diks[256];
+
 };

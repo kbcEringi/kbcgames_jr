@@ -49,7 +49,7 @@ void C3DObject::Initialize(LPCSTR FileName,int pass)
 		m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
 		m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
 		m_diffuseLightDirection[3] = D3DXVECTOR4(0.0f, 0.0f, -1.0f, 1.0f);
-		//m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+		//m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, -1.0f, 0.0f, 1.0f);
 		//m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, -1.0f, 0.0f, 1.0f);
 		for (int i = 0; i < LIGHT_NUM; i++)
 		{
@@ -63,7 +63,7 @@ void C3DObject::Initialize(LPCSTR FileName,int pass)
 		//m_diffuseLightColor[4] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
 		//m_diffuseLightColor[5] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
 		//ŠÂ‹«ŒõB
-		m_ambientLight = D3DXVECTOR4(0.1f, 0.1f, 0.1f, 1.0f);
+		m_ambientLight = D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f);
 	}
 
 }

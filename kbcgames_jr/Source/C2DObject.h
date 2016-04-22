@@ -22,7 +22,7 @@ public:
 	/*
 	 *第一引数　中心点を置く位置
 	 *第二引数　画像の大きさ
-	 *第三引数　回転度数（反時計回り）
+	 *第三引数　回転度数（反時計回り）：記入しない場合０がデフォルト
 	 */
 	void Draw(D3DXVECTOR3, D3DXVECTOR3,float angle =0);
 	~C2DObject();
