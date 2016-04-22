@@ -35,8 +35,21 @@ void C2DObject::Initialize(LPCSTR FileName)
 	m_pVB->Unlock();
 }
 
-void C2DObject::Draw(D3DXMATRIX world)
+void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 {
+	vec3Scale.x = vec3Scale.x / WINDOW_WIDTH;
+	vec3Scale.y = vec3Scale.y / WINDOW_HEIGHT;
+	D3DXVECTOR3 t;
+	t.x = vec3Trans.x / WINDOW_WIDTH;
+	t.y = vec3Trans.y / WINDOW_HEIGHT;
+	vec3Trans.x = -1.0f + t.x * 2.0f;
+	vec3Trans.y = 1.0f - t.y * 2.0f;
+	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixScaling(&matScale, vec3Scale.x, vec3Scale.y, vec3Scale.z);
+	D3DXMatrixTranslation(&matTrans, vec3Trans.x, vec3Trans.y, vec3Trans.z);
+	D3DXMatrixRotationZ(&matRot, D3DXToRadian(angle));
+	matWorld = matScale * matRot * matTrans;
+
 	m_pEffect->SetTechnique("Tech");
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(0);
@@ -45,7 +58,8 @@ void C2DObject::Draw(D3DXMATRIX world)
 	(*graphicsDevice()).SetStreamSource(0, m_pVB, 0, sizeof(SVertex));
 	(*graphicsDevice()).SetFVF(D3DFVF_CUSTOMVERTEX);
 	(*graphicsDevice()).DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
-	m_pEffect->SetMatrix("matWorld", &world);
+
+	m_pEffect->SetMatrix("matWorld", &matWorld);
 	m_pEffect->EndPass();
 	m_pEffect->End();
 }

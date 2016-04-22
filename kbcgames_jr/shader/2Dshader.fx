@@ -30,7 +30,9 @@ VS_OUT vs_main(VS_IN In)
 {
 	VS_OUT Out = (VS_OUT)0;
 
-	Out.pos =mul( In.pos,matWorld);
+
+	Out.pos = mul(In.pos, matWorld);
+
 	Out.color = In.color;
 	Out.uv = In.uv;
 
