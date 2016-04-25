@@ -29,20 +29,23 @@ void CScene1::Update()
 	}*/
 
 	//camera.RotLongitudinal(m_Player.GetPosition().x);
-	camera.SerBase(m_Player.GetPosition());
-
-
+	camera.SerBase(m_Player.GetPosition());//Playerを追いかけるカメラ
 
 	//test.Update();
 	m_Player.Update();
 	m_stage1.Update();
 	m_wood.Update();
+
+	/*m_aabb.isIntersected(m_Player.GetPosition());
+	m_aabb.SetPosition(m_Player.GetPosition());
+	m_aabb.SetSize(m_Player.GetPosition());
+	m_aabb.CalcAABBSizeFromMesh(m_Player.GetMesh());*/
 }
 
 void CScene1::Draw()
 {
 	//test.Draw(camera.GetView());
-	m_stage1.Draw(camera.GetView());
+	m_stage1.Draw(camera.GetView());//ステージ１を描画
 	/*これを実行すると半透明になる（半透明にするオブジェクトのときにする）*/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -52,6 +55,7 @@ void CScene1::Draw()
 	}
 	m_Player.Draw(camera.GetView());
 	m_wood.Draw(camera.GetView());
+	m_Player.Draw(camera.GetView());//Playerを描画
 	/*これ以降は半透明にならない処理*/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 

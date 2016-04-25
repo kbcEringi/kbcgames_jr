@@ -28,4 +28,5 @@ private:
 	CPlayer m_Player;
 	CStage1 m_stage1;
 	CWood m_wood;
+	//CAabb m_aabb;
 };
