@@ -3,6 +3,7 @@
 #include"DXCommon.h"
 #include"C3DObject.h"
 
+#include"Input.h"//キーボードインプット
 
 class CPlayer
 {
@@ -33,4 +34,6 @@ private:
 	float Gravity;					//重力
 	float MaxJump;					//ジャンプする力
 	float NowPositionY;				//今のポジション
+
+	BYTE diks[256];//キーインプット
 };

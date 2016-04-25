@@ -12,7 +12,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	Obj.Initialize("XFile\\Player.x");
+	Obj.Initialize("XFile\\Player.x");	//プレイヤーXファイル
 	D3DXMatrixIdentity(&matWorld);
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 0.0f;				//Y座標
@@ -21,7 +21,8 @@ void CPlayer::Initialize()
 	NowPositionY = 0.0f;				//今のポジション
 	Gravity = -0.2;						//重力
 	MaxJump = 1.0f;						//ジャンプする力
-	SpeedPower = 0.0f;
+	SpeedPower = 0.0f;					//加速する力
+	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 }
 
 void CPlayer::Update()
@@ -40,28 +41,36 @@ void CPlayer::Draw(D3DXMATRIX view)
 
 void CPlayer::Move()//移動
 {
-	if (GetAsyncKeyState(VK_RIGHT))
+	D3DXMatrixIdentity(&matWorld);
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
 	{
 		m_position.x += 0.2f;
 	}
-	if (GetAsyncKeyState(VK_LEFT))
+	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
 	{
 		m_position.x -= 0.2f;
 	}
-	if (GetAsyncKeyState(VK_UP))
+	if (KEYDOWN(diks, DIK_UP) & 0x80)//上
 	{
 		m_position.y += 0.2f;
 	}
-	if (GetAsyncKeyState(VK_DOWN))
+	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
 	{
 		m_position.y -= 0.2f;
+	}
+	else
+	{
+		(*GetKeyDevice()).Acquire();//キーデバイス取得
 	}
 }
 
 void CPlayer::Jump()//ジャンプ
 {
-	//ジャンプ処理(地面についている)
-	if (m_Ground == true && GetAsyncKeyState(VK_SPACE))
+	//ジャンプ処理(地面についている時)
+	if (m_Ground == true && KEYDOWN(diks, DIK_SPACE) & 0x80)
 	{
 		NowPositionY = m_position.y;//今のポジションを代入
 		m_Ground = false;
@@ -69,7 +78,7 @@ void CPlayer::Jump()//ジャンプ
 		
 		
 	}
-	//地面についていない
+	//地面についていない時
 	if (!m_Ground)
 	{
 		SpeedPower += Gravity;
