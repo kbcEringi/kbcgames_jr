@@ -5,6 +5,7 @@ void CScene1::Initialize()
 	//test.Initialize();
 	m_Player.Initialize();
 	m_stage1.Initialize();
+	m_wood.Initialize();
 	camera.Initialize();
 }
 
@@ -33,6 +34,7 @@ void CScene1::Update()
 	//test.Update();
 	m_Player.Update();
 	m_stage1.Update();
+	m_wood.Update();
 
 	/*m_aabb.isIntersected(m_Player.GetPosition());
 	m_aabb.SetPosition(m_Player.GetPosition());
@@ -48,6 +50,11 @@ void CScene1::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	if (GetAsyncKeyState('Q')){
+		m_wood.ApplyForce(D3DXVECTOR3(2.0f,0.0f,0.0f));
+	}
+	m_Player.Draw(camera.GetView());
+	m_wood.Draw(camera.GetView());
 	m_Player.Draw(camera.GetView());//PlayerÇï`âÊ
 	/*Ç±ÇÍà»ç~ÇÕîºìßñæÇ…Ç»ÇÁÇ»Ç¢èàóù*/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);

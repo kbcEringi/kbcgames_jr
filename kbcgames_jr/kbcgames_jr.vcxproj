@@ -94,6 +94,11 @@
     <ClCompile Include="Source\test\jimen.cpp" />
     <ClCompile Include="Source\test\TestObj.cpp" />
     <ClCompile Include="Source\test\TestScene.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Source\WinMain.cpp" />
+    <ClCompile Include="Source\wood.cpp" />
+>>>>>>> ef6deb9277ce0b99ef21ea212fe725628a9fbb96
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h" />
@@ -115,6 +120,11 @@
     <ClInclude Include="Source\test\jimen.h" />
     <ClInclude Include="Source\test\TestObj.h" />
     <ClInclude Include="Source\test\TestScene.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Source\WinMain.h" />
+    <ClInclude Include="Source\wood.h" />
+>>>>>>> ef6deb9277ce0b99ef21ea212fe725628a9fbb96
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

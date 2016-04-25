@@ -9,7 +9,12 @@
 //#include"TestObj.h"
 #include "Player.h"
 #include "stage1.h"
+<<<<<<< HEAD:kbcgames_jr/Source/Game/Scene1.h
 #include "..\AABB.h"
+=======
+#include "wood.h"
+#include "AABB.h"
+>>>>>>> ef6deb9277ce0b99ef21ea212fe725628a9fbb96:kbcgames_jr/Source/Scene1.h
 
 class CSceneManager;
 
@@ -26,5 +31,6 @@ private:
 	//CTestObj test;
 	CPlayer m_Player;
 	CStage1 m_stage1;
+	CWood m_wood;
 	//CAabb m_aabb;
 };
