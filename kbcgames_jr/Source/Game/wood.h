@@ -1,7 +1,7 @@
 #pragma once
-#include "Input.h"
-#include"DXCommon.h"
-#include"C3DObject.h"
+#include "..\Frame\Input.h"
+#include"..\Frame\DXCommon.h"
+#include"..\Frame\C3DObject.h"
 
 #define GRAVITY 0.2　//重力
 #define MAXJUMP	1.0	 //ジャンプする力

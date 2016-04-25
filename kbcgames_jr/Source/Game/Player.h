@@ -3,7 +3,7 @@
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
 
-#include"Input.h"//キーボードインプット
+#include"..\Frame\Input.h"//キーボードインプット
 
 class CPlayer
 {
