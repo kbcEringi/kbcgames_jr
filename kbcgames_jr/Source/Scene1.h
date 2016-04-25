@@ -9,6 +9,7 @@
 //#include"TestObj.h"
 #include "Player.h"
 #include "stage1.h"
+#include "wood.h"
 #include "AABB.h"
 
 class CSceneManager;
@@ -26,4 +27,5 @@ private:
 	//CTestObj test;
 	CPlayer m_Player;
 	CStage1 m_stage1;
+	CWood m_wood;
 };
