@@ -1,9 +1,9 @@
 #pragma once
 
-#include"..\DXCommon.h"
-#include"..\C3DObject.h"
+#include"..\Frame\DXCommon.h"
+#include"..\Frame\C3DObject.h"
 
-#include"..\Input.h"
+#include"..\Frame\Input.h"
 
 class CTestObj
 {

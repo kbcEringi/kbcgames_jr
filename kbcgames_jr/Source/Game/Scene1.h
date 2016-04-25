@@ -1,15 +1,15 @@
 #pragma once
 
-#include"DXCommon.h"
+#include"..\Frame\DXCommon.h"
 
-#include"Scene.h"
-#include"SceneManager.h"
+#include"..\Frame\Scene.h"
+#include"..\Frame\SceneManager.h"
 
-#include"camera.h"
+#include"..\Frame\camera.h"
 //#include"TestObj.h"
 #include "Player.h"
 #include "stage1.h"
-#include "AABB.h"
+#include "..\AABB.h"
 
 class CSceneManager;
 

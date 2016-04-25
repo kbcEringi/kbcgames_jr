@@ -1,5 +1,5 @@
 #pragma once
-#include"C3DObject.h"
+#include"..\Frame\C3DObject.h"
 
 class CAabb
 {

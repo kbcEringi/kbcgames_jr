@@ -10,22 +10,22 @@ void CScene1::Initialize()
 
 void CScene1::Update()
 {
-	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
-	{
-	camera.RotLongitudinal(0.05f);
-	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-	camera.RotLongitudinal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-	camera.RotTransversal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	{
-	camera.RotTransversal(0.05f);
-	}*/
+	//if (GetAsyncKeyState(VK_UP) & 0x8000)
+	//{
+	//camera.RotLongitudinal(0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	//{
+	//camera.RotLongitudinal(-0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//{
+	//camera.RotTransversal(-0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//{
+	//camera.RotTransversal(0.05f);
+	//}
 
 	//camera.RotLongitudinal(m_Player.GetPosition().x);
 	camera.SerBase(m_Player.GetPosition());

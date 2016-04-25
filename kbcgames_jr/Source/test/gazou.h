@@ -1,7 +1,7 @@
 #pragma once
 
-#include"..\C2DObject.h"
-#include"..\Input.h"
+#include"..\Frame\C2DObject.h"
+#include"..\Frame\Input.h"
 
 
 class Cgazou

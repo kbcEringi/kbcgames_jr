@@ -1,8 +1,10 @@
 #pragma once
-#include "Input.h"
-#include"DXCommon.h"
-#include"C3DObject.h"
+#include "..\Frame\Input.h"
+#include"..\Frame\DXCommon.h"
+#include"..\Frame\C3DObject.h"
 
+
+#include "..\Frame\Audio.h"
 class CAudio;
 
 class CStage1

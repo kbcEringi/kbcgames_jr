@@ -1,16 +1,15 @@
 #pragma once
 
-#include"..\DXCommon.h"
+#include"..\Frame\DXCommon.h"
 
-#include"..\Scene.h"
-#include"..\SceneManager.h"
+#include"..\Frame\Scene.h"
+#include"..\Frame\SceneManager.h"
 
-#include"..\camera.h"
-//#include"TestObj.h"
-#include "..\Player.h"
-#include "..\stage1.h"
-#include "..\AABB.h"
-#include"..\Input.h"
+#include"..\Frame\camera.h"
+#include"..\Frame\Input.h"
+
+#include"TestObj.h"
+#include"jimen.h"
 
 class CSceneManager;
 
@@ -24,10 +23,8 @@ public:
 
 private:
 	CCamera camera;
-	//CTestObj test;
-	CPlayer m_Player;
-	CStage1 m_stage1;
-	CAabb m_aabb;
+	CTestObj testob;
+	CTestjimen jimen;
 
 	BYTE diks[256];
 

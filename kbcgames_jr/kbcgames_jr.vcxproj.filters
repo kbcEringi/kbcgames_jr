@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="3D">
-      <UniqueIdentifier>{bbc3145f-f35f-49c9-8184-9dba336cb208}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{581c9284-48e7-4909-9973-be98aed4e9c6}</UniqueIdentifier>
     </Filter>
@@ -25,40 +10,37 @@
     <Filter Include="Test\TestObj">
       <UniqueIdentifier>{a7dc21af-67c3-47cf-bcd8-bc409c40bc71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2D">
-      <UniqueIdentifier>{7d3acdc2-e98c-42ee-b356-ba65e54479c4}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{095b06b0-0241-4e58-8460-3c4965b3c46f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Audio">
-      <UniqueIdentifier>{82843399-84d5-4f7e-9a50-3f995f3bd48f}</UniqueIdentifier>
+    <Filter Include="Frame">
+      <UniqueIdentifier>{6f11feb9-f745-445e-9ddd-3e78fb0328a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\2D">
+      <UniqueIdentifier>{24dc14de-7305-4144-9c6f-c9edf9c3211d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\3D">
+      <UniqueIdentifier>{829d49af-8ec8-4c9c-bcd7-620789b66bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\Input">
+      <UniqueIdentifier>{5dade1e6-c40b-4e3c-b0f9-98bfc87f7044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\Scene">
+      <UniqueIdentifier>{b81c5df2-83fe-4243-8ec1-b84f3743826f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{fa872c34-4a39-44df-881f-fabb85df9be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{e24ee000-4310-4977-8ac1-1f61efe7a80f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GraphicsDevice.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\WinMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\C3DObject.cpp">
-      <Filter>3D</Filter>
-    </ClCompile>
     <ClCompile Include="Source\test\TestScene.cpp">
       <Filter>Test\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\test\TestObj.cpp">
       <Filter>Test\TestObj</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\C2DObject.cpp">
-      <Filter>2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\input.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\test\jimen.cpp">
       <Filter>Test\TestObj</Filter>
@@ -66,55 +48,49 @@
     <ClCompile Include="Source\test\gazou.cpp">
       <Filter>Test\TestObj</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Audio.cpp">
-      <Filter>Audio</Filter>
+    <ClCompile Include="Source\Frame\input.cpp">
+      <Filter>Frame\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AABB.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\Frame\C3DObject.cpp">
+      <Filter>Frame\3D</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\Frame\C2DObject.cpp">
+      <Filter>Frame\2D</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene1.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\Frame\Audio.cpp">
+      <Filter>Frame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\stage1.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\Frame\camera.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\GraphicsDevice.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\WinMain.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\SceneManager.cpp">
+      <Filter>Frame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Player.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Scene1.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\stage1.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\posteffect.cpp">
+      <Filter>Frame\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DXCommon.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GraphicsDevice.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceCommon.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\WinMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\C3DObject.h">
-      <Filter>3D</Filter>
-    </ClInclude>
     <ClInclude Include="Source\test\TestScene.h">
       <Filter>Test\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\test\TestObj.h">
       <Filter>Test\TestObj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\C2DObject.h">
-      <Filter>2D</Filter>
     </ClInclude>
     <ClInclude Include="Source\test\jimen.h">
       <Filter>Test\TestObj</Filter>
@@ -122,20 +98,50 @@
     <ClInclude Include="Source\test\gazou.h">
       <Filter>Test\TestObj</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Audio.h">
-      <Filter>Audio</Filter>
+    <ClInclude Include="Source\Frame\Input.h">
+      <Filter>Frame\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AABB.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Source\Frame\C3DObject.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene1.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Source\Frame\C2DObject.h">
+      <Filter>Frame\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Source\stage1.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Source\Frame\Audio.h">
+      <Filter>Frame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Source\Frame\camera.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\DXCommon.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\GraphicsDevice.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\WinMain.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SceCommon.h">
+      <Filter>Frame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Scene.h">
+      <Filter>Frame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SceneManager.h">
+      <Filter>Frame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Player.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Scene1.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\stage1.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\posteffect.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
