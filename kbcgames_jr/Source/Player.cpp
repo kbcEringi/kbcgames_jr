@@ -26,23 +26,9 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	if (GetAsyncKeyState('D'))
-	{
-		m_position.x += 0.2f;
-	}
-	else if (GetAsyncKeyState('A'))
-	{
-		m_position.x -= 0.2f;
-	}
-	else if (GetAsyncKeyState('W'))
-	{
-		m_position.y += 0.2f;
-	}
-	else if (GetAsyncKeyState('S'))
-	{
-		m_position.y -= 0.2f;
-	}
-	Jump();
+	
+	Move();//移動関数
+	Jump();//プレイヤージャンプ関数
 
 }
 
@@ -52,14 +38,35 @@ void CPlayer::Draw(D3DXMATRIX view)
 	Obj.Draw(matWorld, view);
 }
 
-void CPlayer::Jump()
+void CPlayer::Move()//移動
+{
+	if (GetAsyncKeyState(VK_RIGHT))
+	{
+		m_position.x += 0.2f;
+	}
+	if (GetAsyncKeyState(VK_LEFT))
+	{
+		m_position.x -= 0.2f;
+	}
+	if (GetAsyncKeyState(VK_UP))
+	{
+		m_position.y += 0.2f;
+	}
+	if (GetAsyncKeyState(VK_DOWN))
+	{
+		m_position.y -= 0.2f;
+	}
+}
+
+void CPlayer::Jump()//ジャンプ
 {
 	//ジャンプ処理(地面についている)
 	if (m_Ground == true && GetAsyncKeyState(VK_SPACE))
 	{
+		NowPositionY = m_position.y;//今のポジションを代入
 		m_Ground = false;
 		SpeedPower = MaxJump;
-		NowPositionY = m_position.y;//今のポジションを代入
+		
 		
 	}
 	//地面についていない
@@ -67,7 +74,7 @@ void CPlayer::Jump()
 	{
 		SpeedPower += Gravity;
 		m_position.y += SpeedPower;
-		if (NowPositionY <= m_position.y)
+		if (NowPositionY >= m_position.y)
 			m_Ground = true;
 	}
 	

@@ -26,5 +26,5 @@ private:
 	//CTestObj test;
 	CPlayer m_Player;
 	CStage1 m_stage1;
-	CAabb m_aabb;
+	//CAabb m_aabb;
 };

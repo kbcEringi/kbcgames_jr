@@ -13,6 +13,7 @@ public:
 	void Update();
 	void Draw(D3DXMATRIX);
 	void Jump();					//JUMPä÷êî
+	void Move();					//Moveä÷êî
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;

@@ -34,10 +34,10 @@ void CScene1::Update()
 	m_Player.Update();
 	m_stage1.Update();
 
-	m_aabb.isIntersected(m_Player.GetPosition());
+	/*m_aabb.isIntersected(m_Player.GetPosition());
 	m_aabb.SetPosition(m_Player.GetPosition());
 	m_aabb.SetSize(m_Player.GetPosition());
-	m_aabb.CalcAABBSizeFromMesh(m_Player.GetMesh());
+	m_aabb.CalcAABBSizeFromMesh(m_Player.GetMesh());*/
 }
 
 void CScene1::Draw()
