@@ -2,6 +2,8 @@
 //
 //CAabb::CAabb()
 //{
+//	m_position = { 0.0f, 0.0f, 0.0f };
+//	m_size = { 0.0f, 0.0f, 0.0f };
 //}
 //CAabb::~CAabb()
 //{
@@ -37,6 +39,7 @@
 ////ˆê”Ôã‚ÌX,Y,ZÀ•W‚Æˆê”Ô‰º‚ÌX,Y,ZÀ•W‚ğ“à•ï‚·‚é—§•û‘Ì‚ğì¬
 //D3DXVECTOR3 CAabb::CalcAABBSizeFromMesh(LPD3DXMESH mesh)
 //{
+//
 //	D3DXVECTOR3 min;
 //	D3DXVECTOR3 max;
 //	D3DXVECTOR3 size;
