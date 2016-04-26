@@ -54,9 +54,9 @@ void CScene1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(2.0f,0.0f,0.0f));
 	}
-	m_Player.Draw(camera.GetView());
-	m_wood.Draw(camera.GetView());
+	
 	m_Player.Draw(camera.GetView());//PlayerÇï`âÊ
+	m_wood.Draw(camera.GetView());	//ñÿï`âÊ
 	/***************************Ç±ÇÍà»ç~ÇÕîºìßñæÇ…Ç»ÇÁÇ»Ç¢èàóù*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
