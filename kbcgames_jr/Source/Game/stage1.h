@@ -1,15 +1,11 @@
 #pragma once
-
 #include"..\Frame\DXCommon.h"
-
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
-
 #include"..\Frame\camera.h"
 //#include"TestObj.h"
 #include "Player.h"
 #include "Ground.h"
-
 #include "wood.h"
 #include "..\AABB.h"
 
