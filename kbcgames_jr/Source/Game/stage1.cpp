@@ -12,7 +12,7 @@ void CStage1::Initialize()
 	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 	//test.Initialize();
 	m_Player.Initialize();
-	m_Ground.Initialize();
+	/*m_Ground.Initialize();*/
 	m_wood.Initialize();
 	camera.Initialize();
 }
@@ -40,14 +40,14 @@ void CStage1::Update()
 
 	//test.Update();
 	m_Player.Update();
-	m_Ground.Update();
+	/*m_Ground.Update();*/
 	m_wood.Update();
 }
 
 void CStage1::Draw()
 {
 	//test.Draw(camera.GetView());
-	m_Ground.Draw(camera.GetView());//ステージ１を描画
+	/*m_Ground.Draw(camera.GetView());*///ステージ１を描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
