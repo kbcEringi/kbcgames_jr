@@ -24,7 +24,7 @@ void CTitleScene::Update()
 		camera.RotTransversal(0.05f);
 	}
 	
-	
+
 }
 
 void CTitleScene::Draw()
