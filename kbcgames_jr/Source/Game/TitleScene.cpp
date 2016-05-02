@@ -7,7 +7,7 @@ void CTitleScene::Initialize()
 
 void CTitleScene::Update()
 {
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
 		camera.RotLongitudinal(0.05f);
 	}
@@ -22,7 +22,7 @@ void CTitleScene::Update()
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
 		camera.RotTransversal(0.05f);
-	}
+	}*/
 	
 
 }

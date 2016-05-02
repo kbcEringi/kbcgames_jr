@@ -12,7 +12,7 @@ void CTitle::Update()
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
-	if (KEYDOWN(diks, DIK_W) & 0x80)
+	/*if (KEYDOWN(diks, DIK_W) & 0x80)
 	{
 		vec3Position.y += -2.0;
 	}
@@ -41,7 +41,7 @@ void CTitle::Update()
 	else
 	{
 		(*GetKeyDevice()).Acquire();
-	}
+	}*/
 }
 
 void CTitle::Draw()
