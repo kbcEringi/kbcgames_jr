@@ -15,7 +15,7 @@ public:
 	*第一引数　ワールドマトリクス（自分の位置）
 	*第二引数　ビューマトリクス（カメラの位置）
 	*/
-	void Draw(D3DXMATRIX, D3DXMATRIX);
+	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
 	~C3DObject();
 protected:
 	LPD3DXBUFFER m_D3DXMtrlBuffer;	//マテリアル
@@ -23,7 +23,6 @@ protected:
 	LPD3DXMESH m_Mesh;			//メッシュ
 	LPDIRECT3DTEXTURE9*  m_pMeshTextures;	//メッシュテクスチャ
 	ID3DXEffect* m_pEffect;
-	D3DXMATRIX  m_projMatrix;
 
 	D3DXMATERIAL *materials;
 

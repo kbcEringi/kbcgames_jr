@@ -25,6 +25,8 @@ void CStage1::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
+
 }
 
 void CStage1::Update()
@@ -35,5 +37,5 @@ void CStage1::Update()
 void CStage1::Draw(D3DXMATRIX view)
 {
 	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
-	Obj.Draw(matWorld, view);
+	Obj.Draw(matWorld, view, m_projMatrix);
 }

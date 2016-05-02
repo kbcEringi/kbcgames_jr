@@ -85,6 +85,7 @@
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
     <ClCompile Include="Source\Frame\posteffect.cpp" />
+    <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
     <ClInclude Include="Source\Frame\posteffect.h" />
+    <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
     <ClInclude Include="Source\Frame\Scene.h" />
     <ClInclude Include="Source\Frame\SceneManager.h" />

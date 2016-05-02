@@ -78,14 +78,17 @@
     <ClCompile Include="Source\Game\Scene1.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\stage1.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\posteffect.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\wood.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\stage1.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\RenderTarget.cpp">
+      <Filter>Frame\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,14 +143,17 @@
     <ClInclude Include="Source\Game\Scene1.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\stage1.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\posteffect.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\wood.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\stage1.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\RenderTarget.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

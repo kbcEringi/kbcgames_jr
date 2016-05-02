@@ -14,5 +14,5 @@ private:
 	D3DXMATRIX matWorld;
 
 	D3DXVECTOR3 vecTrans;
-	D3DXMATRIX matTrans;
+	D3DXMATRIX matTrans, m_projMatrix;
 };

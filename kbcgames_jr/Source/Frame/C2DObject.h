@@ -31,9 +31,5 @@ protected:
 	ID3DXEffect* m_pEffect;
 	LPDIRECT3DVERTEXBUFFER9 m_pVB;
 
-	D3DXVECTOR3 vec3Trans;
-	D3DXVECTOR3 vec3Scale;
-	D3DXVECTOR3 vec3Rot;
-
 	D3DXMATRIX  matWorld, matTrans, matScale, matRot;
 };
