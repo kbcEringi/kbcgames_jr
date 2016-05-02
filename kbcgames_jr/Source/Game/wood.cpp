@@ -23,8 +23,13 @@ void CWood::Initialize()
 
 void CWood::Update()
 {
+
+	if (m_Ground=0){//’n–Ê‚É•t‚¢‚Ä‚È‚¢Žž
+		
+	}
 	if (m_force.x > 0.0f){
 		m_position.x += m_force.x;
+		m_force.x *= 0.85f;
 	}
 
 }

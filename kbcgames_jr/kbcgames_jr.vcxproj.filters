@@ -75,16 +75,19 @@
     <ClCompile Include="Source\Game\Player.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Scene1.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\posteffect.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\wood.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\stage1.cpp">
+    <ClCompile Include="Source\Game\Stage1.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\TitleScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Title.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
@@ -140,16 +143,19 @@
     <ClInclude Include="Source\Game\Player.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Scene1.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\posteffect.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\wood.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\stage1.h">
+    <ClInclude Include="Source\Game\Stage1.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Title.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\RenderTarget.h">

@@ -31,7 +31,7 @@ void CPlayer::Update()
 {
 	
 	Move();//移動関数
-	Jump();//プレイヤージャンプ関数
+	//Jump();//プレイヤージャンプ関数
 
 }
 
@@ -69,24 +69,24 @@ void CPlayer::Move()//移動
 	}
 }
 
-void CPlayer::Jump()//ジャンプ
-{
-	//ジャンプ処理(地面についている時)
-	if (m_Ground == true && KEYDOWN(diks, DIK_SPACE) & 0x80)
-	{
-		NowPositionY = m_position.y;//今のポジションを代入
-		m_Ground = false;
-		SpeedPower = MaxJump;
-		
-		
-	}
-	//地面についていない時
-	if (!m_Ground)
-	{
-		SpeedPower += Gravity;
-		m_position.y += SpeedPower;
-		if (NowPositionY >= m_position.y)
-			m_Ground = true;
-	}
-	
-}
+//void CPlayer::Jump()//ジャンプ
+//{
+//	//ジャンプ処理(地面についている時)
+//	if (m_Ground == true && KEYDOWN(diks, DIK_SPACE) & 0x80)
+//	{
+//		NowPositionY = m_position.y;//今のポジションを代入
+//		m_Ground = false;
+//		SpeedPower = MaxJump;
+//		
+//		
+//	}
+//	//地面についていない時
+//	if (!m_Ground)
+//	{
+//		SpeedPower += Gravity;
+//		m_position.y += SpeedPower;
+//		if (NowPositionY >= m_position.y)
+//			m_Ground = true;
+//	}
+//	
+//}
