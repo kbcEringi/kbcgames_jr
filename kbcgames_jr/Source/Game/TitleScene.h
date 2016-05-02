@@ -8,6 +8,8 @@
 #include"..\Frame\camera.h"
 #include"..\Frame\Input.h"
 
+#include"Title.h"
+
 
 class CSceneManager;
 
@@ -21,6 +23,7 @@ public:
 
 private:
 	CCamera camera;
+	CTitle  m_title;
 	
 
 	BYTE diks[256];

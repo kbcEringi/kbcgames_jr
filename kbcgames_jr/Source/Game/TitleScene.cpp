@@ -2,7 +2,7 @@
 
 void CTitleScene::Initialize()
 {
-	
+	m_title.Initialize();
 }
 
 void CTitleScene::Update()
@@ -24,10 +24,11 @@ void CTitleScene::Update()
 		camera.RotTransversal(0.05f);
 	}*/
 	
-
+	m_title.Update();
 }
 
 void CTitleScene::Draw()
 {
 	camera.SerBase(D3DXVECTOR3(0.0, 0.0, 0.0));
+	m_title.Draw();
 }
