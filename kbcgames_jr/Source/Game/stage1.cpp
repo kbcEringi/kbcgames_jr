@@ -54,7 +54,7 @@ void CStage1::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
 	if (GetAsyncKeyState('Q')){
-		m_wood.ApplyForce(D3DXVECTOR3(2.0f, 0.0f, 0.0f));
+		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
 
 	m_Player.Draw(camera.GetView());//Player‚ð•`‰æ
