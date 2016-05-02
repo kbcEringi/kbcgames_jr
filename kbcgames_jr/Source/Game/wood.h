@@ -4,7 +4,6 @@
 #include"..\Frame\C3DObject.h"
 
 #define GRAVITY 0.2　//重力
-#define MAXJUMP	1.0	 //ジャンプする力
 
 class CWood
 {
