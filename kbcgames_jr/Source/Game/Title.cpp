@@ -2,7 +2,7 @@
 
 void CTitle::Initialize()
 {
-	m_2Dobj.Initialize("Texture\\ClearBack.jpg");
+	m_2Dobj.Initialize("Texture\\Title.jpg");
 	vec3Scale = D3DXVECTOR3(200.0f, 100.0f, 1.0f);
 	vec3Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 }

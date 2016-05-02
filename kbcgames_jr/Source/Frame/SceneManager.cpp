@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-#include"..\Game\Stage1.h"
+//#include"..\Game\Stage1.h"
 #include"..\Game\TitleScene.h"
 
 CSceneManager* CSceneManager::m_pInstance = new CSceneManager();
@@ -13,6 +13,7 @@ void CSceneManager::Add(CScene* pAdd)
 void CSceneManager::InitializeScene()
 {
 	SINSTANCE(CSceneManager)->Add(new CTitleScene("Title"));
+	SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
 
 	SINSTANCE(CSceneManager)->Add(new CStage1("Stage1"));
 	SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
