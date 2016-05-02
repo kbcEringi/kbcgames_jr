@@ -1,11 +1,15 @@
 #pragma once
+
 #include"..\Frame\DXCommon.h"
+
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
+
 #include"..\Frame\camera.h"
 //#include"TestObj.h"
 #include "Player.h"
-#include "Ground.h"
+//#include "Ground.h"
+
 #include "wood.h"
 #include "..\AABB.h"
 
@@ -21,10 +25,15 @@ public:
 	void Draw();
 
 private:
+
+	C3DObject Obj;
+	D3DXMATRIX matWorld, m_projMatrix;
+	D3DXVECTOR3 m_position;
+
 	CCamera camera;
 	//CTestObj test;
 	CPlayer m_Player;
-	CGround m_Ground;
+	/*CGround m_Ground;*/
 	CWood m_wood;
 	CAudio* m_pAudio;
 	//CAabb m_aabb;

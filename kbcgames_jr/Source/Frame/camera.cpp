@@ -45,17 +45,9 @@ HRESULT CCamera::Update()
 {
 	D3DXVec3Scale(&m_Object, &m_NormalizeObject, m_Distance);
 	D3DXVec3Add(&m_Object, &m_Object, &m_Base);
-	
-	//2DŽ‹“_
-	if (GetAsyncKeyState('A'))
-		m_NormalizeObject = D3DXVECTOR3(0.0f, 0.0f, -2.0f);
-	//3DŽ‹“_
-	if (GetAsyncKeyState('D'))
-		m_NormalizeObject = D3DXVECTOR3(-2.0f, 0.5f, 0.0f);
 
 	return SetView(m_Object, m_Base, m_Up);
 }
-
 
 //======================================
 //SetView

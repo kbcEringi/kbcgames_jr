@@ -25,7 +25,7 @@ public:
 	}
 private:
 	C3DObject Obj;
-	D3DXMATRIX matWorld;
+	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 

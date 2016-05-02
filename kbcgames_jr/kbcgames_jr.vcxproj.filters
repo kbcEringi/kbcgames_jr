@@ -84,8 +84,14 @@
     <ClCompile Include="Source\Game\Stage1.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Ground.cpp">
+    <ClCompile Include="Source\Game\TitleScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Title.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\RenderTarget.cpp">
+      <Filter>Frame\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,8 +152,14 @@
     <ClInclude Include="Source\Game\Stage1.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Ground.h">
+    <ClInclude Include="Source\Game\TitleScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Title.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\RenderTarget.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

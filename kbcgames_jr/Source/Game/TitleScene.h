@@ -8,29 +8,23 @@
 #include"..\Frame\camera.h"
 #include"..\Frame\Input.h"
 
-#include"TestObj.h"
-#include"jimen.h"
-#include"..\Frame\posteffect.h"
-#include"gazou.h"
+#include"Title.h"
+
 
 class CSceneManager;
 
-class CTestScene : public CScene
+class CTitleScene : public CScene
 {
 public:
-	CTestScene(const string& name) :CScene(name){}
+	CTitleScene(const string& name) :CScene(name){}
 	void Initialize();
 	void Update();
 	void Draw();
 
 private:
 	CCamera camera;
-	CTestObj testob;
-	CTestjimen jimen;
-	CPostEffect testPost;
-	Cgazou gazo;
-
-	D3DXMATRIX m_projMatrix;
+	CTitle  m_title;
+	
 
 	BYTE diks[256];
 

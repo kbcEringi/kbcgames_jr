@@ -23,6 +23,8 @@ void CPlayer::Initialize()
 	MaxJump = 1.0f;						//ジャンプする力
 	SpeedPower = 0.0f;					//加速する力
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
+	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
+
 }
 
 void CPlayer::Update()
@@ -36,7 +38,7 @@ void CPlayer::Update()
 void CPlayer::Draw(D3DXMATRIX view)
 {
 	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
-	Obj.Draw(matWorld, view);
+	Obj.Draw(matWorld, view, m_projMatrix);
 }
 
 void CPlayer::Move()//移動

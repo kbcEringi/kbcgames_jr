@@ -20,7 +20,7 @@ public:
 	}
 private:
 	C3DObject Obj;
-	D3DXMATRIX matWorld;
+	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
 	bool m_Ground;					//ínñ Ç…Ç¬Ç¢ÇƒÇ¢ÇÈÇ©ÅH
