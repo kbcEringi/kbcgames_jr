@@ -7,11 +7,11 @@
 
 #include"..\Frame\camera.h"
 //#include"TestObj.h"
+/********オブジェクト********/
 #include "Player.h"
 #include "Ground.h"
-
 #include "wood.h"
-#include "..\AABB.h"
+#include "Debri.h"
 
 class CSceneManager;
 class CAudio;
@@ -31,10 +31,12 @@ private:
 	D3DXVECTOR3 m_position;
 
 	CCamera camera;
+	CAudio* m_pAudio;
+	/******オブジェクト*****/
 	//CTestObj test;
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;
-	CAudio* m_pAudio;
-	//CAabb m_aabb;
+	CDebri m_Debri;
+	
 };

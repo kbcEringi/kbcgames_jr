@@ -13,21 +13,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{095b06b0-0241-4e58-8460-3c4965b3c46f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Frame">
-      <UniqueIdentifier>{6f11feb9-f745-445e-9ddd-3e78fb0328a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\2D">
-      <UniqueIdentifier>{24dc14de-7305-4144-9c6f-c9edf9c3211d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\3D">
-      <UniqueIdentifier>{829d49af-8ec8-4c9c-bcd7-620789b66bd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Input">
-      <UniqueIdentifier>{5dade1e6-c40b-4e3c-b0f9-98bfc87f7044}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Scene">
-      <UniqueIdentifier>{b81c5df2-83fe-4243-8ec1-b84f3743826f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object">
       <UniqueIdentifier>{fa872c34-4a39-44df-881f-fabb85df9be1}</UniqueIdentifier>
     </Filter>
@@ -36,6 +21,21 @@
     </Filter>
     <Filter Include="BulletPhysics">
       <UniqueIdentifier>{6062f32b-0b7f-4571-8658-ac44e4e4d0d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BulletPhysics\Frame">
+      <UniqueIdentifier>{6f11feb9-f745-445e-9ddd-3e78fb0328a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BulletPhysics\Frame\2D">
+      <UniqueIdentifier>{24dc14de-7305-4144-9c6f-c9edf9c3211d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BulletPhysics\Frame\3D">
+      <UniqueIdentifier>{829d49af-8ec8-4c9c-bcd7-620789b66bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BulletPhysics\Frame\Input">
+      <UniqueIdentifier>{5dade1e6-c40b-4e3c-b0f9-98bfc87f7044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BulletPhysics\Frame\Scene">
+      <UniqueIdentifier>{b81c5df2-83fe-4243-8ec1-b84f3743826f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,34 +52,34 @@
       <Filter>Test\TestObj</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\input.cpp">
-      <Filter>Frame\Input</Filter>
+      <Filter>BulletPhysics\Frame\Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\C3DObject.cpp">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\C2DObject.cpp">
-      <Filter>Frame\2D</Filter>
+      <Filter>BulletPhysics\Frame\2D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\Audio.cpp">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\camera.cpp">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\WinMain.cpp">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\SceneManager.cpp">
-      <Filter>Frame\Scene</Filter>
+      <Filter>BulletPhysics\Frame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Player.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\posteffect.cpp">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\wood.cpp">
       <Filter>Game\Object</Filter>
@@ -94,12 +94,15 @@
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp">
       <Filter>BulletPhysics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Ground.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Debri.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,43 +120,43 @@
       <Filter>Test\TestObj</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Input.h">
-      <Filter>Frame\Input</Filter>
+      <Filter>BulletPhysics\Frame\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\C3DObject.h">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\C2DObject.h">
-      <Filter>Frame\2D</Filter>
+      <Filter>BulletPhysics\Frame\2D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Audio.h">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\camera.h">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\DXCommon.h">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\GraphicsDevice.h">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\WinMain.h">
-      <Filter>Frame</Filter>
+      <Filter>BulletPhysics\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\SceCommon.h">
-      <Filter>Frame\Scene</Filter>
+      <Filter>BulletPhysics\Frame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Scene.h">
-      <Filter>Frame\Scene</Filter>
+      <Filter>BulletPhysics\Frame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\SceneManager.h">
-      <Filter>Frame\Scene</Filter>
+      <Filter>BulletPhysics\Frame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Player.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\posteffect.h">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\wood.h">
       <Filter>Game\Object</Filter>
@@ -168,12 +171,15 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\RenderTarget.h">
-      <Filter>Frame\3D</Filter>
+      <Filter>BulletPhysics\Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\BulletPhysics\BulletPhysics.h">
       <Filter>BulletPhysics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Ground.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Debri.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include"WinMain.h"
 #include"..\BulletPhysics\BulletPhysics.h"
+#include "..\BulletPhysics\BulletPhysics.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
@@ -102,13 +103,14 @@ void Initialize()
 	graphicsDevice().InitD3d(hWnd);
 	GetKeyDevice().Initialize(hWnd);
 	//SceneManagerのinitialize
-	g_bulletPhysics.InitPysics();
+	g_bulletPhysics.InitPysics();				//物理エンジン初期化
 	SINSTANCE(CSceneManager)->InitializeScene();
 }
 
 void Update()
 {
 	//SceneManagerのupdate
+	g_bulletPhysics.Update();					//物理エンジン更新
 	SINSTANCE(CSceneManager)->UpdateScene();
 
 }
