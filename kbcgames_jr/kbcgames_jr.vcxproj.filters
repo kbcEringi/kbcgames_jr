@@ -34,6 +34,9 @@
     <Filter Include="Game\Scene">
       <UniqueIdentifier>{e24ee000-4310-4977-8ac1-1f61efe7a80f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BulletPhysics">
+      <UniqueIdentifier>{6062f32b-0b7f-4571-8658-ac44e4e4d0d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\test\TestScene.cpp">
@@ -92,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
       <Filter>Frame\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp">
+      <Filter>BulletPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Ground.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\RenderTarget.h">
       <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BulletPhysics\BulletPhysics.h">
+      <Filter>BulletPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Ground.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

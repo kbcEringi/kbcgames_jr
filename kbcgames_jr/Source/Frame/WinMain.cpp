@@ -1,4 +1,5 @@
 #include"WinMain.h"
+#include"..\BulletPhysics\BulletPhysics.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
@@ -101,6 +102,7 @@ void Initialize()
 	graphicsDevice().InitD3d(hWnd);
 	GetKeyDevice().Initialize(hWnd);
 	//SceneManager‚Ìinitialize
+	g_bulletPhysics.InitPysics();
 	SINSTANCE(CSceneManager)->InitializeScene();
 }
 

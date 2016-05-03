@@ -8,7 +8,7 @@
 #include"..\Frame\camera.h"
 //#include"TestObj.h"
 #include "Player.h"
-//#include "Ground.h"
+#include "Ground.h"
 
 #include "wood.h"
 #include "..\AABB.h"
@@ -33,7 +33,7 @@ private:
 	CCamera camera;
 	//CTestObj test;
 	CPlayer m_Player;
-	/*CGround m_Ground;*/
+	CGround m_Ground;
 	CWood m_wood;
 	CAudio* m_pAudio;
 	//CAabb m_aabb;

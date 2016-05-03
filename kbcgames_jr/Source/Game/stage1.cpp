@@ -16,7 +16,7 @@ void CStage1::Initialize()
 
 	//test.Initialize();
 	m_Player.Initialize();
-	/*m_Ground.Initialize();*/
+	m_Ground.Initialize();
 	m_wood.Initialize();
 	camera.Initialize();
 }
@@ -42,7 +42,7 @@ void CStage1::Update()
 	m_pAudio->Run();	//周期タスク実行
 	//test.Update();
 	m_Player.Update();
-	/*m_Ground.Update();*/
+	m_Ground.Update();
 	m_wood.Update();
 	camera.SerBase(m_Player.GetPosition());//Playerを追いかけるカメラ
 }
@@ -53,7 +53,7 @@ void CStage1::Draw()
 	//D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
 	//Obj.Draw(matWorld, view, m_projMatrix);
 	//test.Draw(camera.GetView());
-	/*m_Ground.Draw(camera.GetView());*///ステージ１を描画
+	m_Ground.Draw(camera.GetView());//ステージ１を描画5
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
