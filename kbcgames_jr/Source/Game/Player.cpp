@@ -18,7 +18,7 @@ void CPlayer::Initialize()
 	m_position.y = 0.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_Ground = true;					//今地面についているか？（TRUE）
-	NowPositionY = 0.0f;				//今のポジション
+	NowPositionY = 0.0f;				//今のYポジション
 	Gravity = -0.2;						//重力
 	MaxJump = 1.0f;						//ジャンプする力
 	SpeedPower = 0.0f;					//加速する力
@@ -65,6 +65,8 @@ void CPlayer::Move()//移動
 	{
 		(*GetKeyDevice()).Acquire();//キーデバイス取得
 	}
+	
+	
 }
 
 //void CPlayer::Jump()//ジャンプ
