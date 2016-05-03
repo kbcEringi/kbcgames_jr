@@ -41,7 +41,6 @@ void C3DObject::Initialize(LPCSTR FileName,int pass)
 		abort();
 	}
 
-	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
 	{//ライト設定
 		//ディフューズライト方向
@@ -68,12 +67,12 @@ void C3DObject::Initialize(LPCSTR FileName,int pass)
 
 }
 
-
+LPDIRECT3DTEXTURE9 g_hoge = NULL; //@todo for debug
 /*
 *第一引数　ワールドマトリクス（自分の位置）
 *第二引数　ビューマトリクス（カメラの位置）
 */
-void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix)
+void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix)
 {
 	//シェーダー適用開始。
 	m_pEffect->SetTechnique("SkinModel");
@@ -90,7 +89,7 @@ void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix)
 
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_viewMatrix", &viewMatrix);//ビュー行列の転送。
-	m_pEffect->SetMatrix("g_projectionMatrix", &m_projMatrix);//プロジェクション行列の転送。
+	m_pEffect->SetMatrix("g_projectionMatrix", &projMatrix);//プロジェクション行列の転送。
 
 	//ライトの向きを転送。
 	m_pEffect->SetVectorArray("g_diffuseLightDirection", m_diffuseLightDirection, LIGHT_NUM);
@@ -98,13 +97,17 @@ void C3DObject::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix)
 	m_pEffect->SetVectorArray("g_diffuseLightColor", m_diffuseLightColor, LIGHT_NUM);
 
 	m_pEffect->SetVector("g_ambientLight", &m_ambientLight);
-
-	m_pEffect->CommitChanges();//この関数を呼び出すことで、データの転送が確定する。描画を行う前に一回だけ呼び出す。
 	
 	D3DMATERIAL9 *pMat1 = (D3DMATERIAL9*)m_D3DXMtrlBuffer->GetBufferPointer();
 	for (DWORD i = 0; i < m_NumMaterials; i++)
 	{
-		m_pEffect->SetTexture("g_diffuseTexture", m_pMeshTextures[i]);
+		if (g_hoge){
+			m_pEffect->SetTexture("g_diffuseTexture", g_hoge); //@todo for debug
+		}
+		else{
+			m_pEffect->SetTexture("g_diffuseTexture", m_pMeshTextures[i]);
+		}
+		m_pEffect->CommitChanges();//この関数を呼び出すことで、データの転送が確定する。描画を行う前に一回だけ呼び出す。
 		m_Mesh->DrawSubset(i);
 	}
 

@@ -58,7 +58,6 @@ HRESULT CCamera::Update()
 	return SetView(m_Object, m_Base, m_Up);
 }
 
-
 //======================================
 //SetView
 //機能：ビュー行列の設定

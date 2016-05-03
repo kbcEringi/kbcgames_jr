@@ -4,7 +4,6 @@
 #include"..\Frame\C3DObject.h"
 
 #define GRAVITY 0.2　//重力
-#define MAXJUMP	1.0	 //ジャンプする力
 
 class CWood
 {
@@ -21,7 +20,7 @@ public:
 	}
 private:
 	C3DObject Obj;
-	D3DXMATRIX matWorld;
+	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
 	bool m_Ground;					//地面についているか？

@@ -38,7 +38,7 @@ void CTestObj::Update()
 	matWorld *= matTrans;
 }
 
-void CTestObj::Draw(D3DXMATRIX view)
+void CTestObj::Draw(D3DXMATRIX view, D3DXMATRIX projMatrix)
 {
-	Obj.Draw(matWorld, view);
+	Obj.Draw(matWorld, view, projMatrix);
 }
