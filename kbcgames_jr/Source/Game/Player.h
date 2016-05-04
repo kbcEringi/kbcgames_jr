@@ -7,6 +7,8 @@
 
 #include"..\Frame\Input.h"//キーボードインプット
 
+#define PI 3.14159265358979323846f
+
 class CPlayer
 {
 public:
@@ -30,12 +32,15 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
+	D3DXVECTOR3 m_moveSpeed;		//移動速度
+	
 
 	bool m_Ground;					//地面についているか？
 	float SpeedPower;				//加速を加える速度
 	float Gravity;					//重力
 	float MaxJump;					//ジャンプする力
 	float NowPositionY;				//今のポジション
+	float			m_radius;		//ラジアンの角度
 
 	BYTE diks[256];//キーインプット
 
