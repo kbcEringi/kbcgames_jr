@@ -12,6 +12,7 @@ public:
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);
 	D3DXVECTOR3 GetTrans(){ return vecTrans; }
+	C3DObject* Get3DObj(){ return &Obj; }
 private:
 	C3DObject Obj;
 	D3DXMATRIX matWorld;

@@ -3,8 +3,8 @@
 
 void CTestObj::Initialize()
 {
-	Obj.Initialize("XFile\\kyu.x");
-	vecTrans = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	Obj.Initialize("XFile\\enderman.x");
+	vecTrans = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	ZeroMemory(diks, sizeof(diks));
 }
 
@@ -14,7 +14,7 @@ void CTestObj::Update()
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
-	/*if (KEYDOWN(diks, DIK_W) & 0x80)
+	if (KEYDOWN(diks, DIK_W) & 0x80)
 	{
 		vecTrans.z += 0.05;
 	}
@@ -33,7 +33,7 @@ void CTestObj::Update()
 	else
 	{
 		(*GetKeyDevice()).Acquire();
-	}*/
+	}
 	D3DXMatrixTranslation(&matTrans, vecTrans.x, vecTrans.y, vecTrans.z);
 	matWorld *= matTrans;
 }

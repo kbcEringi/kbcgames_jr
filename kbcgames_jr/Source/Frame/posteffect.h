@@ -25,10 +25,5 @@ private:
 
 	Frame::CRenderTarget TestRenderT;
 
-	ID3DXEffect* m_pEffect;
-	D3DXMATRIX  matWorld, matTrans, matScale;
-	D3DXVECTOR3 vec3Position, vec3Scale;
-
-	LPDIRECT3DVERTEXBUFFER9 m_pVB;
 
 };

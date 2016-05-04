@@ -87,6 +87,7 @@
     <ClCompile Include="Source\Frame\posteffect.cpp" />
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
+    <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="Source\Frame\SceCommon.h" />
     <ClInclude Include="Source\Frame\Scene.h" />
     <ClInclude Include="Source\Frame\SceneManager.h" />
+    <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Stage1.h" />

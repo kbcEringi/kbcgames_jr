@@ -93,6 +93,9 @@
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\Shadow.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\test\TestScene.h">
@@ -159,6 +162,9 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\RenderTarget.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Shadow.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>

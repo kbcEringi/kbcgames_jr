@@ -7,7 +7,7 @@ float4x4 g_worldMatrix;			//ワールド行列。
 float4x4 g_viewMatrix;			//ビュー行列。
 float4x4 g_projectionMatrix;	//プロジェクション行列。
 
-#define DIFFUSE_LIGHT_NUM 4
+#define DIFFUSE_LIGHT_NUM 6
 float4 g_diffuseLightDirection[DIFFUSE_LIGHT_NUM];
 float4 g_diffuseLightColor[DIFFUSE_LIGHT_NUM];
 float4 g_ambientLight;
@@ -23,6 +23,18 @@ sampler_state
     MinFilter = NONE;
     MagFilter = NONE;
     AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+texture g_ShadowTexture;		//ディフューズテクスチャ。
+sampler g_ShadowTextureSampler =
+sampler_state
+{
+	Texture = <g_ShadowTexture>;
+	MipFilter = NONE;
+	MinFilter = NONE;
+	MagFilter = NONE;
+	AddressU = Wrap;
 	AddressV = Wrap;
 };
 
@@ -72,7 +84,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	*/
 float4 PSMain(VS_OUTPUT In) : COLOR
 {
-	return tex2D(g_diffuseTextureSampler, In.uv) * In.color;
+	return tex2D(g_ShadowTextureSampler, In.uv) * In.color;
 }
 
 VS_OUTPUT VSSpecular(VS_INPUT In)
@@ -108,6 +120,24 @@ float4 PSSpecular(VS_OUTPUT In) : COLOR
 	return /*tex2D(g_diffuseTextureSampler, In.uv) */ In.color;
 }
 
+VS_OUTPUT VSShadow(VS_INPUT In)
+{
+	VS_OUTPUT Out = (VS_OUTPUT)0;
+	float4 pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
+	pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
+	pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
+	Out.pos = pos;
+	Out.uv = In.uv;
+	Out.color = In.color;
+	return Out;
+}
+/*!
+*@brief	ピクセルシェーダー。
+*/
+float4 PSShadow(VS_OUTPUT In) : COLOR
+{
+	return float4(0.5f, 0.5f, 0.5f, 1.0f);
+}
 
 technique SkinModel
 {
@@ -120,5 +150,10 @@ technique SkinModel
 	{
 		VertexShader = compile vs_2_0 VSSpecular();
 		PixelShader = compile ps_2_0 PSSpecular();
+	}
+	pass p2
+	{
+		VertexShader = compile vs_2_0 VSShadow();
+		PixelShader = compile ps_2_0 PSShadow();
 	}
 }

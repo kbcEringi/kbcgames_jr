@@ -2,6 +2,7 @@
 
 #include"..\Game\Stage1.h"
 #include"..\Game\TitleScene.h"
+#include"../test/TestScene.h"
 
 CSceneManager* CSceneManager::m_pInstance = new CSceneManager();
 
@@ -12,17 +13,15 @@ void CSceneManager::Add(CScene* pAdd)
 
 void CSceneManager::InitializeScene()
 {
+	SINSTANCE(CSceneManager)->Add(new CTestScene("Test"));
 	SINSTANCE(CSceneManager)->Add(new CTitleScene("Title"));
-	
-
 	SINSTANCE(CSceneManager)->Add(new CStage1("Stage1"));
-	SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
+	SINSTANCE(CSceneManager)->ChangeScene(SCENE::TEST);
 
 	if (m_nowScene == -1){
 		//ƒV[ƒ“‚ðì‚Á‚Ä‚Ë
 		std::abort();
 	}
-	m_scenes[m_nowScene]->Initialize();
 }
 
 void CSceneManager::UpdateScene()

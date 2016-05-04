@@ -10,8 +10,8 @@
 
 #include"TestObj.h"
 #include"jimen.h"
-#include"..\Frame\posteffect.h"
-#include"gazou.h"
+
+#include"../Frame/Shadow.h"
 
 class CSceneManager;
 
@@ -27,8 +27,7 @@ private:
 	CCamera camera;
 	CTestObj testob;
 	CTestjimen jimen;
-	CPostEffect testPost;
-	Cgazou gazo;
+
 
 	D3DXMATRIX m_projMatrix;
 
