@@ -1,5 +1,87 @@
 #include "Player.h"
+#include "bulletPhysics.h"
 
+struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
+{
+	bool isHit;
+	D3DXVECTOR3 hitPos;
+
+	SweepResultGround()
+	{
+		isHit = false;
+	}
+
+	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
+	{
+		if (convexResult.m_hitCollisionObject->getUserIndex() != -1) {
+			//無視。
+			return 0.0f;
+		}
+		D3DXVECTOR3 hitPointNormal;
+		hitPointNormal.Set(
+			convexResult.m_hitNormalLocal.x(),
+			convexResult.m_hitNormalLocal.y(),
+			convexResult.m_hitNormalLocal.z()
+			);
+		float d = hitPointNormal.Dot(D3DXVECTOR3::Up);
+		if (d < 0.0f) {
+			//当たってない。
+			return 0.0f;
+		}
+		if (acosf(d) > CMath::PI * 0.2) {
+			//ホントは地面かどうかとかの属性を見るのがベストなんだけど、今回は角度で。
+			return 0.0f;
+		}
+		isHit = true;
+		hitPos.Set(
+			convexResult.m_hitPointLocal.x(),
+			convexResult.m_hitPointLocal.y(),
+			convexResult.m_hitPointLocal.z());
+		return 0.0f;
+	}
+};
+struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
+{
+	D3DXVECTOR3 hitNormalXZ;
+	bool isHit;
+	D3DXVECTOR3 hitPos;
+	SweepResultWall()
+	{
+		isHit = false;
+	}
+
+	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
+	{
+		if (convexResult.m_hitCollisionObject->getUserIndex() != -1) {
+			//無視。
+			return 0.0f;
+		}
+		D3DXVECTOR3 hitPointNormal;
+		hitPointNormal.Set(
+			convexResult.m_hitNormalLocal.x(),
+			convexResult.m_hitNormalLocal.y(),
+			convexResult.m_hitNormalLocal.z()
+			);
+		float d = hitPointNormal.Dot(D3DXVECTOR3::Up);
+		if (acosf(d) < CMath::PI * 0.2) {
+			//ホントは地面かどうかとかの属性を見るのがベストなんだけど、今回は角度で。
+			return 0.0f;
+		}
+		isHit = true;
+		//XZ平面での法線。
+		hitNormalXZ.x = hitPointNormal.x;
+		hitNormalXZ.y = 0.0f;
+		hitNormalXZ.z = hitPointNormal.z;
+		hitNormalXZ.Normalize();
+
+		btTransform transform = convexResult.m_hitCollisionObject->getWorldTransform();
+		hitPos.Set(
+			convexResult.m_hitPointLocal.x(),
+			convexResult.m_hitPointLocal.y(),
+			convexResult.m_hitPointLocal.z());
+		return 0.0f;
+	}
+};
 
 CPlayer::CPlayer()
 {
