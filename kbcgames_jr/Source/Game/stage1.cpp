@@ -10,18 +10,18 @@ struct SCollisionInfo {
 
 SCollisionInfo collisionInfoTable[] = {
 	{
-		//地面のコリジョン
+		//Block1のコリジョン
 		D3DXVECTOR3(0.0f, 2.0f, 0.0f),			//座標。
 		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
 		D3DXVECTOR3(2.0f, 2.0f, 2.0f),	//拡大。	
 	},
-	/*{
-		//box00のコリジョン。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
-		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
-		D3DXVECTOR3(100.0f, 200.0f, 100.0f),	//拡大。	
-	},
 	{
+		//Groundのコリジョン
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(200.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	/*{
 		//saka00のコリジョン。
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
 		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
@@ -144,9 +144,9 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
-
-	m_Player.Draw(camera.GetView());//Playerを描画
 	m_wood.Draw(camera.GetView());	//木描画
+	m_Player.Draw(camera.GetView());//Playerを描画
+	
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

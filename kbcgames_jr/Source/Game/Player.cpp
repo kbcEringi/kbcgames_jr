@@ -79,8 +79,9 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 		//XZ平面での法線。
 		hitNormalXZ.x = hitPointNormal.x;
 		hitNormalXZ.y = 0.0f;
-		hitNormalXZ.z = hitPointNormal.z;
-		D3DXVec3Normalize(&hitNormalXZ, &hitPointNormal);
+		hitNormalXZ.z = hitPointNormal.z;// hitPointNormal.z
+		//D3DXVec3Normalize(&hitNormalXZ, &hitNormalXZ);
+		//D3DXVec3Normalize(&hitNormalXZ, &hitPointNormal);
 
 
 		btTransform transform = convexResult.m_hitCollisionObject->getWorldTransform();
@@ -166,9 +167,8 @@ void CPlayer::Update()
 			D3DXVECTOR3 addPosXZ = addPos;
 			addPosXZ.y = 0.0f;
 			if (D3DXVec3Length(&addPosXZ) > 0.0001f) {
-				newPos += (m_position, addPosXZ);
+				newPos = (m_position += addPosXZ);
 				end.setOrigin(btVector3(newPos.x, newPos.y, newPos.z));
-
 				g_bulletPhysics.ConvexSweepTest(m_collisionShape, start, end, callback);
 			}
 			if (callback.isHit) {
@@ -181,15 +181,17 @@ void CPlayer::Update()
 				t.x = -addPos.x;
 				t.y = 0.0f;
 				t.z = -addPos.z;
-				D3DXVec3Normalize(&t, &addPos);
+				D3DXVec3Normalize(&t, &t);
+				//D3DXVec3Normalize(&t, &addPos);
 				//半径分押し戻す。
-				t *= (m_radius);
+				t *= m_radius;
 				addPos += t;
 				//続いて壁に沿って滑らせる。
 				//滑らせる方向を計算。
 				D3DXVec3Cross(&t , &callback.hitNormalXZ, &Up);
-				D3DXVec3Normalize(&t, &addPos);
-				t *= (D3DXVec3Dot(&t, &(addPosXZ)));
+				D3DXVec3Normalize(&t, &t);
+				//D3DXVec3Normalize(&t, &addPos);
+				t *= D3DXVec3Dot(&t, &addPosXZ);
 				addPos += t;	//滑らせるベクトルを加算。
 			}
 			else {
