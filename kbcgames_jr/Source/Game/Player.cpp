@@ -106,7 +106,7 @@ void CPlayer::Initialize()
 {
 	Obj.Initialize("XFile\\Player.x");	//プレイヤーXファイル
 	D3DXMatrixIdentity(&matWorld);
-	m_position.x = 0.0f;				//X座標
+	m_position.x = -2.0f;				//X座標
 	m_position.y = 2.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_Ground = true;					//今地面についているか？（TRUE）
@@ -248,21 +248,27 @@ void CPlayer::Move()//移動
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
+	m_moveSpeed.x = 0.0f;
+//	m_moveSpeed.z = 0.0f;
 	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
 	{
-		m_position.x += 0.2f;
+		m_moveSpeed.x = 4.0f;
+	//	m_position.x += 0.2f;
 	}
 	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
 	{
-		m_position.x -= 0.2f;
+		m_moveSpeed.x = -4.0f;
+	//m_position.x -= 0.2f;
 	}
 	if (KEYDOWN(diks, DIK_UP) & 0x80)//上
 	{
-		m_position.y += 0.2f;
+		m_moveSpeed.y = 4.0f;
+	//	m_position.y += 0.2f;
 	}
 	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
 	{
-		m_position.y -= 0.2f;
+		m_moveSpeed.y = -4.0f;
+	//	m_position.y -= 0.2f;
 	}
 	else
 	{

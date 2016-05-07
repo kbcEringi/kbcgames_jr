@@ -95,6 +95,7 @@
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
+    <ClCompile Include="Source\Game\block1.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Source\Frame\Scene.h" />
     <ClInclude Include="Source\Frame\SceneManager.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
+    <ClInclude Include="Source\Game\block1.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />

@@ -1,6 +1,48 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 
+//オブジェクトの詳細
+struct SCollisionInfo {
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 angle;
+	D3DXVECTOR3 scale;
+};
+
+SCollisionInfo collisionInfoTable[] = {
+	{
+		//地面のコリジョン
+		D3DXVECTOR3(0.0f, 2.0f, 0.0f),			//座標。
+		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
+		D3DXVECTOR3(2.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	/*{
+		//box00のコリジョン。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
+		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
+		D3DXVECTOR3(100.0f, 200.0f, 100.0f),	//拡大。	
+	},
+	{
+		//saka00のコリジョン。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
+		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
+		D3DXVECTOR3(100.0f, 200.0f, 100.0f),	//拡大。	
+	},*/
+};
+
+
+void CreateCollision()
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable);
+	if (arraySize >= MAX_COLLISION)
+	{
+		std::abort();
+	}
+	for (int i = 0; i < arraySize; i++) {
+		SCollisionInfo& collision = collisionInfoTable[i];
+		//ここで剛体とかを登録する。
+	}
+}
+
 void CStage1::Initialize()
 {
 	//オーディオ初期化
@@ -13,13 +55,45 @@ void CStage1::Initialize()
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
-
 	//test.Initialize();
 	m_Player.Initialize();
 	m_Ground.Initialize();
 	m_wood.Initialize();
 	camera.Initialize();
 	m_Debri.Initialize();
+	m_Block1.Initialize();
+
+	D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
+	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+
+	int arraySize = ARRAYSIZE(collisionInfoTable);
+	for (int i = 0; i < arraySize; i++) {
+		SCollisionInfo& collision = collisionInfoTable[i];
+		//ここで剛体とかを登録する。
+		for (int i = 0; i < arraySize; i++) {
+			SCollisionInfo& collision = collisionInfoTable[i];
+			//ここで剛体とかを登録する。
+			//剛体を初期化。
+			{
+				//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
+				m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+				btTransform groundTransform;
+				groundTransform.setIdentity();
+				groundTransform.setOrigin(btVector3(collision.pos.x, collision.pos.y, collision.pos.z));
+				float mass = 0.0f;
+
+				//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+				m_myMotionState = new btDefaultMotionState(groundTransform);
+				btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
+				m_rigidBody[i] = new btRigidBody(rbInfo);
+
+				//ワールドに追加。
+				g_bulletPhysics.AddRigidBody(m_rigidBody[i]);
+
+			}
+		}
+	}
+
 }
 
 void CStage1::Update()
@@ -46,6 +120,7 @@ void CStage1::Update()
 	m_Ground.Update();
 	m_wood.Update();
 	m_Debri.Update();
+	m_Block1.Update();
 	//Playerを追いかけるカメラ
 	camera.SerBase(m_Player.GetPosition());
 }
@@ -58,7 +133,7 @@ void CStage1::Draw()
 	//test.Draw(camera.GetView());
 
 	m_Ground.Draw(camera.GetView());//ステージ１を描画
-
+	m_Block1.Draw(camera.GetView());//ブロック１を描画
 	m_Debri.Draw(camera.GetView());//テストでぶり
 	
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
