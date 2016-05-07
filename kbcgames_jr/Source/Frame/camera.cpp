@@ -53,7 +53,7 @@ HRESULT CCamera::Update()
 	}
 	//3DŽ‹“_
 	if (GetAsyncKeyState('D'))
-		m_NormalizeObject = D3DXVECTOR3(-2.0f, 0.5f, 0.0f);
+		m_NormalizeObject = D3DXVECTOR3(0.0f, 1.0f, -2.0f);
 
 	return SetView(m_Object, m_Base, m_Up);
 }

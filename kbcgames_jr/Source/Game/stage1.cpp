@@ -13,35 +13,48 @@ SCollisionInfo collisionInfoTable[] = {
 		//Block1のコリジョン
 		D3DXVECTOR3(0.0f, 2.0f, 0.0f),			//座標。
 		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
-		D3DXVECTOR3(2.0f, 2.0f, 2.0f),	//拡大。	
+		D3DXVECTOR3(2.0f, 2.0f, 2.0f),			//拡大。	
 	},
 	{
-		//Groundのコリジョン
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
+		//Ground1のコリジョン
+		D3DXVECTOR3(2.0f, 0.0f, 0.0f),		//座標。
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(200.0f, 2.0f, 2.0f),	//拡大。	
+		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
 	},
-	/*{
-		//saka00のコリジョン。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),			//座標。
-		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
-		D3DXVECTOR3(100.0f, 200.0f, 100.0f),	//拡大。	
-	},*/
+	{
+		//Ground2のコリジョン
+		D3DXVECTOR3(6.0f, -1.0f, 0.0f),		//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	{
+		//Ground3のコリジョン
+		D3DXVECTOR3(10.5f, -2.0f, 0.0f),		//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(5.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	{
+		//Ground4のコリジョン
+		D3DXVECTOR3(15.0f, -1.0f, 0.0f),		//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	{
+		//Ground5のコリジョン
+		D3DXVECTOR3(18.0f, 0.0f, 0.0f),		//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
+	},
+	{
+		//Ground1のコリジョン
+		D3DXVECTOR3(24.0f, 1.0f, 0.0f),		//座標。
+		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
+		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
+	},
 };
 
 
-void CreateCollision()
-{
-	int arraySize = ARRAYSIZE(collisionInfoTable);
-	if (arraySize >= MAX_COLLISION)
-	{
-		std::abort();
-	}
-	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collisionInfoTable[i];
-		//ここで剛体とかを登録する。
-	}
-}
+
 
 void CStage1::Initialize()
 {
@@ -62,37 +75,11 @@ void CStage1::Initialize()
 	camera.Initialize();
 	m_Debri.Initialize();
 	m_Block1.Initialize();
-
-	D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
+	//D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	CreateCollision();
 
-	int arraySize = ARRAYSIZE(collisionInfoTable);
-	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collisionInfoTable[i];
-		//ここで剛体とかを登録する。
-		for (int i = 0; i < arraySize; i++) {
-			SCollisionInfo& collision = collisionInfoTable[i];
-			//ここで剛体とかを登録する。
-			//剛体を初期化。
-			{
-				//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
-				m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
-				btTransform groundTransform;
-				groundTransform.setIdentity();
-				groundTransform.setOrigin(btVector3(collision.pos.x, collision.pos.y, collision.pos.z));
-				float mass = 0.0f;
-
-				//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
-				m_myMotionState = new btDefaultMotionState(groundTransform);
-				btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
-				m_rigidBody[i] = new btRigidBody(rbInfo);
-
-				//ワールドに追加。
-				g_bulletPhysics.AddRigidBody(m_rigidBody[i]);
-
-			}
-		}
-	}
+	
 
 }
 
@@ -151,5 +138,37 @@ void CStage1::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
 	camera.SerBase(D3DXVECTOR3(0.0, 0.0, 0.0));
+
+}
+
+void CStage1::CreateCollision()
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable);
+	if (arraySize >= MAX_COLLISION)
+	{
+		std::abort();
+	}
+	for (int i = 0; i < arraySize; i++) {
+		SCollisionInfo& collision = collisionInfoTable[i];
+		//ここで剛体とかを登録する。
+		//剛体を初期化。
+		{
+			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			btTransform groundTransform;
+			groundTransform.setIdentity();
+			groundTransform.setOrigin(btVector3(collision.pos.x, collision.pos.y, collision.pos.z));
+			float mass = 0.0f;
+
+			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+			m_myMotionState = new btDefaultMotionState(groundTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
+			m_rigidBody[i] = new btRigidBody(rbInfo);
+
+			//ワールドに追加。
+			g_bulletPhysics.AddRigidBody(m_rigidBody[i]);
+
+		}
+	}
 
 }

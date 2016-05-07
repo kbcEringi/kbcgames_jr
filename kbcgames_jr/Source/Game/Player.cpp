@@ -151,9 +151,6 @@ void CPlayer::Update()
 	addPos = m_moveSpeed;
 	addPos *= (deltaTime);
 	D3DXVECTOR3 Up(0.0f, 1.0f, 0.0f);
-
-	
-
 	//XZ•½–Ê‚ð’²‚×‚éB
 	{
 		int loopCount = 0;
@@ -167,7 +164,7 @@ void CPlayer::Update()
 			D3DXVECTOR3 addPosXZ = addPos;
 			addPosXZ.y = 0.0f;
 			if (D3DXVec3Length(&addPosXZ) > 0.0001f) {
-				newPos = (m_position += addPosXZ);
+				newPos = (m_position + addPosXZ);
 				end.setOrigin(btVector3(newPos.x, newPos.y, newPos.z));
 				g_bulletPhysics.ConvexSweepTest(m_collisionShape, start, end, callback);
 			}

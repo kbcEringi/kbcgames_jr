@@ -16,8 +16,4 @@ private:
 	C3DObject Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
-	////ここからbulletPhysicsの剛体を使用するために必要な変数。
-	//btCollisionShape*	m_groundShape;	//地面のコリジョン形状。
-	//btRigidBody*		m_rigidBody;	//剛体。
-	//btDefaultMotionState* m_myMotionState;
 };
