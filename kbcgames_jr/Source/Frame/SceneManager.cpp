@@ -17,6 +17,7 @@ void CSceneManager::InitializeScene()
 
 	SINSTANCE(CSceneManager)->Add(new CStage1("Stage1"));
 	SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
+
 	if (m_nowScene == -1){
 		//ƒV[ƒ“‚ğì‚Á‚Ä‚Ë
 		std::abort();

@@ -28,7 +28,7 @@ void C2DObject::Initialize(LPCSTR FileName)
 		{ -1.0f, 1.0f, 0.0f, 1.0f, 0xffffffff, 0.0f, 0.0f, },
 		{ 1.0f, 1.0f, 0.0f, 1.0f, 0xffffffff, 1.0f, 0.0f, },
 	};
-	(*graphicsDevice()).CreateVertexBuffer(3 * sizeof(SVertex), 0, D3DFVF_CUSTOMVERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL);
+	(*graphicsDevice()).CreateVertexBuffer(6 * sizeof(SVertex), 0, D3DFVF_CUSTOMVERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL);
 	VOID* pVertices;
 	m_pVB->Lock(0, sizeof(vertices), (void**)&pVertices, 0);
 	memcpy(pVertices, vertices, sizeof(vertices));
@@ -54,12 +54,12 @@ void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(0);
 
+	m_pEffect->SetMatrix("matWorld", &matWorld);
 	m_pEffect->SetTexture("g_diffuseTexture", tex);
 	(*graphicsDevice()).SetStreamSource(0, m_pVB, 0, sizeof(SVertex));
 	(*graphicsDevice()).SetFVF(D3DFVF_CUSTOMVERTEX);
 	(*graphicsDevice()).DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
-
-	m_pEffect->SetMatrix("matWorld", &matWorld);
+	m_pEffect->CommitChanges();
 	m_pEffect->EndPass();
 	m_pEffect->End();
 }
