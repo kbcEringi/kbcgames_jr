@@ -18,8 +18,6 @@ void CBlock1::Initialize()
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
-	//D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
-	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 }
 
 void CBlock1::Update()

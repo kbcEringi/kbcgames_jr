@@ -77,7 +77,7 @@ void CStage1::Initialize()
 	m_Block1.Initialize();
 	//D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
-	CreateCollision();
+	this->CreateCollision();
 
 	
 

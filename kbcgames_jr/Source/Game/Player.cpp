@@ -18,23 +18,20 @@ void CPlayer::Initialize()
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
-	//m_radius = 1.0;						//バウンディングスフィアの半径。
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
 	m_moveSpeed.z = 0.0f;				//移動速度
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 	
-	//m_IsIntersect.GetSRG();
-	//m_IsIntersect.GetSRW();
-	m_IsIntersect.CollisitionInitialize(&m_position);
+	m_IsIntersect.CollisitionInitialize(&m_position);//あたり判定初期化
 
 }
 
 void CPlayer::Update()
 {
 	Move();//移動関数
-	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量
+	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量(あたり判定)
 	
 }
 

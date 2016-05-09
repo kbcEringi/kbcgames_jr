@@ -1,5 +1,7 @@
 #include "IsIntersect.h"
 
+//あたり判定
+
 struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 {
 	bool isHit;
@@ -110,7 +112,7 @@ void CIsIntersect::CollisitionInitialize(D3DXVECTOR3* m_position)
 	m_moveSpeed.z = 0.0f;				//移動速度
 	m_radius = 1.0;						//バウンディングスフィアの半径。
 	//コリジョン初期化。
-	m_collisionShape = new btSphereShape(m_radius);
+	m_collisionShape = new btBoxShape(btVector3(m_radius, m_radius, m_radius));
 	float mass = 1000.0f;
 	btTransform rbTransform;
 	rbTransform.setIdentity();

@@ -1,7 +1,7 @@
 #pragma once
-#include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
+#include "..\Frame\Rigidbody.h"
 
 
 class CDebri{
@@ -22,11 +22,8 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
-	D3DXVECTOR3 size;
+	
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
-	btCollisionShape*	m_collisionShape;	//コリジョンの形状。
-	btRigidBody*		m_rigidBody;		//剛体。
-	btDefaultMotionState* m_myMotionState;
-	D3DXQUATERNION	m_rotation;
-	float m_life;
+	D3DXVECTOR3 size;
+	CRigidbody m_Rigidbody;
 };
