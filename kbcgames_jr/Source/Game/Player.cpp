@@ -107,8 +107,8 @@ void CPlayer::Initialize()
 {
 	Obj.Initialize("XFile\\Player.x");	//プレイヤーXファイル
 	D3DXMatrixIdentity(&matWorld);
-	m_position.x = -2.0f;				//X座標
-	m_position.y = 2.0f;				//Y座標
+	m_position.x = 0.0f;				//X座標
+	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_Ground = true;					//今地面についているか？（TRUE）
 	NowPositionY = 0.0f;				//今のYポジション
