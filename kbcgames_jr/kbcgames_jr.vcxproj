@@ -91,6 +91,7 @@
     <ClCompile Include="Source\Frame\camera.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
+    <ClCompile Include="Source\Frame\IsIntersect.cpp" />
     <ClCompile Include="Source\Frame\posteffect.cpp" />
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
+    <ClInclude Include="Source\Frame\IsIntersect.h" />
     <ClInclude Include="Source\Frame\posteffect.h" />
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
