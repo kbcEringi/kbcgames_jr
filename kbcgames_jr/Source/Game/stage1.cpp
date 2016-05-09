@@ -47,7 +47,7 @@ SCollisionInfo collisionInfoTable[] = {
 	},
 	{
 		//Ground1のコリジョン
-		D3DXVECTOR3(24.0f, 1.0f, 0.0f),		//座標。
+		D3DXVECTOR3(24.5f, 1.0f, 0.0f),		//座標。
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
 		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
 	},
