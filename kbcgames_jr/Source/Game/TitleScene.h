@@ -22,10 +22,9 @@ public:
 	void Draw();
 
 private:
-	CCamera camera;
+	
 	CTitle  m_title;
 	
-
 	BYTE diks[256];
 
 };
