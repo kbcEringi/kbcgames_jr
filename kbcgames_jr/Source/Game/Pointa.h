@@ -3,17 +3,16 @@
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
 #include"..\Frame\Input.h"//キーボードインプット
-#include "..\Frame\IsIntersect.h"
 
-class CPlayer
+class CPointa
 {
 public:
-	CPlayer();
-	~CPlayer();
+	CPointa();
+	~CPointa();
 	void Initialize();
 	void Update();
 	void Draw(D3DXMATRIX);
-	//void Move();					//Move関数
+	void Move();					//Move関数
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
@@ -22,25 +21,11 @@ public:
 	{
 		return m_mesh;
 	}
-	void SetPosition(D3DXVECTOR3 position)
-	{
-		m_position = position;
-	}
-	void Add(D3DXVECTOR3 v)
-	{
-		m_position += v;
-	}
-	void subtract(D3DXVECTOR3 v)
-	{
-		m_position -= v;
-	}
 private:
 	C3DObject Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
-	D3DXVECTOR3 m_moveSpeed;		//移動速度
-
-	CIsIntersect m_IsIntersect;		//あたり判定
+	//D3DXVECTOR3 m_moveSpeed;
 	BYTE diks[256];//キーインプット
 };

@@ -108,6 +108,15 @@
     <ClCompile Include="Source\Game\block1.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\IsIntersect.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\Rigidbody.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Pointa.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\test\TestScene.h">
@@ -186,6 +195,15 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\block1.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\IsIntersect.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Rigidbody.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Pointa.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
