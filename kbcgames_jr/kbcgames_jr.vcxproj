@@ -101,6 +101,7 @@
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
+    <ClCompile Include="Source\Game\Pointa.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />
+    <ClInclude Include="Source\Game\Pointa.h" />
     <ClInclude Include="Source\Game\Stage1.h" />
     <ClInclude Include="Source\Game\Title.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />

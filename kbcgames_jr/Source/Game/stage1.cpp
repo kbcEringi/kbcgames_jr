@@ -75,8 +75,9 @@ void CStage1::Initialize()
 	camera.Initialize();
 	m_Debri.Initialize();
 	m_Block1.Initialize();
-	//D3DXVECTOR3 boxSize(200.0f, 2.0f, 2.0f);
-	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	m_pointa.Initialize();
+
+	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
 
 	
@@ -108,8 +109,27 @@ void CStage1::Update()
 	m_wood.Update();
 	m_Debri.Update();
 	m_Block1.Update();
+	m_pointa.Update();
+	//ポインタをPlayerが追いかける
+	if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
+	{
+		m_Player.Add(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
+	}
+	if (m_Player.GetPosition().y <= m_pointa.GetPosition().y)
+	{
+		m_Player.Add(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
+	}
+	if (m_Player.GetPosition().x >= m_pointa.GetPosition().x)
+	{
+		m_Player.subtract(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
+	}
+	if (m_Player.GetPosition().y >= m_pointa.GetPosition().y)
+	{
+		m_Player.subtract(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
+	}
 	//Playerを追いかけるカメラ
 	camera.SerBase(m_Player.GetPosition());
+	
 }
 
 void CStage1::Draw()
@@ -131,6 +151,7 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
+	m_pointa.Draw(camera.GetView());//ポインタ描画
 	m_wood.Draw(camera.GetView());	//木描画
 	m_Player.Draw(camera.GetView());//Playerを描画
 	

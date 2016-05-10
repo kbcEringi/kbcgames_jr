@@ -13,6 +13,7 @@
 #include "wood.h"
 #include "Debri.h"
 #include "block1.h"
+#include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 
@@ -45,6 +46,8 @@ private:
 	CWood m_wood;
 	CDebri m_Debri;
 	CBlock1 m_Block1;
+	CPointa m_pointa;
+
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
 	btRigidBody*		m_rigidBody[MAX_COLLISION];	//剛体。

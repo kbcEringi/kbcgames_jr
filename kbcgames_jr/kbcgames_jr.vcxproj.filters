@@ -114,6 +114,9 @@
     <ClCompile Include="Source\Frame\Rigidbody.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Pointa.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\test\TestScene.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\Rigidbody.h">
       <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Pointa.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
