@@ -117,6 +117,9 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Cousel.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\test\TestScene.h">
@@ -204,6 +207,9 @@
       <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Pointa.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Cousel.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
