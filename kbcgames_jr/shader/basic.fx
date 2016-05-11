@@ -91,7 +91,7 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 	float4 pos = In.shadowpos;
 	float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
 	float4 color = tex2D(g_diffuseTextureSampler, In.uv);
-	color *= tex2D(g_ShadowTextureSampler, uv);
+	//color *= tex2D(g_ShadowTextureSampler, uv);
 	return color;
 }
 
