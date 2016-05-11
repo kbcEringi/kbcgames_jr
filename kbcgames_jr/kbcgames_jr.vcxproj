@@ -91,18 +91,13 @@
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />
-    <ClCompile Include="Source\Frame\posteffect.cpp" />
->>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\Rigidbody.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\block1.cpp" />
-    <ClCompile Include="Source\Game\Cousel.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -121,11 +116,7 @@
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="Source\Frame\IsIntersect.h" />
-    <ClInclude Include="Source\Frame\posteffect.h" />
->>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\Rigidbody.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
@@ -134,7 +125,6 @@
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\block1.h" />
-    <ClInclude Include="Source\Game\Cousel.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />

@@ -1,6 +1,6 @@
 #pragma once
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DObject.h"
+#include"..\Frame\C3DDraw.h"
 #include "..\Frame\Rigidbody.h"
 
 
@@ -18,7 +18,7 @@ public:
 	void Build(const D3DXVECTOR3& size, const D3DXVECTOR3& pos);
 	
 private:
-	C3DObject Obj;
+	C3DDraw Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
