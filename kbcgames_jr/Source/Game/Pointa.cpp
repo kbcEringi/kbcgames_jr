@@ -41,6 +41,7 @@ void CPointa::Move()//移動
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
+	//m_moveSpeed.x = 0.0f;
 
 	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
 	{
@@ -62,4 +63,5 @@ void CPointa::Move()//移動
 	{
 		(*GetKeyDevice()).Acquire();//キーデバイス取得
 	}
+
 }
