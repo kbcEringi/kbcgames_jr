@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Test">
-      <UniqueIdentifier>{581c9284-48e7-4909-9973-be98aed4e9c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Test\Scene">
-      <UniqueIdentifier>{65cad721-ee6a-4a9a-a80d-ea6f8f79a40d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Test\TestObj">
-      <UniqueIdentifier>{a7dc21af-67c3-47cf-bcd8-bc409c40bc71}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{095b06b0-0241-4e58-8460-3c4965b3c46f}</UniqueIdentifier>
     </Filter>
@@ -39,31 +30,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\test\TestScene.cpp">
-      <Filter>Test\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\test\TestObj.cpp">
-      <Filter>Test\TestObj</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\test\jimen.cpp">
-      <Filter>Test\TestObj</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\test\gazou.cpp">
-      <Filter>Test\TestObj</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\input.cpp">
       <Filter>Frame\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\C3DObject.cpp">
-      <Filter>Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\C2DObject.cpp">
       <Filter>Frame\2D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\Audio.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\camera.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp">
@@ -77,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="Source\Game\Player.cpp">
       <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\posteffect.cpp">
-      <Filter>Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\wood.cpp">
       <Filter>Game\Object</Filter>
@@ -96,6 +66,17 @@
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Source\Frame\Shadow.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\C3DDraw.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\Ccamera.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+=======
     <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp">
       <Filter>BulletPhysics</Filter>
     </ClCompile>
@@ -117,33 +98,19 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Cousel.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+>>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\test\TestScene.h">
-      <Filter>Test\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\test\TestObj.h">
-      <Filter>Test\TestObj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\test\jimen.h">
-      <Filter>Test\TestObj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\test\gazou.h">
-      <Filter>Test\TestObj</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\Input.h">
       <Filter>Frame\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C3DObject.h">
-      <Filter>Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\C2DObject.h">
       <Filter>Frame\2D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Audio.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\camera.h">
       <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\DXCommon.h">
@@ -167,9 +134,6 @@
     <ClInclude Include="Source\Game\Player.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Frame\posteffect.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\wood.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
@@ -185,6 +149,17 @@
     <ClInclude Include="Source\Frame\RenderTarget.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Source\Frame\Shadow.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\C3DDraw.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Ccamera.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="Source\BulletPhysics\BulletPhysics.h">
       <Filter>BulletPhysics</Filter>
     </ClInclude>
@@ -206,5 +181,9 @@
     <ClInclude Include="Source\Game\Pointa.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Game\Cousel.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+>>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
   </ItemGroup>
 </Project>

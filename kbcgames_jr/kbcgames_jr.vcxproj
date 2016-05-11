@@ -87,17 +87,22 @@
     <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp" />
     <ClCompile Include="Source\Frame\Audio.cpp" />
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
-    <ClCompile Include="Source\Frame\C3DObject.cpp" />
-    <ClCompile Include="Source\Frame\camera.cpp" />
+    <ClCompile Include="Source\Frame\C3DDraw.cpp" />
+    <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
+<<<<<<< HEAD
+=======
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />
     <ClCompile Include="Source\Frame\posteffect.cpp" />
+>>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\Rigidbody.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
+    <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\block1.cpp" />
+    <ClCompile Include="Source\Game\Cousel.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -106,29 +111,30 @@
     <ClCompile Include="Source\Game\Title.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
-    <ClCompile Include="Source\test\gazou.cpp" />
-    <ClCompile Include="Source\test\jimen.cpp" />
-    <ClCompile Include="Source\test\TestObj.cpp" />
-    <ClCompile Include="Source\test\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BulletPhysics\BulletPhysics.h" />
     <ClInclude Include="Source\Frame\Audio.h" />
     <ClInclude Include="Source\Frame\C2DObject.h" />
-    <ClInclude Include="Source\Frame\C3DObject.h" />
-    <ClInclude Include="Source\Frame\camera.h" />
+    <ClInclude Include="Source\Frame\C3DDraw.h" />
+    <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
+<<<<<<< HEAD
+=======
     <ClInclude Include="Source\Frame\IsIntersect.h" />
     <ClInclude Include="Source\Frame\posteffect.h" />
+>>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\Rigidbody.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
     <ClInclude Include="Source\Frame\Scene.h" />
     <ClInclude Include="Source\Frame\SceneManager.h" />
+    <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\block1.h" />
+    <ClInclude Include="Source\Game\Cousel.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />
@@ -137,10 +143,6 @@
     <ClInclude Include="Source\Game\Title.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
     <ClInclude Include="Source\Game\wood.h" />
-    <ClInclude Include="Source\test\gazou.h" />
-    <ClInclude Include="Source\test\jimen.h" />
-    <ClInclude Include="Source\test\TestObj.h" />
-    <ClInclude Include="Source\test\TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

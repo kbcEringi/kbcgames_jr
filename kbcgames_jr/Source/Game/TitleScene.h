@@ -5,7 +5,6 @@
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
 
-#include"..\Frame\camera.h"
 #include"..\Frame\Input.h"
 
 #include"Title.h"
@@ -22,10 +21,8 @@ public:
 	void Draw();
 
 private:
-	CCamera camera;
 	CTitle  m_title;
 	
-
 	BYTE diks[256];
 
 };

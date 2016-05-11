@@ -13,16 +13,13 @@ void CSceneManager::Add(CScene* pAdd)
 void CSceneManager::InitializeScene()
 {
 	SINSTANCE(CSceneManager)->Add(new CTitleScene("Title"));
-	
-
 	SINSTANCE(CSceneManager)->Add(new CStage1("Stage1"));
-	SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
+	SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
 
 	if (m_nowScene == -1){
 		//ƒV[ƒ“‚ðì‚Á‚Ä‚Ë
 		std::abort();
 	}
-	m_scenes[m_nowScene]->Initialize();
 }
 
 void CSceneManager::UpdateScene()
@@ -32,6 +29,7 @@ void CSceneManager::UpdateScene()
 
 void CSceneManager::DrawScene()
 {
+	
 	m_scenes[m_nowScene]->Draw();
 }
 

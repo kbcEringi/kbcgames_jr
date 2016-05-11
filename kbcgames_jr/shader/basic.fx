@@ -4,10 +4,11 @@
 
 
 float4x4 g_worldMatrix;			//ワールド行列。
-float4x4 g_viewMatrix;			//ビュー行列。
+float4x4 g_viewMatrix : register(c0);			//ビュー行列。
 float4x4 g_projectionMatrix;	//プロジェクション行列。
+float4x4 g_lvpMatrix;	//プロジェクション行列。
 
-#define DIFFUSE_LIGHT_NUM 4
+#define DIFFUSE_LIGHT_NUM 6
 float4 g_diffuseLightDirection[DIFFUSE_LIGHT_NUM];
 float4 g_diffuseLightColor[DIFFUSE_LIGHT_NUM];
 float4 g_ambientLight;
@@ -26,6 +27,18 @@ sampler_state
 	AddressV = Wrap;
 };
 
+texture g_ShadowTexture;		//ディフューズテクスチャ。
+sampler g_ShadowTextureSampler =
+sampler_state
+{
+	Texture = <g_ShadowTexture>;
+	MipFilter = NONE;
+	MinFilter = NONE;
+	MagFilter = NONE;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
 struct VS_INPUT{
 	float4	pos		: POSITION;
 	float4	color	: COLOR0;
@@ -38,6 +51,7 @@ struct VS_OUTPUT{
 	float4	color	: COLOR0;
 	float2	uv		: TEXCOORD0;
 	float4  specColor : TEXCOORD1;
+	float4 shadowpos : TEXCOORD2;
 };
 
 /*!
@@ -61,10 +75,12 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	//座標変換
 	float4 pos;
 	pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
+	Out.shadowpos = mul(pos, g_lvpMatrix);
 	pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
 	pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
 	Out.pos = pos;
 	Out.uv = In.uv;
+	
 	return Out;
 }
 /*!
@@ -72,7 +88,11 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	*/
 float4 PSMain(VS_OUTPUT In) : COLOR
 {
-	return tex2D(g_diffuseTextureSampler, In.uv) * In.color;
+	float4 pos = In.shadowpos;
+	float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
+	float4 color = tex2D(g_diffuseTextureSampler, In.uv);
+	color *= tex2D(g_ShadowTextureSampler, uv);
+	return color;
 }
 
 VS_OUTPUT VSSpecular(VS_INPUT In)
@@ -108,7 +128,6 @@ float4 PSSpecular(VS_OUTPUT In) : COLOR
 	return /*tex2D(g_diffuseTextureSampler, In.uv) */ In.color;
 }
 
-
 technique SkinModel
 {
 	pass p0
@@ -121,4 +140,5 @@ technique SkinModel
 		VertexShader = compile vs_2_0 VSSpecular();
 		PixelShader = compile ps_2_0 PSSpecular();
 	}
+	
 }

@@ -72,16 +72,13 @@ void CStage1::Initialize()
 	m_Player.Initialize();
 	m_Ground.Initialize();
 	m_wood.Initialize();
-	camera.Initialize();
+	m_camera.Initialize();
 	m_Debri.Initialize();
 	m_Block1.Initialize();
 	m_pointa.Initialize();
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
-
-	
-
 }
 
 void CStage1::Update()
@@ -103,6 +100,7 @@ void CStage1::Update()
 	camera.RotTransversal(0.05f);
 	}*/
 	m_pAudio->Run();	//周期タスク実行
+	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	//test.Update();
 	m_Player.Update();
 	m_Ground.Update();
@@ -111,7 +109,6 @@ void CStage1::Update()
 	m_Block1.Update();
 	m_pointa.Update();
 	//ポインタをPlayerが追いかける
-	//m_Player.Move(m_pointa.GetPosition());
 	if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
 	{
 		m_Player.Add(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
@@ -128,9 +125,6 @@ void CStage1::Update()
 	{
 		m_Player.subtract(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
 	}
-	//Playerを追いかけるカメラ
-	camera.SerBase(m_Player.GetPosition());
-	
 }
 
 void CStage1::Draw()
@@ -143,7 +137,6 @@ void CStage1::Draw()
 	m_Ground.Draw(camera.GetView());//ステージ１を描画
 	m_Block1.Draw(camera.GetView());//ブロック１を描画
 	m_Debri.Draw(camera.GetView());//テストでぶり
-	m_pointa.Draw(camera.GetView());//ポインタ描画
 	
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -153,15 +146,13 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
-	
-	m_wood.Draw(camera.GetView());	//木描画
-	m_Player.Draw(camera.GetView());//Playerを描画
-	
+
+	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
+	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
-	camera.SerBase(D3DXVECTOR3(0.0, 0.0, 0.0));
-
+	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 }
 
 void CStage1::CreateCollision()
