@@ -29,6 +29,7 @@ void CSceneManager::UpdateScene()
 
 void CSceneManager::DrawScene()
 {
+	
 	m_scenes[m_nowScene]->Draw();
 }
 

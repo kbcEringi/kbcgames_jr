@@ -2,9 +2,10 @@
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DDraw.h"
+#include "..\Frame\Rigidbody.h"
+
 
 #define GRAVITY 0.2　//重力
-#define MAXJUMP	1.0	 //ジャンプする力
 
 class CWood
 {
@@ -26,4 +27,8 @@ private:
 	D3DXVECTOR3 m_force;
 	bool m_Ground;					//地面についているか？
 	float SpeedPower;				//加速を加える速度
+	//剛体に必要なメンバ変数
+	D3DXVECTOR3 size;				//剛体のサイズ
+	CRigidbody m_Rigidbody;			//剛体
+	
 };

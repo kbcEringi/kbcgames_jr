@@ -7,11 +7,17 @@
 
 #include"..\Frame\Ccamera.h"
 //#include"TestObj.h"
+/********オブジェクト********/
 #include "Player.h"
-//#include "Ground.h"
-
+#include "Ground.h"
 #include "wood.h"
-#include "..\AABB.h"
+#include "Debri.h"
+#include "block1.h"
+#include "Pointa.h"
+
+#include"..\BulletPhysics\BulletPhysics.h"
+
+#define MAX_COLLISION 100
 
 class CSceneManager;
 class CAudio;
@@ -23,6 +29,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	void CreateCollision();
 
 private:
 
@@ -31,10 +38,19 @@ private:
 	D3DXVECTOR3 m_position;
 
 	Ccamera m_camera;
+	CAudio* m_pAudio;
+	/******オブジェクト*****/
 	//CTestObj test;
 	CPlayer m_Player;
-	/*CGround m_Ground;*/
+	CGround m_Ground;
 	CWood m_wood;
-	CAudio* m_pAudio;
-	//CAabb m_aabb;
+	CDebri m_Debri;
+	CBlock1 m_Block1;
+	CPointa m_pointa;
+
+	//ここからbulletPhysicsの剛体を使用するために必要な変数。
+	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
+	btRigidBody*		m_rigidBody[MAX_COLLISION];	//剛体。
+	btDefaultMotionState* m_myMotionState;
+	
 };
