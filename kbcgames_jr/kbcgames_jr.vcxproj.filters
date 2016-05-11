@@ -66,7 +66,6 @@
     <ClCompile Include="Source\Frame\RenderTarget.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Source\Frame\Shadow.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
@@ -76,7 +75,6 @@
     <ClCompile Include="Source\Frame\Ccamera.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
-=======
     <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp">
       <Filter>BulletPhysics</Filter>
     </ClCompile>
@@ -98,10 +96,6 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Cousel.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
->>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -149,7 +143,6 @@
     <ClInclude Include="Source\Frame\RenderTarget.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Source\Frame\Shadow.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
@@ -159,7 +152,6 @@
     <ClInclude Include="Source\Frame\Ccamera.h">
       <Filter>Frame</Filter>
     </ClInclude>
-=======
     <ClInclude Include="Source\BulletPhysics\BulletPhysics.h">
       <Filter>BulletPhysics</Filter>
     </ClInclude>
@@ -181,9 +173,5 @@
     <ClInclude Include="Source\Game\Pointa.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Cousel.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
->>>>>>> e584743d0c35ae8e3b78ac8d42f7ae943a284604
   </ItemGroup>
 </Project>

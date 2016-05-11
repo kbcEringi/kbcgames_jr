@@ -3,7 +3,7 @@
 #include"BulletPhysics.h"
 #include"..\BulletCollision\CollisionDispatch\btGhostObject.h"
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DObject.h"
+#include"..\Frame\C3DDraw.h"
 
 
 /*!

@@ -134,9 +134,9 @@ void CStage1::Draw()
 	//Obj.Draw(matWorld, view, m_projMatrix);
 	//test.Draw(camera.GetView());
 
-	m_Ground.Draw(camera.GetView());//ステージ１を描画
-	m_Block1.Draw(camera.GetView());//ブロック１を描画
-	m_Debri.Draw(camera.GetView());//テストでぶり
+	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
+	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
+	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
 	
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
