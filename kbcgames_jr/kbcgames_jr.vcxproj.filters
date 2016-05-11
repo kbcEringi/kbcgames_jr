@@ -173,5 +173,8 @@
     <ClInclude Include="Source\Game\Pointa.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Frame\CGamepad.h">
+      <Filter>Frame\Input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

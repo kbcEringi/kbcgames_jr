@@ -16,12 +16,13 @@ public:
 	D3DXMATRIX GetProjectionMatrix(){ return m_projectionMatrix; }
 	void AddLookat(D3DXVECTOR3 vec){ m_vLookatPt += vec; }
 	void SetLookat(D3DXVECTOR3 vec){ m_vLookatPt = vec; }
+	void SetEyePt(D3DXVECTOR3 vec){ m_vEyePt = vec; }
 	void RotTransversal(float RotY);	//横回転
 	void RotLongitudinal(float RotX); //縦回転
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。
-	D3DXVECTOR3		m_vEyePt;				//カメラの視点。
+	D3DXVECTOR3		m_vEyePt;				//カメラの位置。
 	D3DXVECTOR3		m_vLookatPt;			//カメラの注視点。
 	D3DXVECTOR3		m_vUpVec;				//カメラの上方向。
 	float			m_Distance;				//カメラの位置と視点の距離

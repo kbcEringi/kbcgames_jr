@@ -68,11 +68,11 @@ void CStage1::Initialize()
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
-	//test.Initialize();
 	m_Player.Initialize();
 	m_Ground.Initialize();
 	m_wood.Initialize();
 	m_camera.Initialize();
+	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_Block1.Initialize();
 	m_pointa.Initialize();
@@ -83,25 +83,26 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
-	/*if (GetAsyncKeyState(VK_UP) & 0x8000)
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
-	camera.RotLongitudinal(0.05f);
+		m_camera.RotLongitudinal(0.05f);
 	}
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 	{
-	camera.RotLongitudinal(-0.05f);
+		m_camera.RotLongitudinal(-0.05f);
 	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-	camera.RotTransversal(-0.05f);
+		m_camera.RotTransversal(-0.05f);
 	}
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-	camera.RotTransversal(0.05f);
-	}*/
+		m_camera.RotTransversal(0.05f);
+	}
+
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-	//test.Update();
+	m_camera.Update();
 	m_Player.Update();
 	m_Ground.Update();
 	m_wood.Update();
@@ -129,11 +130,6 @@ void CStage1::Update()
 
 void CStage1::Draw()
 {
-
-	//D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
-	//Obj.Draw(matWorld, view, m_projMatrix);
-	//test.Draw(camera.GetView());
-
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
 	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり

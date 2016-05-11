@@ -113,6 +113,7 @@
     <ClInclude Include="Source\Frame\C2DObject.h" />
     <ClInclude Include="Source\Frame\C3DDraw.h" />
     <ClInclude Include="Source\Frame\Ccamera.h" />
+    <ClInclude Include="Source\Frame\CGamepad.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
