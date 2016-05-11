@@ -18,7 +18,7 @@ void CStage1::Initialize()
 	m_Player.Initialize();
 	/*m_Ground.Initialize();*/
 	m_wood.Initialize();
-	camera.Initialize();
+	m_camera.Initialize();
 }
 
 void CStage1::Update()
@@ -40,7 +40,7 @@ void CStage1::Update()
 	//camera.RotTransversal(0.05f);
 	//}
 	m_pAudio->Run();	//周期タスク実行
-	camera.SerBase(m_Player.GetPosition());//Playerを追いかけるカメラ
+	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 
 	//test.Update();
 	m_Player.Update();
@@ -64,11 +64,9 @@ void CStage1::Draw()
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
 
-	m_Player.Draw(camera.GetView());//Playerを描画
-	m_wood.Draw(camera.GetView());	//木描画
+	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
+	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
-	camera.SerBase(D3DXVECTOR3(0.0, 0.0, 0.0));
-
 }

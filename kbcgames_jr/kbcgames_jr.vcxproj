@@ -80,11 +80,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Frame\Audio.cpp" />
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
-    <ClCompile Include="Source\Frame\C3DObject.cpp" />
-    <ClCompile Include="Source\Frame\camera.cpp" />
+    <ClCompile Include="Source\Frame\C3DDraw.cpp" />
+    <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
-    <ClCompile Include="Source\Frame\posteffect.cpp" />
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
@@ -94,20 +93,15 @@
     <ClCompile Include="Source\Game\Title.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
-    <ClCompile Include="Source\test\gazou.cpp" />
-    <ClCompile Include="Source\test\jimen.cpp" />
-    <ClCompile Include="Source\test\TestObj.cpp" />
-    <ClCompile Include="Source\test\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h" />
     <ClInclude Include="Source\Frame\C2DObject.h" />
-    <ClInclude Include="Source\Frame\C3DObject.h" />
-    <ClInclude Include="Source\Frame\camera.h" />
+    <ClInclude Include="Source\Frame\C3DDraw.h" />
+    <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
-    <ClInclude Include="Source\Frame\posteffect.h" />
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
     <ClInclude Include="Source\Frame\Scene.h" />
@@ -119,10 +113,6 @@
     <ClInclude Include="Source\Game\Title.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
     <ClInclude Include="Source\Game\wood.h" />
-    <ClInclude Include="Source\test\gazou.h" />
-    <ClInclude Include="Source\test\jimen.h" />
-    <ClInclude Include="Source\test\TestObj.h" />
-    <ClInclude Include="Source\test\TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

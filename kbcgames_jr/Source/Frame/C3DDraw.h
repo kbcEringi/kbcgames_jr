@@ -3,7 +3,9 @@
 #include"GraphicsDevice.h"
 #include <stdlib.h>
 
-class C3DObject;
+
+
+class C3DDraw;
 /*
 *エフェクト設定のコールバッククラス。
 */
@@ -15,14 +17,10 @@ public:
 	virtual ~ISetEffectCallback()
 	{
 	}
-	void SetEffect(ID3DXEffect* effect)
-	{
-		m_pEffect = effect;
-	}
 public:
-	virtual void OnBeginRender(C3DObject* p3dObject, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) = 0;
-	virtual void OnPreDrawSubset(C3DObject* p3dObject, int materialNo) = 0;
-	virtual void OnEndRender(C3DObject*	m_p3dObject) = 0;
+	virtual void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) = 0;
+	virtual void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) = 0;
+	virtual void OnEndRender(C3DDraw*	p3dDraw) = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
 };
@@ -33,23 +31,23 @@ class CSetEffectCallbackDefault : public ISetEffectCallback{
 public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
-	void OnBeginRender(C3DObject* p3dObject, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
-	void OnPreDrawSubset(C3DObject* p3dObject, int materialNo) override;
-	void OnEndRender(C3DObject*	m_p3dObject) override;
+	void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
+	void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) override;
+	void OnEndRender(C3DDraw*	p3dDraw) override;
 };
 
 class CSetEffectCallbackShadowMap : public ISetEffectCallback{
 public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
-	void OnBeginRender(C3DObject* p3dObject, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
-	void OnPreDrawSubset(C3DObject* p3dObject, int materialNo) override;
-	void OnEndRender(C3DObject*	m_p3dObject) override;
+	void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
+	void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) override;
+	void OnEndRender(C3DDraw*	p3dDraw) override;
 };
 /*
 * 3Dオブジェクト。
 */
-class C3DObject
+class C3DDraw
 {
 	friend class ISetEffectCallback;
 	friend class CSetEffectCallbackDefault;
@@ -72,17 +70,12 @@ public:
 	{
 		m_currentSetEffectCallback = callback;
 	}
-	ID3DXEffect* GetEffect()
-	{
-		return m_pEffect;
-	}
-	~C3DObject();
+	~C3DDraw();
 protected:
 	LPD3DXBUFFER m_D3DXMtrlBuffer;	//マテリアル
 	DWORD m_NumMaterials;		//マテリアル数
 	LPD3DXMESH m_Mesh;			//メッシュ
 	LPDIRECT3DTEXTURE9*  m_pMeshTextures;	//メッシュテクスチャ
-	ID3DXEffect* m_pEffect;
 
 	D3DXMATERIAL *materials;
 

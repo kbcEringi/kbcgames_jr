@@ -1,7 +1,7 @@
 #pragma once
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DObject.h"
+#include"..\Frame\C3DDraw.h"
 
 #define GRAVITY 0.2　//重力
 #define MAXJUMP	1.0	 //ジャンプする力
@@ -20,7 +20,7 @@ public:
 		return m_position;
 	}
 private:
-	C3DObject Obj;
+	C3DDraw Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;

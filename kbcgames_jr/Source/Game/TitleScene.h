@@ -5,7 +5,7 @@
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
 
-#include"..\Frame\camera.h"
+#include"..\Frame\Ccamera.h"
 #include"..\Frame\Input.h"
 
 #include"Title.h"
@@ -22,7 +22,7 @@ public:
 	void Draw();
 
 private:
-	CCamera camera;
+	Ccamera m_camera;
 	CTitle  m_title;
 	
 

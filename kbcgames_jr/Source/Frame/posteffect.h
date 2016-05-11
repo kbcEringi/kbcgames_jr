@@ -3,7 +3,6 @@
 #include"GraphicsDevice.h"
 #include"DXCommon.h"
 
-#include"..\test\TestObj.h"
 #include"C2DObject.h"
 
 #include"RenderTarget.h"
@@ -20,10 +19,6 @@ private:
 	D3DVIEWPORT9       m_viewport;  // テクスチャのビューポート
 	LPDIRECT3DSURFACE9 m_Backbuffer;
 	LPDIRECT3DSURFACE9 m_BackZ;
-	
-	CTestObj testob;
 
 	Frame::CRenderTarget TestRenderT;
-
-
 };

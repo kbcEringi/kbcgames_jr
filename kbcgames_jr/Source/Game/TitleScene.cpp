@@ -29,6 +29,6 @@ void CTitleScene::Update()
 
 void CTitleScene::Draw()
 {
-	camera.SerBase(D3DXVECTOR3(0.0, 0.0, 0.0));
+	//m_camera.AddLookat(D3DXVECTOR3(0.0, 0.0, 0.0));
 	m_title.Draw();
 }

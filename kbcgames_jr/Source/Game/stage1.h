@@ -5,7 +5,7 @@
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
 
-#include"..\Frame\camera.h"
+#include"..\Frame\Ccamera.h"
 //#include"TestObj.h"
 #include "Player.h"
 //#include "Ground.h"
@@ -26,11 +26,11 @@ public:
 
 private:
 
-	C3DObject Obj;
+	C3DDraw Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 
-	CCamera camera;
+	Ccamera m_camera;
 	//CTestObj test;
 	CPlayer m_Player;
 	/*CGround m_Ground;*/
