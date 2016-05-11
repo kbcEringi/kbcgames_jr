@@ -96,6 +96,9 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\TitleCusor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleCusor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

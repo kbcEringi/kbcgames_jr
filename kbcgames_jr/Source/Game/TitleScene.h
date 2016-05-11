@@ -8,9 +8,13 @@
 #include"..\Frame\Input.h"
 
 #include"Title.h"
+#include "TitleCusor.h"
 
 
 class CSceneManager;
+class CAudio;
+
+enum COMMAND_SELECT { START = 0, EXIT };
 
 class CTitleScene : public CScene
 {
@@ -19,10 +23,13 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	void Select();
 
 private:
 	CTitle  m_title;
-	
+	CTitleCursor m_TitleCusor;
+
+	CAudio* m_pAudio;
 	BYTE diks[256];
 
 };

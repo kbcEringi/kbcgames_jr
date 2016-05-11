@@ -41,43 +41,42 @@ void CPlayer::Draw(D3DXMATRIX view)
 	Obj.Draw(matWorld, view, m_projMatrix);
 }
 
-//void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
-//{
-//
-//	
-//	D3DXMatrixIdentity(&matWorld);
-//	(*GetKeyDevice()).GetDeviceState(
-//		sizeof(diks),	// パラメータ バッファサイズ
-//		&diks);
-//	m_moveSpeed.x = 0.0f;
-//	if (KEYDOWN(diks, DIK_SPACE) & 0x80)
-//	{
-//		
-//		//m_moveSpeed.y = 0.0f;
-//		if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
-//		{
-//			m_moveSpeed.x = movespeed.x;
-//			//m_position.x += 0.2f;
-//		}
-//		if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
-//		{
-//			m_moveSpeed.x = movespeed.x;
-//			//m_position.x -= 0.2f;
-//		}
-//		if (KEYDOWN(diks, DIK_UP) & 0x80)//上
-//		{
-//			m_moveSpeed.y = movespeed.y;
-//			//m_position.y += 0.2f;
-//		}
-//		if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
-//		{
-//			m_moveSpeed.y = movespeed.y;
-//			//m_position.y -= 0.2f;
-//		}
-//		else
-//		{
-//			(*GetKeyDevice()).Acquire();//キーデバイス取得
-//		}
-//	}
-//
-//}
+void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
+{
+
+
+	D3DXMatrixIdentity(&matWorld);
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+	m_moveSpeed.x = 0.0f;
+	if (KEYDOWN(diks, DIK_SPACE) & 0x80)
+	{
+		//m_moveSpeed.y = 0.0f;
+		if (m_position.x <= movespeed.x)//右
+		{
+			m_position.x += 0.1f;
+			//m_position.x += 0.2f;
+		}
+		if (m_position.x >= movespeed.x)//左
+		{
+			m_position.x -= 0.1f;
+			//m_position.x -= 0.2f;
+		}
+		if (m_position.y <= movespeed.y)//上
+		{
+			m_position.y += 0.1f;
+			//m_position.y += 0.2f;
+		}
+		if (m_position.y >= movespeed.y)//下
+		{
+			m_position.y -= 0.1f;
+			//m_position.y -= 0.2f;
+		}
+		
+	}
+	else
+	{
+		(*GetKeyDevice()).Acquire();//キーデバイス取得
+	}
+}

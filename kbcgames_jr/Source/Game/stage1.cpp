@@ -83,22 +83,22 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
-	{
-		m_camera.RotLongitudinal(0.05f);
-	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		m_camera.RotLongitudinal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-		m_camera.RotTransversal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	{
-		m_camera.RotTransversal(0.05f);
-	}
+	//if (GetAsyncKeyState(VK_UP) & 0x8000)
+	//{
+	//	m_camera.RotLongitudinal(0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	//{
+	//	m_camera.RotLongitudinal(-0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//{
+	//	m_camera.RotTransversal(-0.05f);
+	//}
+	//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//{
+	//	m_camera.RotTransversal(0.05f);
+	//}
 
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
@@ -110,7 +110,8 @@ void CStage1::Update()
 	m_Block1.Update();
 	m_pointa.Update();
 	//ポインタをPlayerが追いかける
-	if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
+	m_Player.Move(m_pointa.GetPosition());
+	/*if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
 	{
 		m_Player.Add(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
 	}
@@ -125,7 +126,7 @@ void CStage1::Update()
 	if (m_Player.GetPosition().y >= m_pointa.GetPosition().y)
 	{
 		m_Player.subtract(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
-	}
+	}*/
 }
 
 void CStage1::Draw()
@@ -133,7 +134,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
 	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
-	
+	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -148,7 +149,6 @@ void CStage1::Draw()
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
-	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 }
 
 void CStage1::CreateCollision()
