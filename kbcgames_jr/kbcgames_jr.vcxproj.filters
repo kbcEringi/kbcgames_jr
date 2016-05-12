@@ -98,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="Source\Frame\CGamepad.cpp">
       <Filter>Frame\Input</Filter>
+       </ClCompile>
+    <ClCompile Include="Source\Game\TitleCusor.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleCusor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

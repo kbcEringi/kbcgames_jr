@@ -26,6 +26,6 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
-	//D3DXVECTOR3 m_moveSpeed;
+	D3DXVECTOR3 m_moveSpeed;
 	BYTE diks[256];//キーインプット
 };

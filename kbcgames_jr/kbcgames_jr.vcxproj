@@ -105,6 +105,7 @@
     <ClCompile Include="Source\Game\Pointa.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
+    <ClCompile Include="Source\Game\TitleCusor.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="Source\Game\Pointa.h" />
     <ClInclude Include="Source\Game\Stage1.h" />
     <ClInclude Include="Source\Game\Title.h" />
+    <ClInclude Include="Source\Game\TitleCusor.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
     <ClInclude Include="Source\Game\wood.h" />
   </ItemGroup>
