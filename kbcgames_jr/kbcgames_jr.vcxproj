@@ -89,6 +89,7 @@
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
     <ClCompile Include="Source\Frame\C3DDraw.cpp" />
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
+    <ClCompile Include="Source\Frame\CGamepad.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />

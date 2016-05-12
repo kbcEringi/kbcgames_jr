@@ -83,21 +83,25 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	GAMEPAD(CGamepad)->UpdateControllerState();
+	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		m_camera.RotLongitudinal(0.05f);
-	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		m_camera.RotLongitudinal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-		m_camera.RotTransversal(-0.05f);
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	{
-		m_camera.RotTransversal(0.05f);
+		if (GAMEPAD(CGamepad)->GetStickR_Y() > 0)
+		{
+			m_camera.RotLongitudinal(0.05f);
+		}
+		if (GAMEPAD(CGamepad)->GetStickR_Y()<0)
+		{
+			m_camera.RotLongitudinal(-0.05f);
+		}
+		if (GAMEPAD(CGamepad)->GetStickR_X()>0)
+		{
+			m_camera.RotTransversal(-0.05f);
+		}
+		if (GAMEPAD(CGamepad)->GetStickR_X() < 0)
+		{
+			m_camera.RotTransversal(0.05f);
+		}
 	}
 
 	m_pAudio->Run();	//周期タスク実行

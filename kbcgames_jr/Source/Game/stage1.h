@@ -3,10 +3,9 @@
 #include"..\Frame\DXCommon.h"
 
 #include"..\Frame\Scene.h"
-#include"..\Frame\SceneManager.h"
 
 #include"..\Frame\Ccamera.h"
-//#include"TestObj.h"
+
 /********オブジェクト********/
 #include "Player.h"
 #include "Ground.h"
@@ -16,6 +15,8 @@
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
+
+#include"..\Frame\CGamepad.h"
 
 #define MAX_COLLISION 100
 
@@ -40,7 +41,7 @@ private:
 	Ccamera m_camera;
 	CAudio* m_pAudio;
 	/******オブジェクト*****/
-	//CTestObj test;
+
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;

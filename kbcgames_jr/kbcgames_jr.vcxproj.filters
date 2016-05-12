@@ -96,6 +96,9 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\CGamepad.cpp">
+      <Filter>Frame\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
