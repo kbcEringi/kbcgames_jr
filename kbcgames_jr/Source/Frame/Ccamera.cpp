@@ -5,7 +5,7 @@ void Ccamera::Initialize()
 	m_vEyePt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_vLookatPt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_vUpVec = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
+	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.5f, -1.0f);
 
 	m_Distance = 10.0f;
 	m_vFovy = D3DXToRadian(45.0f);

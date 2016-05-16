@@ -96,8 +96,14 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\TitleCusor.cpp">
+    <ClCompile Include="Source\Game\GameCursor.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\TitleCursor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\RayCursor.cpp">
+      <Filter>Frame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +185,14 @@
     <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\TitleCusor.h">
+    <ClInclude Include="Source\Game\GameCursor.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleCursor.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\RayCursor.h">
+      <Filter>Frame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

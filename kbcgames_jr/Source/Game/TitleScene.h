@@ -8,7 +8,7 @@
 #include"..\Frame\Input.h"
 
 #include"Title.h"
-#include "TitleCusor.h"
+#include "TitleCursor.h"
 
 
 class CSceneManager;
@@ -27,7 +27,7 @@ public:
 
 private:
 	CTitle  m_title;
-	CTitleCursor m_TitleCusor;
+	CTitleCursor m_TitleCursor;
 
 	CAudio* m_pAudio;
 	BYTE diks[256];

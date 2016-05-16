@@ -68,14 +68,15 @@ void CStage1::Initialize()
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
-	m_Player.Initialize();
-	m_Ground.Initialize();
-	m_wood.Initialize();
-	m_camera.Initialize();
-	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
-	m_Debri.Initialize();
-	m_Block1.Initialize();
-	m_pointa.Initialize();
+	m_Player.Initialize();//プレイヤー
+	m_Ground.Initialize();//グラウンド
+	m_wood.Initialize();//木
+	m_camera.Initialize();//カメラ
+	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));//カメラセット
+	m_Debri.Initialize();//実験体
+	m_Block1.Initialize();//実験ブロック1
+	//m_pointa.Initialize();//３Dポインタ
+	m_GCursor.Initialize();//ゲームカーソル
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
@@ -102,31 +103,17 @@ void CStage1::Update()
 
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.SetLookat(D3DXVECTOR3(m_Player.GetPosition().x,3.0f,0.0f));//Playerを追いかけるカメラ
-	m_camera.Update();
-	m_Player.Update();
-	m_Ground.Update();
-	m_wood.Update();
-	m_Debri.Update();
-	m_Block1.Update();
-	m_pointa.Update();
+	m_camera.Update();//カメラ
+	m_Player.Update();//プレイヤー
+	m_Ground.Update();//地面
+	m_wood.Update();//木
+	m_Debri.Update();//実験体
+	m_Block1.Update();//実験ブロック１
+	//m_pointa.Update();//３Dポインタ
+	m_GCursor.Update();//ゲームカーソル
+
 	//ポインタをPlayerが追いかける
 	m_Player.Move(m_pointa.GetPosition());
-	/*if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
-	{
-		m_Player.Add(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
-	}
-	if (m_Player.GetPosition().y <= m_pointa.GetPosition().y)
-	{
-		m_Player.Add(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
-	}
-	if (m_Player.GetPosition().x >= m_pointa.GetPosition().x)
-	{
-		m_Player.subtract(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
-	}
-	if (m_Player.GetPosition().y >= m_pointa.GetPosition().y)
-	{
-		m_Player.subtract(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
-	}*/
 }
 
 void CStage1::Draw()
@@ -134,7 +121,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
 	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
-	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
+	//m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -146,6 +133,7 @@ void CStage1::Draw()
 
 	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
+	m_GCursor.Draw();//ゲームカーソル
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

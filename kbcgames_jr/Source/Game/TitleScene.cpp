@@ -12,7 +12,7 @@ void CTitleScene::Initialize()
 	m_pAudio->PlayCue("title");	//ステージ音楽再生
 
 	m_title.Initialize();
-	m_TitleCusor.Initialize();
+	m_TitleCursor.Initialize();
 }
 
 void CTitleScene::Update()
@@ -21,7 +21,7 @@ void CTitleScene::Update()
 	Select();//セレクト
 
 	m_title.Update();
-	m_TitleCusor.Update();
+	m_TitleCursor.Update();
 }
 
 void CTitleScene::Draw()
@@ -32,7 +32,7 @@ void CTitleScene::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
-	m_TitleCusor.Draw();
+	m_TitleCursor.Draw();
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
@@ -41,11 +41,12 @@ void CTitleScene::Draw()
 void CTitleScene::Select()
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000){
-		switch (m_TitleCusor.GetSelect())
+		switch (m_TitleCursor.GetSelect())
 		{
 		case COMMAND_SELECT::START:
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
 			m_pAudio->StopCue("title");
+			m_pAudio->PlayCue("start");
 			break;
 		case COMMAND_SELECT::EXIT:
 			PostQuitMessage(0);

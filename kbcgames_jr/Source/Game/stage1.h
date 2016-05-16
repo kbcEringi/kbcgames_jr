@@ -7,7 +7,9 @@
 
 #include"..\Frame\Ccamera.h"
 //#include"TestObj.h"
-/********オブジェクト********/
+/********2Dオブジェクト********/
+#include "GameCursor.h"
+/********3dオブジェクト********/
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
@@ -15,7 +17,7 @@
 #include "block1.h"
 #include "Pointa.h"
 
-#include"..\BulletPhysics\BulletPhysics.h"
+#include"..\BulletPhysics\BulletPhysics.h"//あたり判定
 
 #define MAX_COLLISION 100
 
@@ -39,7 +41,9 @@ private:
 
 	Ccamera m_camera;
 	CAudio* m_pAudio;
-	/******オブジェクト*****/
+	/******2Dオブジェクト*****/
+	CGameCursor m_GCursor;
+	/******3Dオブジェクト*****/
 	//CTestObj test;
 	CPlayer m_Player;
 	CGround m_Ground;
