@@ -96,14 +96,17 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameCursor.cpp">
+    <ClCompile Include="Source\Game\TitleCusor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\TitleCursor.cpp">
+    <ClCompile Include="Source\Game\ResultScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Result.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Frame\RayCursor.cpp">
-      <Filter>Frame</Filter>
+    <ClCompile Include="Source\Game\ResultCusor.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,14 +188,17 @@
     <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GameCursor.h">
+    <ClInclude Include="Source\Game\TitleCusor.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\TitleCursor.h">
+    <ClInclude Include="Source\Game\ResultScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Result.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Frame\RayCursor.h">
-      <Filter>Frame</Filter>
+    <ClInclude Include="Source\Game\ResultCusor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

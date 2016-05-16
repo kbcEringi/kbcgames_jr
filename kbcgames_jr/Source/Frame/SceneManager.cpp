@@ -2,6 +2,7 @@
 
 #include"..\Game\Stage1.h"
 #include"..\Game\TitleScene.h"
+#include"..\Game\ResultScene.h"
 
 CSceneManager* CSceneManager::m_pInstance = new CSceneManager();
 
@@ -13,8 +14,11 @@ void CSceneManager::Add(CScene* pAdd)
 void CSceneManager::InitializeScene()
 {
 	SINSTANCE(CSceneManager)->Add(new CTitleScene("Title"));
+	SINSTANCE(CSceneManager)->Add(new CResultScene("Result"));
 	SINSTANCE(CSceneManager)->Add(new CStage1("Stage1"));
 	SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
+
+	
 
 	if (m_nowScene == -1){
 		//ƒV[ƒ“‚ğì‚Á‚Ä‚Ë
