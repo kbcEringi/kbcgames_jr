@@ -99,6 +99,9 @@
     <ClCompile Include="Source\Game\TitleCusor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\SetWind.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -180,6 +183,9 @@
       <Filter>Frame\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TitleCusor.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\SetWind.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

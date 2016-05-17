@@ -1,6 +1,7 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 
+CStage1* g_stage = NULL;
 //オブジェクトの詳細
 struct SCollisionInfo {
 	D3DXVECTOR3 pos;
@@ -71,6 +72,7 @@ void CStage1::Initialize()
 	m_Player.Initialize();
 	m_Ground.Initialize();
 	m_wood.Initialize();
+	m_setwind.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
@@ -79,6 +81,7 @@ void CStage1::Initialize()
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
+	g_stage = this;
 }
 
 void CStage1::Update()
@@ -106,6 +109,7 @@ void CStage1::Update()
 	m_Player.Update();
 	m_Ground.Update();
 	m_wood.Update();
+	m_setwind.Update();
 	m_Debri.Update();
 	m_Block1.Update();
 	m_pointa.Update();
@@ -146,6 +150,7 @@ void CStage1::Draw()
 
 	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
+	m_setwind.Draw(m_camera.GetViewMatrix());//風描画
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

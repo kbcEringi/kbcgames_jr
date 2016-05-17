@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
+#include "SetWind.h"
 #include "Debri.h"
 #include "block1.h"
 #include "Pointa.h"
@@ -30,7 +31,10 @@ public:
 	void Update();
 	void Draw();
 	void CreateCollision();
-
+	CPlayer* GetPlayer()
+	{
+		return &m_Player;
+	}
 private:
 
 	C3DDraw Obj;
@@ -47,6 +51,7 @@ private:
 	CDebri m_Debri;
 	CBlock1 m_Block1;
 	CPointa m_pointa;
+	CSetWind m_setwind;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
@@ -54,3 +59,4 @@ private:
 	btDefaultMotionState* m_myMotionState;
 	
 };
+extern CStage1* g_stage;
