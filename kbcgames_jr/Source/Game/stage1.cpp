@@ -4,53 +4,16 @@
 //オブジェクトの詳細
 struct SCollisionInfo {
 	D3DXVECTOR3 pos;
-	D3DXVECTOR3 angle;
+	D3DXQUATERNION rotation;
 	D3DXVECTOR3 scale;
 };
 
-SCollisionInfo collisionInfoTable[] = {
-	{
-		//Block1のコリジョン
-		D3DXVECTOR3(0.0f, 2.0f, 0.0f),			//座標。
-		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
-		D3DXVECTOR3(2.0f, 2.0f, 2.0f),			//拡大。	
-	},
-	{
-		//Ground1のコリジョン
-		D3DXVECTOR3(2.0f, 0.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground2のコリジョン
-		D3DXVECTOR3(6.0f, -1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground3のコリジョン
-		D3DXVECTOR3(10.5f, -2.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(5.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground4のコリジョン
-		D3DXVECTOR3(15.0f, -1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground5のコリジョン
-		D3DXVECTOR3(18.0f, 0.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground1のコリジョン
-		D3DXVECTOR3(24.5f, 1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
-	},
+SCollisionInfo collisionInfoTable3D[] = {
+#include "CollisionInfo3D.h"
+};
+
+SCollisionInfo collisionInfoTable2D[] = {
+#include "CollisionInfo2D.h"
 };
 
 
@@ -74,8 +37,7 @@ void CStage1::Initialize()
 	m_camera.Initialize();//カメラ
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));//カメラセット
 	m_Debri.Initialize();//実験体
-	m_Block1.Initialize();//実験ブロック1
-	//m_pointa.Initialize();//３Dポインタ
+	m_pointa.Initialize();//３Dポインタ
 	m_GCursor.Initialize();//ゲームカーソル
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
@@ -108,8 +70,7 @@ void CStage1::Update()
 	m_Ground.Update();//地面
 	m_wood.Update();//木
 	m_Debri.Update();//実験体
-	m_Block1.Update();//実験ブロック１
-	//m_pointa.Update();//３Dポインタ
+	m_pointa.Update();//３Dポインタ
 	m_GCursor.Update();//ゲームカーソル
 
 	//ポインタをPlayerが追いかける
@@ -119,17 +80,16 @@ void CStage1::Update()
 void CStage1::Draw()
 {
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
-	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
-	//m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
+	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
-	if (GetAsyncKeyState('Q')){
+	/*if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
-	}
+	}*/
 
 	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
@@ -141,13 +101,13 @@ void CStage1::Draw()
 
 void CStage1::CreateCollision()
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable);
+	int arraySize = ARRAYSIZE(collisionInfoTable3D);
 	if (arraySize >= MAX_COLLISION)
 	{
 		std::abort();
 	}
 	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collisionInfoTable[i];
+		SCollisionInfo& collision = collisionInfoTable3D[i];
 		//ここで剛体とかを登録する。
 		//剛体を初期化。
 		{
@@ -155,7 +115,8 @@ void CStage1::CreateCollision()
 			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
-			groundTransform.setOrigin(btVector3(collision.pos.x, collision.pos.y, collision.pos.z));
+			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, collision.pos.z));
+			groundTransform.setRotation(btQuaternion(collision.rotation.x, collision.rotation.y, collision.rotation.z, collision.rotation.w));
 			float mass = 0.0f;
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects

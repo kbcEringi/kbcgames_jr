@@ -14,7 +14,6 @@
 #include "Ground.h"
 #include "wood.h"
 #include "Debri.h"
-#include "block1.h"
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"//あたり判定
@@ -49,7 +48,6 @@ private:
 	CGround m_Ground;
 	CWood m_wood;
 	CDebri m_Debri;
-	CBlock1 m_Block1;
 	CPointa m_pointa;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
