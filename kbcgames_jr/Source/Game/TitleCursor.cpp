@@ -30,7 +30,7 @@ void CTitleCursor::Update()
 			dir = 1;
 		}
 	}
-	if (GetAsyncKeyState(VK_UP))//ª‰Ÿ‚³‚ê‚½‚ç
+	else if (GetAsyncKeyState(VK_UP))//ª‰Ÿ‚³‚ê‚½‚ç
 	{
 		m_pAudio->PlayCue("select");
 		if (m_selectIndex > 0)
