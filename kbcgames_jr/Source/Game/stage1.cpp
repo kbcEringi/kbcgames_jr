@@ -9,52 +9,13 @@ struct SCollisionInfo {
 	D3DXVECTOR3 scale;
 };
 
-SCollisionInfo collisionInfoTable[] = {
-	{
-		//Block1のコリジョン
-		D3DXVECTOR3(0.0f, 2.0f, 0.0f),			//座標。
-		D3DXVECTOR3(45.0f, 90.0f, 0.0f),		//回転。
-		D3DXVECTOR3(2.0f, 2.0f, 2.0f),			//拡大。	
-	},
-	{
-		//Ground1のコリジョン
-		D3DXVECTOR3(2.0f, 0.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground2のコリジョン
-		D3DXVECTOR3(6.0f, -1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground3のコリジョン
-		D3DXVECTOR3(10.5f, -2.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(5.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground4のコリジョン
-		D3DXVECTOR3(15.0f, -1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground5のコリジョン
-		D3DXVECTOR3(18.0f, 0.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(3.0f, 2.0f, 2.0f),	//拡大。	
-	},
-	{
-		//Ground1のコリジョン
-		D3DXVECTOR3(24.5f, 1.0f, 0.0f),		//座標。
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//回転。
-		D3DXVECTOR3(6.0f, 2.0f, 2.0f),	//拡大。	
-	},
+SCollisionInfo collisionInfoTable3D[] = {
+#include "CollisionInfo3D.h"
 };
 
-
+SCollisionInfo collisionInfoTable2D[] = {
+#include "CollisionInfo2D.h"
+};
 
 
 void CStage1::Initialize()
@@ -76,7 +37,6 @@ void CStage1::Initialize()
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
-	m_Block1.Initialize();
 	m_pointa.Initialize();
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
@@ -111,7 +71,6 @@ void CStage1::Update()
 	m_wood.Update();
 	m_setwind.Update();
 	m_Debri.Update();
-	m_Block1.Update();
 	m_pointa.Update();
 	//ポインタをPlayerが追いかける
 	m_Player.Move(m_pointa.GetPosition());
@@ -136,7 +95,6 @@ void CStage1::Update()
 void CStage1::Draw()
 {
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
-	m_Block1.Draw(m_camera.GetViewMatrix());//ブロック１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 	
@@ -159,13 +117,13 @@ void CStage1::Draw()
 
 void CStage1::CreateCollision()
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable);
+	int arraySize = ARRAYSIZE(collisionInfoTable3D);
 	if (arraySize >= MAX_COLLISION)
 	{
 		std::abort();
 	}
 	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collisionInfoTable[i];
+		SCollisionInfo& collision = collisionInfoTable3D[i];
 		//ここで剛体とかを登録する。
 		//剛体を初期化。
 		{

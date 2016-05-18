@@ -97,7 +97,6 @@
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
-    <ClCompile Include="Source\Game\block1.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -105,7 +104,7 @@
     <ClCompile Include="Source\Game\AlwaysWind.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
-    <ClCompile Include="Source\Game\TitleCusor.cpp" />
+    <ClCompile Include="Source\Game\TitleCursor.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
     <ClCompile Include="Source\Game\Windmill.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
@@ -128,7 +127,6 @@
     <ClInclude Include="Source\Frame\SceneManager.h" />
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
-    <ClInclude Include="Source\Game\block1.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />

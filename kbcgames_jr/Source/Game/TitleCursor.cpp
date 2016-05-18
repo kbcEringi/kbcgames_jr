@@ -1,4 +1,4 @@
-#include"TitleCursor.h"
+#include"TitleCusor.h"
 #include "..\Frame\Audio.h"
 
 void CTitleCursor::Initialize()

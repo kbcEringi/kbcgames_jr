@@ -13,7 +13,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	Obj.Initialize("XFile\\Player.x");	//プレイヤーXファイル
+	Obj.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
 	D3DXMatrixIdentity(&matWorld);
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標

@@ -13,7 +13,6 @@
 #include "wood.h"
 #include "AlwaysWind.h"
 #include "Debri.h"
-#include "block1.h"
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
@@ -49,7 +48,6 @@ private:
 	CGround m_Ground;
 	CWood m_wood;
 	CDebri m_Debri;
-	CBlock1 m_Block1;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 
