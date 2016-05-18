@@ -5,11 +5,11 @@
 #include "..\Frame\Rigidbody.h"
 
 
-class CSetWind
+class CAlwaysWind
 {
 public:
-	CSetWind();
-	~CSetWind();
+	CAlwaysWind();
+	~CAlwaysWind();
 	void Initialize();
 	void Update();
 	void Draw(D3DXMATRIX);

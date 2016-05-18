@@ -99,7 +99,10 @@
     <ClCompile Include="Source\Game\TitleCusor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\SetWind.cpp">
+    <ClCompile Include="Source\Game\Windmill.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\AlwaysWind.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,7 +188,10 @@
     <ClInclude Include="Source\Game\TitleCusor.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\SetWind.h">
+    <ClInclude Include="Source\Game\Windmill.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\AlwaysWind.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

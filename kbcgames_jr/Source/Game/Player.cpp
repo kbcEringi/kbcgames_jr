@@ -57,8 +57,9 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
-	m_moveSpeed.x = 0.0f;
-	m_moveSpeed.z = 0.0f;
+	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
+	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
+	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
 	if (KEYDOWN(diks, DIK_SPACE) & 0x80)
 	{
 		//m_moveSpeed.y = 0.0f;

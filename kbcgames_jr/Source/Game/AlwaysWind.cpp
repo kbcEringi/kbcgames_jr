@@ -1,4 +1,4 @@
-#include "SetWind.h"
+#include "AlwaysWind.h"
 #include "Stage1.h"
 
 /*!
@@ -36,7 +36,7 @@ void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max)
 }
 
 
-CSetWind::CSetWind()
+CAlwaysWind::CAlwaysWind()
 {
 	m_force.x = 0.0f;
 	m_force.y = 0.0f;
@@ -44,24 +44,24 @@ CSetWind::CSetWind()
 }
 
 
-CSetWind::~CSetWind()
+CAlwaysWind::~CAlwaysWind()
 {
 }
 
-void CSetWind::Initialize()
+void CAlwaysWind::Initialize()
 {
 	Obj.Initialize("XFile\\wood.x");
 	CalcAABBSizeFromMesh(Obj.GetMesh(), m_aabbMin, m_aabbMax);
 	D3DXMatrixIdentity(&matWorld);
-	m_position.x = 18.0f;
-	m_position.y = 4.0f;
+	m_position.x = 14.0f;
+	m_position.y = 1.0f;
 	m_position.z = 0.0f;
 	D3DXQUATERNION rot;
 	rot.x = 0.0f;
 	rot.y = 0.0f;
 	rot.z = 0.0f;
 	rot.w = 1.0f;
-	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.0f);
+	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);
 	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
@@ -70,7 +70,7 @@ void CSetWind::Initialize()
 
 }
 
-void CSetWind::Update()
+void CAlwaysWind::Update()
 {
 	CPlayer* player = g_stage->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
@@ -81,7 +81,7 @@ void CSetWind::Update()
 		&& m_aabbMax.y > pos.y
 		&& m_aabbMax.z > pos.z
 		){
-		m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
+		m_force = D3DXVECTOR3(25.0f, 0.0f, 0.0f);
 		D3DXVECTOR4 force;
 		D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 		m_force.x = force.x;
@@ -101,7 +101,7 @@ void CSetWind::Update()
 
 }
 
-void CSetWind::Draw(D3DXMATRIX view)
+void CAlwaysWind::Draw(D3DXMATRIX view)
 {
 	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
 	
