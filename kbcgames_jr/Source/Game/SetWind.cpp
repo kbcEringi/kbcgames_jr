@@ -53,15 +53,15 @@ void CSetWind::Initialize()
 	Obj.Initialize("XFile\\wood.x");
 	CalcAABBSizeFromMesh(Obj.GetMesh(), m_aabbMin, m_aabbMax);
 	D3DXMatrixIdentity(&matWorld);
-	m_position.x = 2.0f;
-	m_position.y = 6.0f;
+	m_position.x = 18.0f;
+	m_position.y = 4.0f;
 	m_position.z = 0.0f;
 	D3DXQUATERNION rot;
 	rot.x = 0.0f;
 	rot.y = 0.0f;
 	rot.z = 0.0f;
 	rot.w = 1.0f;
-	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);
+	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.0f);
 	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
