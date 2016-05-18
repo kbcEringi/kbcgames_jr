@@ -9,7 +9,7 @@ void CTitleScene::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("title");	//ステージ音楽再生
+	m_pAudio->PlayCue("title");	//タイトル音楽再生
 
 	m_title.Initialize();
 	m_TitleCursor.Initialize();
@@ -45,8 +45,8 @@ void CTitleScene::Select()
 		{
 		case COMMAND_SELECT::START:
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
-			m_pAudio->StopCue("title");
-			m_pAudio->PlayCue("start");
+			m_pAudio->StopCue("title");//タイトル音楽ストップ
+			m_pAudio->PlayCue("start");//スタート
 			break;
 		case COMMAND_SELECT::EXIT:
 			PostQuitMessage(0);

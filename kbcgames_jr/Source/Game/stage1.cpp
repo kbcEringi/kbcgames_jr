@@ -82,6 +82,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
+	
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);

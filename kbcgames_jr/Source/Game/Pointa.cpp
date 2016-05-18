@@ -12,7 +12,7 @@ CPointa::~CPointa()
 
 void CPointa::Initialize()
 {
-	Obj.Initialize("XFile\\Pointa.x");	//プレイヤーXファイル
+	Obj.Initialize("XFile\\Pointa.x");	//ぽいんたXファイル
 	D3DXMatrixIdentity(&matWorld);
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 5.0f;				//Y座標

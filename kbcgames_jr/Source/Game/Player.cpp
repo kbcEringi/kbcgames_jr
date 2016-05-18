@@ -31,6 +31,7 @@ void CPlayer::Initialize()
 void CPlayer::Update()
 {
 	//Move();//移動関数
+	Died();
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量(あたり判定)
 	
 }
@@ -78,5 +79,13 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 	else
 	{
 		(*GetKeyDevice()).Acquire();//キーデバイス取得
+	}
+}
+
+void CPlayer::Died()
+{
+	if (m_position.y <= -5.0)
+	{
+		PostQuitMessage(0);
 	}
 }
