@@ -1,60 +1,16 @@
-#include "RayCursor.h"
-
-//あたり判定
-
-struct SweepResultCursor : public btCollisionWorld::ConvexResultCallback
-{
-	bool isHit;
-	D3DXVECTOR3 hitPos;
-
-	SweepResultCursor()//コンストラクタ
-	{
-		isHit = false;
-		hitPos.x = 0.0f;
-		hitPos.y = 0.0f;
-		hitPos.z = 0.0f;
-	}
-
-	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
-	{
-		if (convexResult.m_hitCollisionObject->getUserIndex() != -1) {//-1以外
-			//無視。
-			return 0.0f;
-		}
-		D3DXVECTOR3 hitPointNormal;
-
-		hitPointNormal.x = convexResult.m_hitNormalLocal.x();
-		hitPointNormal.y = convexResult.m_hitNormalLocal.y();
-		hitPointNormal.z = convexResult.m_hitNormalLocal.z();
-
-		D3DXVECTOR3 Right(1.0f, 0.0f, 0.0f);
-
-		float d = D3DXVec3Dot(&hitPointNormal, &Right);
-		if (d < 0.0f) {
-			//当たってない。
-			return 0.0f;
-		}
-		if (acosf(d) > PI * 0.2) {
-			//ホントは地面かどうかとかの属性を見るのがベストなんだけど、今回は角度で。
-			return 0.0f;
-		}
-		isHit = true;
-
-		hitPos.x = convexResult.m_hitPointLocal.x();
-		hitPos.y = convexResult.m_hitPointLocal.y();
-		hitPos.z = convexResult.m_hitPointLocal.z();
-
-		return 0.0f;
-	}
-};
-//struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
+//#include "RayCursor.h"
+//
+//
+//struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 //{
-//	D3DXVECTOR3 hitNormalXZ;
 //	bool isHit;
 //	D3DXVECTOR3 hitPos;
-//	SweepResultWall()
+//	D3DXVECTOR3 startPos;
+//	float dist;
+//	SCollisionResult()
 //	{
 //		isHit = false;
+//		dist = FLT_MAX;
 //	}
 //
 //	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
@@ -63,136 +19,141 @@ struct SweepResultCursor : public btCollisionWorld::ConvexResultCallback
 //			//無視。
 //			return 0.0f;
 //		}
-//		D3DXVECTOR3 hitPointNormal;
+//		//交点とレイの始点との距離を調べる。
+//		D3DXVECTOR3 vDist;
+//		
+//		vDist.x = convexResult.m_hitPointLocal.x();
+//		vDist.y = convexResult.m_hitPointLocal.y();
+//		vDist.z = convexResult.m_hitPointLocal.z();
+//			
+//		vDist -= startPos;
+//		float distTmp = D3DXVec3LengthSq(&vDist);
+//		if (distTmp < dist) {
+//			//こっちのほうが近い。
+//			
+//			hitPos.x = convexResult.m_hitPointLocal.x();
+//			hitPos.y = convexResult.m_hitPointLocal.y();
+//			hitPos.z = convexResult.m_hitPointLocal.z();
+//			dist = distTmp;
 //
-//		hitPointNormal.x = convexResult.m_hitNormalLocal.x();
-//		hitPointNormal.y = convexResult.m_hitNormalLocal.y();
-//		hitPointNormal.z = convexResult.m_hitNormalLocal.z();
-//
-//		D3DXVECTOR3 Up(0.0f, 1.0f, 0.0f);
-//
-//		float d = D3DXVec3Dot(&hitPointNormal, &Up);
-//		if (acosf(d) < PI * 0.2) {
-//			//ホントは地面かどうかとかの属性を見るのがベストなんだけど、今回は角度で。
-//			return 0.0f;
 //		}
+//
 //		isHit = true;
-//		//XZ平面での法線。
-//		hitNormalXZ.x = hitPointNormal.x;
-//		hitNormalXZ.y = 0.0f;
-//		hitNormalXZ.z = hitPointNormal.z;// hitPointNormal.z
-//		//D3DXVec3Normalize(&hitNormalXZ, &hitNormalXZ);
-//		//D3DXVec3Normalize(&hitNormalXZ, &hitPointNormal);
-//
-//
-//		btTransform transform = convexResult.m_hitCollisionObject->getWorldTransform();
-//
-//		hitPos.x = convexResult.m_hitPointLocal.x();
-//		hitPos.y = convexResult.m_hitPointLocal.y();
-//		hitPos.z = convexResult.m_hitPointLocal.z();
-//
 //		return 0.0f;
 //	}
 //};
-
-CRayCursor::CRayCursor()
-{
-
-}
-
-CRayCursor::~CRayCursor()
-{
-
-}
-
-void CRayCursor::Initialize(D3DXVECTOR3* m_position)
-{
-	m_moveSpeed.x = 0.0f;				//移動速度
-	m_moveSpeed.y = 0.0f;
-	m_moveSpeed.z = 0.0f;				//移動速度
-	m_radius = 1.0;						//バウンディングスフィアの半径。
-	//コリジョン初期化。
-	m_collisionShape = new btSphereShape(m_radius);
-	float mass = 1000.0f;
-	btTransform rbTransform;
-	rbTransform.setIdentity();
-	rbTransform.setOrigin(btVector3(m_position->x, m_position->y, m_position->z));
-
-	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
-	m_myMotionState = new btDefaultMotionState(rbTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_collisionShape, btVector3(0, 0, 0));
-	m_rigidBody = new btRigidBody(rbInfo);
-	m_rigidBody->setUserIndex(0);
-	//ワールドに追加。
-	g_bulletPhysics.AddRigidBody(m_rigidBody);
-}
-
-void CRayCursor::Intersect(D3DXVECTOR3* m_position, D3DXVECTOR3* m_moveSpeed)
-{
-	static float deltaTime = 1.0f / 60.0f;
-	static D3DXVECTOR3 gravity(0.0f, -9.8f, 0.0f);
-	D3DXVECTOR3 addGravity = gravity;
-	addGravity *= (deltaTime);
-	*m_moveSpeed += (addGravity);
-	D3DXVECTOR3 addPos;
-	addPos = *m_moveSpeed;
-	addPos *= (deltaTime);
-	D3DXVECTOR3 Up(0.0f, 1.0f, 0.0f);
-	//XZ平面を調べる。
-	{
-		int loopCount = 0;
-		while (true) {
-			btTransform start, end;
-			start.setIdentity();
-			end.setIdentity();
-			start.setOrigin(btVector3(m_position->x, m_position->y, m_position->z));
-			D3DXVECTOR3 newPos;
-			SweepResultCursor callback;
-			D3DXVECTOR3 addPosXZ = addPos;
-			addPosXZ.y = 0.0f;
-			if (D3DXVec3Length(&addPosXZ) > 0.0001f) {
-				newPos = (*m_position + addPosXZ);
-				end.setOrigin(btVector3(newPos.x, newPos.y, newPos.z));
-				g_bulletPhysics.ConvexSweepTest(m_collisionShape, start, end, callback);
-			}
-			if (callback.isHit) {
-				//当たった。
-				//壁。
-				addPos.x = callback.hitPos.x - m_position->x;
-				addPos.z = callback.hitPos.z - m_position->z;
-
-				D3DXVECTOR3 t;
-				t.x = -addPos.x;
-				t.y = 0.0f;
-				t.z = -addPos.z;
-				D3DXVec3Normalize(&t, &t);
-				////D3DXVec3Normalize(&t, &addPos);
-				////半径分押し戻す。
-				//t *= m_radius;
-				//addPos += t;
-				////続いて壁に沿って滑らせる。
-				////滑らせる方向を計算。
-				//D3DXVec3Cross(&t, &callback.hitNormalXZ, &Up);
-				//D3DXVec3Normalize(&t, &t);
-				////D3DXVec3Normalize(&t, &addPos);
-				//t *= D3DXVec3Dot(&t, &addPosXZ);
-				addPos += t;	//滑らせるベクトルを加算。
-			}
-			else {
-				//どことも当たらないので終わり。
-				break;
-			}
-			loopCount++;
-			if (loopCount == 5) {
-				break;
-			}
-		}
-	}
-
-	*m_position += addPos;
-
-	const btVector3& rPos = m_rigidBody->getWorldTransform().getOrigin();
-
-	m_rigidBody->getWorldTransform().setOrigin(btVector3(m_position->x, m_position->y, m_position->z));
-
-}
+//
+//CRayCursor::CRayCursor()
+//{
+//
+//}
+//
+//CRayCursor::~CRayCursor()
+//{
+//
+//}
+//
+//void CRayCursor::Initialize()
+//{
+//	m_interval = 0.0f;
+//	m_sphereColli = new btSphereShape(0.1f);
+//	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
+//}
+//
+//void CRayCursor::Update()
+//{
+//	(*GetKeyDevice()).GetDeviceState(
+//		sizeof(diks),	// パラメータ バッファサイズ
+//		&diks);
+//	if (KEYDOWN(diks, DIK_SPACE) & 0x80) {
+//		//レイを飛ばしてデブリを生成する座標を決める。
+//		D3DXVECTOR4 start;
+//		D3DXVECTOR4 end;
+//
+//		start.x = m_GameCursor.GetPosition().x;
+//		start.y = m_GameCursor.GetPosition().y;
+//		start.z = 0.0f;
+//		start.w = 1.0f;
+//		end.x = m_GameCursor.GetPosition().x;
+//		end.y = m_GameCursor.GetPosition().y;
+//		end.z = 1.0f;
+//		end.w = 1.0f;
+//
+//		int screenW = tkEngine::CEngine::Instance().GetFrameBufferWidth();
+//		int screenH = tkEngine::CEngine::Instance().GetFrameBufferHeight();
+//		D3DXMATRIX mViewInv = m_pCamera->GetViewMatrix();
+//		D3DXMATRIX mProjInv = m_pCamera->GetProjectionMatrix();
+//#if 1 //DirectXの関数を使用したバージョン。
+//		{
+//			D3DVIEWPORT9 vp;
+//			//LPDIRECT3DDEVICE9 Viewport(&vp);
+//			D3DXVec3Unproject(
+//				reinterpret_cast<D3DXVECTOR3*>(&start),
+//				reinterpret_cast<const D3DXVECTOR3*>(&start),
+//				&vp,
+//				reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
+//				reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
+//				NULL
+//				);
+//
+//			D3DXVec3Unproject(
+//				reinterpret_cast<D3DXVECTOR3*>(&end),
+//				reinterpret_cast<const D3DXVECTOR3*>(&end),
+//				&vp,
+//				reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
+//				reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
+//				NULL
+//				);
+//		}
+//#else
+//		CMatrix mVpInv = CMatrix::Identity;
+//
+//		//3D空間の座標をスクリーン座標系に変換するには、カメラ行列×プロジェクション行列×スクリーン行列を乗算してやればいい・・・
+//		//つまり、スクリーン座標系から３Ｄ空間の座標に戻すためには、スクリーン行列の逆行列×プロジェクション行列の逆行列×カメラ行列の逆行列を
+//		//乗算してやればいいことになる。(逆行列を乗算するということは、その変換を打ち消すという意味がある。）
+//
+//		//スクリーン座標系から正規化座標系に変換するための行列を計算する。
+//		mVpInv.m[0][0] = screenW / 2.0f;
+//		mVpInv.m[1][1] = -screenH / 2.0f;
+//		mVpInv.m[3][0] = screenW / 2.0f;
+//		mVpInv.m[3][1] = screenH / 2.0f;
+//		mVpInv.Inverse(mVpInv);		//正規化座標系に変換するためにはスクリーン座標系に変換する行列の逆行列を求めたらいい。
+//		//正規化座標系からカメラ座標系に変換する行列を計算する。
+//		mProjInv.Inverse(mProjInv);	//カメラ座標系に変換するには、射影空間に変換する行列の逆行列を求める。
+//		mViewInv.Inverse(mViewInv);	//ワールド座標系に変換するには、カメラ行列の逆行列を求める。
+//		//スクリーン行列の逆行列×プロジェクション行列の逆行列×カメラ行列の逆行列を求める。
+//		CMatrix mInv;
+//		mInv.Mul(mVpInv, mProjInv);
+//		mInv.Mul(mInv, mViewInv);
+//		mInv.Mul(start);
+//		mInv.Mul(end);
+//		//プロジェクション行列を書けるとwで割る必要があるので、除算する。
+//		start.x /= start.w;
+//		start.y /= start.w;
+//		start.z /= start.w;
+//		end.x /= end.w;
+//		end.y /= end.w;
+//		end.z /= end.w;
+//#endif
+//		//あたりを調べる
+//		btTransform btStart, btEnd;
+//		btStart.setIdentity();
+//		btEnd.setIdentity();
+//		btStart.setOrigin(btVector3(start.x, start.y, start.z));
+//		btEnd.setOrigin(btVector3(end.x, end.y, end.z));
+//		SCollisionResult callback;
+//		callback.startPos.x = start.x;
+//		callback.startPos.y = start.y;
+//		callback.startPos.z = start.z;
+//		g_bulletPhysics.ConvexSweepTest(m_sphereColli, btStart, btEnd, callback);
+//		if (callback.isHit) {//当たったら
+//			callback.hitPos.y += 0.05f;
+//			m_Pointa.SetPos(callback.hitPos);
+//		}
+//	}
+//	else
+//	{
+//		(*GetKeyDevice()).Acquire();//キーデバイス取得
+//	}
+//
+//}

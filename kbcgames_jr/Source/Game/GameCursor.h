@@ -11,6 +11,10 @@ public:
 	void Update();
 	void Draw();
 	void Move();
+	D3DXVECTOR3 GetPosition()
+	{
+		return vec3Position;
+	}
 
 private:
 	C2DObject m_2Dobj;

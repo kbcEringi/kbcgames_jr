@@ -12,10 +12,14 @@ public:
 	void Initialize();
 	void Update();
 	void Draw(D3DXMATRIX);
-	void Move();					//Moveä÷êî
+	//void Move();					//Moveä÷êî
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
+	}
+	void SetPos(D3DXVECTOR3 pos)
+	{
+		m_position = pos;
 	}
 	LPD3DXMESH GetMesh()
 	{

@@ -93,14 +93,14 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameCursor.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\RayCursor.cpp">
-      <Filter>Game</Filter>
+      <Filter>Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\TitleCursor.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameCursor.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,14 +179,14 @@
     <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GameCursor.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\RayCursor.h">
-      <Filter>Game</Filter>
+      <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TitleCursor.h">
-      <Filter>Game</Filter>
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameCursor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
