@@ -1,10 +1,17 @@
-#include"TitleCusor.h"
+#include"TitleCursor.h"
+#include "..\Frame\Audio.h"
 
 void CTitleCursor::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\buttefly.png");
 	m_scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	m_position = D3DXVECTOR3(320.0f, 200.0f, 0.0f);
+	//オーディオ初期化
+	m_pAudio = new CAudio();
+	m_pAudio->Initialize(
+		"Audio\\Audio.xgs",
+		"Audio\\Wave Bank.xwb",
+		"Audio\\Audio.xsb");
 
 	m_selectIndex = 0;
 	m_moveDistance = 130;
@@ -13,25 +20,26 @@ void CTitleCursor::Initialize()
 
 void CTitleCursor::Update()
 {
-	float dir = 0;//初期化
+	m_pAudio->Run();
+	int dir = 0;//初期化
 	if (GetAsyncKeyState(VK_DOWN))//↓押されたら
 	{
+		m_pAudio->PlayCue("select");
 		if (m_selectIndex < MAX_COMAND_NUM - 1)
 		{
 			dir = 1;
-
 		}
 	}
 	if (GetAsyncKeyState(VK_UP))//↑押されたら
 	{
+		m_pAudio->PlayCue("select");
 		if (m_selectIndex > 0)
 		{
 			dir = -1;
-
 		}
 	}
 	m_selectIndex += dir;
-	m_position.y +=  m_moveDistance * dir;
+	m_position.y += m_moveDistance * (float)dir;
 }
 
 void CTitleCursor::Draw()
