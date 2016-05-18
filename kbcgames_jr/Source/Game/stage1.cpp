@@ -77,7 +77,7 @@ void CStage1::Update()
 	m_pointa.Update();
 	m_GameCursor.Update();
 	//ポインタをPlayerが追いかける
-	//m_Player.Move(m_pointa.GetPosition());
+	m_Player.Move(m_pointa.GetPosition());
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }

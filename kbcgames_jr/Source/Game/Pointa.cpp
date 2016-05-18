@@ -29,7 +29,7 @@ void CPointa::Initialize()
 
 void CPointa::Update()
 {
-	//Move();//移動関数
+	Move();//移動関数
 
 }
 
@@ -39,32 +39,32 @@ void CPointa::Draw(D3DXMATRIX view)
 	Obj.Draw(matWorld, view, m_projMatrix);
 }
 
-//void CPointa::Move()//移動
-//{
-//	D3DXMatrixIdentity(&matWorld);
-//	(*GetKeyDevice()).GetDeviceState(
-//		sizeof(diks),	// パラメータ バッファサイズ
-//		&diks);
-//
-//	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
-//	{
-//		m_position.x += 0.1f;
-//	}
-//	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
-//	{
-//		m_position.x -= 0.1f;
-//	}
-//	if (KEYDOWN(diks, DIK_UP) & 0x80)//上
-//	{
-//		m_position.y += 0.1f;
-//	}
-//	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
-//	{
-//		m_position.y -= 0.1f;
-//	}
-//	else
-//	{
-//		(*GetKeyDevice()).Acquire();//キーデバイス取得
-//	}
-//	
-//}
+void CPointa::Move()//移動
+{
+	D3DXMatrixIdentity(&matWorld);
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+
+	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
+	{
+		m_position.x += 0.1f;
+	}
+	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
+	{
+		m_position.x -= 0.1f;
+	}
+	if (KEYDOWN(diks, DIK_UP) & 0x80)//上
+	{
+		m_position.y += 0.1f;
+	}
+	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
+	{
+		m_position.y -= 0.1f;
+	}
+	else
+	{
+		(*GetKeyDevice()).Acquire();//キーデバイス取得
+	}
+	
+}
