@@ -71,6 +71,11 @@ public:
 		m_currentSetEffectCallback = callback;
 	}
 	~C3DDraw();
+	//メッシュを取得。
+	LPD3DXMESH GetMesh()
+	{
+		return m_Mesh;
+	}
 protected:
 	LPD3DXBUFFER m_D3DXMtrlBuffer;	//マテリアル
 	DWORD m_NumMaterials;		//マテリアル数

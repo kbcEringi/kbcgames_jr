@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -92,21 +92,22 @@
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />
-    <ClCompile Include="Source\Frame\RayCursor.cpp" />
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\Rigidbody.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
+    <ClCompile Include="Source\Game\block1.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
-    <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Pointa.cpp" />
+    <ClCompile Include="Source\Game\AlwaysWind.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
-    <ClCompile Include="Source\Game\TitleCursor.cpp" />
+    <ClCompile Include="Source\Game\TitleCusor.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
+    <ClCompile Include="Source\Game\Windmill.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +121,6 @@
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
     <ClInclude Include="Source\Frame\IsIntersect.h" />
-    <ClInclude Include="Source\Frame\RayCursor.h" />
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\Rigidbody.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
@@ -128,15 +128,17 @@
     <ClInclude Include="Source\Frame\SceneManager.h" />
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
+    <ClInclude Include="Source\Game\block1.h" />
     <ClInclude Include="Source\Game\Debri.h" />
-    <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Pointa.h" />
+    <ClInclude Include="Source\Game\AlwaysWind.h" />
     <ClInclude Include="Source\Game\Stage1.h" />
     <ClInclude Include="Source\Game\Title.h" />
-    <ClInclude Include="Source\Game\TitleCursor.h" />
+    <ClInclude Include="Source\Game\TitleCusor.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
+    <ClInclude Include="Source\Game\Windmill.h" />
     <ClInclude Include="Source\Game\wood.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
