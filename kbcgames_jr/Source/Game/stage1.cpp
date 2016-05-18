@@ -38,7 +38,10 @@ void CStage1::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_pointa.Initialize();
+	m_GameCursor.Initialize();
 
+
+	m_Ray.Initialize();//レイカーソル初期化
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
 	g_stage = this;
@@ -72,24 +75,11 @@ void CStage1::Update()
 	m_setwind.Update();
 	m_Debri.Update();
 	m_pointa.Update();
+	m_GameCursor.Update();
 	//ポインタをPlayerが追いかける
-	m_Player.Move(m_pointa.GetPosition());
-	/*if (m_Player.GetPosition().x <= m_pointa.GetPosition().x)
-	{
-		m_Player.Add(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
-	}
-	if (m_Player.GetPosition().y <= m_pointa.GetPosition().y)
-	{
-		m_Player.Add(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
-	}
-	if (m_Player.GetPosition().x >= m_pointa.GetPosition().x)
-	{
-		m_Player.subtract(D3DXVECTOR3(0.02f, 0.0f, 0.0f));
-	}
-	if (m_Player.GetPosition().y >= m_pointa.GetPosition().y)
-	{
-		m_Player.subtract(D3DXVECTOR3(0.0f, 0.02f, 0.0f));
-	}*/
+	//m_Player.Move(m_pointa.GetPosition());
+	//レイカーソルに値をセット
+	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }
 
 void CStage1::Draw()
@@ -110,6 +100,7 @@ void CStage1::Draw()
 	m_Player.Draw(m_camera.GetViewMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix());//風描画
+	m_GameCursor.Draw();
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

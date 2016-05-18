@@ -1,9 +1,9 @@
 #pragma once
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"Input.h"//キーボードインプット
-#include "..\Game\GameCursor.h"
 #include "..\Game\Pointa.h"
-#include "Ccamera.h"
+
+class Ccamera;
 
 //あたり判定
 
@@ -15,11 +15,10 @@ public:
 	CRayCursor();
 	~CRayCursor();
 	void Initialize();
-	void Update();
+	void Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX ProjectionMatrix);
 private:
 	float	m_interval;
 	Ccamera*	m_pCamera;
-	CGameCursor m_GameCursor;
 	CPointa m_Pointa;
 	btSphereShape* m_sphereColli;
 

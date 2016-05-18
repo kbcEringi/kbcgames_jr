@@ -6,8 +6,11 @@
 #include"..\Frame\SceneManager.h"
 
 #include"..\Frame\Ccamera.h"
+#include "..\Frame\RayCursor.h"//カーソル
 //#include"TestObj.h"
-/********オブジェクト********/
+/********オブジェクト2D********/
+#include "GameCursor.h"
+/********オブジェクト3D********/
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
@@ -42,7 +45,10 @@ private:
 
 	Ccamera m_camera;
 	CAudio* m_pAudio;
-	/******オブジェクト*****/
+	CRayCursor m_Ray;
+	/********オブジェクト3D********/
+	CGameCursor m_GameCursor;
+	/******オブジェクト3d*****/
 	//CTestObj test;
 	CPlayer m_Player;
 	CGround m_Ground;

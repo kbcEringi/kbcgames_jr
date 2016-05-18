@@ -60,35 +60,28 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
-	if (KEYDOWN(diks, DIK_SPACE) & 0x80)
+	//m_moveSpeed.y = 0.0f;
+	if (m_position.x <= movespeed.x)//右
 	{
-		//m_moveSpeed.y = 0.0f;
-		if (m_position.x <= movespeed.x)//右
-		{
-			m_position.x += 0.1f;
-			//m_position.x += 0.2f;
-		}
-		if (m_position.x >= movespeed.x)//左
-		{
-			m_position.x -= 0.1f;
-			//m_position.x -= 0.2f;
-		}
-		if (m_position.y <= movespeed.y)//上
-		{
-			m_position.y += 0.1f;
-			//m_position.y += 0.2f;
-		}
-		if (m_position.y >= movespeed.y)//下
-		{
-			m_position.y -= 0.1f;
-			//m_position.y -= 0.2f;
-		}
-		
+		m_position.x += 0.1f;
+		//m_position.x += 0.2f;
 	}
-	else
+	if (m_position.x >= movespeed.x)//左
 	{
-		(*GetKeyDevice()).Acquire();//キーデバイス取得
+		m_position.x -= 0.1f;
+		//m_position.x -= 0.2f;
 	}
+	if (m_position.y <= movespeed.y)//上
+	{
+		m_position.y += 0.1f;
+		//m_position.y += 0.2f;
+	}
+	if (m_position.y >= movespeed.y)//下
+	{
+		m_position.y -= 0.1f;
+		//m_position.y -= 0.2f;
+	}
+
 }
 
 void CPlayer::Died()

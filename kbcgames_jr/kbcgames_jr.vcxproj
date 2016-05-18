@@ -92,12 +92,14 @@
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />
+    <ClCompile Include="Source\Frame\RayCursor.cpp" />
     <ClCompile Include="Source\Frame\RenderTarget.cpp" />
     <ClCompile Include="Source\Frame\Rigidbody.cpp" />
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
+    <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Pointa.cpp" />
@@ -120,6 +122,7 @@
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
     <ClInclude Include="Source\Frame\IsIntersect.h" />
+    <ClInclude Include="Source\Frame\RayCursor.h" />
     <ClInclude Include="Source\Frame\RenderTarget.h" />
     <ClInclude Include="Source\Frame\Rigidbody.h" />
     <ClInclude Include="Source\Frame\SceCommon.h" />
@@ -128,6 +131,7 @@
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\Debri.h" />
+    <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Pointa.h" />
