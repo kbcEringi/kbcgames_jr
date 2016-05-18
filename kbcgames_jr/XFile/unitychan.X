@@ -26,6 +26,11 @@ template Vector {
  FLOAT z;
 }
 
+template TextureFilename {
+ <A42790E1-7810-11cf-8F52-0040333594A3>
+ STRING filename;
+}
+
 template MeshFace {
  <3d82ab5f-62da-11cf-ab39-0020af71e433>
  DWORD nFaceVertexIndices;
@@ -9566,6 +9571,9 @@ Frame Character1_Reference {
            0.100000;
            0.900000;0.900000;0.900000;;
            0.000000;0.000000;0.000000;;
+		   TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
           }
 
           Material {
@@ -9573,6 +9581,9 @@ Frame Character1_Reference {
            0.100000;
            0.900000;0.900000;0.900000;;
            0.000000;0.000000;0.000000;;
+           TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
           }
          }
         }
@@ -20975,6 +20986,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+     TextureFilename {
+        "Texture\\utc_all2.tga";
+     }
     }
 
     Material {
@@ -20982,6 +20996,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+     TextureFilename {
+       "Texture\\utc_all2.tga";
+     }
     }
 
     Material {
@@ -20989,6 +21006,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+	 TextureFilename {
+         "Texture\\utc_all2.tga";
+     }
     }
    }
 
@@ -44754,6 +44774,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+     TextureFilename {
+      "Texture\\utc_all2.tga";
+     }
     }
 
     Material {
@@ -44761,6 +44784,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+     TextureFilename {
+       "Texture\\utc_all2.tga";
+     }
     }
    }
 
@@ -56093,6 +56119,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+     TextureFilename {
+       "Texture\\utc_all2.tga";
+     }
     }
 
     Material {
@@ -56100,6 +56129,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+	 TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
     }
    }
 
@@ -58430,6 +58462,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+	 TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
     }
    }
 
@@ -59424,6 +59459,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+	 TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
     }
 
     Material {
@@ -59431,6 +59469,9 @@ Frame Mesh_SD_unitychan {
      0.100000;
      0.900000;0.900000;0.900000;;
      0.000000;0.000000;0.000000;;
+	 TextureFilename {
+             "Texture\\utc_all2.tga";
+           }
     }
    }
 

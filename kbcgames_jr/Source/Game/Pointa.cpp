@@ -29,7 +29,7 @@ void CPointa::Initialize()
 
 void CPointa::Update()
 {
-	Move();//ˆÚ“®ŠÖ”
+	//Move();//ˆÚ“®ŠÖ”
 
 }
 

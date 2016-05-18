@@ -17,9 +17,9 @@ public:
 	{
 		return m_position;
 	}
-	void SetPos(D3DXVECTOR3 pos)
+	void SetPos(D3DXVECTOR3* pos)
 	{
-		m_position = pos;
+		m_position = *pos;
 	}
 	LPD3DXMESH GetMesh()
 	{

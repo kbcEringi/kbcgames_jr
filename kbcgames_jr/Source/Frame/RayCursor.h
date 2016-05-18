@@ -18,6 +18,10 @@ public:
 	void Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX ProjectionMatrix);
 private:
 	float	m_interval;
+
+	D3DXVECTOR4 start;
+	D3DXVECTOR4 end;
+	
 	Ccamera*	m_pCamera;
 	CPointa m_Pointa;
 	btSphereShape* m_sphereColli;
