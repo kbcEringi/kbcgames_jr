@@ -1,4 +1,10 @@
-﻿//stage1
+﻿//ita
+{
+	D3DXVECTOR3(3.00f, 4.00f, 0.00f),             //平行移動
+	D3DXQUATERNION(0.00, 0.00f, 0.00f, 1.00f ),    //回転
+	D3DXVECTOR3(2.00f, 0.30f, 2.00f ),            //拡大
+},
+//stage1
 {
 	D3DXVECTOR3(-1.95f, 0.00f, 0.00f),             //平行移動
 	D3DXQUATERNION(0.00, 0.00f, 0.00f, 1.00f ),    //回転
