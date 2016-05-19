@@ -84,9 +84,6 @@
     <ClCompile Include="Source\Game\Debri.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\block1.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\IsIntersect.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
@@ -96,11 +93,26 @@
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Windmill.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\AlwaysWind.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\TitleCursor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameCursor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\RayCursor.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Frame\CGamepad.cpp">
       <Filter>Frame\Input</Filter>
-       </ClCompile>
-    <ClCompile Include="Source\Game\TitleCusor.cpp">
-      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +179,6 @@
     <ClInclude Include="Source\Game\Debri.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\block1.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\IsIntersect.h">
       <Filter>Frame</Filter>
     </ClInclude>
@@ -184,6 +193,24 @@
     </ClInclude>
     <ClInclude Include="Source\Game\TitleCusor.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Windmill.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\AlwaysWind.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameCursor.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\RayCursor.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\C3DObject.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SkinModelDate.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

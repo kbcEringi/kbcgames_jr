@@ -3,8 +3,7 @@
  */
 
 float4x4 g_worldMatrix;			//ワールド行列。
-float4x4 g_viewMatrix : register(c0);			//ビュー行列。
-float4x4 g_projectionMatrix;	//プロジェクション行列。
+float4x4 g_viewprojMatrix : register(c0);			//ビュー行列。
 
 struct VS_INPUT{
 	float4	pos		: POSITION;
@@ -22,8 +21,7 @@ VS_OUTPUT VSShadow(VS_INPUT In)
 {
 	VS_OUTPUT Out = (VS_OUTPUT)0;
 	float4 pos = mul(In.pos, g_worldMatrix);		//モデルのローカル空間からワールド空間に変換。
-		pos = mul(pos, g_viewMatrix);			//ワールド空間からビュー空間に変換。
-	//pos = mul(pos, g_projectionMatrix);	//ビュー空間から射影空間に変換。
+		pos = mul(pos, g_viewprojMatrix);			//ワールド空間からビュー空間に変換。
 	Out.pos = pos;
 	Out.uv = In.uv;
 	Out.color = In.color;

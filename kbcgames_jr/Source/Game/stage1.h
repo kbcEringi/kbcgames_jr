@@ -7,11 +7,16 @@
 #include"..\Frame\Ccamera.h"
 
 /********オブジェクト********/
+#include "..\Frame\RayCursor.h"//カーソル
+//#include"TestObj.h"
+/********オブジェクト2D********/
+#include "GameCursor.h"
+/********オブジェクト3D********/
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
+#include "AlwaysWind.h"
 #include "Debri.h"
-#include "block1.h"
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
@@ -31,7 +36,10 @@ public:
 	void Update();
 	void Draw();
 	void CreateCollision();
-
+	CPlayer* GetPlayer()
+	{
+		return &m_Player;
+	}
 private:
 
 	C3DDraw Obj;
@@ -41,13 +49,17 @@ private:
 	Ccamera m_camera;
 	CAudio* m_pAudio;
 	/******オブジェクト*****/
-
+	CRayCursor m_Ray;
+	/********オブジェクト3D********/
+	CGameCursor m_GameCursor;
+	/******オブジェクト3d*****/
+	//CTestObj test;
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;
 	CDebri m_Debri;
-	CBlock1 m_Block1;
 	CPointa m_pointa;
+	CAlwaysWind m_setwind;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
@@ -55,3 +67,4 @@ private:
 	btDefaultMotionState* m_myMotionState;
 	
 };
+extern CStage1* g_stage;

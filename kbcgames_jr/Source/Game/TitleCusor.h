@@ -5,6 +5,8 @@
 
 #define MAX_COMAND_NUM 2
 
+class CAudio;
+
 class CTitleCursor
 {
 public:
@@ -20,6 +22,8 @@ private:
 
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_scale;
+
+	CAudio* m_pAudio;
 
 	int m_selectIndex;
 	float m_moveDistance;
