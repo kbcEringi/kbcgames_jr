@@ -1,21 +1,20 @@
 #pragma once
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DDraw.h"
+#include"..\Frame\C3DObject.h"
 #include"..\Frame\Input.h"//キーボードインプット
 #include "..\Frame\IsIntersect.h"
-#include "Pointa.h"
-#include "..\Frame\Turn.h"
 
-class CPlayer
+class CPlayer : public C3DObject
 {
 public:
-	CPlayer();
+	CPlayer() : C3DObject(){}
 	~CPlayer();
-	void Initialize();
-	void Update();
-	void Draw(D3DXMATRIX);
-	void Move(D3DXVECTOR3 pos);					//Move関数
+	void Initialize()override;
+	void D3DUpdate()override;
+	void D2DUpdate()override{}
+	void Draw(D3DXMATRIX, D3DXMATRIX)override;
+	void Move(D3DXVECTOR3 movespeed);					//Move関数
 	void Died();
 	D3DXVECTOR3 GetPosition()
 	{
@@ -41,22 +40,11 @@ public:
 	{
 		m_applyForce += force;
 	}
-	void SetPointa(CPointa* pointa)
-	{
-		m_Pointa = pointa;
-	}
 private:
-	C3DDraw Obj;
-	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
-	D3DXVECTOR3 m_moveSpeed;					//移動速度
-	D3DXVECTOR3 m_applyForce;					//外部から受けた力。
-	CIsIntersect m_IsIntersect;					//あたり判定
-	CPointa* m_Pointa;
-	CTurn m_Turn;
-	float					m_targetAngleY;		//キャラアングル
-	float					m_currentAngleY;	//キャラクター回転アングル
-	BYTE diks[256];								//キーインプット
-
+	D3DXVECTOR3 m_moveSpeed;		//移動速度
+	D3DXVECTOR3 m_applyForce;		//外部から受けた力。
+	CIsIntersect m_IsIntersect;		//あたり判定
+	BYTE diks[256];//キーインプット
 };

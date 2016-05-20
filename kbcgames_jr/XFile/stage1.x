@@ -401,7 +401,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\GitHub\\kbcGames_jr\\kbcgames_jr\\Texture\\stage_image.jpg";
+    "stage_image.jpg";
    }
   }
  }
