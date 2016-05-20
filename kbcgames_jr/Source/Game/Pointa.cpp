@@ -8,7 +8,7 @@ CPointa::~CPointa()
 void CPointa::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Pointa.x");	//ぽいんたXファイル
-	m_position.x = 0.0f;				//X座標
+	m_position.x = 2.0f;				//X座標
 	m_position.y = 5.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 

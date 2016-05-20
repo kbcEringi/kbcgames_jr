@@ -1,6 +1,8 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 
+CShadowMap g_Shadow;
+
 CStage1* g_stage = NULL;
 //オブジェクトの詳細
 struct SCollisionInfo {
@@ -40,6 +42,11 @@ void CStage1::Initialize()
 	m_pointa.Initialize();
 	m_GameCursor.Initialize();
 
+	g_Shadow.Create(512, 512);
+	g_Shadow.Entry(&m_Player);
+	g_Shadow.Entry(&m_pointa);
+	g_Shadow.SetLightPosition(m_pointa.GetPosition() + D3DXVECTOR3(0.0f, 5.0f, 0.0f));
+	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
 
 	m_Ray.Initialize();//レイカーソル初期化
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
@@ -68,10 +75,27 @@ void CStage1::Update()
 		{
 			m_camera.RotTransversal(0.05f);
 		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER))
+		{
+			m_camera.Set2Dflg(true);
+		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER))
+		{
+			m_camera.Set2Dflg(false);
+		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_X))
+		{
+			m_camera.AddVolume(1.0f);
+		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_Y))
+		{
+			m_camera.AddVolume(-1.0f);
+		}
 	}
 
+
 	m_pAudio->Run();	//周期タスク実行
-	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 	m_Player.D3DUpdate();
 	m_Ground.D3DUpdate();
@@ -88,10 +112,11 @@ void CStage1::Update()
 
 void CStage1::Draw()
 {
+	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
-	
+	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -101,7 +126,7 @@ void CStage1::Draw()
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
 
-	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
+	
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
 	m_GameCursor.Draw();

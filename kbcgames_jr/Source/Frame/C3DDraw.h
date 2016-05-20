@@ -19,7 +19,7 @@ public:
 	{
 	}
 public:
-	virtual void OnBeginRender(D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR4,int) = 0;
+	virtual void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int) = 0;
 	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) = 0;
 	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX) = 0;
 	virtual void OnEndRender() = 0;
@@ -33,7 +33,7 @@ class CSetEffectCallbackDefault : public ISetEffectCallback{
 public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
-	void OnBeginRender(D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR4,int);
+	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
 	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) override;
 	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX)override;
 	void OnEndRender();
@@ -43,10 +43,16 @@ class CSetEffectCallbackShadowMap : public ISetEffectCallback{
 public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
-	void OnBeginRender(D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR4,int);
+	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
 	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) override;
 	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX) override;
 	void OnEndRender();
+	void SetEffect(ID3DXEffect* effect)
+	{
+		m_pEffect = effect;
+	}
+private:
+	ID3DXEffect* m_pEffect;
 };
 /*
 * 3Dオブジェクト。
@@ -62,17 +68,20 @@ public:
 	*/
 	C3DDraw();
 	void Initialize(LPCSTR , int pass = 0);
+	//アニメーションを進める。
+	void AddAnimation();
+	void UpdateWorldMatrix(D3DXMATRIX worldMatrix);
 	/*
 	*第一引数　ワールドマトリクス（自分の位置）
 	*第二引数　ビューマトリクス（カメラの位置）
 	*/
 	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
 	void DrawFrame(
-		LPD3DXFRAME pFrame);
+		LPD3DXFRAME pFrame, D3DXMATRIX, D3DXMATRIX);
 
 	void DrawMeshContainer(
 		LPD3DXMESHCONTAINER pMeshContainerBase,
-		LPD3DXFRAME pFrameBase
+		LPD3DXFRAME pFrameBase, D3DXMATRIX, D3DXMATRIX
 		);
 	ISetEffectCallback* GetEffectCallback()
 	{
@@ -107,6 +116,4 @@ protected:
 	ISetEffectCallback* m_currentSetEffectCallback;
 
 	D3DXMATRIX m_matWorld;
-	D3DXMATRIX m_matView;
-	D3DXMATRIX m_matProj;
 };

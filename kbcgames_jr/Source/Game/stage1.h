@@ -8,7 +8,6 @@
 
 /********オブジェクト********/
 #include "..\Frame\RayCursor.h"//カーソル
-//#include"TestObj.h"
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
@@ -22,6 +21,8 @@
 #include"..\BulletPhysics\BulletPhysics.h"
 
 #include"..\Frame\CGamepad.h"
+
+#include"..\Frame\Shadow.h"
 
 #define MAX_COLLISION 100
 
