@@ -12,14 +12,13 @@ public:
 	void Initialize();
 	void Update();
 	void Draw(D3DXMATRIX);
-	void Move();					//Move関数
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
 	}
-	void SetPos(D3DXVECTOR3* pos)
+	void SetPos(D3DXVECTOR3 pos)
 	{
-		m_position = *pos;
+		m_position = pos;
 	}
 	LPD3DXMESH GetMesh()
 	{
@@ -30,6 +29,5 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
-	D3DXVECTOR3 m_moveSpeed;
 	BYTE diks[256];//キーインプット
 };

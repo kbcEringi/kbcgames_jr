@@ -25,19 +25,20 @@ void CGameCursor::Move()
 
 	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//âE
 	{
-		vec3Position.x += 2.0f;
+		vec3Position.x += 4.0f;
 	}
 	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//ç∂
 	{
-		vec3Position.x -= 2.0f;
+		vec3Position.x -= 4.0f;
 	}
 	if (KEYDOWN(diks, DIK_UP) & 0x80)//è„
 	{
-		vec3Position.y -= 2.0f;
+		vec3Position.y -= 4.0f;
 	}
 	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//â∫
+
 	{
-		vec3Position.y += 2.0f;
+		vec3Position.y += 4.0f;
 	}
 	else
 	{

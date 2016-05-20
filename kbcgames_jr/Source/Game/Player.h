@@ -5,6 +5,7 @@
 #include"..\Frame\Input.h"//キーボードインプット
 #include "..\Frame\IsIntersect.h"
 
+
 class CPlayer
 {
 public:
@@ -13,7 +14,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw(D3DXMATRIX);
-	void Move(D3DXVECTOR3 movespeed);					//Move関数
+	void Move(D3DXVECTOR3 pos);					//Move関数
 	void Died();
 	D3DXVECTOR3 GetPosition()
 	{
@@ -48,4 +49,5 @@ private:
 	D3DXVECTOR3 m_applyForce;		//外部から受けた力。
 	CIsIntersect m_IsIntersect;		//あたり判定
 	BYTE diks[256];//キーインプット
+
 };

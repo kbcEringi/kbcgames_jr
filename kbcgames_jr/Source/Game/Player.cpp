@@ -33,7 +33,6 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	//Move();//移動関数
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
@@ -49,7 +48,7 @@ void CPlayer::Draw(D3DXMATRIX view)
 	Obj.Draw(matWorld, view, m_projMatrix);
 }
 
-void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
+void CPlayer::Move(D3DXVECTOR3 pos)//移動
 {
 
 
@@ -60,28 +59,27 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
-	//m_moveSpeed.y = 0.0f;
-	if (m_position.x <= movespeed.x)//右
+	if (m_position.x < pos.x && fabs(m_position.x - pos.x) > 0.1f)//右
 	{
-		m_position.x += 0.1f;
-		//m_position.x += 0.2f;
+		m_moveSpeed.x += 1.0f;
+		
 	}
-	if (m_position.x >= movespeed.x)//左
+	if (m_position.x > pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
 	{
-		m_position.x -= 0.1f;
-		//m_position.x -= 0.2f;
+		m_moveSpeed.x -= 1.0f;
+		
 	}
-	if (m_position.y <= movespeed.y)//上
+	if (m_position.z < pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
 	{
-		m_position.y += 0.1f;
-		//m_position.y += 0.2f;
+		m_moveSpeed.z += 1.0f;
+		
 	}
-	if (m_position.y >= movespeed.y)//下
+	if (m_position.z > pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
 	{
-		m_position.y -= 0.1f;
-		//m_position.y -= 0.2f;
+		m_moveSpeed.z -= 1.0f;
+		
 	}
-
+	
 }
 
 void CPlayer::Died()

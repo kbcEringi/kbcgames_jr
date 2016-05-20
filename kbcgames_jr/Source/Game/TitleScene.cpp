@@ -47,7 +47,7 @@ void CTitleScene::Select()
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
 
 			m_pAudio->StopCue("title");//タイトル音楽ストップ
-			m_pAudio->PlayCue("start");//スタート
+			m_pAudio->PlayCue("uni1512");//スタート
 			break;
 		case COMMAND_SELECT::EXIT:
 			PostQuitMessage(0);

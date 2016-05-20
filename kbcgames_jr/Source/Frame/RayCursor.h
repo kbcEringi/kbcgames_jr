@@ -16,6 +16,10 @@ public:
 	~CRayCursor();
 	void Initialize();
 	void Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX ProjectionMatrix);
+	void SetPointa(CPointa* pointa)
+	{
+		m_Pointa = pointa;
+	}
 private:
 	float	m_interval;
 
@@ -23,7 +27,7 @@ private:
 	D3DXVECTOR4 end;
 	
 	Ccamera*	m_pCamera;
-	CPointa m_Pointa;
+	CPointa* m_Pointa;
 	btSphereShape* m_sphereColli;
 
 	BYTE diks[256];//キーインプット

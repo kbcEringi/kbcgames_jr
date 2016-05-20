@@ -15,7 +15,6 @@
 #include "Ground.h"
 #include "wood.h"
 #include "AlwaysWind.h"
-#include "Debri.h"
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
@@ -53,7 +52,6 @@ private:
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;
-	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 

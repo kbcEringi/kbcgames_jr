@@ -26,7 +26,7 @@ void CStage1::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
@@ -36,12 +36,12 @@ void CStage1::Initialize()
 	m_setwind.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
-	m_Debri.Initialize();
 	m_pointa.Initialize();
 	m_GameCursor.Initialize();
 
 
 	m_Ray.Initialize();//レイカーソル初期化
+	m_Ray.SetPointa(&m_pointa);
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
 	g_stage = this;
@@ -73,11 +73,10 @@ void CStage1::Update()
 	m_Ground.Update();
 	m_wood.Update();
 	m_setwind.Update();
-	m_Debri.Update();
 	m_pointa.Update();
 	m_GameCursor.Update();
 	//ポインタをPlayerが追いかける
-	//m_Player.Move(m_pointa.GetPosition());
+	m_Player.Move(m_pointa.GetPosition());
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }
@@ -85,7 +84,6 @@ void CStage1::Update()
 void CStage1::Draw()
 {
 	m_Ground.Draw(m_camera.GetViewMatrix());//ステージ１を描画
-	m_Debri.Draw(m_camera.GetViewMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix());//ポインタ描画
 	
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
