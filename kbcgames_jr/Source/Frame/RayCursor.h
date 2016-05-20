@@ -2,6 +2,7 @@
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"Input.h"//キーボードインプット
 #include "..\Game\Pointa.h"
+#include"..\Frame\CGamepad.h"
 
 class Ccamera;
 

@@ -49,9 +49,8 @@ private:
 
 	Ccamera m_camera;
 	CAudio* m_pAudio;
-	/******オブジェクト*****/
 	CRayCursor m_Ray;
-	/********オブジェクト3D********/
+	/********オブジェクト2D********/
 	CGameCursor m_GameCursor;
 	/******オブジェクト3d*****/
 	//CTestObj test;

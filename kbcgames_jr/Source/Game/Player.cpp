@@ -63,28 +63,28 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	//m_moveSpeed.y = 0.0f;
 	if (m_position.x <= pos.x && fabs(m_position.x - pos.x) > 0.1f)//右
 	{
-		m_moveSpeed.x += 1.0f;
+		m_moveSpeed.x += 2.0f;
 		//右方向を向かせる。
 		m_targetAngleY = D3DXToRadian(90.0f);
 		isTurn = true;
 	}
 	if (m_position.x >= pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
 	{
-		m_moveSpeed.x -= 1.0f;
+		m_moveSpeed.x -= 2.0f;
 		//左方向を向かせる
 		m_targetAngleY = D3DXToRadian(-90.0f);
 		isTurn = true;
 	}
 	if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
 	{
-		m_moveSpeed.z += 1.0f;
+		m_moveSpeed.z += 2.0f;
 		//180度向かせる。
 		m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
 	if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
 	{
-		m_moveSpeed.z -= 1.0f;
+		m_moveSpeed.z -= 2.0f;
 		//正面を向かせる。
 		m_targetAngleY = D3DXToRadian(0.0f);
 		isTurn = true;

@@ -9,7 +9,7 @@
 
 #include"Title.h"
 #include "TitleCusor.h"
-
+#include"..\Frame\CGamepad.h"
 
 class CSceneManager;
 class CAudio;
