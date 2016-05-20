@@ -31,6 +31,7 @@ void CStage1::Initialize()
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
 	m_Player.Initialize();
+	m_Player.SetPointa(&m_pointa);
 	m_Ground.Initialize();
 	m_wood.Initialize();
 	m_setwind.Initialize();
@@ -75,8 +76,7 @@ void CStage1::Update()
 	m_setwind.Update();
 	m_pointa.Update();
 	m_GameCursor.Update();
-	//ポインタをPlayerが追いかける
-	m_Player.Move(m_pointa.GetPosition());
+	
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }

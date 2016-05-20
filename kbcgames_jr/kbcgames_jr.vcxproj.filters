@@ -108,6 +108,9 @@
     <ClCompile Include="Source\Frame\RayCursor.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\Tunr.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -198,6 +201,9 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\RayCursor.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Turn.h">
       <Filter>Frame</Filter>
     </ClInclude>
   </ItemGroup>
