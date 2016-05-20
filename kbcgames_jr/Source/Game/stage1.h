@@ -15,6 +15,7 @@
 #include "Ground.h"
 #include "wood.h"
 #include "AlwaysWind.h"
+#include"Windmill.h"
 #include "Debri.h"
 #include "Pointa.h"
 
@@ -56,6 +57,7 @@ private:
 	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
+	CWindmill m_windmill;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
