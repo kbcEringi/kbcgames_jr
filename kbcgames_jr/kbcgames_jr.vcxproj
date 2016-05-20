@@ -99,6 +99,7 @@
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
+    <ClCompile Include="Source\Frame\Turn.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Source\Frame\SceneManager.h" />
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\SkinModelDate.h" />
+    <ClInclude Include="Source\Frame\Turn.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />

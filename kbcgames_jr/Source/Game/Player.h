@@ -4,6 +4,8 @@
 #include"..\Frame\C3DObject.h"
 #include"..\Frame\Input.h"//キーボードインプット
 #include "..\Frame\IsIntersect.h"
+#include "..\Frame\Turn.h"
+#include "Pointa.h"
 
 class CPlayer : public C3DObject
 {
@@ -14,7 +16,7 @@ public:
 	void D3DUpdate()override;
 	void D2DUpdate()override{}
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
-	void Move(D3DXVECTOR3 movespeed);					//Move関数
+	void Move(D3DXVECTOR3 pos);					//Move関数
 	void Died();
 	D3DXVECTOR3 GetPosition()
 	{
@@ -40,11 +42,19 @@ public:
 	{
 		m_applyForce += force;
 	}
+	void SetPointa(CPointa* pointa)
+	{
+		m_Pointa = pointa;
+	}
 private:
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;		//移動速度
 	D3DXVECTOR3 m_applyForce;		//外部から受けた力。
 	CIsIntersect m_IsIntersect;		//あたり判定
+	CTurn m_Turn;
+	CPointa* m_Pointa;
 	BYTE diks[256];//キーインプット
+	float					m_currentAngleY;
+	float					m_targetAngleY;
 };

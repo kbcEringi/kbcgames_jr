@@ -149,7 +149,7 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 		g_bulletPhysics.ConvexSweepTest(m_sphereColli, btStart, btEnd, callback);
 		if (callback.isHit) {//“–‚½‚Á‚½‚ç
 			callback.hitPos.y += 0.5f;
-			m_Pointa->SetPos(callback.hitPos);
+			m_Pointa->SetPos(&callback.hitPos);
 		}
 	}
 	else

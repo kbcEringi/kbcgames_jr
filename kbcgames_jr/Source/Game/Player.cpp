@@ -16,10 +16,14 @@ void CPlayer::Initialize()
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
 	m_moveSpeed.z = 0.0f;				//移動速度
+	m_Turn.Initialize();
 	m_IsIntersect.CollisitionInitialize(&m_position);//あたり判定初期化
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
+
+	m_currentAngleY = 0.0f;
+	m_targetAngleY = 0.0f;
 
 }
 
@@ -30,7 +34,8 @@ void CPlayer::D3DUpdate()
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
-	Died();
+	Died();//死亡判定
+	Move(m_Pointa->GetPosition());
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量(あたり判定)
 	
 }
@@ -38,12 +43,15 @@ void CPlayer::D3DUpdate()
 void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMATRIX mRot;
+	D3DXMatrixRotationY(&mRot, m_currentAngleY);
+	m_matWorld = mRot * m_matWorld;
 	m_SkinModel.Draw(m_matWorld, view, proj);
 }
 
-void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
+void CPlayer::Move(D3DXVECTOR3 pos)//移動
 {
-
+	bool isTurn = false;
 
 	D3DXMatrixIdentity(&m_matWorld);
 	(*GetKeyDevice()).GetDeviceState(
@@ -53,26 +61,36 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
 	//m_moveSpeed.y = 0.0f;
-	if (m_position.x <= movespeed.x)//右
+	if (m_position.x <= pos.x && fabs(m_position.x - pos.x) > 0.1f)//右
 	{
-		m_position.x += 0.1f;
-		//m_position.x += 0.2f;
+		m_moveSpeed.x += 1.0f;
+		//右方向を向かせる。
+		m_targetAngleY = D3DXToRadian(90.0f);
+		isTurn = true;
 	}
-	if (m_position.x >= movespeed.x)//左
+	if (m_position.x >= pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
 	{
-		m_position.x -= 0.1f;
-		//m_position.x -= 0.2f;
+		m_moveSpeed.x -= 1.0f;
+		//左方向を向かせる
+		m_targetAngleY = D3DXToRadian(-90.0f);
+		isTurn = true;
 	}
-	if (m_position.y <= movespeed.y)//上
+	if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
 	{
-		m_position.y += 0.1f;
-		//m_position.y += 0.2f;
+		m_moveSpeed.z += 1.0f;
+		//180度向かせる。
+		m_targetAngleY = D3DXToRadian(180.0f);
+		isTurn = true;
 	}
-	if (m_position.y >= movespeed.y)//下
+	if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
 	{
-		m_position.y -= 0.1f;
-		//m_position.y -= 0.2f;
+		m_moveSpeed.z -= 1.0f;
+		//正面を向かせる。
+		m_targetAngleY = D3DXToRadian(0.0f);
+		isTurn = true;
 	}
+
+	m_currentAngleY = m_Turn.Update(isTurn, m_targetAngleY);
 
 }
 
