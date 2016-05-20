@@ -108,6 +108,12 @@
     <ClCompile Include="Source\Frame\RayCursor.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CGamepad.cpp">
+      <Filter>Frame\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -199,6 +205,12 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\RayCursor.h">
       <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\C3DObject.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SkinModelDate.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

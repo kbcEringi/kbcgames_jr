@@ -3,9 +3,10 @@
 #include"..\Frame\DXCommon.h"
 
 #include"..\Frame\Scene.h"
-#include"..\Frame\SceneManager.h"
 
 #include"..\Frame\Ccamera.h"
+
+/********オブジェクト********/
 #include "..\Frame\RayCursor.h"//カーソル
 //#include"TestObj.h"
 /********オブジェクト2D********/
@@ -20,6 +21,8 @@
 #include "Pointa.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
+
+#include"..\Frame\CGamepad.h"
 
 #define MAX_COLLISION 100
 
@@ -46,6 +49,7 @@ private:
 
 	Ccamera m_camera;
 	CAudio* m_pAudio;
+	/******オブジェクト*****/
 	CRayCursor m_Ray;
 	/********オブジェクト3D********/
 	CGameCursor m_GameCursor;

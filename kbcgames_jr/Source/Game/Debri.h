@@ -1,15 +1,18 @@
 #pragma once
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DDraw.h"
+#include"..\Frame\C3DObject.h"
 #include "..\Frame\Rigidbody.h"
 
 
-class CDebri{
+class CDebri : public C3DObject
+{
 public:
+	CDebri() : C3DObject(){}
 	void Initialize();
-	void Update();
-	void Draw(D3DXMATRIX);
-	virtual void OnDestroy();
+	void D2DUpdate(){}
+	void D3DUpdate();
+	void Draw(D3DXMATRIX, D3DXMATRIX);
+	void OnDestroy();
 	/*!
 	*@brief	構築処理。
 	*@param[in]	size	箱のサイズ。
@@ -18,8 +21,6 @@ public:
 	void Build(const D3DXVECTOR3& size, const D3DXVECTOR3& pos);
 	
 private:
-	C3DDraw Obj;
-	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	
