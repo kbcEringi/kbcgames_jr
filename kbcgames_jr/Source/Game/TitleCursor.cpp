@@ -22,20 +22,24 @@ void CTitleCursor::Update()
 {
 	m_pAudio->Run();
 	int dir = 0;//‰Šú‰»
-	if (GetAsyncKeyState(VK_DOWN))//«‰Ÿ‚³‚ê‚½‚ç
+	GAMEPAD(CGamepad)->UpdateControllerState();
+	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		m_pAudio->PlayCue("select");
-		if (m_selectIndex < MAX_COMAND_NUM - 1)
+		if (GetAsyncKeyState(VK_DOWN) || GAMEPAD(CGamepad)->GetStickL_Y()<0)//«‰Ÿ‚³‚ê‚½‚ç
 		{
-			dir = 1;
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex < MAX_COMAND_NUM - 1)
+			{
+				dir = 1;
+			}
 		}
-	}
-	else if (GetAsyncKeyState(VK_UP))//ª‰Ÿ‚³‚ê‚½‚ç
-	{
-		m_pAudio->PlayCue("select");
-		if (m_selectIndex > 0)
+		else if (GetAsyncKeyState(VK_UP) || GAMEPAD(CGamepad)->GetStickL_Y()>0)//ª‰Ÿ‚³‚ê‚½‚ç
 		{
-			dir = -1;
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex > 0)
+			{
+				dir = -1;
+			}
 		}
 	}
 	m_selectIndex += dir;

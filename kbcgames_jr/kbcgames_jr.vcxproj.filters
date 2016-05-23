@@ -114,6 +114,12 @@
     <ClCompile Include="Source\Frame\CGamepad.cpp">
       <Filter>Frame\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\Turn.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CAnimation.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -210,6 +216,12 @@
       <Filter>Frame\3D</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\SkinModelDate.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Turn.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CAnimation.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>

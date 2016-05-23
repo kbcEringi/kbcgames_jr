@@ -3,6 +3,7 @@
 #include"GraphicsDevice.h"
 #include <stdlib.h>
 #include"SkinModelDate.h"
+#include"CAnimation.h"
 
 
 
@@ -67,7 +68,7 @@ public:
 	*第二引数　グラフィックパス（デフォルト＝０、スペキュラ＝１）
 	*/
 	C3DDraw();
-	void Initialize(LPCSTR , int pass = 0);
+	void Initialize(LPCSTR);
 	//アニメーションを進める。
 	void AddAnimation();
 	void UpdateWorldMatrix(D3DXMATRIX worldMatrix);
@@ -95,15 +96,15 @@ public:
 	{
 		 return m_skinmodel->GetFrameRoot()->pMeshContainer->MeshData.pMesh;
 	}
-	/*void SetAnimation(int idx)
+	void SetAnimation(int idx)
 	{
-		m_pAnimController->SetTrackAnimationSet(1, animationSet[idx]); 
-	}*/
+		idx %= m_animation.GetNumAnimationSet();
+		m_animation.PlayAnimation(idx, 0.1f);
+	}
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
-	//ID3DXAnimationController* m_pAnimController;
-	//LPD3DXANIMATIONSET animationSet[100];
+	CAnimation m_animation;
 
 
 	static const int LIGHT_NUM = 6;

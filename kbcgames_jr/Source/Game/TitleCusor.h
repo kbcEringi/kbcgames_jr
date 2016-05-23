@@ -2,6 +2,7 @@
 
 #include"..\Frame\C2DObject.h"
 #include"..\Frame\Input.h"
+#include"..\Frame\CGamepad.h"
 
 #define MAX_COMAND_NUM 2
 

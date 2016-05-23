@@ -133,20 +133,11 @@ C3DDraw::C3DDraw() : m_skinmodel(nullptr)
 *第一引数　Xファイル名（例："XFile\\kyu.x"）
 *第二引数　グラフィックパス（デフォルト＝０、スペキュラ＝１）
 */
-void C3DDraw::Initialize(LPCSTR FileName,int pass)
+void C3DDraw::Initialize(LPCSTR FileName)
 {
 	m_skinmodel = new CSkinModelData;
-	m_skinmodel->LoadModelData(FileName);
+	m_skinmodel->LoadModelData(FileName,&m_animation);
 	m_currentSetEffectCallback = &m_defaultSetEffectCallback;
-	
-	//if (m_skinmodel->GetFrameRoot()->pMeshContainer->pSkinInfo != NULL)
-	//{
-	//	m_pAnimController = m_skinmodel->GetAnimationController();
-	//	for (DWORD i = 0; i < m_pAnimController->GetNumAnimationSets(); i++) {
-	//		animationSet[i] = NULL;
-	//		m_pAnimController->GetAnimationSet(i, &animationSet[i]);
-	//	}
-	//}
 
 	{//ライト設定
 		//ディフューズライト方向
@@ -176,12 +167,7 @@ void C3DDraw::Initialize(LPCSTR FileName,int pass)
 
 void C3DDraw::AddAnimation()
 {
-	if (m_skinmodel) {
-		if (m_skinmodel->GetAnimationController() != NULL)
-		{
-			m_skinmodel->GetAnimationController()->AdvanceTime(1.0f / 60.0f, NULL);
-		}
-	}
+	m_animation.Update(1.0f / 60.0f);
 }
 void C3DDraw::UpdateWorldMatrix(D3DXMATRIX worldMatrix)
 {

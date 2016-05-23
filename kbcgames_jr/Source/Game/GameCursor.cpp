@@ -23,25 +23,28 @@ void CGameCursor::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
-	if (KEYDOWN(diks, DIK_RIGHT) & 0x80)//右
+	GAMEPAD(CGamepad)->UpdateControllerState();
+	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		vec3Position.x += 2.0f;
+		if (KEYDOWN(diks, DIK_RIGHT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()>0)//右
+		{
+			vec3Position.x += 4.0f;
+		}
+		if (KEYDOWN(diks, DIK_LEFT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()<0)//左
+		{
+			vec3Position.x -= 4.0f;
+		}
+		if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() > 0)//上
+		{
+			vec3Position.y -= 4.0f;
+		}
+		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() < 0)//下
+		{
+			vec3Position.y += 4.0f;
+		}
+		else
+		{
+			(*GetKeyDevice()).Acquire();//キーデバイス取得
+		}
 	}
-	if (KEYDOWN(diks, DIK_LEFT) & 0x80)//左
-	{
-		vec3Position.x -= 2.0f;
-	}
-	if (KEYDOWN(diks, DIK_UP) & 0x80)//上
-	{
-		vec3Position.y -= 2.0f;
-	}
-	if (KEYDOWN(diks, DIK_DOWN) & 0x80)//下
-	{
-		vec3Position.y += 2.0f;
-	}
-	else
-	{
-		(*GetKeyDevice()).Acquire();//キーデバイス取得
-	}
-
 }

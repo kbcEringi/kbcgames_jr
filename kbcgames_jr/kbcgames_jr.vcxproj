@@ -88,6 +88,7 @@
     <ClCompile Include="Source\Frame\Audio.cpp" />
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
     <ClCompile Include="Source\Frame\C3DDraw.cpp" />
+    <ClCompile Include="Source\Frame\CAnimation.cpp" />
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\CGamepad.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
+    <ClCompile Include="Source\Frame\Turn.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
@@ -119,6 +121,7 @@
     <ClInclude Include="Source\Frame\C2DObject.h" />
     <ClInclude Include="Source\Frame\C3DDraw.h" />
     <ClInclude Include="Source\Frame\C3DObject.h" />
+    <ClInclude Include="Source\Frame\CAnimation.h" />
     <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\CGamepad.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
@@ -133,6 +136,7 @@
     <ClInclude Include="Source\Frame\SceneManager.h" />
     <ClInclude Include="Source\Frame\Shadow.h" />
     <ClInclude Include="Source\Frame\SkinModelDate.h" />
+    <ClInclude Include="Source\Frame\Turn.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
