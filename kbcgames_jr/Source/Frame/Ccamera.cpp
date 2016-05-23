@@ -5,13 +5,13 @@ void Ccamera::Initialize()
 	m_vEyePt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_vLookatPt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_vUpVec = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.5f, -1.0f);
+	m_NormalizeObject = D3DXVECTOR3(0.0f, 0.5f, 1.0f);
 	D3DXVec3Normalize(&m_NormalizeObject, &m_NormalizeObject);
 	m_Distance = 10.0f;
 	m_vFovy = D3DXToRadian(45.0f);
 	m_vAspect = 960.0f / 580.0f;
 	m_vNear = 1.0f;
-	m_vFar = 100.0f;
+	m_vFar = 10000.0f;
 }
 
 void Ccamera::Update()

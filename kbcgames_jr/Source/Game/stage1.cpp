@@ -30,17 +30,17 @@ void CStage1::Initialize()
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
-	m_Player.Initialize();
-	m_Player.SetPointa(&m_pointa);
-	m_Ground.Initialize();
-	m_wood.Initialize();
-	m_setwind.Initialize();
-	m_camera.Initialize();
-	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
-	m_Debri.Initialize();
-	m_pointa.Initialize();
-	m_GameCursor.Initialize();
-
+	m_Player.Initialize();//プレイヤー初期化
+	m_Player.SetPointa(&m_pointa);//プレイヤーにセットpointa
+	m_Ground.Initialize();//地面初期化
+	m_wood.Initialize();//木
+	m_setwind.Initialize();//風
+	m_camera.Initialize();//カメラ
+	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));//カメラにセット
+	m_Debri.Initialize();//
+	m_pointa.Initialize();//ポインタ初期化
+	m_GameCursor.Initialize();//ゲームカーソル初期化
+	m_Back1.Initialize();
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
@@ -76,22 +76,23 @@ void CStage1::Update()
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
-	m_Player.D3DUpdate();
-	m_Ground.D3DUpdate();
-	m_wood.D3DUpdate();
-	m_setwind.D3DUpdate();
+	m_Player.D3DUpdate();//プレイヤー
+	m_Ground.D3DUpdate();//地面
+	m_wood.D3DUpdate();//木
+	m_setwind.D3DUpdate();//風
 	//m_windmill.D3Dupdate();
-	m_Debri.D3DUpdate();
-	m_pointa.D3DUpdate();
+	m_Debri.D3DUpdate();//
+	m_pointa.D3DUpdate();//ポインタ
+	m_GameCursor.Update();//ゲームカーソル
+	m_Back1.D3DUpdate();
 
-	m_GameCursor.Update();
-	
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }
 
 void CStage1::Draw()
 {
+	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
@@ -101,10 +102,6 @@ void CStage1::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
-	if (GetAsyncKeyState('Q')){
-		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
-	}
-
 
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画

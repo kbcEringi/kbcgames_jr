@@ -56,7 +56,6 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
-	//m_moveSpeed.y = 0.0f;
 	if (m_position.x <= pos.x && fabs(m_position.x - pos.x) > 0.1f)//右
 	{
 		m_moveSpeed.x += 2.0f;
