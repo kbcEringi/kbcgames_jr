@@ -28,19 +28,19 @@ void CGameCursor::Move()
 	{
 		if (KEYDOWN(diks, DIK_RIGHT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()>0)//‰E
 		{
-			vec3Position.x += 4.0f;
+			vec3Position.x += 6.0f;
 		}
 		if (KEYDOWN(diks, DIK_LEFT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()<0)//¶
 		{
-			vec3Position.x -= 4.0f;
+			vec3Position.x -= 6.0f;
 		}
 		if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() > 0)//ã
 		{
-			vec3Position.y -= 4.0f;
+			vec3Position.y -= 6.0f;
 		}
 		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() < 0)//‰º
 		{
-			vec3Position.y += 4.0f;
+			vec3Position.y += 6.0f;
 		}
 		else
 		{

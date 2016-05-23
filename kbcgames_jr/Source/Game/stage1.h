@@ -1,13 +1,10 @@
 #pragma once
 
 #include"..\Frame\DXCommon.h"
-
 #include"..\Frame\Scene.h"
-
 #include"..\Frame\Ccamera.h"
-
-/********オブジェクト********/
 #include "..\Frame\RayCursor.h"//カーソル
+
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
@@ -18,9 +15,9 @@
 #include"Windmill.h"
 #include "Debri.h"
 #include "Pointa.h"
+#include "Stage1Back.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
-
 #include"..\Frame\CGamepad.h"
 
 #include"..\Frame\Shadow.h"
@@ -62,6 +59,7 @@ private:
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 	//CWindmill m_windmill;
+	CStage1Back m_Back1;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

@@ -49,6 +49,8 @@ void CStage1::Initialize()
 	g_Shadow.SetLightPosition(m_pointa.GetPosition() + D3DXVECTOR3(0.0f, 5.0f, 0.0f));
 	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
 
+	m_Back1.Initialize();
+
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
@@ -109,23 +111,25 @@ void CStage1::Update()
 	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
-	m_Player.D3DUpdate();
-	m_Ground.D3DUpdate();
-	m_wood.D3DUpdate();
-	m_setwind.D3DUpdate();
+	m_Player.D3DUpdate();//プレイヤー
+	m_Ground.D3DUpdate();//地面
+	m_wood.D3DUpdate();//木
+	m_setwind.D3DUpdate();//風
 	//m_windmill.D3Dupdate();
-	m_Debri.D3DUpdate();
-	m_pointa.D3DUpdate();
+	m_Debri.D3DUpdate();//
+	m_pointa.D3DUpdate();//ポインタ
+	m_GameCursor.Update();//ゲームカーソル
+	m_Back1.D3DUpdate();
 
-	m_GameCursor.Update();
-	
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 }
 
 void CStage1::Draw()
 {
+
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
+	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画

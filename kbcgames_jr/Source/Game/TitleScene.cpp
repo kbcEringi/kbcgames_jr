@@ -10,6 +10,7 @@ void CTitleScene::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 	m_pAudio->PlayCue("title");	//タイトル音楽再生
+	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_title.Initialize();
 	m_TitleCusor.Initialize();
@@ -40,10 +41,14 @@ void CTitleScene::Draw()
 
 void CTitleScene::Select()
 {
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (GetAsyncKeyState(VK_RETURN) & 0x8000 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A)){
+		if (KEYDOWN(diks, DIK_RETURN) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A)){
 			switch (m_TitleCusor.GetSelect())
 			{
 			case COMMAND_SELECT::START:
@@ -57,6 +62,10 @@ void CTitleScene::Select()
 				break;
 			}
 
+		}
+		else
+		{
+			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
 	}
 }

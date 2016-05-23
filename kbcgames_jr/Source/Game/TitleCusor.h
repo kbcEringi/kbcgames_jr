@@ -23,7 +23,7 @@ private:
 
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_scale;
-
+	BYTE diks[256];
 	CAudio* m_pAudio;
 
 	int m_selectIndex;

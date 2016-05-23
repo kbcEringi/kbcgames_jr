@@ -40,6 +40,7 @@ public:
 		m_2Dflg = flg;
 	}
 	bool Get2Dflg(){ return m_2Dflg; }
+
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。
