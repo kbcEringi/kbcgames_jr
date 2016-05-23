@@ -1,6 +1,5 @@
 #include "AlwaysWind.h"
 #include "Stage1.h"
-#include "..\Frame\Audio.h"
 /*!
 *@brief	ID3DXMeshからAABBのサイズを計算する関数。
 *@param[in]	mesh		ID3DXMesh
@@ -65,19 +64,11 @@ void CAlwaysWind::Initialize()
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
-	//オーディオ初期化
-	m_pAudio = new CAudio();
-	m_pAudio->Initialize(
-		"Audio\\Audio.xgs",
-		"Audio\\Wave Bank.xwb",
-		"Audio\\Audio.xsb");
 
 }
 
 void CAlwaysWind::D3DUpdate()
 {
-	m_pAudio->Run();
-	bool musicflag = false;
 
 	CPlayer* player = g_stage->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
@@ -100,14 +91,8 @@ void CAlwaysWind::D3DUpdate()
 			m_force.x = 0.0f;
 			m_force.y = 0.0f;
 			m_force.z = 0.0f;
-			m_pAudio->StopCue("wind");
 		}else{
 			m_force *= 0.95f;
-			if (musicflag == true)
-			{
-				m_pAudio->PlayCue("wind");
-				musicflag = false;
-			}
 		}
 	}
 	player->ApplyForce(m_force);

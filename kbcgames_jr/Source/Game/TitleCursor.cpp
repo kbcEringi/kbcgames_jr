@@ -12,6 +12,7 @@ void CTitleCursor::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
+	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_selectIndex = 0;
 	m_moveDistance = 130;
@@ -22,10 +23,15 @@ void CTitleCursor::Update()
 {
 	m_pAudio->Run();
 	int dir = 0;//初期化
+
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (GetAsyncKeyState(VK_DOWN) || GAMEPAD(CGamepad)->GetStickL_Y()<0)//↓押されたら
+		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()<0)//↓押されたら
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex < MAX_COMAND_NUM - 1)
@@ -33,7 +39,7 @@ void CTitleCursor::Update()
 				dir = 1;
 			}
 		}
-		else if (GetAsyncKeyState(VK_UP) || GAMEPAD(CGamepad)->GetStickL_Y()>0)//↑押されたら
+		else if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()>0)//↑押されたら
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex > 0)

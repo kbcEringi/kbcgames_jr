@@ -2,7 +2,6 @@
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
-#include"..\Frame\Input.h"//キーボードインプット
 #include "..\Frame\IsIntersect.h"
 #include "..\Frame\Turn.h"
 #include "Pointa.h"
@@ -54,7 +53,6 @@ private:
 	CIsIntersect m_IsIntersect;		//あたり判定
 	CTurn m_Turn;
 	CPointa* m_Pointa;
-	BYTE diks[256];//キーインプット
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 };

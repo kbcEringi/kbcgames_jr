@@ -12,7 +12,6 @@ void CPlayer::Initialize()
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
-	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
 	m_moveSpeed.z = 0.0f;				//移動速度
@@ -54,9 +53,6 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	bool isTurn = false;
 
 	D3DXMatrixIdentity(&m_matWorld);
-	(*GetKeyDevice()).GetDeviceState(
-		sizeof(diks),	// パラメータ バッファサイズ
-		&diks);
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
@@ -65,28 +61,28 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	{
 		m_moveSpeed.x += 2.0f;
 		//右方向を向かせる。
-		m_targetAngleY = D3DXToRadian(90.0f);
+		m_targetAngleY = D3DXToRadian(0.0f);
 		isTurn = true;
 	}
-	if (m_position.x >= pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
+	else if (m_position.x >= pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
 	{
 		m_moveSpeed.x -= 2.0f;
 		//左方向を向かせる
-		m_targetAngleY = D3DXToRadian(-90.0f);
+		m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
 	if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
 	{
 		m_moveSpeed.z += 2.0f;
 		//180度向かせる。
-		m_targetAngleY = D3DXToRadian(180.0f);
+		m_targetAngleY = D3DXToRadian(-90.0f);
 		isTurn = true;
 	}
-	if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
+	else if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
 	{
 		m_moveSpeed.z -= 2.0f;
 		//正面を向かせる。
-		m_targetAngleY = D3DXToRadian(0.0f);
+		m_targetAngleY = D3DXToRadian(90.0f);
 		isTurn = true;
 	}
 

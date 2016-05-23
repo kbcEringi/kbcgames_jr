@@ -4,8 +4,6 @@
 #include"..\Frame\C3DObject.h"
 #include "..\Frame\Rigidbody.h"
 
-class CAudio;
-
 class CAlwaysWind : public C3DObject
 {
 public:
@@ -29,5 +27,4 @@ private:
 	//bool m_Ground;					//’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚©H
 	float SpeedPower;				//‰Á‘¬‚ğ‰Á‚¦‚é‘¬“x
 
-	CAudio* m_pAudio;
 };
