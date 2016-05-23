@@ -103,6 +103,7 @@
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
+    <ClCompile Include="Source\Game\Movefloor.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Pointa.cpp" />
     <ClCompile Include="Source\Game\AlwaysWind.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\Ground.h" />
+    <ClInclude Include="Source\Game\Movefloor.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Pointa.h" />
     <ClInclude Include="Source\Game\AlwaysWind.h" />

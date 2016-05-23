@@ -12,14 +12,16 @@ void CWindmill::Initialize()
 
 }
 
-void CWindmill::Update()
+void CWindmill::D3DUpdate()
 {
 	
+	m_moveSpeed.x = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌxÀ•W‚Ì‰Šú‰»
+	m_moveSpeed.z = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌzÀ•W‚Ì‰Šú‰»
 }
 
-void CWindmill::Draw(D3DXMATRIX view)
+void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	Obj.Draw(matWorld, view, m_projMatrix);
 }
 

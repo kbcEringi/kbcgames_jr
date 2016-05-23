@@ -114,6 +114,9 @@
     <ClCompile Include="Source\Frame\CGamepad.cpp">
       <Filter>Frame\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Movefloor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\SkinModelDate.h">
       <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Movefloor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
