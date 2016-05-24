@@ -2,6 +2,8 @@
 #include"DXCommon.h"
 #include"GraphicsDevice.h"
 #include <stdlib.h>
+#include"SkinModelDate.h"
+#include"CAnimation.h"
 
 
 
@@ -11,16 +13,17 @@ class C3DDraw;
 */
 class ISetEffectCallback{
 public:
-	ISetEffectCallback() 
+	ISetEffectCallback()
 	{
 	}
 	virtual ~ISetEffectCallback()
 	{
 	}
 public:
-	virtual void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) = 0;
-	virtual void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) = 0;
-	virtual void OnEndRender(C3DDraw*	p3dDraw) = 0;
+	virtual void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX) = 0;
+	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
 };
@@ -31,18 +34,26 @@ class CSetEffectCallbackDefault : public ISetEffectCallback{
 public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
-	void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
-	void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) override;
-	void OnEndRender(C3DDraw*	p3dDraw) override;
+	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX)override;
+	void OnEndRender();
 };
 
 class CSetEffectCallbackShadowMap : public ISetEffectCallback{
 public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
-	void OnBeginRender(C3DDraw* p3dDraw, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix) override;
-	void OnPreDrawSubset(C3DDraw* p3dDraw, int materialNo) override;
-	void OnEndRender(C3DDraw*	p3dDraw) override;
+	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX) override;
+	void OnEndRender();
+	void SetEffect(ID3DXEffect* effect)
+	{
+		m_pEffect = effect;
+	}
+private:
+	ID3DXEffect* m_pEffect;
 };
 /*
 * 3Dオブジェクト。
@@ -56,12 +67,23 @@ public:
 	*第一引数　Xファイル名（例："XFile\\kyu.x"）
 	*第二引数　グラフィックパス（デフォルト＝０、スペキュラ＝１）
 	*/
-	void Initialize(LPCSTR , int pass = 0);
+	C3DDraw();
+	void Initialize(LPCSTR);
+	//アニメーションを進める。
+	void AddAnimation();
+	void UpdateWorldMatrix(D3DXMATRIX worldMatrix);
 	/*
 	*第一引数　ワールドマトリクス（自分の位置）
 	*第二引数　ビューマトリクス（カメラの位置）
 	*/
 	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
+	void DrawFrame(
+		LPD3DXFRAME pFrame, D3DXMATRIX, D3DXMATRIX);
+
+	void DrawMeshContainer(
+		LPD3DXMESHCONTAINER pMeshContainerBase,
+		LPD3DXFRAME pFrameBase, D3DXMATRIX, D3DXMATRIX
+		);
 	ISetEffectCallback* GetEffectCallback()
 	{
 		return m_currentSetEffectCallback;
@@ -70,19 +92,20 @@ public:
 	{
 		m_currentSetEffectCallback = callback;
 	}
-	~C3DDraw();
-	//メッシュを取得。
 	LPD3DXMESH GetMesh()
 	{
-		return m_Mesh;
+		 return m_skinmodel->GetFrameRoot()->pMeshContainer->MeshData.pMesh;
 	}
+	void SetAnimation(int idx)
+	{
+		idx %= m_animation.GetNumAnimationSet();
+		m_animation.PlayAnimation(idx, 0.1f);
+	}
+	~C3DDraw();
 protected:
-	LPD3DXBUFFER m_D3DXMtrlBuffer;	//マテリアル
-	DWORD m_NumMaterials;		//マテリアル数
-	LPD3DXMESH m_Mesh;			//メッシュ
-	LPDIRECT3DTEXTURE9*  m_pMeshTextures;	//メッシュテクスチャ
+	CSkinModelData* m_skinmodel;
+	CAnimation m_animation;
 
-	D3DXMATERIAL *materials;
 
 	static const int LIGHT_NUM = 6;
 	D3DXVECTOR4 m_diffuseLightDirection[LIGHT_NUM];	//ライトの方向。
@@ -92,4 +115,6 @@ protected:
 	int m_Graphicspass;
 	CSetEffectCallbackDefault m_defaultSetEffectCallback;
 	ISetEffectCallback* m_currentSetEffectCallback;
+
+	D3DXMATRIX m_matWorld;
 };

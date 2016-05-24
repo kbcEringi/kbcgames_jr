@@ -108,8 +108,20 @@
     <ClCompile Include="Source\Frame\RayCursor.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\LostGround.cpp">
+    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CGamepad.cpp">
+      <Filter>Frame\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\Turn.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage1Back.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CAnimation.cpp">
+      <Filter>Frame\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,11 +215,20 @@
     <ClInclude Include="Source\Frame\RayCursor.h">
       <Filter>Frame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\LostGround.h">
+    <ClInclude Include="Source\Frame\C3DObject.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SkinModelDate.h">
+      <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Turn.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage1Back.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h">
-      <Filter>Frame</Filter>
+    <ClInclude Include="Source\Frame\CAnimation.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

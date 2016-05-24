@@ -2,12 +2,10 @@
 
 #include<Windows.h>
 #include<XInput.h>
-#include<d3d9.h>
-#include<d3dx9.h>
-#pragma comment(lib, "d3d9.lib")
-#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "Xinput.lib")
+#include"DXCommon.h"
 
-#define SINSTANCE(Class) Class::GetInstance()
+#define GAMEPAD(Class) Class::getGameInstance()
 
 #define INPUT_DEADZONE  ( 0.24f * FLOAT(0x7FFF) )
 
@@ -29,7 +27,7 @@
 class CGamepad
 {
 public:
-	static CGamepad *GetInstance()
+	static CGamepad *getGameInstance()
 	{
 		if (!s_gamepad)
 		{
@@ -56,22 +54,7 @@ public:
 		{
 			m_bConnected = false;
 		}
-		if ((m_state.Gamepad.sThumbLX < INPUT_DEADZONE &&
-			m_state.Gamepad.sThumbLX > -INPUT_DEADZONE) && 
-			(m_state.Gamepad.sThumbLY < INPUT_DEADZONE &&
-			m_state.Gamepad.sThumbLY > -INPUT_DEADZONE))
-		{
-			m_state.Gamepad.sThumbLX = 0;
-			m_state.Gamepad.sThumbLY = 0;
-		}
-		if ((m_state.Gamepad.sThumbRX < INPUT_DEADZONE &&
-			m_state.Gamepad.sThumbRX > -INPUT_DEADZONE)&&
-			(m_state.Gamepad.sThumbRY < INPUT_DEADZONE &&
-			m_state.Gamepad.sThumbRY > -INPUT_DEADZONE))
-		{
-			m_state.Gamepad.sThumbRX = 0;
-			m_state.Gamepad.sThumbRY = 0;
-		}
+	
 	}
 	/*
 	 *	左スティックの傾き量　
@@ -79,6 +62,11 @@ public:
 	 */
 	SHORT GetStickL_X()
 	{	
+		if ((m_state.Gamepad.sThumbLX < INPUT_DEADZONE &&
+			m_state.Gamepad.sThumbLX > -INPUT_DEADZONE))
+		{
+			m_state.Gamepad.sThumbLX = 0;
+		}
 		return m_state.Gamepad.sThumbLX;
 	}
 	/*
@@ -87,6 +75,12 @@ public:
 	*/
 	SHORT GetStickL_Y()
 	{
+		if ((m_state.Gamepad.sThumbLY < INPUT_DEADZONE &&
+			m_state.Gamepad.sThumbLY > -INPUT_DEADZONE))
+		{
+			m_state.Gamepad.sThumbLY = 0;
+
+		}
 		return m_state.Gamepad.sThumbLY;
 	}
 	/*
@@ -95,6 +89,12 @@ public:
 	*/
 	SHORT GetStickR_X()
 	{
+
+		if ((m_state.Gamepad.sThumbRX < INPUT_DEADZONE &&
+			m_state.Gamepad.sThumbRX > -INPUT_DEADZONE))
+		{
+			m_state.Gamepad.sThumbRX = 0;
+		}
 		return m_state.Gamepad.sThumbRX;
 	}
 	/*
@@ -103,6 +103,11 @@ public:
 	*/
 	SHORT GetStickR_Y()
 	{
+		if ((m_state.Gamepad.sThumbRY < INPUT_DEADZONE &&
+			m_state.Gamepad.sThumbRY > -INPUT_DEADZONE))
+		{
+			m_state.Gamepad.sThumbRY = 0;
+		}
 		return m_state.Gamepad.sThumbRY;
 	}
 	/*
@@ -138,7 +143,5 @@ private:
 	CGamepad(){}
 
 	XINPUT_STATE m_state;	//状態
-	bool m_bConnected;	//コントローラー生存
+	bool m_bConnected = false;	//コントローラー生存
 };
-
-CGamepad *CGamepad::s_gamepad = new CGamepad();

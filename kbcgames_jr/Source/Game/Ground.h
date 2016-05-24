@@ -1,19 +1,18 @@
 #pragma once
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\C3DDraw.h"
+#include"..\Frame\C3DObject.h"
 #include"..\BulletPhysics\BulletPhysics.h"
 
-class CGround
+class CGround : public C3DObject
 {
 public:
-	CGround();
+	CGround() : C3DObject(){}
 	~CGround();
-	void Initialize();
-	void Update();
-	void Draw(D3DXMATRIX);
+	void Initialize()override;
+	void D3DUpdate()override;
+	void D2DUpdate()override{}
+	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 private:
-	C3DDraw Obj;
-	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 };

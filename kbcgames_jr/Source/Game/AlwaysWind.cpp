@@ -1,6 +1,5 @@
 #include "AlwaysWind.h"
 #include "Stage1.h"
-
 /*!
 *@brief	ID3DXMeshからAABBのサイズを計算する関数。
 *@param[in]	mesh		ID3DXMesh
@@ -36,7 +35,7 @@ void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max)
 }
 
 
-CAlwaysWind::CAlwaysWind()
+CAlwaysWind::CAlwaysWind() : C3DObject()
 {
 	m_force.x = 0.0f;
 	m_force.y = 0.0f;
@@ -50,9 +49,8 @@ CAlwaysWind::~CAlwaysWind()
 
 void CAlwaysWind::Initialize()
 {
-	Obj.Initialize("XFile\\wood.x");
-	CalcAABBSizeFromMesh(Obj.GetMesh(), m_aabbMin, m_aabbMax);
-	D3DXMatrixIdentity(&matWorld);
+	m_SkinModel.Initialize("XFile\\wood.x");
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
 	m_position.x = 14.0f;
 	m_position.y = 1.0f;
 	m_position.z = 0.0f;
@@ -65,13 +63,13 @@ void CAlwaysWind::Initialize()
 	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
-	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
 }
 
-void CAlwaysWind::Update()
+void CAlwaysWind::D3DUpdate()
 {
+
 	CPlayer* player = g_stage->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
 	if (m_aabbMin.x < pos.x
@@ -101,9 +99,9 @@ void CAlwaysWind::Update()
 
 }
 
-void CAlwaysWind::Draw(D3DXMATRIX view)
+void CAlwaysWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	
-	Obj.Draw(matWorld, view, m_projMatrix);
+	m_SkinModel.Draw(m_matWorld, view, proj);
 }
