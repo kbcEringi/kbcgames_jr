@@ -17,6 +17,7 @@
 #include "AlwaysWind.h"
 #include "Debri.h"
 #include "Pointa.h"
+#include "LostGround.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 
@@ -56,6 +57,7 @@ private:
 	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
+	CLostGround m_lost;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

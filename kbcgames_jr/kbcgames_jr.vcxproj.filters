@@ -108,6 +108,9 @@
     <ClCompile Include="Source\Frame\RayCursor.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\LostGround.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -198,6 +201,12 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\RayCursor.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\LostGround.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h">
       <Filter>Frame</Filter>
     </ClInclude>
   </ItemGroup>

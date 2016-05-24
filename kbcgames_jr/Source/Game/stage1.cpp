@@ -20,6 +20,7 @@ SCollisionInfo collisionInfoTable2D[] = {
 
 void CStage1::Initialize()
 {
+	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -39,12 +40,12 @@ void CStage1::Initialize()
 	m_Debri.Initialize();
 	m_pointa.Initialize();
 	m_GameCursor.Initialize();
-
+	m_lost.Initialize();
 
 	m_Ray.Initialize();//レイカーソル初期化
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
-	g_stage = this;
+	
 }
 
 void CStage1::Update()
@@ -76,6 +77,7 @@ void CStage1::Update()
 	m_Debri.Update();
 	m_pointa.Update();
 	m_GameCursor.Update();
+	m_lost.Update();
 	//ポインタをPlayerが追いかける
 	//m_Player.Move(m_pointa.GetPosition());
 	//レイカーソルに値をセット
@@ -101,6 +103,7 @@ void CStage1::Draw()
 	m_wood.Draw(m_camera.GetViewMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix());//風描画
 	m_GameCursor.Draw();
+	m_lost.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

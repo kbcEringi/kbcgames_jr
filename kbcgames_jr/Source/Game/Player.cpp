@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
+#include "LostGround.h"
 
 CPlayer::CPlayer()
 {
@@ -33,13 +34,13 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	//Move();//移動関数
+	Move(m_moveSpeed);//移動関数
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
 	Died();
-	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量(あたり判定)
+	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_positionからの移動量(あたり判定)
 	
 }
 
@@ -52,7 +53,30 @@ void CPlayer::Draw(D3DXMATRIX view)
 void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 {
 
+#if 1
+	m_moveSpeed.x = 0.0f;
+	m_moveSpeed.z = 0.0f;
+	if (GetAsyncKeyState(VK_LEFT) ){
+		m_moveSpeed.x = -4.0f;
+	}
+	if (GetAsyncKeyState(VK_RIGHT) ){
+		m_moveSpeed.x = 4.0f;
+	}
+	if (GetAsyncKeyState(VK_SHIFT)){
+		if (GetAsyncKeyState(VK_UP)){
+			m_moveSpeed.z = 4.0f;
+		}
+		if (GetAsyncKeyState(VK_DOWN)){
+			m_moveSpeed.z = -4.0f;
+		}
+	}
+	else{
+		if (GetAsyncKeyState(VK_UP)){
+			m_moveSpeed.y = 4.0f;
+		}
+	}
 
+#else
 	D3DXMatrixIdentity(&matWorld);
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
@@ -81,6 +105,7 @@ void CPlayer::Move(D3DXVECTOR3 movespeed)//移動
 		m_position.y -= 0.1f;
 		//m_position.y -= 0.2f;
 	}
+#endif
 
 }
 
