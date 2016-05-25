@@ -42,7 +42,8 @@ void CStage1::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();
+	m_GameCursor.Initialize();//ゲームカーソル
+	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 
 	g_Shadow.Create(512, 512);
@@ -52,6 +53,7 @@ void CStage1::Initialize()
 	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
 
 	m_Back1.Initialize();
+	m_Back1.SetPointa(&m_Player);
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
@@ -112,6 +114,8 @@ void CStage1::Update()
 	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
+
+=======
 	m_Player.D3DUpdate();//プレイヤー
 	m_Ground.D3DUpdate();//地面
 	m_wood.D3DUpdate();//木
@@ -120,8 +124,10 @@ void CStage1::Update()
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
+	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
+
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -136,6 +142,7 @@ void CStage1::Draw()
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
+	m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -147,7 +154,11 @@ void CStage1::Draw()
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+<<<<<<< HEAD
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+=======
 	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+>>>>>>> aff02f03bd069c24188eac4e12ba7f5cfe50b5b9
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());

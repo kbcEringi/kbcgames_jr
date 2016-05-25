@@ -123,6 +123,10 @@
     <ClCompile Include="Source\Frame\CAnimation.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\LostGround.cpp" />
+    <ClCompile Include="Source\Game\Movefloor.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -229,6 +233,11 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\CAnimation.h">
       <Filter>Frame\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
+    <ClInclude Include="Source\Game\LostGround.h" />
+    <ClInclude Include="Source\Game\Movefloor.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
