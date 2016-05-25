@@ -3,6 +3,7 @@
 
 #include"DXCommon.h"
 #include<d3dx9anim.h>
+#include"CAnimation.h"
 
 
 struct D3DXFRAME_DERIVED : public D3DXFRAME {
@@ -21,6 +22,7 @@ struct D3DXMESHCONTAINER_DERIVED : public D3DXMESHCONTAINER {
 	bool UseSoftwareVP;
 	DWORD iAttributeSW;
 };
+class CAnimation;
 
 class CSkinModelData
 {
@@ -30,7 +32,7 @@ public:
 	//デストラクタ
 	~CSkinModelData();
 	//モデルデータをロード
-	void LoadModelData(const char* filepath);
+	void LoadModelData(const char* filepath,CAnimation* anim);
 	//リリース
 	void Release();
 	//フレームルートゲッタ
@@ -41,7 +43,7 @@ public:
 	//アニメーションコントローラーゲッタ
 	ID3DXAnimationController* GetAnimationController()
 	{
-		return m_pAnimeController;
+		return m_pAnimController;
 	}
 	//ボーン行列を更新
 	void UpdateBoneMatrix(const D3DXMATRIX& matWorld);
@@ -49,5 +51,5 @@ private:
 	//フレームルート
 	LPD3DXFRAME m_FrameRoot;
 	//アニメーションコントローラー
-	ID3DXAnimationController* m_pAnimeController;
+	ID3DXAnimationController* m_pAnimController;
 };

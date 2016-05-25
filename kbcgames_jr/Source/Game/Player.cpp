@@ -8,7 +8,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
+	m_SkinModel.Initialize("XFile\\PL_Girl_SSword.x");	//プレイヤーXファイル
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
@@ -28,6 +28,16 @@ void CPlayer::Initialize()
 
 void CPlayer::D3DUpdate()
 {
+
+	if (GetAsyncKeyState(VK_A) & 0x8000)
+	{
+		m_SkinModel.SetAnimation(0);
+	}
+	if (GetAsyncKeyState(VK_S) & 0x8000)
+	{
+		m_SkinModel.SetAnimation(1);
+	}
+	
 	//Move();//移動関数
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
@@ -35,8 +45,11 @@ void CPlayer::D3DUpdate()
 	m_applyForce.z = 0.0f;
 	Died();//死亡判定
 	Move(m_Pointa->GetPosition());
-	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_positionからの移動量(あたり判定)
-	
+	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_positionからの移動量(あたり判定)
+	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+
+	m_SkinModel.AddAnimation();
+	m_SkinModel.UpdateWorldMatrix(m_matWorld);
 }
 
 void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)

@@ -1,5 +1,6 @@
 #include"Input.h"
 
+
 void Dinput::Initialize(HWND hWnd)
 {
 	DirectInput8Create(

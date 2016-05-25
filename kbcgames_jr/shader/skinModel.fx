@@ -89,7 +89,7 @@ void CalcWorldMatrixFromSkinMatrix(VS_INPUT In, out float3 Pos, out float3 Norma
 
 	Pos += (mul(In.Pos, g_mWorldMatrixArray[IndexArray[g_numBone - 1]]) * LastWeight);
 	Normal += (mul(In.Normal, g_mWorldMatrixArray[IndexArray[g_numBone - 1]]) * LastWeight);
-
+	Normal = normalize(Normal);
 }
 
 void CalcWorldMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
@@ -97,6 +97,7 @@ void CalcWorldMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
 	Pos = 0.0f;
 	Normal = 0.0f;
 	Pos = mul(In.Pos, g_worldMatrix);
+	Normal = mul(In.Normal, g_worldMatrix);
 }
 
 VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
@@ -104,24 +105,24 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 	VS_OUTPUT Out = (VS_OUTPUT)0;
 	float3 Pos = 0.0f;
 	float3 Normal= 0.0f;
-	//CalcWorldMatrixFromSkinMatrix(In, Pos, Normal);
-	float3 N = normalize(mul(Normal, (float3x3)g_worldMatrix));
-	float4 lig = 0.0f;
-	{
-		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
-		{
-			lig.xyz += max(0.0f, dot(N, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
-		}
-		lig += g_ambientLight;
-	}
-	Out.color = lig;
 	if (hasSkin){
 		CalcWorldMatrixFromSkinMatrix(In, Pos, Normal);
 	}
 	else{
 		CalcWorldMatrix(In, Pos, Normal);
 	}
-	Out.shadowpos = mul(Pos, g_lvpMatrix);
+	
+	float4 lig = 0.0f;
+	{
+		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
+		{
+			lig.xyz += max(0.0f, dot(Normal, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
+		}
+		lig += g_ambientLight;
+	}
+	Out.color = lig;
+	
+	Out.shadowpos = mul(float4(Pos, 1.0f), g_lvpMatrix);
 	Out.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);
 	Out.Tex0 = In.Tex0;
 	return Out;
@@ -132,10 +133,14 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 float4 PSMain( VS_OUTPUT In ) : COLOR
 {
 	float4 pos = In.shadowpos;
-	//float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
-	float4 color = tex2D(g_diffuseTextureSampler, In.Tex0);
-	//color *= tex2D(g_ShadowTextureSampler, uv);
-	return color;
+	float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
+	
+	float4 color;
+	color = tex2D(g_diffuseTextureSampler, In.Tex0);
+	if (uv.x < 1.0f && uv.y < 1.0f){
+		color *= tex2D(g_ShadowTextureSampler, uv);
+	}
+	return color * In.color;
 }
 
 

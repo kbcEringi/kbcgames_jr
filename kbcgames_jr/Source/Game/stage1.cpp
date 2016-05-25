@@ -1,6 +1,8 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 
+CShadowMap g_Shadow;
+
 CStage1* g_stage = NULL;
 //オブジェクトの詳細
 struct SCollisionInfo {
@@ -20,6 +22,7 @@ SCollisionInfo collisionInfoTable2D[] = {
 
 void CStage1::Initialize()
 {
+	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -30,16 +33,24 @@ void CStage1::Initialize()
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
-	m_Player.Initialize();//プレイヤー初期化
-	m_Player.SetPointa(&m_pointa);//プレイヤーにセットpointa
-	m_Ground.Initialize();//地面初期化
-	m_wood.Initialize();//木
-	m_setwind.Initialize();//風
-	m_camera.Initialize();//カメラ
-	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));//カメラにセット
-	m_Debri.Initialize();//
-	m_pointa.Initialize();//ポインタ初期化
-	m_GameCursor.Initialize();//ゲームカーソル初期化
+	m_Player.Initialize();
+	m_Player.SetPointa(&m_pointa);
+	m_Ground.Initialize();
+	m_wood.Initialize();
+	m_setwind.Initialize();
+	m_camera.Initialize();
+	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
+	m_Debri.Initialize();
+	m_pointa.Initialize();
+	m_GameCursor.Initialize();
+	m_lost.Initialize();
+
+	g_Shadow.Create(512, 512);
+	g_Shadow.Entry(&m_Player);
+	g_Shadow.Entry(&m_pointa);
+	g_Shadow.SetLightPosition(m_pointa.GetPosition() + D3DXVECTOR3(0.0f, 5.0f, 0.0f));
+	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
+
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);
 
@@ -47,7 +58,6 @@ void CStage1::Initialize()
 	m_Ray.SetPointa(&m_pointa);
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
-	g_stage = this;
 }
 
 void CStage1::Update()
@@ -55,26 +65,52 @@ void CStage1::Update()
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (GAMEPAD(CGamepad)->GetStickR_Y() > 0)
+		if (!m_camera.Get2Dflg())
 		{
-			m_camera.RotLongitudinal(0.05f);
+			if (GAMEPAD(CGamepad)->GetStickR_X() > 0)
+			{
+				m_camera.RotTransversal(-0.05f);
+			}
+			if (GAMEPAD(CGamepad)->GetStickR_X() < 0)
+			{
+				m_camera.RotTransversal(0.05f);
+			}
 		}
-		if (GAMEPAD(CGamepad)->GetStickR_Y()<0)
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER))
 		{
-			m_camera.RotLongitudinal(-0.05f);
+			m_camera.Set2Dflg(true);
 		}
-		if (GAMEPAD(CGamepad)->GetStickR_X()>0)
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER))
 		{
-			m_camera.RotTransversal(-0.05f);
+			m_camera.Set2Dflg(false);
 		}
-		if (GAMEPAD(CGamepad)->GetStickR_X() < 0)
+	}
+	else
+	{
+		if (!m_camera.Get2Dflg())
 		{
-			m_camera.RotTransversal(0.05f);
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+			{
+				m_camera.RotTransversal(-0.05f);
+			}
+			if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+			{
+				m_camera.RotTransversal(0.05f);
+			}
+		}
+		if (GetAsyncKeyState(VK_Q) & 0x8000)
+		{
+			m_camera.Set2Dflg(true);
+		}
+		if (GetAsyncKeyState(VK_W) & 0x8000)
+		{
+			m_camera.Set2Dflg(false);
 		}
 	}
 
+
 	m_pAudio->Run();	//周期タスク実行
-	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
 	m_Player.D3DUpdate();//プレイヤー
@@ -85,6 +121,7 @@ void CStage1::Update()
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
+	m_lost.Update();
 	m_Back1.D3DUpdate();
 
 	//レイカーソルに値をセット
@@ -93,23 +130,28 @@ void CStage1::Update()
 
 void CStage1::Draw()
 {
+
+	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
-	
+	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
+	if (GetAsyncKeyState('Q')){
+		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
+	}
 
-	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
 	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 	m_GameCursor.Draw();
+	m_lost.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

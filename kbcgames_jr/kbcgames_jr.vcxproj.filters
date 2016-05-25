@@ -120,6 +120,9 @@
     <ClCompile Include="Source\Game\Stage1Back.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\CAnimation.cpp">
+      <Filter>Frame\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Input.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Source\Game\Stage1Back.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CAnimation.h">
+      <Filter>Frame\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

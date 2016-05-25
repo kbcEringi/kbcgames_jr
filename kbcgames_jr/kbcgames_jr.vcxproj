@@ -88,6 +88,7 @@
     <ClCompile Include="Source\Frame\Audio.cpp" />
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
     <ClCompile Include="Source\Frame\C3DDraw.cpp" />
+    <ClCompile Include="Source\Frame\CAnimation.cpp" />
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\CGamepad.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
+    <ClCompile Include="Source\Game\LostGround.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Pointa.cpp" />
     <ClCompile Include="Source\Game\AlwaysWind.cpp" />
@@ -121,11 +123,13 @@
     <ClInclude Include="Source\Frame\C2DObject.h" />
     <ClInclude Include="Source\Frame\C3DDraw.h" />
     <ClInclude Include="Source\Frame\C3DObject.h" />
+    <ClInclude Include="Source\Frame\CAnimation.h" />
     <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\CGamepad.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
+    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
     <ClInclude Include="Source\Frame\IsIntersect.h" />
     <ClInclude Include="Source\Frame\RayCursor.h" />
     <ClInclude Include="Source\Frame\RenderTarget.h" />
@@ -140,6 +144,7 @@
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\Ground.h" />
+    <ClInclude Include="Source\Game\LostGround.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Pointa.h" />
     <ClInclude Include="Source\Game\AlwaysWind.h" />

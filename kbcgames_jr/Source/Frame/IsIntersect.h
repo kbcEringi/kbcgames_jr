@@ -1,6 +1,7 @@
 #pragma once
 #include"..\BulletPhysics\BulletPhysics.h"
-
+#include <vector>
+class IPlayerCollisionCallback;
 //あたり判定
 
 #define PI 3.14159265358979323846f
@@ -11,7 +12,12 @@ public:
 	CIsIntersect();
 	~CIsIntersect();
 	void CollisitionInitialize(D3DXVECTOR3* m_position);
-	void Intersect(D3DXVECTOR3* m_position, D3DXVECTOR3* m_moveSpeed);
+	void Intersect(
+		D3DXVECTOR3* m_position, 
+		D3DXVECTOR3* m_moveSpeed, 
+		std::vector<IPlayerCollisionCallback*>& callbackList
+	);
+	
 private:
 	float	m_radius;		//ラジアンの角度
 	//D3DXVECTOR3 m_position;	//ポジション
@@ -21,6 +27,4 @@ private:
 	btBoxShape*		m_collisionShape;	//!<コリジョン形状。
 	btRigidBody*			m_rigidBody;
 	btDefaultMotionState*	m_myMotionState;
-	
-
 };

@@ -515,7 +515,7 @@ HRESULT CAllocateHierarchy::DestroyMeshContainer(LPD3DXMESHCONTAINER pMeshContai
 */
 CSkinModelData::CSkinModelData() :
 	m_FrameRoot(nullptr),
-	m_pAnimeController(nullptr)
+	m_pAnimController(nullptr)
 {
 }
 /*!
@@ -529,8 +529,8 @@ CSkinModelData::~CSkinModelData()
 */
 void CSkinModelData::Release()
 {
-	if (m_pAnimeController) {
-		m_pAnimeController->Release();
+	if (m_pAnimController) {
+		m_pAnimController->Release();
 	}
 }
 
@@ -538,7 +538,7 @@ void CSkinModelData::Release()
 * @brief	モデルデータをロード。
 *@param[in]	filePath	ファイルパス。
 */
-void CSkinModelData::LoadModelData(const char* filePath)
+void CSkinModelData::LoadModelData(const char* filePath, CAnimation* anim)
 {
 	CAllocateHierarchy alloc;
 	HRESULT hr = D3DXLoadMeshHierarchyFromX(
@@ -548,9 +548,13 @@ void CSkinModelData::LoadModelData(const char* filePath)
 		&alloc,
 		nullptr,
 		&m_FrameRoot,
-		&m_pAnimeController
+		&m_pAnimController
 		);
 	SetupBoneMatrixPointers(m_FrameRoot, m_FrameRoot);
+	if (m_pAnimController)
+	{
+		anim->Init(m_pAnimController);
+	}
 }
 /*!
 * @brief	ボーン行列を更新。

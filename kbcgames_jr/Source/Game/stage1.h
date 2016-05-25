@@ -5,7 +5,6 @@
 #include"..\Frame\Ccamera.h"
 #include "..\Frame\RayCursor.h"//カーソル
 
-//#include"TestObj.h"
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
@@ -17,9 +16,12 @@
 #include "Debri.h"
 #include "Pointa.h"
 #include "Stage1Back.h"
+#include "LostGround.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
+
+#include"..\Frame\Shadow.h"
 
 #define MAX_COLLISION 100
 
@@ -59,6 +61,7 @@ private:
 	CAlwaysWind m_setwind;
 	//CWindmill m_windmill;
 	CStage1Back m_Back1;
+	CLostGround m_lost;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
