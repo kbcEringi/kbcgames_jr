@@ -16,7 +16,7 @@ void Ccamera::Initialize()
 	m_viewVolumeW = Volume * m_vAspect;
 	m_viewVolumeH = Volume;
 	Set2Dflg(false);
-	m_2Dflg = false;
+	//m_2Dflg = false;
 }
 
 void Ccamera::Update()
