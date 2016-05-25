@@ -12,7 +12,8 @@
 #include "Ground.h"
 #include "wood.h"
 #include "AlwaysWind.h"
-#include"Windmill.h"
+#include "Windmill.h"
+#include "Movefloor.h"
 #include "Debri.h"
 #include "Pointa.h"
 #include "Stage1Back.h"
@@ -61,6 +62,7 @@ private:
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 	CWindmill m_windmill;
+	CMovefloor m_floor;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
