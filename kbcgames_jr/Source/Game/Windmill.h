@@ -1,17 +1,17 @@
-
 #pragma once
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DDraw.h"
 #include "..\Frame\Rigidbody.h"
+
 #include"..\Frame\C3DObject.h"
 
-class CWindmill:C3DObject
+class CWindmill :public C3DObject
 {
 public:
 	void Initialize();
-  void D3DUpdate()override;
-  void D2DUpdate()override{}
+	void D3DUpdate()override;
+	void D2DUpdate()override{}
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	D3DXVECTOR3 GetPosition()
 	{
@@ -23,11 +23,10 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix, m_rotationMatrix;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
-D3DXVECTOR3 m_moveSpeed;		//移動速度
-D3DXVECTOR3 m_applyForce;//外部から受けた力
+	D3DXVECTOR3 m_moveSpeed;		//移動速度
+	D3DXVECTOR3 m_applyForce;//外部から受けた力
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
-	
+
 
 };
-
