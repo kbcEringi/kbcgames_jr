@@ -121,7 +121,7 @@ void CStage1::Update()
 
 
 	m_pAudio->Run();	//周期タスク実行
-	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
+	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
 	m_Player.D3DUpdate();//プレイヤー
