@@ -42,7 +42,8 @@ void CStage1::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();
+	m_GameCursor.Initialize();//ゲームカーソル
+	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 
 	g_Shadow.Create(512, 512);
@@ -121,6 +122,7 @@ void CStage1::Update()
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
+	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
 
@@ -137,6 +139,7 @@ void CStage1::Draw()
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
+	m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
