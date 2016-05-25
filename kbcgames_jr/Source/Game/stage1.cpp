@@ -125,7 +125,6 @@ void CStage1::Update()
 			m_camera.Set2Dflg(false);
 		}
 	}
-
 	if (m_camera.Get2Dflg() == true)
 	{
 		this->CreateCollision2D();
@@ -134,6 +133,7 @@ void CStage1::Update()
 	{
 		this->CreateCollision3D();
 	}
+	m_camera.Get2Dflg();
 
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
