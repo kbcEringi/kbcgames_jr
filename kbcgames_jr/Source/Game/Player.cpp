@@ -36,7 +36,7 @@ void CPlayer::D3DUpdate()
 	m_applyForce.z = 0.0f;
 	Died();//Ž€–S”»’è
 	Move(m_Pointa->GetPosition());
-	m_IsIntersect.Intersect(&m_position, &m_moveSpeed);//m_position‚©‚ç‚ÌˆÚ“®—Ê(‚ ‚½‚è”»’è)
+	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_position‚©‚ç‚ÌˆÚ“®—Ê(‚ ‚½‚è”»’è)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 
 	m_SkinModel.AddAnimation();

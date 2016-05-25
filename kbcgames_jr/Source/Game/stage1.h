@@ -17,6 +17,8 @@
 #include "Debri.h"
 #include "Pointa.h"
 #include "Stage1Back.h"
+#include "LostGround.h"
+#include "GameCursorWind.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -63,8 +65,10 @@ private:
 	CDebri m_Debri;
 	CPointa m_pointa;
 	//CAlwaysWind m_setwind;
-	//CWindmill m_windmill;
+	CWindmill m_windmill;
 	CStage1Back m_Back1;
+	CLostGround m_lost;
+	CGameCursorWind m_GCursorWind;
 
 	//ギミック配列
 	static const int gimmicknum = 2;

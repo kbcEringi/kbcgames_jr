@@ -6,6 +6,8 @@
 #include "..\Frame\Turn.h"
 #include "Pointa.h"
 
+class IPlayerCollisionCallback;
+
 class CPlayer : public C3DObject
 {
 public:
@@ -45,6 +47,10 @@ public:
 	{
 		m_Pointa = pointa;
 	}
+	void AddCollisionCallback(IPlayerCollisionCallback* callback)
+	{
+		m_callbackList.push_back(callback);
+	}
 private:
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
@@ -55,4 +61,5 @@ private:
 	CPointa* m_Pointa;
 	float					m_currentAngleY;
 	float					m_targetAngleY;
+	std::vector<IPlayerCollisionCallback*>	m_callbackList;
 };

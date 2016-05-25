@@ -30,6 +30,7 @@ SGimmickData gimmickobj[] = {
 
 void CStage1::Initialize()
 {
+	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -48,7 +49,9 @@ void CStage1::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();
+	m_GameCursor.Initialize();//ゲームカーソル
+	m_GCursorWind.Initialize();//ゲームカーソル風
+	m_lost.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -57,11 +60,13 @@ void CStage1::Initialize()
 	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
 
 	m_Back1.Initialize();
+	m_Back1.SetPointa(&m_Player);
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
+
 	this->CreateGimmick();
 	g_stage = this;
 }
@@ -129,7 +134,10 @@ void CStage1::Update()
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
+	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
+	m_lost.Update();
 	m_Back1.D3DUpdate();
+
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -144,6 +152,11 @@ void CStage1::Draw()
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
+	m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+
+	for (int i = 0; i < gimmicknum; i++) {
+		m_gimmick[i]->Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	}
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -154,12 +167,15 @@ void CStage1::Draw()
 	}
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-	for (int i = 0; i < gimmicknum; i++) {
-		m_gimmick[i]->Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	}
+	
+	//m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+
 	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 	m_GameCursor.Draw();
+	m_lost.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
