@@ -51,6 +51,14 @@ public:
 	{
 		return &m_Player;
 	}
+	Ccamera* GetCamera()
+	{
+		return &m_camera;
+	}
+	CGameCursor* GetCursor()
+	{
+		return &m_GameCursor;
+	}
 private:
 
 	C3DDraw Obj;

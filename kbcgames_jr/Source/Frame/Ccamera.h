@@ -42,7 +42,16 @@ public:
 		m_2Dflg = flg;
 	}
 	bool Get2Dflg(){ return m_2Dflg; }
-
+	//ニアーを取得。
+	float GetNear()
+	{
+		return m_vNear;
+	}
+	//ファーを取得。
+	float GetFar()
+	{
+		return m_vFar;
+	}
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。

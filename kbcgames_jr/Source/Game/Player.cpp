@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\Ccamera.h";
-
+#include "Stage1.h"
 CPlayer::~CPlayer()
 {
 }
@@ -56,7 +56,6 @@ void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 void CPlayer::Move(D3DXVECTOR3 pos)//à⁄ìÆ
 {
 	bool isTurn = false;
-	Ccamera camera;
 
 	D3DXMatrixIdentity(&m_matWorld);
 	m_moveSpeed.x = 0.0f;//éÛÇØÇÈïóÇÃóÕÇÃxç¿ïWÇÃèâä˙âª
@@ -76,7 +75,7 @@ void CPlayer::Move(D3DXVECTOR3 pos)//à⁄ìÆ
 		m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
-	if (camera.Get2Dflg() == false)
+	if (g_stage->GetCamera()->Get2Dflg() == false)
 	{
 		if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//è„
 		{

@@ -50,7 +50,7 @@ void CStage1::Initialize()
 	m_Debri.Initialize();
 	m_pointa.Initialize();
 	m_GameCursor.Initialize();//ゲームカーソル
-	//m_GCursorWind.Initialize();//ゲームカーソル風
+	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 
 	g_Shadow.Create(512, 512);
@@ -149,7 +149,7 @@ void CStage1::Update()
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
-	//m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
+	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
 
@@ -167,10 +167,15 @@ void CStage1::Draw()
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	//m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+	
 
 	for (int i = 0; i < gimmicknum; i++) {
 		m_gimmick[i]->Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	}
+	if (m_camera.Get2Dflg() == false)
+	{
+		//Zバッファをクリア
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	}
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -180,17 +185,21 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
-
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
-
-
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
+	
+	if (m_camera.Get2Dflg() == true)
+	{
+		//Zバッファをクリア
+		(*graphicsDevice()).Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+	}
+	
 }
 
 void CStage1::CreateCollision3D()
