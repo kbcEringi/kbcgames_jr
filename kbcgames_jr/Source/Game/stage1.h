@@ -8,6 +8,7 @@
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
+#include"..\Frame\C3DObject.h"
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
@@ -26,6 +27,9 @@
 
 class CSceneManager;
 class CAudio;
+class C3DObject;
+
+enum GIMMICK{ AlwaysWind };
 
 class CStage1 : public CScene
 {
@@ -35,6 +39,7 @@ public:
 	void Update();
 	void Draw();
 	void CreateCollision();
+	void CreateGimmick();
 	CPlayer* GetPlayer()
 	{
 		return &m_Player;
@@ -57,9 +62,13 @@ private:
 	CWood m_wood;
 	CDebri m_Debri;
 	CPointa m_pointa;
-	CAlwaysWind m_setwind;
+	//CAlwaysWind m_setwind;
 	//CWindmill m_windmill;
 	CStage1Back m_Back1;
+
+	//ギミック配列
+	static const int gimmicknum = 2;
+	C3DObject* m_gimmick[gimmicknum];
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

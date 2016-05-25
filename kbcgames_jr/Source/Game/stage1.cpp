@@ -19,6 +19,14 @@ SCollisionInfo collisionInfoTable2D[] = {
 #include "CollisionInfo2D.h"
 };
 
+struct SGimmickData
+{
+	ObjectData data;
+	int type;
+};
+SGimmickData gimmickobj[] = {
+#include"GimmickInfo.h"
+};
 
 void CStage1::Initialize()
 {
@@ -36,7 +44,6 @@ void CStage1::Initialize()
 	m_Player.SetPointa(&m_pointa);
 	m_Ground.Initialize();
 	m_wood.Initialize();
-	m_setwind.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
@@ -55,6 +62,7 @@ void CStage1::Initialize()
 	m_Ray.SetPointa(&m_pointa);
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
+	this->CreateGimmick();
 	g_stage = this;
 }
 
@@ -114,7 +122,9 @@ void CStage1::Update()
 	m_Player.D3DUpdate();//プレイヤー
 	m_Ground.D3DUpdate();//地面
 	m_wood.D3DUpdate();//木
-	m_setwind.D3DUpdate();//風
+	for (int i = 0; i < gimmicknum; i++) {
+		m_gimmick[i]->D3DUpdate();
+	}
 	//m_windmill.D3Dupdate();
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
@@ -144,7 +154,9 @@ void CStage1::Draw()
 	}
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+	for (int i = 0; i < gimmicknum; i++) {
+		m_gimmick[i]->Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	}
 	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 	m_GameCursor.Draw();
@@ -182,5 +194,27 @@ void CStage1::CreateCollision()
 
 		}
 	}
+}
 
+void CStage1::CreateGimmick()
+{
+	int arraySize = ARRAYSIZE(gimmickobj);
+	if (arraySize > gimmicknum)
+	{
+		std::abort();
+	}
+	for (int i = 0; i < arraySize; i++) {
+		switch (gimmickobj[i].type)
+		{
+		case 0:
+			CAlwaysWind* Always;
+			Always = new CAlwaysWind;
+			m_gimmick[i] = Always;
+			break;
+		default:
+			break;
+		}
+		m_gimmick[i]->Initialize();
+		m_gimmick[i]->SetObjectData(gimmickobj[i].data);
+	}
 }
