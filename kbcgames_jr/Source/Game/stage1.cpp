@@ -167,12 +167,9 @@ void CStage1::Draw()
 	}
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//–Ø•`‰æ
-	
-	//m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—•`‰æ
 
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—ŽÔ•`‰æ
 
-	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—ŽÔ•`‰æ
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
