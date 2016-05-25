@@ -15,12 +15,11 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	D3DXVECTOR3 GetPosition()
 	{
-		return m_position;
+		return m_data.position;
 	}
 	
 private:
 	D3DXMATRIX m_rotationMatrix;
-	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;

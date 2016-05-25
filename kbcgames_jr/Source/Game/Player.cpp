@@ -8,7 +8,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\PL_Girl_SSword.x");	//プレイヤーXファイル
+	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
@@ -28,15 +28,6 @@ void CPlayer::Initialize()
 
 void CPlayer::D3DUpdate()
 {
-
-	if (GetAsyncKeyState(VK_A) & 0x8000)
-	{
-		m_SkinModel.SetAnimation(0);
-	}
-	if (GetAsyncKeyState(VK_S) & 0x8000)
-	{
-		m_SkinModel.SetAnimation(1);
-	}
 	
 	//Move();//移動関数
 	m_moveSpeed += m_applyForce;
