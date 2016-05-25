@@ -7,6 +7,7 @@
 float4x3    g_mWorldMatrixArray[MAX_MATRICES] : WORLDMATRIXARRAY;//アニメーション用
 float4x4    g_mViewProj : VIEWPROJECTION;
 float		g_numBone;			//骨の数。
+bool shadowflg;
 
 float4x4 g_worldMatrix;
 float4x4 g_lvpMatrix;	//プロジェクション行列。
@@ -137,8 +138,11 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 	
 	float4 color;
 	color = tex2D(g_diffuseTextureSampler, In.Tex0);
-	if (uv.x < 1.0f && uv.y < 1.0f){
-		color *= tex2D(g_ShadowTextureSampler, uv);
+	if (shadowflg)
+	{
+		if (uv.x < 1.0f && uv.y < 1.0f){
+			color *= tex2D(g_ShadowTextureSampler, uv);
+		}
 	}
 	return color * In.color;
 }
