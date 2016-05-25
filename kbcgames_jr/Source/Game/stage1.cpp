@@ -41,6 +41,7 @@ void CStage1::Initialize()
 	m_pointa.Initialize();//ポインタ初期化
 	m_GameCursor.Initialize();//ゲームカーソル初期化
 	m_Back1.Initialize();
+	m_Back1.SetPointa(&m_Player);
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
