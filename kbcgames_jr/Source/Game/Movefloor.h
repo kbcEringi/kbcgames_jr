@@ -24,4 +24,5 @@ private:
 	D3DXVECTOR3 m_applyForce;//外部から受けた力
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
+	BYTE diks[256];//キーインプット
 };
