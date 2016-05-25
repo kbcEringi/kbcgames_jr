@@ -1,14 +1,10 @@
 #pragma once
 
 #include"..\Frame\DXCommon.h"
-
 #include"..\Frame\Scene.h"
-
 #include"..\Frame\Ccamera.h"
-
-/********オブジェクト********/
 #include "..\Frame\RayCursor.h"//カーソル
-//#include"TestObj.h"
+
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
@@ -19,10 +15,13 @@
 #include"Windmill.h"
 #include "Debri.h"
 #include "Pointa.h"
+#include "Stage1Back.h"
+#include "LostGround.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
-
 #include"..\Frame\CGamepad.h"
+
+#include"..\Frame\Shadow.h"
 
 #define MAX_COLLISION 100
 
@@ -49,9 +48,8 @@ private:
 
 	Ccamera m_camera;
 	CAudio* m_pAudio;
-	/******オブジェクト*****/
 	CRayCursor m_Ray;
-	/********オブジェクト3D********/
+	/********オブジェクト2D********/
 	CGameCursor m_GameCursor;
 	/******オブジェクト3d*****/
 	//CTestObj test;
@@ -61,7 +59,9 @@ private:
 	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
-	CWindmill m_windmill;
+	//CWindmill m_windmill;
+	CStage1Back m_Back1;
+	CLostGround m_lost;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

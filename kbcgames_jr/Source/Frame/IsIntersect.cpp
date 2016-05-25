@@ -1,18 +1,20 @@
 #include "IsIntersect.h"
-
+#include <vector>
+#include "IPlayerCollisionCallback.h"
 //あたり判定
 
 struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 {
 	bool isHit;
 	D3DXVECTOR3 hitPos;
-
+	const btCollisionObject* hitCollisionObject;
 	SweepResultGround()
 	{
 		isHit = false;
 		hitPos.x = 0.0f;
 		hitPos.y = 0.0f;
 		hitPos.z = 0.0f;
+		hitCollisionObject = NULL;
 	}
 
 	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
@@ -43,7 +45,7 @@ struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 		hitPos.x = convexResult.m_hitPointLocal.x();
 		hitPos.y = convexResult.m_hitPointLocal.y();
 		hitPos.z = convexResult.m_hitPointLocal.z();
-
+		hitCollisionObject = convexResult.m_hitCollisionObject;
 		return 0.0f;
 	}
 };
@@ -52,9 +54,11 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 	D3DXVECTOR3 hitNormalXZ;
 	bool isHit;
 	D3DXVECTOR3 hitPos;
+	const btCollisionObject* hitCollisionObject;
 	SweepResultWall()
 	{
 		isHit = false;
+		hitCollisionObject = NULL;
 	}
 
 	virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
@@ -90,7 +94,7 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 		hitPos.x = convexResult.m_hitPointLocal.x();
 		hitPos.y = convexResult.m_hitPointLocal.y();
 		hitPos.z = convexResult.m_hitPointLocal.z();
-
+		hitCollisionObject = convexResult.m_hitCollisionObject;
 		return 0.0f;
 	}
 };
@@ -126,7 +130,10 @@ void CIsIntersect::CollisitionInitialize(D3DXVECTOR3* m_position)
 	g_bulletPhysics.AddRigidBody(m_rigidBody);
 }
 
-void CIsIntersect::Intersect(D3DXVECTOR3* m_position, D3DXVECTOR3* m_moveSpeed)
+void CIsIntersect::Intersect(
+	D3DXVECTOR3* m_position, 
+	D3DXVECTOR3* m_moveSpeed,
+	std::vector<IPlayerCollisionCallback*>& callbackList)
 {
 	static float deltaTime = 1.0f / 60.0f;
 	static D3DXVECTOR3 gravity(0.0f, -9.8f, 0.0f);
@@ -176,6 +183,9 @@ void CIsIntersect::Intersect(D3DXVECTOR3* m_position, D3DXVECTOR3* m_moveSpeed)
 				//D3DXVec3Normalize(&t, &addPos);
 				t *= D3DXVec3Dot(&t, &addPosXZ);
 				addPos += t;	//滑らせるベクトルを加算。
+				for (auto p : callbackList){
+					p->OnHitWall(callback.hitCollisionObject);
+				}
 			}
 			else {
 				//どことも当たらないので終わり。
@@ -210,6 +220,24 @@ void CIsIntersect::Intersect(D3DXVECTOR3* m_position, D3DXVECTOR3* m_moveSpeed)
 			m_moveSpeed->y = 0.0f;
 			addPos.y = callback.hitPos.y - m_position->y;
 			addPos.y += m_radius;
+			for (auto p : callbackList){
+				p->OnHitGround(callback.hitCollisionObject);
+				if (!p->IsHitGround()){
+					//初めてあたった
+					if (p->OnHitGroundTrigger(callback.hitCollisionObject)){
+						p->SetHitGround(true);
+					}
+				}
+			}
+		}
+		else{
+			for (auto p : callbackList){
+				if (p->IsHitGround()){
+					//あたってたので離れた
+					p->OnHitGroundLeave(callback.hitCollisionObject);
+					p->SetHitGround(false);
+				}
+			}
 		}
 	}
 

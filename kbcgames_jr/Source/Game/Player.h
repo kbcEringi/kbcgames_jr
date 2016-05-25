@@ -2,8 +2,11 @@
 #include "..\Frame\Input.h"
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
-#include"..\Frame\Input.h"//キーボードインプット
 #include "..\Frame\IsIntersect.h"
+#include "..\Frame\Turn.h"
+#include "Pointa.h"
+
+class IPlayerCollisionCallback;
 
 class CPlayer : public C3DObject
 {
@@ -14,7 +17,7 @@ public:
 	void D3DUpdate()override;
 	void D2DUpdate()override{}
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
-	void Move(D3DXVECTOR3 movespeed);					//Move関数
+	void Move(D3DXVECTOR3 pos);					//Move関数
 	void Died();
 	D3DXVECTOR3 GetPosition()
 	{
@@ -40,11 +43,23 @@ public:
 	{
 		m_applyForce += force;
 	}
+	void SetPointa(CPointa* pointa)
+	{
+		m_Pointa = pointa;
+	}
+	void AddCollisionCallback(IPlayerCollisionCallback* callback)
+	{
+		m_callbackList.push_back(callback);
+	}
 private:
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;		//移動速度
 	D3DXVECTOR3 m_applyForce;		//外部から受けた力。
 	CIsIntersect m_IsIntersect;		//あたり判定
-	BYTE diks[256];//キーインプット
+	CTurn m_Turn;
+	CPointa* m_Pointa;
+	float					m_currentAngleY;
+	float					m_targetAngleY;
+	std::vector<IPlayerCollisionCallback*>	m_callbackList;
 };

@@ -10,6 +10,7 @@ void CTitleScene::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 	m_pAudio->PlayCue("title");	//タイトル音楽再生
+	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_title.Initialize();
 	m_TitleCusor.Initialize();
@@ -40,19 +41,31 @@ void CTitleScene::Draw()
 
 void CTitleScene::Select()
 {
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000){
-		switch (m_TitleCusor.GetSelect())
-		{
-		case COMMAND_SELECT::START:
-			SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
 
-			m_pAudio->StopCue("title");//タイトル音楽ストップ
-			m_pAudio->PlayCue("start");//スタート
-			break;
-		case COMMAND_SELECT::EXIT:
-			PostQuitMessage(0);
-			break;
+	GAMEPAD(CGamepad)->UpdateControllerState();
+	if (GAMEPAD(CGamepad)->GetConnected())
+	{
+		if (KEYDOWN(diks, DIK_RETURN) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A)){
+			switch (m_TitleCusor.GetSelect())
+			{
+			case COMMAND_SELECT::START:
+				SINSTANCE(CSceneManager)->ChangeScene(SCENE::STAGE1);
+
+				m_pAudio->StopCue("title");//タイトル音楽ストップ
+				m_pAudio->PlayCue("uni1512");//スタート
+				break;
+			case COMMAND_SELECT::EXIT:
+				PostQuitMessage(0);
+				break;
+			}
+
 		}
-
+		else
+		{
+			(*GetKeyDevice()).Acquire();//キーデバイス取得
+		}
 	}
 }

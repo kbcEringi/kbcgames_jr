@@ -4,7 +4,6 @@
 #include"..\Frame\C3DObject.h"
 #include "..\Frame\Rigidbody.h"
 
-
 class CAlwaysWind : public C3DObject
 {
 public:
@@ -27,4 +26,5 @@ private:
 	D3DXVECTOR3 m_aabbMax;
 	//bool m_Ground;					//’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚©H
 	float SpeedPower;				//‰Á‘¬‚ğ‰Á‚¦‚é‘¬“x
+
 };

@@ -1,6 +1,5 @@
 #include "AlwaysWind.h"
 #include "Stage1.h"
-
 /*!
 *@brief	ID3DXMeshからAABBのサイズを計算する関数。
 *@param[in]	mesh		ID3DXMesh
@@ -70,6 +69,7 @@ void CAlwaysWind::Initialize()
 
 void CAlwaysWind::D3DUpdate()
 {
+
 	CPlayer* player = g_stage->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
 	if (m_aabbMin.x < pos.x

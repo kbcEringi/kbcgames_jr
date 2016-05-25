@@ -7,11 +7,15 @@
 class CShadowMap
 {
 public:
-	CShadowMap(){}
-	~CShadowMap(){}
+	CShadowMap(){
+		m_pEffect = NULL;
+	}
+	~CShadowMap(){
+		Release();
+	}
 	void Create(int w, int h);
-	void CreateLight();
-	void Draw();
+	void CreateLight(D3DXMATRIX);
+	void Draw(D3DXMATRIX);
 	void Release();
 	void Entry(C3DObject* SkinModel);
 	D3DXMATRIX Getlipmatrix()
@@ -28,6 +32,10 @@ public:
 	{
 		m_lightDirection = Dir;
 	}
+	void SetEffect(ID3DXEffect* effect)
+	{
+		m_pEffect = effect;
+	}
 private:
 	D3DVIEWPORT9       m_viewport;  // テクスチャのビューポート
 	LPDIRECT3DSURFACE9 m_Backbuffer;
@@ -40,5 +48,6 @@ private:
 	D3DXVECTOR3 m_lightDirection;
 	D3DXMATRIX m_lvMatrix;
 	D3DXMATRIX m_LVPMatrix;
-	D3DXMATRIX m_projectionMatrix;
+	D3DXMATRIX m_projMatrix;
+	ID3DXEffect* m_pEffect;
 };

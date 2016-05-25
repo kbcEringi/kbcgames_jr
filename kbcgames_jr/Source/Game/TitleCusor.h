@@ -2,6 +2,7 @@
 
 #include"..\Frame\C2DObject.h"
 #include"..\Frame\Input.h"
+#include"..\Frame\CGamepad.h"
 
 #define MAX_COMAND_NUM 2
 
@@ -22,7 +23,7 @@ private:
 
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_scale;
-
+	BYTE diks[256];
 	CAudio* m_pAudio;
 
 	int m_selectIndex;
