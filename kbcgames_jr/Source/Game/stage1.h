@@ -60,7 +60,7 @@ private:
 	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
-	//CWindmill m_windmill;
+	CWindmill m_windmill;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;

@@ -15,7 +15,7 @@ void CWindmill::Initialize()
 void CWindmill::D3DUpdate()
 {
 	m_moveSpeed.x = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌxÀ•W‚Ì‰Šú‰»
-  m_moveSpeed.z = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌzÀ•W‚Ì‰Šú‰»
+	m_moveSpeed.z = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌzÀ•W‚Ì‰Šú‰»
 }
 
 void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)

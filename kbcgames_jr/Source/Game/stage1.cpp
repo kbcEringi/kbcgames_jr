@@ -115,7 +115,6 @@ void CStage1::Update()
 	m_camera.Update();
 
 
-=======
 	m_Player.D3DUpdate();//ƒvƒŒƒCƒ„[
 	m_Ground.D3DUpdate();//’n–Ê
 	m_wood.D3DUpdate();//–Ø
@@ -154,11 +153,8 @@ void CStage1::Draw()
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//–Ø•`‰æ
 	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—•`‰æ
-<<<<<<< HEAD
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—Ô•`‰æ
-=======
-	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//•—Ô•`‰æ
->>>>>>> aff02f03bd069c24188eac4e12ba7f5cfe50b5b9
+
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
