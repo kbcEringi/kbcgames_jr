@@ -1,3 +1,4 @@
+
 //#pragma once
 //#include "..\Frame\Input.h"
 //#include"..\Frame\DXCommon.h"
@@ -8,8 +9,9 @@
 //{
 //public:
 //	void Initialize();
-//	void Update();
-//	void Draw(D3DXMATRIX);
+//  void D3DUpdate()override;
+//  void D2DUpdate()override{}
+//	void Draw(D3DXMATRIX, D3DXMATRIX)override;);
 //	D3DXVECTOR3 GetPosition()
 //	{
 //		return m_position;
@@ -20,8 +22,11 @@
 //	D3DXMATRIX matWorld, m_projMatrix, m_rotationMatrix;
 //	D3DXVECTOR3 m_position;
 //	D3DXVECTOR3 m_force;
+//D3DXVECTOR3 m_moveSpeed;		//ˆÚ“®‘¬“x
+//D3DXVECTOR3 m_applyForce;//ŠO•”‚©‚çŽó‚¯‚½—Í
 //	D3DXVECTOR3 m_aabbMin;
 //	D3DXVECTOR3 m_aabbMax;
 //	
 //
 //};
+

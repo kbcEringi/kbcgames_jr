@@ -114,6 +114,8 @@ void CStage1::Update()
 	m_camera.SetLookat(m_pointa.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
+
+=======
 	m_Player.D3DUpdate();//プレイヤー
 	m_Ground.D3DUpdate();//地面
 	m_wood.D3DUpdate();//木
@@ -125,6 +127,7 @@ void CStage1::Update()
 	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
+
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -151,7 +154,11 @@ void CStage1::Draw()
 
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+<<<<<<< HEAD
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+=======
 	//m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+>>>>>>> aff02f03bd069c24188eac4e12ba7f5cfe50b5b9
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
