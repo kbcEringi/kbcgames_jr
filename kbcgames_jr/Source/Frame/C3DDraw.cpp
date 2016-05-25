@@ -43,12 +43,13 @@ void CSetEffectCallbackDefault::OnBeginRender(D3DXVECTOR4* m_diffuseLightDirecti
 	m_pEffect->SetVectorArray("g_diffuseLightColor", m_diffuseLightColor, C3DDraw::LIGHT_NUM);
 	m_pEffect->SetVector("g_ambientLight", &m_ambientLight);
 }
-void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib)
+void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib,bool shadowflg)
 {
 	m_pEffect->SetMatrix("g_mViewProj", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
 	m_pEffect->SetFloat("g_numBone", pMeshContainer->NumInfl);
 	m_pEffect->SetMatrix("g_lvpMatrix", &g_Shadow.Getlipmatrix());
+	m_pEffect->SetBool("shadowflg", shadowflg);
 
 	if (g_hoge){
 		m_pEffect->SetTexture("g_ShadowTexture", g_hoge); //@todo for debug
@@ -61,12 +62,12 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	// draw the subset with the current world matrix palette and material state
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj)
+void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, bool shadowflg)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_mViewProj", &viewproj);
 	m_pEffect->SetMatrix("g_lvpMatrix", &g_Shadow.Getlipmatrix());
-
+	m_pEffect->SetBool("shadowflg", shadowflg);
 	if (g_hoge){
 		m_pEffect->SetTexture("g_ShadowTexture", g_hoge); //@todo for debug
 	}
@@ -97,7 +98,7 @@ void CSetEffectCallbackShadowMap::OnBeginRender(D3DXVECTOR4* m_diffuseLightDirec
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(pass);
 }
-void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib)
+void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, bool shadowflg)
 {
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
@@ -108,7 +109,7 @@ void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMesh
 	m_pEffect->CommitChanges();
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj)
+void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, bool shadowflg)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewproj);//ビュープロジェクション行列の転送。
@@ -162,7 +163,7 @@ void C3DDraw::Initialize(LPCSTR FileName)
 		//環境光。
 		m_ambientLight = D3DXVECTOR4(0.1f, 0.1f, 0.1f, 1.0f);
 	}
-
+	shadowflg = true;
 }
 
 void C3DDraw::AddAnimation()
@@ -251,13 +252,13 @@ void C3DDraw::DrawMeshContainer(
 				}
 			}
 			//シェーダー適用開始。
-			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib);
+			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib,shadowflg);
 		}
 	}
 	else {
 		m_currentSetEffectCallback->OnBeginRender(m_diffuseLightDirection, m_diffuseLightColor, m_ambientLight, 1);
 
-		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, m_matWorld, viewProj);
+		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, m_matWorld, viewProj, shadowflg);
 	}
 	m_currentSetEffectCallback->OnEndRender();
 }
