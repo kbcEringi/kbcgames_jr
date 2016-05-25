@@ -63,7 +63,7 @@ private:
 	//CWindmill m_windmill;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
-	CGameCursorWind m_GCursorWind
+	CGameCursorWind m_GCursorWind;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
