@@ -29,4 +29,4 @@ private:
 	D3DXVECTOR3 m_aabbMax;
 
 
-}:
+};
