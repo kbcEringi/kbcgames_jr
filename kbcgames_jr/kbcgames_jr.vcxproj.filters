@@ -124,7 +124,7 @@
       <Filter>Frame\3D</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\LostGround.cpp" />
-    <ClCompile Include="Source\Game\GameCursorWind.cpp">
+    <ClCompile Include="Source\Game\Movefloor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,7 +236,7 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
     <ClInclude Include="Source\Game\LostGround.h" />
-    <ClInclude Include="Source\Game\GameCursorWind.h">
+    <ClInclude Include="Source\Game\Movefloor.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
