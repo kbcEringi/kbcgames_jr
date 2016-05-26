@@ -19,6 +19,7 @@
 #include "Stage1Back.h"
 #include "LostGround.h"
 #include "GameCursorWind.h"
+#include "Hasu.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -76,11 +77,12 @@ private:
 	CGround m_Ground;
 	CWood m_wood;
 	CPointa m_pointa;
-	//CAlwaysWind m_setwind;
+	CAlwaysWind m_setwind;
 	CWindmill m_windmill;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
+	CHasu m_hasu;
 
 	//ギミック配列
 	static const int gimmicknum = 2;
