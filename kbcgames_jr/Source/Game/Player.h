@@ -16,7 +16,8 @@ public:
 	void Initialize()override;
 	void D3DUpdate()override;
 	void D2DUpdate()override{}
-	void Draw(D3DXMATRIX, D3DXMATRIX)override;
+	void D2DDraw(D3DXMATRIX, D3DXMATRIX)override{}
+	void D3DDraw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
 	void Died();
 	D3DXVECTOR3 GetPosition()

@@ -2,6 +2,7 @@
 #include "..\Frame\Ccamera.h"
 #include"..\Frame\GraphicsDevice.h"
 #include "Stage1.h"
+#include"CGameFlg.h"
 
 struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 {
@@ -72,7 +73,7 @@ void CGameCursorWind::D3DUpdate()
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
 		{
 			Ray();
-			if (g_stage->GetCamera()->Get2Dflg() == true)
+			if (GAMEFLG->Getflg() == true)
 			{
 				state = State_DecideYPower;
 			}
@@ -84,7 +85,7 @@ void CGameCursorWind::D3DUpdate()
 	}
 	if (state == State_DecideYPower)
 	{
-		if (g_stage->GetCamera()->Get2Dflg() == true)
+		if (GAMEFLG->Getflg() == true)
 		{
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
@@ -110,7 +111,7 @@ void CGameCursorWind::D3DUpdate()
 	
 }
 
-void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
+void CGameCursorWind::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_matWorld = mScale * mRotationZ * mRotationY * m_matWorld;
@@ -177,7 +178,7 @@ void CGameCursorWind::Ray()
 			g_bulletPhysics.ConvexSweepTest(m_sphereColli, btStart, btEnd, callback);
 			if (callback.isHit) {//“–‚½‚Á‚½‚ç
 				callback.hitPos.y += 0.5f;
-				if (g_stage->GetCamera()->Get2Dflg() == true)
+				if (GAMEFLG->Getflg() == true)
 				{
 					//SetPosition(callback.hitPos);
 					SetPosition(g_stage->GetPlayer()->GetPosition());

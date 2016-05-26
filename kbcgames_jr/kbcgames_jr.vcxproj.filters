@@ -28,6 +28,12 @@
     <Filter Include="Frame\Scene">
       <UniqueIdentifier>{b81c5df2-83fe-4243-8ec1-b84f3743826f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Frame\particle">
+      <UniqueIdentifier>{420aae24-14ff-4f53-9952-4b599e7a5b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\system">
+      <UniqueIdentifier>{58468f51-62dd-40f8-9a67-450cae80a6e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Frame\input.cpp">
@@ -123,7 +129,6 @@
     <ClCompile Include="Source\Frame\CAnimation.cpp">
       <Filter>Frame\3D</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\LostGround.cpp" />
     <ClCompile Include="Source\Game\Movefloor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
@@ -134,6 +139,27 @@
     <ClCompile Include="Source\Game\GameCursorWind.cpp">
 >>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\LostGround.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CRandom.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CParticleResources.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CParticleEmitter.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CParticle.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CPrimitive.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\CGameFlg.cpp">
+      <Filter>Game\system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,8 +268,6 @@
     <ClInclude Include="Source\Frame\CAnimation.h">
       <Filter>Frame\3D</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
-    <ClInclude Include="Source\Game\LostGround.h" />
     <ClInclude Include="Source\Game\Movefloor.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
@@ -254,6 +278,30 @@
     <ClInclude Include="Source\Game\GameCursorWind.h">
 >>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\LostGround.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CRandom.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CParticleResources.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CParticleEmitter.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CParticle.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CPrimitive.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\CGameFlg.h">
+      <Filter>Game\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@
 #include "Stage1Back.h"
 #include "LostGround.h"
 #include "GameCursorWind.h"
-#include "Hasu.h"
+//#include "Hasu.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -76,14 +76,13 @@ private:
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;
-	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 	CWindmill m_windmill;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
-	CHasu m_hasu;
+	//CHasu m_hasu;
 
 	//ギミック配列
 	static const int gimmicknum = 2;
