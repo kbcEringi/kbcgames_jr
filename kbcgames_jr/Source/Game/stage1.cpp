@@ -64,16 +64,14 @@ void CStage1::Initialize()
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
-<<<<<<< HEAD
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
-	this->CreateCollision();
-=======
+	//this->CreateCollision();
+
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	
 	this->CreateCollision3D();
 	this->CreateCollision2D();
 	this->Add3DRigidBody();
->>>>>>> 46d4cfc81356c8d8d1dfbad1a7769b46d63a1b64
 
 	this->CreateGimmick();
 	g_stage = this;
