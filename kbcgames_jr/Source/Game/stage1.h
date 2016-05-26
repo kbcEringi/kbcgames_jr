@@ -41,11 +41,24 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
-	void CreateCollision();
+	void CreateCollision3D();
+	void CreateCollision2D();
 	void CreateGimmick();
+	void Add3DRigidBody();
+	void Add2DRigidBody();
+	void Remove3DRigidBody();
+	void Remove2DRigidBody();
 	CPlayer* GetPlayer()
 	{
 		return &m_Player;
+	}
+	Ccamera* GetCamera()
+	{
+		return &m_camera;
+	}
+	CGameCursor* GetCursor()
+	{
+		return &m_GameCursor;
 	}
 private:
 
@@ -78,7 +91,8 @@ private:
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
-	btRigidBody*		m_rigidBody[MAX_COLLISION];	//剛体。
+	btRigidBody*		m_rigidBody3D[MAX_COLLISION];	//剛体3D。
+	btRigidBody*		m_rigidBody2D[MAX_COLLISION];	//剛体2D。
 	btDefaultMotionState* m_myMotionState;
 	
 };

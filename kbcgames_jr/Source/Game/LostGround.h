@@ -5,6 +5,8 @@
 #include"..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\IPlayerCollisionCallback.h"
 
+extern void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max);
+
 class CLostGround : public IPlayerCollisionCallback
 {
 public:
