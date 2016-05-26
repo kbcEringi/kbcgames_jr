@@ -49,7 +49,7 @@ void CStage1::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_Debri.Initialize();
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();//ゲームカーソル
+	m_GameCursor.Initialize();//ゲームカーソル000
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 
