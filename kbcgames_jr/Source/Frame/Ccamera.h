@@ -29,12 +29,14 @@ public:
 			m_NormalizeObject.x = 0;
 			m_NormalizeObject.y = 0;
 			m_NormalizeObject.z = -1;
+			//D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
 			D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
 		}
 		else if (!flg && m_2Dflg)
 		{
 			m_NormalizeObject = m_v3DNormal;
 			m_Distance = 15;
+			//D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
 			D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
 		}
 		m_2Dflg = flg;

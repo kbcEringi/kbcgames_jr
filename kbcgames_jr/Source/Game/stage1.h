@@ -8,6 +8,7 @@
 /********オブジェクト2D********/
 #include "GameCursor.h"
 /********オブジェクト3D********/
+#include"..\Frame\C3DObject.h"
 #include "Player.h"
 #include "Ground.h"
 #include "wood.h"
@@ -29,6 +30,9 @@
 
 class CSceneManager;
 class CAudio;
+class C3DObject;
+
+enum GIMMICK{ AlwaysWind };
 
 class CStage1 : public CScene
 {
@@ -38,6 +42,7 @@ public:
 	void Update();
 	void Draw();
 	void CreateCollision();
+	void CreateGimmick();
 	CPlayer* GetPlayer()
 	{
 		return &m_Player;
@@ -66,6 +71,10 @@ private:
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
+
+	//ギミック配列
+	static const int gimmicknum = 2;
+	C3DObject* m_gimmick[gimmicknum];
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
