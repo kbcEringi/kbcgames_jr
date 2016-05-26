@@ -31,6 +31,9 @@
     <Filter Include="Frame\particle">
       <UniqueIdentifier>{420aae24-14ff-4f53-9952-4b599e7a5b66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\system">
+      <UniqueIdentifier>{58468f51-62dd-40f8-9a67-450cae80a6e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Frame\input.cpp">
@@ -146,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="Source\Frame\CParticle.cpp">
       <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CPrimitive.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\CGameFlg.cpp">
+      <Filter>Game\system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\CParticle.h">
       <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CPrimitive.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\CGameFlg.h">
+      <Filter>Game\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

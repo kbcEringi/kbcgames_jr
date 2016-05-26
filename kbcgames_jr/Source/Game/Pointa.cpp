@@ -22,7 +22,7 @@ void CPointa::D3DUpdate()
 
 }
 
-void CPointa::Draw(D3DXMATRIX view, D3DXMATRIX proj)
+void CPointa::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_SkinModel.Draw(m_matWorld, view, proj);

@@ -1,4 +1,5 @@
 #include"Ccamera.h"
+#include"..\Game\CGameFlg.h"
 
 void Ccamera::Initialize()
 {
@@ -15,9 +16,15 @@ void Ccamera::Initialize()
 	Volume = 15.0f;
 	m_viewVolumeW = Volume * m_vAspect;
 	m_viewVolumeH = Volume;
-	m_2Dflg = true;
-	Set2Dflg(false);
-	
+	flg = !(GAMEFLG->Getflg());
+	if (GAMEFLG->Getflg())
+	{
+		this->Set2DProj();
+	}
+	else
+	{
+		this->Set3DProj();
+	}
 }
 
 void Ccamera::Update()

@@ -17,7 +17,7 @@ void CWindmill::D3DUpdate()
 	m_moveSpeed.z = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌzÀ•W‚Ì‰Šú‰»
 }
 
-void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)
+void CWindmill::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
 	Obj.Draw(matWorld, view, proj);

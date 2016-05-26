@@ -94,6 +94,7 @@
     <ClCompile Include="Source\Frame\CParticle.cpp" />
     <ClCompile Include="Source\Frame\CParticleEmitter.cpp" />
     <ClCompile Include="Source\Frame\CParticleResources.cpp" />
+    <ClCompile Include="Source\Frame\CPrimitive.cpp" />
     <ClCompile Include="Source\Frame\CRandom.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
     <ClCompile Include="Source\Frame\Turn.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
+    <ClCompile Include="Source\Game\CGameFlg.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
@@ -135,6 +137,7 @@
     <ClInclude Include="Source\Frame\CParticle.h" />
     <ClInclude Include="Source\Frame\CParticleEmitter.h" />
     <ClInclude Include="Source\Frame\CParticleResources.h" />
+    <ClInclude Include="Source\Frame\CPrimitive.h" />
     <ClInclude Include="Source\Frame\CRandom.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
@@ -151,6 +154,7 @@
     <ClInclude Include="Source\Frame\SkinModelDate.h" />
     <ClInclude Include="Source\Frame\Turn.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
+    <ClInclude Include="Source\Game\CGameFlg.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
