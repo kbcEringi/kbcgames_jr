@@ -14,6 +14,7 @@ void CGround::Initialize()
 
 void CGround::D3DUpdate()
 {
+
 }
 
 void CGround::Draw(D3DXMATRIX view,D3DXMATRIX proj)

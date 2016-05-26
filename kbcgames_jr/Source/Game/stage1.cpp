@@ -64,7 +64,7 @@ void CStage1::Initialize()
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
-	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
 
 	this->CreateGimmick();
@@ -130,7 +130,8 @@ void CStage1::Update()
 	for (int i = 0; i < gimmicknum; i++) {
 		m_gimmick[i]->D3DUpdate();
 	}
-	//m_windmill.D3Dupdate();
+	m_windmill.D3DUpdate();//風車
+	m_Movefloor.D3DUpdate();//動く床
 	m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
@@ -170,6 +171,7 @@ void CStage1::Draw()
 
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
+	m_Movefloor.Draw(m_camera.GetViewMatrix(),m_camera.GetProjectionMatrix());//動く床
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());

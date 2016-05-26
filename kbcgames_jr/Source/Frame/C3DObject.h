@@ -23,7 +23,7 @@ public:
 	virtual void D3DUpdate()=0;
 	virtual void Draw(D3DXMATRIX, D3DXMATRIX)=0;
 	C3DDraw* GetSkinModel(){ return &m_SkinModel; }
-	void SetObjectData(ObjectData obj){ m_data = obj; }
+	virtual void SetObjectData(ObjectData obj){ m_data = obj; }
 protected:
 	C3DDraw m_SkinModel;
 	ObjectData m_data;

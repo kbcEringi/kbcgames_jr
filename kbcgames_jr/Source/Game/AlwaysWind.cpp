@@ -61,8 +61,6 @@ void CAlwaysWind::Initialize()
 	rot.w = 1.0f;
 	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);
 	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
-	m_aabbMin += m_data.position;
-	m_aabbMax += m_data.position;
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
 }

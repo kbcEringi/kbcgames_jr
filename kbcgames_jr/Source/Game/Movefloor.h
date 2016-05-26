@@ -9,7 +9,7 @@ class CMovefloor :public C3DObject
 {
 public:
 	CMovefloor() :C3DObject(){};
-	~CMovefloor();
+	~CMovefloor(){}
 	void Initialize()override;
 	void D3DUpdate()override;
 	void D2DUpdate()override{}

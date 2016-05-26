@@ -17,7 +17,11 @@ public:
 	{
 		return m_data.position;
 	}
-	
+	void SetObjectData(ObjectData obj)override{ 
+		C3DObject::SetObjectData(obj);
+		m_aabbMax += obj.position;
+		m_aabbMin += obj.position;
+	}
 private:
 	D3DXMATRIX m_rotationMatrix;
 	D3DXVECTOR3 m_force;

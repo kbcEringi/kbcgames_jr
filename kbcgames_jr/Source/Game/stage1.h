@@ -65,9 +65,9 @@ private:
 	CWood m_wood;
 	CDebri m_Debri;
 	CPointa m_pointa;
-	//CAlwaysWind m_setwind;
+	CAlwaysWind m_setwind;
 	CWindmill m_windmill;
-	CMovefloor m_floor;
+	CMovefloor m_Movefloor;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
