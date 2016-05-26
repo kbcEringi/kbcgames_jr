@@ -62,7 +62,7 @@ void CStage1::Initialize()
 	m_GameCursor.Initialize();//ゲームカーソル
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
-	//m_hasu.Initialize();
+	m_hasu.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -167,7 +167,7 @@ void CStage1::Update()
 	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
-	//m_hasu.Update();
+	m_hasu.Update();
 
 
 	//レイカーソルに値をセット
@@ -205,7 +205,7 @@ void CStage1::Draw()
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
-	//m_hasu.Draw(m_camera.GetViewMatrix());
+	m_hasu.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
