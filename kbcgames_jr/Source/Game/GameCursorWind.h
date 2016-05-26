@@ -22,6 +22,7 @@ public:
 	void D2DUpdate()override{}
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Ray();
+	void RotScal();
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;

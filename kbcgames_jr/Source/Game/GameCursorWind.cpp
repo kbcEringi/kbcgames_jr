@@ -86,61 +86,7 @@ void CGameCursorWind::D3DUpdate()
 		if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 			state = State_Hide;
 		}
-		D3DXVECTOR4 v0, v1;
-		float Far = g_stage->GetCamera()->GetFar();
-		float Near = g_stage->GetCamera()->GetNear();
-		v0.x = g_stage->GetCursor()->GetPosition().x;
-		v0.y = g_stage->GetCursor()->GetPosition().y;
-		v0.z = 0.0f;
-		v0.w = 1.0f;
-
-		v1.x = g_stage->GetCursor()->GetPosition().x;
-		v1.y = g_stage->GetCursor()->GetPosition().y;
-		v1.z = 1.0f;
-		v1.w = 1.0f;
-
-		D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
-		D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
-		D3DVIEWPORT9 vp;
-		(*graphicsDevice()).GetViewport(&vp);
-		D3DXVec3Unproject(
-			reinterpret_cast<D3DXVECTOR3*>(&v0),
-			reinterpret_cast<const D3DXVECTOR3*>(&v0),
-			&vp,
-			reinterpret_cast<const D3DXMATRIX*>(&mProj),
-			reinterpret_cast<const D3DXMATRIX*>(&mView),
-			NULL
-			);
-		D3DXVec3Unproject(
-			reinterpret_cast<D3DXVECTOR3*>(&v1),
-			reinterpret_cast<const D3DXVECTOR3*>(&v1),
-			&vp,
-			reinterpret_cast<const D3DXMATRIX*>(&mProj),
-			reinterpret_cast<const D3DXMATRIX*>(&mView),
-			NULL
-			);
-		float t = (-v0.z)/(v1.z - v0.z);
-		D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
-		D3DXVECTOR3 v4 = v3 - m_position;
-		D3DXVECTOR3 v5 = v4;
-		D3DXVec3Normalize(&v4, &v4);
-		static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
-		D3DXVec3Cross(&v3, &v4, &vRIGHT);
-		D3DXVec3Normalize(&v3, &v3);
-		t = acos(D3DXVec3Dot(&v4, &vRIGHT));
-		if (v3.z > 0.0f){
-			t *= -1.0f;
-		}
-		D3DXMatrixRotationZ(&mRotation, t);
-
-		D3DXVECTOR3 m_aabbMin;
-		D3DXVECTOR3 m_aabbMax;
-		D3DXVECTOR3 size;
-		CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得
-		size = m_aabbMax - m_aabbMin;
-
-		v5.x /= size.x;
-		D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+		RotScal();//回転と拡大
 	}
 	if (state == State_DecideXZPower)
 	{
@@ -148,51 +94,7 @@ void CGameCursorWind::D3DUpdate()
 		if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 			state = State_Hide;
 		}
-		D3DXVECTOR4 v0, v1;
-		float Far = g_stage->GetCamera()->GetFar();
-		float Near = g_stage->GetCamera()->GetNear();
-		v0.x = g_stage->GetCursor()->GetPosition().x;
-		v0.y = g_stage->GetCursor()->GetPosition().y;
-		v0.z = 0.0f;
-		v0.w = 1.0f;
-
-		v1.x = g_stage->GetCursor()->GetPosition().x;
-		v1.y = g_stage->GetCursor()->GetPosition().y;
-		v1.z = 1.0f;
-		v1.w = 1.0f;
-
-		D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
-		D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
-		D3DVIEWPORT9 vp;
-		(*graphicsDevice()).GetViewport(&vp);
-		D3DXVec3Unproject(
-			reinterpret_cast<D3DXVECTOR3*>(&v0),
-			reinterpret_cast<const D3DXVECTOR3*>(&v0),
-			&vp,
-			reinterpret_cast<const D3DXMATRIX*>(&mProj),
-			reinterpret_cast<const D3DXMATRIX*>(&mView),
-			NULL
-			);
-		D3DXVec3Unproject(
-			reinterpret_cast<D3DXVECTOR3*>(&v1),
-			reinterpret_cast<const D3DXVECTOR3*>(&v1),
-			&vp,
-			reinterpret_cast<const D3DXMATRIX*>(&mProj),
-			reinterpret_cast<const D3DXMATRIX*>(&mView),
-			NULL
-			);
-		float t = (-v0.z) / (v1.z - v0.z);
-		D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
-		D3DXVECTOR3 v4 = v3 - m_position;
-		D3DXVec3Normalize(&v4, &v4);
-		static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
-		D3DXVec3Cross(&v3, &v4, &vRIGHT);
-
-		t = acos(D3DXVec3Dot(&v4, &vRIGHT));
-		if (v3.z > 0.0f){
-			t *= -1.0f;
-		}
-		D3DXMatrixRotationZ(&mRotation, t);
+		RotScal();//回転と拡大
 	}
 	
 }
@@ -280,4 +182,64 @@ void CGameCursorWind::Ray()
 			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
 	}
+}
+
+void CGameCursorWind::RotScal()
+{
+	D3DXVECTOR4 v0, v1;
+	float Far = g_stage->GetCamera()->GetFar();
+	float Near = g_stage->GetCamera()->GetNear();
+	v0.x = g_stage->GetCursor()->GetPosition().x;
+	v0.y = g_stage->GetCursor()->GetPosition().y;
+	v0.z = 0.0f;
+	v0.w = 1.0f;
+
+	v1.x = g_stage->GetCursor()->GetPosition().x;
+	v1.y = g_stage->GetCursor()->GetPosition().y;
+	v1.z = 1.0f;
+	v1.w = 1.0f;
+
+	D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
+	D3DVIEWPORT9 vp;
+	(*graphicsDevice()).GetViewport(&vp);
+	//スクリーン座標からワールド座標を求める
+	D3DXVec3Unproject(
+		reinterpret_cast<D3DXVECTOR3*>(&v0),
+		reinterpret_cast<const D3DXVECTOR3*>(&v0),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProj),
+		reinterpret_cast<const D3DXMATRIX*>(&mView),
+		NULL
+		);
+	D3DXVec3Unproject(
+		reinterpret_cast<D3DXVECTOR3*>(&v1),
+		reinterpret_cast<const D3DXVECTOR3*>(&v1),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProj),
+		reinterpret_cast<const D3DXMATRIX*>(&mView),
+		NULL
+		);
+	float t = (-v0.z) / (v1.z - v0.z);
+	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
+	D3DXVECTOR3 v4 = v3 - m_position;
+	D3DXVECTOR3 v5 = v4;
+	D3DXVec3Normalize(&v4, &v4);
+	static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
+	D3DXVec3Cross(&v3, &v4, &vRIGHT);
+	D3DXVec3Normalize(&v3, &v3);
+	t = acos(D3DXVec3Dot(&v4, &vRIGHT));
+	if (v3.z > 0.0f){
+		t *= -1.0f;
+	}
+	D3DXMatrixRotationZ(&mRotation, t);//回転
+
+	D3DXVECTOR3 m_aabbMin;
+	D3DXVECTOR3 m_aabbMax;
+	D3DXVECTOR3 size;
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得
+	size = m_aabbMax - m_aabbMin;
+
+	//v5.x /= size.x;
+	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
 }
