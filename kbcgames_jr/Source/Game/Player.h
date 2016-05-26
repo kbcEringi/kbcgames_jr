@@ -62,4 +62,5 @@ private:
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
+
 };

@@ -64,8 +64,16 @@ void CStage1::Initialize()
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
+<<<<<<< HEAD
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	this->CreateCollision();
+=======
+	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	
+	this->CreateCollision3D();
+	this->CreateCollision2D();
+	this->Add3DRigidBody();
+>>>>>>> 46d4cfc81356c8d8d1dfbad1a7769b46d63a1b64
 
 	this->CreateGimmick();
 	g_stage = this;
@@ -90,10 +98,14 @@ void CStage1::Update()
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER))
 		{
 			m_camera.Set2Dflg(true);
+			Remove3DRigidBody();
+			Add2DRigidBody();
 		}
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER))
 		{
 			m_camera.Set2Dflg(false);
+			Remove2DRigidBody();
+			Add3DRigidBody();
 		}
 	}
 	else
@@ -118,7 +130,15 @@ void CStage1::Update()
 			m_camera.Set2Dflg(false);
 		}
 	}
-
+	if (m_camera.Get2Dflg() == true)
+	{
+		this->CreateCollision2D();
+	}
+	else
+	{
+		this->CreateCollision3D();
+	}
+	m_camera.Get2Dflg();
 
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
@@ -153,10 +173,15 @@ void CStage1::Draw()
 	m_Debri.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//テストでぶり
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+	
 
 	for (int i = 0; i < gimmicknum; i++) {
 		m_gimmick[i]->Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	}
+	if (m_camera.Get2Dflg() == false)
+	{
+		//Zバッファをクリア
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	}
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -166,11 +191,8 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
-
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-
-	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
-
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描
 	m_Movefloor.Draw(m_camera.GetViewMatrix(),m_camera.GetProjectionMatrix());//動く床
 
 	m_GameCursor.Draw();
@@ -178,9 +200,17 @@ void CStage1::Draw()
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/
+	
+	if (m_camera.Get2Dflg() == true)
+	{
+		//Zバッファをクリア
+		(*graphicsDevice()).Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+	}
+	
 }
 
-void CStage1::CreateCollision()
+void CStage1::CreateCollision3D()
 {
 	int arraySize = ARRAYSIZE(collisionInfoTable3D);
 	if (arraySize >= MAX_COLLISION)
@@ -202,10 +232,41 @@ void CStage1::CreateCollision()
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 			m_myMotionState = new btDefaultMotionState(groundTransform);
 			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
-			m_rigidBody[i] = new btRigidBody(rbInfo);
+			m_rigidBody3D[i] = new btRigidBody(rbInfo);
 
 			//ワールドに追加。
-			g_bulletPhysics.AddRigidBody(m_rigidBody[i]);
+			//g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
+
+		}
+	}
+}
+
+void CStage1::CreateCollision2D()
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable2D);
+	if (arraySize >= MAX_COLLISION)
+	{
+		std::abort();
+	}
+	for (int i = 0; i < arraySize; i++) {
+		SCollisionInfo& collision = collisionInfoTable2D[i];
+		//ここで剛体とかを登録する。
+		//剛体を初期化。
+		{
+			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			btTransform groundTransform;
+			groundTransform.setIdentity();
+			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
+			float mass = 0.0f;
+
+			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+			m_myMotionState = new btDefaultMotionState(groundTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
+			m_rigidBody2D[i] = new btRigidBody(rbInfo);
+
+			//ワールドに追加。
+			//g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
 
 		}
 	}
@@ -231,5 +292,41 @@ void CStage1::CreateGimmick()
 		}
 		m_gimmick[i]->Initialize();
 		m_gimmick[i]->SetObjectData(gimmickobj[i].data);
+	}
+}
+
+void CStage1::Add2DRigidBody()//ワールドに追加。
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable2D);
+	for (int i = 0; i < arraySize; i++)
+	{
+		g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
+	}
+}
+
+void CStage1::Add3DRigidBody()//ワールドに追加。
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable3D);
+	for (int i = 0; i < arraySize; i++)
+	{
+		g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
+	}
+}
+
+void CStage1::Remove2DRigidBody()//ワールドから削除
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable2D);
+	for (int i = 0; i < arraySize; i++)
+	{
+		g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
+	}
+}
+
+void CStage1::Remove3DRigidBody()//ワールドから削除
+{
+	int arraySize = ARRAYSIZE(collisionInfoTable3D);
+	for (int i = 0; i < arraySize; i++)
+	{
+		g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
 	}
 }
