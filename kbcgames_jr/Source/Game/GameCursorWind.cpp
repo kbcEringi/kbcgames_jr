@@ -59,7 +59,8 @@ void CGameCursorWind::Initialize()
 	start = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 0.0f);
 	end = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 0.0f);
 	state = State_Hide;
-	D3DXMatrixIdentity(&mRotation);
+	D3DXMatrixIdentity(&mRotationZ);
+	D3DXMatrixIdentity(&mRotationY);
 	D3DXMatrixIdentity(&mScale);
 }
 
@@ -83,18 +84,28 @@ void CGameCursorWind::D3DUpdate()
 	}
 	if (state == State_DecideYPower)
 	{
-		if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
-			state = State_Hide;
+		if (g_stage->GetCamera()->Get2Dflg() == true)
+		{
+			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
+				state = State_Hide;
+			}
 		}
-		RotScal();//‰ñ“]‚ÆŠg‘å
+		else
+		{
+			if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+			{
+				state = State_Hide;
+			}
+		}
+		RotScalY();//‰ñ“]‚ÆŠg‘å
 	}
 	if (state == State_DecideXZPower)
 	{
-
+		
 		if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
-			state = State_Hide;
+			state = State_DecideYPower;
 		}
-		RotScal();//‰ñ“]‚ÆŠg‘å
+		RotScalXZ();
 	}
 	
 }
@@ -102,7 +113,7 @@ void CGameCursorWind::D3DUpdate()
 void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-	m_matWorld = mScale * mRotation * m_matWorld;
+	m_matWorld = mScale * mRotationZ * mRotationY * m_matWorld;
 	if (state != State_Hide)
 	{
 		m_SkinModel.Draw(m_matWorld, view, proj);
@@ -168,12 +179,13 @@ void CGameCursorWind::Ray()
 				callback.hitPos.y += 0.5f;
 				if (g_stage->GetCamera()->Get2Dflg() == true)
 				{
-
-					SetPosition(callback.hitPos);
+					//SetPosition(callback.hitPos);
+					SetPosition(g_stage->GetPlayer()->GetPosition());
 				}
 				else
 				{
-					SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
+					//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
+					SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
 				}
 			}
 		}
@@ -184,7 +196,7 @@ void CGameCursorWind::Ray()
 	}
 }
 
-void CGameCursorWind::RotScal()
+void CGameCursorWind::RotScalY()
 {
 	D3DXVECTOR4 v0, v1;
 	float Far = g_stage->GetCamera()->GetFar();
@@ -232,14 +244,66 @@ void CGameCursorWind::RotScal()
 	if (v3.z > 0.0f){
 		t *= -1.0f;
 	}
-	D3DXMatrixRotationZ(&mRotation, t);//‰ñ“]
+	D3DXMatrixRotationZ(&mRotationZ, t);//‰ñ“]
 
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
 	D3DXVECTOR3 size;
-	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//ƒTƒCƒYæ“¾
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//ƒTƒCƒYæ“¾hjkm
 	size = m_aabbMax - m_aabbMin;
 
 	//v5.x /= size.x;
 	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+}
+
+void CGameCursorWind::RotScalXZ()
+{
+	D3DXVECTOR4 v0, v1;
+	float Far = g_stage->GetCamera()->GetFar();
+	float Near = g_stage->GetCamera()->GetNear();
+	v0.x = g_stage->GetCursor()->GetPosition().x;
+	v0.y = g_stage->GetCursor()->GetPosition().y;
+	v0.z = 0.0f;
+	v0.w = 1.0f;
+
+	v1.x = g_stage->GetCursor()->GetPosition().x;
+	v1.y = g_stage->GetCursor()->GetPosition().y;
+	v1.z = 1.0f;
+	v1.w = 1.0f;
+
+	D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
+	D3DVIEWPORT9 vp;
+	(*graphicsDevice()).GetViewport(&vp);
+	//ƒXƒNƒŠ[ƒ“À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚ğ‹‚ß‚é
+	D3DXVec3Unproject(
+		reinterpret_cast<D3DXVECTOR3*>(&v0),
+		reinterpret_cast<const D3DXVECTOR3*>(&v0),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProj),
+		reinterpret_cast<const D3DXMATRIX*>(&mView),
+		NULL
+		);
+	D3DXVec3Unproject(
+		reinterpret_cast<D3DXVECTOR3*>(&v1),
+		reinterpret_cast<const D3DXVECTOR3*>(&v1),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProj),
+		reinterpret_cast<const D3DXMATRIX*>(&mView),
+		NULL
+		);
+	float t = (m_position.y - v0.y) / (v1.y - v0.y);
+	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
+	D3DXVECTOR3 v4 = v3 - m_position;
+	D3DXVECTOR3 v5 = v4;
+	D3DXVec3Normalize(&v4, &v4);
+	static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
+	D3DXVec3Cross(&v3, &v4, &vRIGHT);
+	D3DXVec3Normalize(&v3, &v3);
+	t = acos(D3DXVec3Dot(&v4, &vRIGHT));
+	if (v3.y > 0.0f){
+		t *= -1.0f;
+	}
+	D3DXMatrixRotationY(&mRotationY, t);//‰ñ“]
+
 }

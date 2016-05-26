@@ -22,7 +22,8 @@ public:
 	void D2DUpdate()override{}
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Ray();
-	void RotScal();
+	void RotScalY();
+	void RotScalXZ();
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;
@@ -39,7 +40,9 @@ public:
 private:
 	
 	State state;
-	D3DXMATRIX mRotation;
+	//D3DXMATRIX mRotation;
+	D3DXMATRIX mRotationY;
+	D3DXMATRIX mRotationZ;
 	D3DXMATRIX mScale;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;

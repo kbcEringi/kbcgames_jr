@@ -209,7 +209,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\GitHub\\kbcGames_jr\\kbcgames_jr\\Texture\\red.png";
+    "red.png";
    }
   }
  }
