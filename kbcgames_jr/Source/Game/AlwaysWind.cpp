@@ -51,9 +51,9 @@ void CAlwaysWind::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\wood.x");
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
-	m_data.position.x = 14.0f;
-	m_data.position.y = 1.0f;
-	m_data.position.z = 0.0f;
+	//m_data.position.x = 14.0f;
+	//m_data.position.y = 1.0f;
+	//m_data.position.z = 0.0f;
 	D3DXQUATERNION rot;
 	rot.x = 0.0f;
 	rot.y = 0.0f;
