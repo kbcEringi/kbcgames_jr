@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
-
+#include "..\Frame\Ccamera.h";
+#include "Stage1.h"
 CPlayer::~CPlayer()
 {
 }
@@ -75,21 +76,23 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 		m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
-	if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
+	if (g_stage->GetCamera()->Get2Dflg() == false)
 	{
-		m_moveSpeed.z += 2.0f;
-		//180度向かせる。
-		m_targetAngleY = D3DXToRadian(-90.0f);
-		isTurn = true;
+		if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
+		{
+			m_moveSpeed.z += 2.0f;
+			//180度向かせる。
+			m_targetAngleY = D3DXToRadian(-90.0f);
+			isTurn = true;
+		}
+		else if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
+		{
+			m_moveSpeed.z -= 2.0f;
+			//正面を向かせる。
+			m_targetAngleY = D3DXToRadian(90.0f);
+			isTurn = true;
+		}
 	}
-	else if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
-	{
-		m_moveSpeed.z -= 2.0f;
-		//正面を向かせる。
-		m_targetAngleY = D3DXToRadian(90.0f);
-		isTurn = true;
-	}
-
 	m_currentAngleY = m_Turn.Update(isTurn, m_targetAngleY);
 
 }

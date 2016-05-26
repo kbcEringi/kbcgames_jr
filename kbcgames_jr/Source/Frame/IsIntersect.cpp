@@ -114,7 +114,7 @@ void CIsIntersect::CollisitionInitialize(D3DXVECTOR3* m_position)
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
 	m_moveSpeed.z = 0.0f;				//移動速度
-	m_radius = 1.0;						//バウンディングスフィアの半径。
+	m_radius = 0.5f;						//バウンディングスフィアの半径。
 	//コリジョン初期化。
 	m_collisionShape = new btBoxShape(btVector3(m_radius, m_radius, m_radius));
 	float mass = 1000.0f;

@@ -4,7 +4,7 @@
 #define QUAKE 100
 #define DOWN 150
 
-extern void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max);
+
 
 CLostGround::CLostGround()
 {
