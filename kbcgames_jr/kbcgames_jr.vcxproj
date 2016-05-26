@@ -106,6 +106,7 @@
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
+    <ClCompile Include="Source\Game\Hasu.cpp" />
     <ClCompile Include="Source\Game\LostGround.cpp" />
     <ClCompile Include="Source\Game\Movefloor.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
     <ClInclude Include="Source\Game\Ground.h" />
+    <ClInclude Include="Source\Game\Hasu.h" />
     <ClInclude Include="Source\Game\LostGround.h" />
     <ClInclude Include="Source\Game\Movefloor.h" />
     <ClInclude Include="Source\Game\Player.h" />

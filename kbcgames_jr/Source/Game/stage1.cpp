@@ -52,6 +52,7 @@ void CStage1::Initialize()
 	m_GameCursor.Initialize();//ゲームカーソル000
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
+	m_hasu.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -156,6 +157,7 @@ void CStage1::Update()
 	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.D3DUpdate();
+	m_hasu.Update();
 
 
 	//レイカーソルに値をセット
@@ -190,11 +192,12 @@ void CStage1::Draw()
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描
 	m_Movefloor.Draw(m_camera.GetViewMatrix(),m_camera.GetProjectionMatrix());//動く床
-
+	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
+	m_hasu.Draw(m_camera.GetViewMatrix());
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

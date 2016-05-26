@@ -127,7 +127,12 @@
     <ClCompile Include="Source\Game\Movefloor.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Source\Game\GameCursorWind.cpp" />
+    <ClCompile Include="Source\Game\Hasu.cpp">
+=======
     <ClCompile Include="Source\Game\GameCursorWind.cpp">
+>>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
       <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -242,7 +247,12 @@
     <ClInclude Include="Source\Game\Movefloor.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Source\Game\GameCursorWind.h" />
+    <ClInclude Include="Source\Game\Hasu.h">
+=======
     <ClInclude Include="Source\Game\GameCursorWind.h">
+>>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
