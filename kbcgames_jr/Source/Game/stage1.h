@@ -25,6 +25,7 @@
 #include"..\Frame\CGamepad.h"
 
 #include"..\Frame\Shadow.h"
+#include"..\Frame\CGimmickManager.h"
 
 #define MAX_COLLISION 100
 
@@ -43,7 +44,6 @@ public:
 	void Draw();
 	void CreateCollision3D();
 	void CreateCollision2D();
-	void CreateGimmick();
 	void Add3DRigidBody();
 	void Add2DRigidBody();
 	void Remove3DRigidBody();
@@ -77,16 +77,15 @@ private:
 	CGround m_Ground;
 	CWood m_wood;
 	CPointa m_pointa;
-	CAlwaysWind m_setwind;
+	//CAlwaysWind m_setwind;
 	CWindmill m_windmill;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
 
-	//ギミック配列
-	static const int gimmicknum = 2;
-	C3DObject* m_gimmick[gimmicknum];
+	//ギミックManager
+	CGimmickManager m_gimmick;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

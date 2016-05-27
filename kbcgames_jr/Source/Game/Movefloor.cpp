@@ -12,7 +12,7 @@ void CMovefloor::Initialize()
 }
 
 
-void CMovefloor::D3DUpdate()
+void CMovefloor::Update()
 {
 
 }
@@ -37,7 +37,7 @@ void CMovefloor::Move(D3DXVECTOR3 movespeed)
 
 }
 
-void CMovefloor::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CMovefloor::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 

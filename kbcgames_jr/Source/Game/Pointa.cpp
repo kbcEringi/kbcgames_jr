@@ -17,12 +17,12 @@ void CPointa::Initialize()
 	m_moveSpeed.z = 0.0f;				//Zç¿ïW
 }
 
-void CPointa::D3DUpdate()
+void CPointa::Update()
 {
 
 }
 
-void CPointa::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CPointa::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_SkinModel.Draw(m_matWorld, view, proj);

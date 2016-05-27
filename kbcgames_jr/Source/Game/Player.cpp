@@ -29,7 +29,7 @@ void CPlayer::Initialize()
 	
 }
 
-void CPlayer::D3DUpdate()
+void CPlayer::Update()
 {
 	
 	//Move();//à⁄ìÆä÷êî
@@ -46,7 +46,7 @@ void CPlayer::D3DUpdate()
 	m_SkinModel.UpdateWorldMatrix(m_matWorld);
 }
 
-void CPlayer::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	D3DXMATRIX mRot;
