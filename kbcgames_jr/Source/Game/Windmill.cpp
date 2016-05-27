@@ -11,13 +11,13 @@ void CWindmill::Initialize()
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 }
 
-void CWindmill::D3DUpdate()
+void CWindmill::Update()
 {
 	m_moveSpeed.x = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌxÀ•W‚Ì‰Šú‰»
 	m_moveSpeed.z = 0.0f;//ó‚¯‚é•—‚Ì—Í‚ÌzÀ•W‚Ì‰Šú‰»
 }
 
-void CWindmill::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
 	Obj.Draw(matWorld, view, proj);

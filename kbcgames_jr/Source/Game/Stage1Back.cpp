@@ -13,12 +13,12 @@ void CStage1Back::Initialize()
 	m_position.z = 0.0f;				//ZÀ•W
 }
 
-void CStage1Back::D3DUpdate()
+void CStage1Back::Update()
 {
 
 }
 
-void CStage1Back::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CStage1Back::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	D3DXMatrixTranslation(&m_matWorld, m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, m_pPlayer->GetPosition().z);

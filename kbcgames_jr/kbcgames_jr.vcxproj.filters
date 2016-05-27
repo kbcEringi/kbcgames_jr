@@ -64,9 +64,6 @@
     <ClCompile Include="Source\Game\Ground.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Hasu.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\IsIntersect.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -110,6 +107,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\wood.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Hasu.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -189,9 +189,6 @@
     <ClInclude Include="Source\Game\Ground.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Hasu.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -238,6 +235,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\wood.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Hasu.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

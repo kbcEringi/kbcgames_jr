@@ -10,15 +10,22 @@ public:
 	CAlwaysWind();
 	~CAlwaysWind();
 	void Initialize()override;
-	void D3DUpdate()override;
-	void D2DUpdate()override{}
-	void D2DDraw(D3DXMATRIX, D3DXMATRIX)override{}
-	void D3DDraw(D3DXMATRIX, D3DXMATRIX)override;
+	void Update();
+	void Draw(D3DXMATRIX, D3DXMATRIX);
 	D3DXVECTOR3 GetPosition()
 	{
-		return m_3Ddata.position;
+		return m_data.position;
 	}
-	
+	void SetObject2DData(ObjectData obj){ 
+		C3DObject::SetObject2DData(obj);
+		m_aabbMax += obj.position;
+		m_aabbMin += obj.position;
+	}
+	void SetObject3DData(ObjectData obj){
+		C3DObject::SetObject3DData(obj);
+		m_aabbMax += obj.position;
+		m_aabbMin += obj.position;
+	}
 private:
 	D3DXMATRIX m_rotationMatrix;
 	D3DXVECTOR3 m_force;

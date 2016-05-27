@@ -18,10 +18,8 @@ public:
 	CGameCursorWind() : C3DObject(){ wind.x = 0.0f; wind.y = 0.0f; wind.z = 0.0f; }
 	~CGameCursorWind();
 	void Initialize()override;
-	void D3DUpdate()override;
-	void D2DUpdate()override{}
-	void D2DDraw(D3DXMATRIX, D3DXMATRIX)override{}
-	void D3DDraw(D3DXMATRIX, D3DXMATRIX)override;
+	void Update();
+	void Draw(D3DXMATRIX, D3DXMATRIX);
 	void Ray();
 	void RotScalY();
 	void RotScalXZ();

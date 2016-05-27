@@ -30,9 +30,8 @@ void CPlayer::Initialize()
 	
 }
 
-void CPlayer::D3DUpdate()
+void CPlayer::Update()
 {
-	
 	//Move();//ˆÚ“®ŠÖ”
 	
 	Died();//Ž€–S”»’è
@@ -40,6 +39,7 @@ void CPlayer::D3DUpdate()
 	{
 		Move(m_Pointa->GetPosition());
 	}
+	Move(m_Pointa->GetPosition());
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
@@ -54,8 +54,6 @@ void CPlayer::D3DUpdate()
 			g_stage->GetCursor()->SetPos(m_position);
 		}
 	}
-
-	
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_position‚©‚ç‚ÌˆÚ“®—Ê(‚ ‚½‚è”»’è)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 
@@ -63,7 +61,7 @@ void CPlayer::D3DUpdate()
 	m_SkinModel.UpdateWorldMatrix(m_matWorld);
 }
 
-void CPlayer::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	D3DXMATRIX mRot;

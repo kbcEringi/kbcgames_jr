@@ -2,19 +2,19 @@
 
 void CMovefloor::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\floor.x");	//プレイヤーXファイル
-	m_position.x = 6.0f;				//X座標
-	m_position.y = 4.0f;				//Y座標
-	m_position.z = 0.0f;				//Z座標
+	m_SkinModel.Initialize("XFile\\floor.x");	
+	m_position.x = 6.0f;						//X座標
+	m_position.y = 4.0f;						//Y座標
+	m_position.z = 0.0f;						//Z座標
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
 }
 
 
-void CMovefloor::D3DUpdate()
+void CMovefloor::Update()
 {
-
+	
 }
 
 void CMovefloor::Move(D3DXVECTOR3 movespeed)
@@ -37,7 +37,7 @@ void CMovefloor::Move(D3DXVECTOR3 movespeed)
 
 }
 
-void CMovefloor::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CMovefloor::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 

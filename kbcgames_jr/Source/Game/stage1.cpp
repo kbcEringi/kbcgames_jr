@@ -20,23 +20,12 @@ SCollisionInfo collisionInfoTable2D[] = {
 #include "CollisionInfo2D.h"
 };
 
-struct SGimmick3DData
-{
-	ObjectData data;
-	int type;
-};
-struct SGimmick2DData
-{
-	ObjectData data;
-	int type;
+SGimmickData gimmick3dobj[] = {
+#include"..\Game\Gimmick3DInfo.h"
 };
 
-SGimmick3DData gimmick3dobj[] = {
-#include"Gimmick3DInfo.h"
-};
-
-SGimmick2DData gimmick2dobj[] = {
-#include"Gimmick2DInfo.h"
+SGimmickData gimmick2dobj[] = {
+#include"..\Game\Gimmick2DInfo.h"
 };
 
 void CStage1::Initialize()
@@ -59,7 +48,7 @@ void CStage1::Initialize()
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();//ゲームカーソル
+	m_GameCursor.Initialize();//ゲームカーソル000
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
@@ -75,13 +64,17 @@ void CStage1::Initialize()
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
+	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	//this->CreateCollision();
+
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	
 	this->CreateCollision3D();
 	this->CreateCollision2D();
 	this->Add3DRigidBody();
 
-	this->CreateGimmick();
+	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
+
 	g_stage = this;
 }
 
@@ -112,7 +105,6 @@ void CStage1::Update()
 		{
 			GAMEFLG->Set3D();
 			m_camera.Set3DProj();
-
 			Remove2DRigidBody();
 			Add3DRigidBody();
 		}
@@ -155,18 +147,18 @@ void CStage1::Update()
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
-	m_Player.D3DUpdate();//プレイヤー
-	m_Ground.D3DUpdate();//地面
-	m_wood.D3DUpdate();//木
-	for (int i = 0; i < gimmicknum; i++) {
-		m_gimmick[i]->D3DUpdate();
-	}
-	//m_windmill.D3Dupdate();
-	m_pointa.D3DUpdate();//ポインタ
+	m_Player.Update();//プレイヤー
+	m_Ground.Update();//地面
+	m_wood.Update();//木
+	
+	m_gimmick.Update();
+
+	m_pointa.Update();//ポインタ
+
 	m_GameCursor.Update();//ゲームカーソル
-	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
+	m_GCursorWind.Update();//ゲームカーソルかぜ　
 	m_lost.Update();
-	m_Back1.D3DUpdate();
+	m_Back1.Update();
 	m_hasu.Update();
 
 
@@ -178,19 +170,17 @@ void CStage1::Draw()
 {
 
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
-	m_Back1.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	m_Ground.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
-	m_pointa.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
-	m_Player.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
+	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
+	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
+	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	
-
-	for (int i = 0; i < gimmicknum; i++) {
-		m_gimmick[i]->D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	}
+	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	
 	if (GAMEFLG->Getflg() == false)
 	{
 		//Zバッファをクリア
-		m_GCursorWind.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	}
 	/************これを実行すると半透明になる（半透明にするオブジェクトのときにする）***********/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -200,8 +190,9 @@ void CStage1::Draw()
 	if (GetAsyncKeyState('Q')){
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
-	m_wood.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-	m_windmill.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
+	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
@@ -214,7 +205,7 @@ void CStage1::Draw()
 	{
 		//Zバッファをクリア
 		(*graphicsDevice()).Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
-		m_GCursorWind.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
+		m_GCursorWind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル風
 	}
 	
 }
@@ -281,34 +272,6 @@ void CStage1::CreateCollision2D()
 	}
 }
 
-void CStage1::CreateGimmick()
-{
-	int array3dSize = ARRAYSIZE(gimmick3dobj);
-	int array2dSize = ARRAYSIZE(gimmick2dobj);
-	if (array3dSize > gimmicknum)
-	{
-		std::abort();
-	}
-	if (array3dSize != array2dSize)
-	{
-		std::abort();
-	}
-	for (int i = 0; i < array3dSize; i++) {
-		switch (gimmick3dobj[i].type)
-		{
-		case 0:
-			CAlwaysWind* Always;
-			Always = new CAlwaysWind;
-			m_gimmick[i] = Always;
-			break;
-		default:
-			break;
-		}
-		m_gimmick[i]->Initialize();
-		m_gimmick[i]->SetObject3DData(gimmick3dobj[i].data);
-		m_gimmick[i]->SetObject2DData(gimmick2dobj[i].data);
-	}
-}
 
 void CStage1::Add2DRigidBody()//ワールドに追加。
 {

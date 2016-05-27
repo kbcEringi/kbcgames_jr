@@ -10,10 +10,8 @@ class CWindmill :public C3DObject
 {
 public:
 	void Initialize();
-	void D3DUpdate()override;
-	void D2DUpdate()override{}
-	void D2DDraw(D3DXMATRIX, D3DXMATRIX)override{}
-	void D3DDraw(D3DXMATRIX, D3DXMATRIX)override;
+	void Update();
+	void Draw(D3DXMATRIX, D3DXMATRIX);
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;

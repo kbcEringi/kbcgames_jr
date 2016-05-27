@@ -66,7 +66,7 @@ void CGameCursorWind::Initialize()
 	D3DXMatrixIdentity(&mScale);
 }
 
-void CGameCursorWind::D3DUpdate()
+void CGameCursorWind::Update()
 {
 	if (g_stage->GetPlayer()->GetState() == CPlayer::StateFly)
 	{
@@ -120,7 +120,7 @@ void CGameCursorWind::D3DUpdate()
 	
 }
 
-void CGameCursorWind::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_matWorld = mScale * mRotationZ * mRotationY * m_matWorld;
