@@ -69,7 +69,6 @@ void CHasu::Update()
 		D3DXMatrixRotationZ(&matWorld2, m_quake);
 		m_position.x += down;
 		if (m_time % 5 == 0){
-			m_time /= 5;
 			m_quake *= -1;
 			down *= -1;
 		}
