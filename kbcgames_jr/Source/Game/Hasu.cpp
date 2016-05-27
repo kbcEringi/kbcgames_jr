@@ -59,19 +59,20 @@ void CHasu::Update()
 	}
 
 	if (m_time >= DOWN){
-		m_position.y -= 0.1f;
+		m_position.y -= 0.05f;
+		if (m_time % 15 == 0){
+		}
+
 		if (m_timerFlag == true){
 			g_bulletPhysics.RemoveRigidBody(m_rigidBody);
 		}
 		m_timerFlag = false;
 	}
-	if (m_time >= QUAKE){
+	else if (m_time >= QUAKE){
 		D3DXMatrixRotationZ(&matWorld2, m_quake);
-		m_position.x += down;
+
 		if (m_time % 5 == 0){
-			m_time /= 5;
 			m_quake *= -1;
-			down *= -1;
 		}
 	}
 }

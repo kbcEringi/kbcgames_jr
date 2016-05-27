@@ -1,13 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Source\Frame\Audio.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\C2DObject.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\C3DDraw.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CAnimation.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Frame\Ccamera.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CGamepad.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\CRandom.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\input.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\RenderTarget.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\SceneManager.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\Shadow.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\WinMain.cpp">
@@ -32,9 +62,6 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Ground.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Hasu.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\IsIntersect.cpp">
@@ -82,45 +109,30 @@
     <ClCompile Include="Source\Game\wood.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Frame\CGimmickManager.cpp">
-      <Filter>Frame\gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\SceneManager.cpp">
-      <Filter>Frame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\C2DObject.cpp">
-      <Filter>Frame\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\C3DDraw.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\CAnimation.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\CGamepad.cpp">
-      <Filter>Frame\input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\input.cpp">
-      <Filter>Frame\input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Audio.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\RenderTarget.cpp">
-      <Filter>Frame\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Shadow.cpp">
-      <Filter>Frame\Graphics</Filter>
+    <ClCompile Include="Source\Game\Hasu.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
       <Filter>Frame</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Frame\C2DObject.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\C3DDraw.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\C3DObject.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CAnimation.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Frame\Ccamera.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CGamepad.h">
       <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\CRandom.h">
@@ -130,6 +142,27 @@
       <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\GraphicsDevice.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Input.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\RenderTarget.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SceCommon.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Scene.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SceneManager.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Shadow.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\SkinModelDate.h">
       <Filter>Frame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\WinMain.h">
@@ -154,9 +187,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Ground.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Hasu.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h">
@@ -207,44 +237,8 @@
     <ClInclude Include="Source\Game\wood.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Frame\CGimmickManager.h">
-      <Filter>Frame\gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Scene.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SceneManager.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SceCommon.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C2DObject.h">
-      <Filter>Frame\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C3DDraw.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C3DObject.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\CAnimation.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\CGamepad.h">
-      <Filter>Frame\input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Input.h">
-      <Filter>Frame\input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SkinModelDate.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\RenderTarget.h">
-      <Filter>Frame\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Shadow.h">
-      <Filter>Frame\Graphics</Filter>
+    <ClInclude Include="Source\Game\Hasu.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,24 +247,6 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{ee6b3297-3e6b-4a18-89ec-8d055874dced}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\gimmick">
-      <UniqueIdentifier>{785706e0-6899-4abb-ad39-475a2416ace3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Scene">
-      <UniqueIdentifier>{9a02cf7e-f8f3-474b-adf5-67dea0facf27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\2D">
-      <UniqueIdentifier>{b0f8ae8b-f11f-4636-a1bc-77114e464b32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\3D">
-      <UniqueIdentifier>{1decfd66-f273-4feb-b105-9e00c445e110}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\input">
-      <UniqueIdentifier>{7ea373e7-61c0-4948-b1e2-b1aa29320dfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Graphics">
-      <UniqueIdentifier>{99bfca17-026c-4490-b840-1787a33e62fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

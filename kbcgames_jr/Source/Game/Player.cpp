@@ -31,14 +31,14 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	
 	//Move();//ˆÚ“®ŠÖ”
+	
+	Died();//Ž€–S”»’è
+	Move(m_Pointa->GetPosition());
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
-	Died();//Ž€–S”»’è
-	Move(m_Pointa->GetPosition());
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_position‚©‚ç‚ÌˆÚ“®—Ê(‚ ‚½‚è”»’è)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 

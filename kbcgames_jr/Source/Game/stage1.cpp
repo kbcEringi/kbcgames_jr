@@ -48,7 +48,7 @@ void CStage1::Initialize()
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_pointa.Initialize();
-	m_GameCursor.Initialize();//ゲームカーソル
+	m_GameCursor.Initialize();//ゲームカーソル000
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
@@ -64,6 +64,9 @@ void CStage1::Initialize()
 
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
+	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+	//this->CreateCollision();
+
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 	
 	this->CreateCollision3D();
@@ -102,7 +105,6 @@ void CStage1::Update()
 		{
 			GAMEFLG->Set3D();
 			m_camera.Set3DProj();
-
 			Remove2DRigidBody();
 			Add3DRigidBody();
 		}
@@ -151,8 +153,8 @@ void CStage1::Update()
 	
 	m_gimmick.Update();
 
-	//m_windmill.D3Dupdate();
 	m_pointa.Update();//ポインタ
+
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.Update();//ゲームカーソルかぜ　
 	m_lost.Update();
@@ -190,6 +192,7 @@ void CStage1::Draw()
 	}
 	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
+
 
 	m_GameCursor.Draw();
 	m_lost.Draw(m_camera.GetViewMatrix());
