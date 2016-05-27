@@ -15,7 +15,7 @@ public:
 		State_DecideYPower,
 		State_DecideXZPower,
 	};
-	CGameCursorWind() : C3DObject(){}
+	CGameCursorWind() : C3DObject(){ wind.x = 0.0f; wind.y = 0.0f; wind.z = 0.0f; }
 	~CGameCursorWind();
 	void Initialize()override;
 	void D3DUpdate()override;
@@ -25,6 +25,7 @@ public:
 	void Ray();
 	void RotScalY();
 	void RotScalXZ();
+	void WindPower();
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;
@@ -48,6 +49,7 @@ private:
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;
 	D3DXVECTOR4 end;
+	D3DXVECTOR3 wind;//•—‚Å”ò‚Ô
 	btSphereShape* m_sphereColli;
 	btCollisionShape*	m_groundShape;
 };

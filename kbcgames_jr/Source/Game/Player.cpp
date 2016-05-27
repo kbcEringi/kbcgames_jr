@@ -26,6 +26,7 @@ void CPlayer::Initialize()
 
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;
+	state = StateWalk;
 	
 }
 
@@ -33,12 +34,28 @@ void CPlayer::D3DUpdate()
 {
 	
 	//Move();//ˆÚ“®ŠÖ”
+	
+	Died();//€–S”»’è
+	if (state == StateWalk)
+	{
+		Move(m_Pointa->GetPosition());
+	}
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
-	Died();//€–S”»’è
-	Move(m_Pointa->GetPosition());
+	if (state == StateFly)
+	{
+		//”ò‚ñ‚Å‚¢‚éB‹ó‹C’ïRB
+		m_moveSpeed.x *= 0.98f;
+		m_moveSpeed.y *= 0.98f;
+		if (D3DXVec3Length(&m_moveSpeed) < 0.1f){
+			state = StateWalk;
+			g_stage->GetCursor()->SetPos(m_position);
+		}
+	}
+
+	
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_position‚©‚ç‚ÌˆÚ“®—Ê(‚ ‚½‚è”»’è)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 

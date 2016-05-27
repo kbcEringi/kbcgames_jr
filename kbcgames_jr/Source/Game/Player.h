@@ -11,6 +11,10 @@ class IPlayerCollisionCallback;
 class CPlayer : public C3DObject
 {
 public:
+	enum State{
+		StateWalk,
+		StateFly,
+	};
 	CPlayer() : C3DObject(){}
 	~CPlayer();
 	void Initialize()override;
@@ -52,7 +56,16 @@ public:
 	{
 		m_callbackList.push_back(callback);
 	}
+	void SetState(State _state)
+	{
+		state = _state;
+	}
+	State GetState()
+	{
+		return state;
+	}
 private:
+	State state;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;		//ˆÚ“®‘¬“x
