@@ -18,8 +18,13 @@ public:
 	{
 		return m_3Ddata.position;
 	}
-	void SetObjectData(ObjectData obj)override{ 
-		C3DObject::SetObjectData(obj);
+	void SetObject2DData(ObjectData obj){ 
+		C3DObject::SetObject2DData(obj);
+		m_aabbMax += obj.position;
+		m_aabbMin += obj.position;
+	}
+	void SetObject3DData(ObjectData obj){
+		C3DObject::SetObject3DData(obj);
 		m_aabbMax += obj.position;
 		m_aabbMin += obj.position;
 	}
