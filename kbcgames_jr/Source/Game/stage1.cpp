@@ -115,7 +115,6 @@ void CStage1::Update()
 		{
 			GAMEFLG->Set3D();
 			m_camera.Set3DProj();
-
 			Remove2DRigidBody();
 			Add3DRigidBody();
 		}
@@ -166,7 +165,7 @@ void CStage1::Update()
 	}
 	m_windmill.D3DUpdate();//風車
 	m_Movefloor.D3DUpdate();//動く床
-	m_Debri.D3DUpdate();//
+	//m_Debri.D3DUpdate();//
 	m_pointa.D3DUpdate();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.D3DUpdate();//ゲームカーソルかぜ　
@@ -206,9 +205,9 @@ void CStage1::Draw()
 		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
 	}
 
-	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
+	//m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	//m_Movefloor.Draw(m_camera.GetViewMatrix(),m_camera.GetProjectionMatrix());//動く床
-	m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
+	//m_setwind.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風描画
 	m_wood.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
 	m_windmill.D3DDraw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
