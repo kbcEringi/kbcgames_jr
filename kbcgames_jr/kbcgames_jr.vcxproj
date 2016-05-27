@@ -91,10 +91,6 @@
     <ClCompile Include="Source\Frame\CAnimation.cpp" />
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\CGamepad.cpp" />
-    <ClCompile Include="Source\Frame\CParticle.cpp" />
-    <ClCompile Include="Source\Frame\CParticleEmitter.cpp" />
-    <ClCompile Include="Source\Frame\CParticleResources.cpp" />
-    <ClCompile Include="Source\Frame\CPrimitive.cpp" />
     <ClCompile Include="Source\Frame\CRandom.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
@@ -135,10 +131,6 @@
     <ClInclude Include="Source\Frame\CAnimation.h" />
     <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\CGamepad.h" />
-    <ClInclude Include="Source\Frame\CParticle.h" />
-    <ClInclude Include="Source\Frame\CParticleEmitter.h" />
-    <ClInclude Include="Source\Frame\CParticleResources.h" />
-    <ClInclude Include="Source\Frame\CPrimitive.h" />
     <ClInclude Include="Source\Frame\CRandom.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
