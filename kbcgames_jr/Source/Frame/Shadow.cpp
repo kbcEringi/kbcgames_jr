@@ -60,7 +60,7 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 		C3DDraw* obj = m_shadowModels[idx]->GetSkinModel();
 		ISetEffectCallback* backup = obj->GetEffectCallback();
 		obj->SetEffectCallback(&callback);
-		m_shadowModels[idx]->Draw(m_lvMatrix, m_projMatrix);
+		m_shadowModels[idx]->D3DDraw(m_lvMatrix, m_projMatrix);
 		obj->SetEffectCallback(backup);
 	}
 	(*graphicsDevice()).SetRenderTarget(0, m_Backbuffer);

@@ -77,7 +77,6 @@ private:
 	CPlayer m_Player;
 	CGround m_Ground;
 	CWood m_wood;
-	CDebri m_Debri;
 	CPointa m_pointa;
 	CAlwaysWind m_setwind;
 	CWindmill m_windmill;

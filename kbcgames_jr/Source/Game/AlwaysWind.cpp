@@ -51,17 +51,22 @@ void CAlwaysWind::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\wood.x");
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
-	/*m_data.position.x = 14.0f;.
-	m_data.position.y = 1.0f;
-	m_data.position.z = 0.0f;*/
+
+	//m_data.position.x = 14.0f;
+	//m_data.position.y = 1.0f;
+	//m_data.position.z = 0.0f;
+
 	D3DXQUATERNION rot;
 	rot.x = 0.0f;
 	rot.y = 0.0f;
 	rot.z = 0.0f;
 	rot.w = 1.0f;
 	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 0.0f, 1.0f), 3.14f*0.25f);
-	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
-	//size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
+ D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
+
+	m_aabbMin += m_3Ddata.position;
+	m_aabbMax += m_3Ddata.position;
+	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
 }
 
@@ -97,9 +102,9 @@ void CAlwaysWind::D3DUpdate()
 
 }
 
-void CAlwaysWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
+void CAlwaysWind::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_3Ddata.position.x, m_3Ddata.position.y, m_3Ddata.position.z);
 	
 	m_SkinModel.Draw(m_matWorld, view, proj);
 }

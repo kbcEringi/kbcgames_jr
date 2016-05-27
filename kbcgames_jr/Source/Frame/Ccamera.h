@@ -1,6 +1,7 @@
 #pragma once
 
 #include"DXCommon.h"
+#include"..\Game\CGameFlg.h"
 
 class Ccamera
 {
@@ -22,8 +23,8 @@ public:
 
 	//滑らかに移動させるのと
 	//直前の３Ｄ座標を記憶させる
-	void Set2Dflg(bool flg){
-		if (flg && !m_2Dflg)
+	void Set2DProj(){
+		if (flg == false)
 		{
 			m_v3DNormal = m_NormalizeObject;
 			m_NormalizeObject.x = 0;
@@ -31,17 +32,19 @@ public:
 			m_NormalizeObject.z = -1;
 			//D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
 			D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
+			flg = true;
 		}
-		else if (!flg && m_2Dflg)
+	}
+	void Set3DProj(){
+		if (flg == true)
 		{
 			m_NormalizeObject = m_v3DNormal;
 			m_Distance = 15;
 			//D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
 			D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
+			flg = false;
 		}
-		m_2Dflg = flg;
 	}
-	bool Get2Dflg(){ return m_2Dflg; }
 	//ニアーを取得。
 	float GetNear()
 	{
@@ -63,7 +66,7 @@ private:
 
 	D3DXVECTOR3 m_v3DNormal;
 
-	bool m_2Dflg;
+	bool flg;
 	float m_viewVolumeW;							//!<ビューボリュームの幅(2Dカメラの時だけ有効。)
 	float m_viewVolumeH;							//!<ビューボリュームの高さ(2Dカメラの時だけ有効。)
 	float Volume;

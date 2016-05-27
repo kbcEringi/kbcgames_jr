@@ -12,10 +12,11 @@ public:
 	void Initialize()override;
 	void D3DUpdate()override;
 	void D2DUpdate()override{}
-	void Draw(D3DXMATRIX, D3DXMATRIX)override;
+	void D2DDraw(D3DXMATRIX, D3DXMATRIX)override{}
+	void D3DDraw(D3DXMATRIX, D3DXMATRIX)override;
 	D3DXVECTOR3 GetPosition()
 	{
-		return m_data.position;
+		return m_3Ddata.position;
 	}
 	void SetObjectData(ObjectData obj)override{ 
 		C3DObject::SetObjectData(obj);

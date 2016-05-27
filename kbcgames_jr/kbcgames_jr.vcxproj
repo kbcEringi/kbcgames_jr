@@ -91,6 +91,7 @@
     <ClCompile Include="Source\Frame\CAnimation.cpp" />
     <ClCompile Include="Source\Frame\Ccamera.cpp" />
     <ClCompile Include="Source\Frame\CGamepad.cpp" />
+    <ClCompile Include="Source\Frame\CRandom.cpp" />
     <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
     <ClCompile Include="Source\Frame\input.cpp" />
     <ClCompile Include="Source\Frame\IsIntersect.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
     <ClCompile Include="Source\Frame\Turn.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />
+    <ClCompile Include="Source\Game\CGameFlg.cpp" />
     <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
@@ -128,6 +130,7 @@
     <ClInclude Include="Source\Frame\CAnimation.h" />
     <ClInclude Include="Source\Frame\Ccamera.h" />
     <ClInclude Include="Source\Frame\CGamepad.h" />
+    <ClInclude Include="Source\Frame\CRandom.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
     <ClInclude Include="Source\Frame\Input.h" />
@@ -143,6 +146,7 @@
     <ClInclude Include="Source\Frame\SkinModelDate.h" />
     <ClInclude Include="Source\Frame\Turn.h" />
     <ClInclude Include="Source\Frame\WinMain.h" />
+    <ClInclude Include="Source\Game\CGameFlg.h" />
     <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />

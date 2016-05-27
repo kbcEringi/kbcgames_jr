@@ -2,6 +2,7 @@
 #include "..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\Ccamera.h";
 #include "Stage1.h"
+#include"CGameFlg.h"
 CPlayer::~CPlayer()
 {
 }
@@ -45,7 +46,7 @@ void CPlayer::D3DUpdate()
 	m_SkinModel.UpdateWorldMatrix(m_matWorld);
 }
 
-void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
+void CPlayer::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	D3DXMATRIX mRot;
@@ -76,7 +77,7 @@ void CPlayer::Move(D3DXVECTOR3 pos)//à⁄ìÆ
 		m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
-	if (g_stage->GetCamera()->Get2Dflg() == false)
+	if (GAMEFLG->Getflg() == false)
 	{
 		if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//è„
 		{
