@@ -1,259 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Game">
-      <UniqueIdentifier>{095b06b0-0241-4e58-8460-3c4965b3c46f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object">
-      <UniqueIdentifier>{fa872c34-4a39-44df-881f-fabb85df9be1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene">
-      <UniqueIdentifier>{e24ee000-4310-4977-8ac1-1f61efe7a80f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BulletPhysics">
-      <UniqueIdentifier>{6062f32b-0b7f-4571-8658-ac44e4e4d0d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame">
-      <UniqueIdentifier>{6f11feb9-f745-445e-9ddd-3e78fb0328a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\2D">
-      <UniqueIdentifier>{24dc14de-7305-4144-9c6f-c9edf9c3211d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\3D">
-      <UniqueIdentifier>{829d49af-8ec8-4c9c-bcd7-620789b66bd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Input">
-      <UniqueIdentifier>{5dade1e6-c40b-4e3c-b0f9-98bfc87f7044}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame\Scene">
-      <UniqueIdentifier>{b81c5df2-83fe-4243-8ec1-b84f3743826f}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Frame\input.cpp">
-      <Filter>Frame\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\C2DObject.cpp">
-      <Filter>Frame\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Audio.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\GraphicsDevice.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\WinMain.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\SceneManager.cpp">
-      <Filter>Frame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Player.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\wood.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Stage1.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\TitleScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Title.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\RenderTarget.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Shadow.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\C3DDraw.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Ccamera.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp">
-      <Filter>BulletPhysics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Ground.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Debri.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\IsIntersect.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Rigidbody.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Pointa.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Windmill.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\AlwaysWind.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\TitleCursor.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\GameCursor.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\RayCursor.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\SkinModelDate.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\CGamepad.cpp">
-      <Filter>Frame\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\Turn.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Stage1Back.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Frame\CAnimation.cpp">
-      <Filter>Frame\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\LostGround.cpp" />
-    <ClCompile Include="Source\Game\Movefloor.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp" />
+    <ClCompile Include="Source\Frame\Audio.cpp" />
+    <ClCompile Include="Source\Frame\C2DObject.cpp" />
+    <ClCompile Include="Source\Frame\C3DDraw.cpp" />
+    <ClCompile Include="Source\Frame\CAnimation.cpp" />
+    <ClCompile Include="Source\Frame\Ccamera.cpp" />
+    <ClCompile Include="Source\Frame\CGamepad.cpp" />
+    <ClCompile Include="Source\Frame\GraphicsDevice.cpp" />
+    <ClCompile Include="Source\Frame\input.cpp" />
+    <ClCompile Include="Source\Frame\IsIntersect.cpp" />
+    <ClCompile Include="Source\Frame\RayCursor.cpp" />
+    <ClCompile Include="Source\Frame\RenderTarget.cpp" />
+    <ClCompile Include="Source\Frame\Rigidbody.cpp" />
+    <ClCompile Include="Source\Frame\SceneManager.cpp" />
+    <ClCompile Include="Source\Frame\Shadow.cpp" />
+    <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
+    <ClCompile Include="Source\Frame\Turn.cpp" />
+    <ClCompile Include="Source\Frame\WinMain.cpp" />
+    <ClCompile Include="Source\Game\Debri.cpp" />
+    <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
-    <ClCompile Include="Source\Game\Hasu.cpp">
-=======
-    <ClCompile Include="Source\Game\GameCursorWind.cpp">
->>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
-      <Filter>Game\Object</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\Game\Ground.cpp" />
+    <ClCompile Include="Source\Game\LostGround.cpp" />
+    <ClCompile Include="Source\Game\Movefloor.cpp" />
+    <ClCompile Include="Source\Game\Player.cpp" />
+    <ClCompile Include="Source\Game\Pointa.cpp" />
+    <ClCompile Include="Source\Game\AlwaysWind.cpp" />
+    <ClCompile Include="Source\Game\Stage1.cpp" />
+    <ClCompile Include="Source\Game\Stage1Back.cpp" />
+    <ClCompile Include="Source\Game\Title.cpp" />
+    <ClCompile Include="Source\Game\TitleCursor.cpp" />
+    <ClCompile Include="Source\Game\TitleScene.cpp" />
+    <ClCompile Include="Source\Game\Windmill.cpp" />
+    <ClCompile Include="Source\Game\wood.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Frame\Input.h">
-      <Filter>Frame\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C2DObject.h">
-      <Filter>Frame\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Audio.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\DXCommon.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\GraphicsDevice.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\WinMain.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SceCommon.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Scene.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SceneManager.h">
-      <Filter>Frame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Player.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\wood.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Stage1.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\TitleScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Title.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\RenderTarget.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Shadow.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C3DDraw.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Ccamera.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BulletPhysics\BulletPhysics.h">
-      <Filter>BulletPhysics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Ground.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Debri.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\IsIntersect.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Rigidbody.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Pointa.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\CGamepad.h">
-      <Filter>Frame\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\TitleCusor.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Windmill.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\AlwaysWind.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\GameCursor.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\RayCursor.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\C3DObject.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\SkinModelDate.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\Turn.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Stage1Back.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Frame\CAnimation.h">
-      <Filter>Frame\3D</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\BulletPhysics\BulletPhysics.h" />
+    <ClInclude Include="Source\Frame\Audio.h" />
+    <ClInclude Include="Source\Frame\C2DObject.h" />
+    <ClInclude Include="Source\Frame\C3DDraw.h" />
+    <ClInclude Include="Source\Frame\C3DObject.h" />
+    <ClInclude Include="Source\Frame\CAnimation.h" />
+    <ClInclude Include="Source\Frame\Ccamera.h" />
+    <ClInclude Include="Source\Frame\CGamepad.h" />
+    <ClInclude Include="Source\Frame\DXCommon.h" />
+    <ClInclude Include="Source\Frame\GraphicsDevice.h" />
+    <ClInclude Include="Source\Frame\Input.h" />
     <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
-    <ClInclude Include="Source\Game\LostGround.h" />
-    <ClInclude Include="Source\Game\Movefloor.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="Source\Frame\IsIntersect.h" />
+    <ClInclude Include="Source\Frame\RayCursor.h" />
+    <ClInclude Include="Source\Frame\RenderTarget.h" />
+    <ClInclude Include="Source\Frame\Rigidbody.h" />
+    <ClInclude Include="Source\Frame\SceCommon.h" />
+    <ClInclude Include="Source\Frame\Scene.h" />
+    <ClInclude Include="Source\Frame\SceneManager.h" />
+    <ClInclude Include="Source\Frame\Shadow.h" />
+    <ClInclude Include="Source\Frame\SkinModelDate.h" />
+    <ClInclude Include="Source\Frame\Turn.h" />
+    <ClInclude Include="Source\Frame\WinMain.h" />
+    <ClInclude Include="Source\Game\Debri.h" />
+    <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
-    <ClInclude Include="Source\Game\Hasu.h">
-=======
-    <ClInclude Include="Source\Game\GameCursorWind.h">
->>>>>>> f244d10771637f1507d0fd2d780c85c9a9576417
-      <Filter>Game\Object</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\Game\Ground.h" />
+    <ClInclude Include="Source\Game\LostGround.h" />
+    <ClInclude Include="Source\Game\Movefloor.h" />
+    <ClInclude Include="Source\Game\Player.h" />
+    <ClInclude Include="Source\Game\Pointa.h" />
+    <ClInclude Include="Source\Game\AlwaysWind.h" />
+    <ClInclude Include="Source\Game\Stage1.h" />
+    <ClInclude Include="Source\Game\Stage1Back.h" />
+    <ClInclude Include="Source\Game\Title.h" />
+    <ClInclude Include="Source\Game\TitleCusor.h" />
+    <ClInclude Include="Source\Game\TitleScene.h" />
+    <ClInclude Include="Source\Game\Windmill.h" />
+    <ClInclude Include="Source\Game\wood.h" />
   </ItemGroup>
 </Project>

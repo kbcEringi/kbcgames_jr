@@ -59,7 +59,7 @@ void CAlwaysWind::Initialize()
 	rot.y = 0.0f;
 	rot.z = 0.0f;
 	rot.w = 1.0f;
-	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);
+	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 0.0f, 1.0f), 3.14f*0.25f);
 	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
 	//size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
 
@@ -77,7 +77,7 @@ void CAlwaysWind::D3DUpdate()
 		&& m_aabbMax.y > pos.y
 		&& m_aabbMax.z > pos.z
 		){
-		m_force = D3DXVECTOR3(25.0f, 0.0f, 0.0f);
+		m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
 		D3DXVECTOR4 force;
 		D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 		m_force.x = force.x;
