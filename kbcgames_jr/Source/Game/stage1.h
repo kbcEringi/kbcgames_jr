@@ -94,6 +94,7 @@ private:
 	btRigidBody*		m_rigidBody3D[MAX_COLLISION];	//çÑëÃ3DÅB
 	btRigidBody*		m_rigidBody2D[MAX_COLLISION];	//çÑëÃ2DÅB
 	btDefaultMotionState* m_myMotionState;
-	
+	bool				m_isAdd2DCollision;
+	bool				m_isAdd3DCollision;
 };
 extern CStage1* g_stage;
