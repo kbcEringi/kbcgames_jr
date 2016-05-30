@@ -41,6 +41,7 @@ struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 
 		}
 
+
 		isHit = true;
 		return 0.0f;
 	}
@@ -65,8 +66,12 @@ void CGameCursorWind::Initialize()
 	D3DXMatrixIdentity(&mScale);
 }
 
-void CGameCursorWind::D3DUpdate()
+void CGameCursorWind::Update()
 {
+	if (g_stage->GetPlayer()->GetState() == CPlayer::StateFly)
+	{
+		return;
+	}
 	if (state == State_Hide)
 	{
 		
@@ -89,6 +94,8 @@ void CGameCursorWind::D3DUpdate()
 		{
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
+				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				WindPower();//•—‚É—Í‚ð
 			}
 		}
 		else
@@ -96,6 +103,8 @@ void CGameCursorWind::D3DUpdate()
 			if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
 			{
 				state = State_Hide;
+				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				WindPower();//•—‚É—Í‚ð
 			}
 		}
 		RotScalY();//‰ñ“]‚ÆŠg‘å
@@ -111,7 +120,7 @@ void CGameCursorWind::D3DUpdate()
 	
 }
 
-void CGameCursorWind::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_matWorld = mScale * mRotationZ * mRotationY * m_matWorld;
@@ -128,7 +137,17 @@ void CGameCursorWind::Ray()
 	{
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
 			//ƒŒƒC‚ð”ò‚Î‚µ‚ÄƒfƒuƒŠ‚ð¶¬‚·‚éÀ•W‚ðŒˆ‚ß‚éB
-			
+			if (GAMEFLG->Getflg() == true)
+			{
+				//SetPosition(callback.hitPos);
+				SetPosition(g_stage->GetPlayer()->GetPosition());
+			}
+			else
+			{
+				//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
+				SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+			}
+#if 0
 			start.x = g_stage->GetCursor()->GetPosition().x;
 			start.y = g_stage->GetCursor()->GetPosition().y;
 			start.z = 0.0f;
@@ -189,6 +208,7 @@ void CGameCursorWind::Ray()
 					SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
 				}
 			}
+#endif
 		}
 		else
 		{
@@ -307,4 +327,12 @@ void CGameCursorWind::RotScalXZ()
 	}
 	D3DXMatrixRotationY(&mRotationY, t);//‰ñ“]
 
+}
+
+void CGameCursorWind::WindPower()
+{
+	wind.x = m_matWorld.m[0][0] * 5.0f;
+	wind.y = m_matWorld.m[0][1] * 5.0f;
+	wind.z = m_matWorld.m[0][2] * 5.0f;
+	g_stage->GetPlayer()->ApplyForce(wind);
 }

@@ -12,12 +12,12 @@ void CGround::Initialize()
 	m_position.z = 0.0f;
 }
 
-void CGround::D3DUpdate()
+void CGround::Update()
 {
 
 }
 
-void CGround::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CGround::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_SkinModel.Draw(m_matWorld, view, proj);

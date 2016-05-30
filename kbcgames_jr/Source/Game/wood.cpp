@@ -15,7 +15,7 @@ void CWood::Initialize()
 
 }
 
-void CWood::D3DUpdate()
+void CWood::Update()
 {
 	//テストコード
 	if ((GetAsyncKeyState('A') & 0x8000) != 0){
@@ -33,7 +33,7 @@ void CWood::D3DUpdate()
 	m_Rigidbody.Update(&m_position);//剛体アップデート
 }
 
-void CWood::D3DDraw(D3DXMATRIX view, D3DXMATRIX proj)
+void CWood::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_Rigidbody.Draw();		//剛体draw
