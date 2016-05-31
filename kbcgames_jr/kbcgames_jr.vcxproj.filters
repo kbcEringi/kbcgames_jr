@@ -112,6 +112,10 @@
     <ClCompile Include="Source\Game\Hasu.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\CGimmickManager.cpp" />
+    <ClCompile Include="Source\Game\Goal.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
@@ -238,6 +242,10 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Hasu.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CGimmickManager.h" />
+    <ClInclude Include="Source\Game\Goal.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

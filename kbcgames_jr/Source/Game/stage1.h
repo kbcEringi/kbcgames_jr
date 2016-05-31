@@ -21,6 +21,7 @@
 #include "LostGround.h"
 #include "GameCursorWind.h"
 #include "Hasu.h"
+#include "Goal.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -85,6 +86,7 @@ private:
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
+	CGoal m_Goal;
 
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;

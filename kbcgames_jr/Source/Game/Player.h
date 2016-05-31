@@ -6,6 +6,7 @@
 #include "..\Frame\Turn.h"
 #include "Pointa.h"
 
+class CAudio;
 class IPlayerCollisionCallback;
 
 class CPlayer : public C3DObject
@@ -71,8 +72,11 @@ private:
 	CIsIntersect m_IsIntersect;		//‚ ‚½‚è”»’è
 	CTurn m_Turn;
 	CPointa* m_Pointa;
+	CAudio* m_pAudio;
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
+
+	bool windflag;
 
 };

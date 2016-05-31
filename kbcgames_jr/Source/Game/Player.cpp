@@ -3,6 +3,8 @@
 #include "..\Frame\Ccamera.h";
 #include "Stage1.h"
 #include"CGameFlg.h"
+#include "..\Frame\Audio.h"
+
 CPlayer::~CPlayer()
 {
 }
@@ -12,7 +14,14 @@ void CPlayer::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
 	m_SkinModel.Setshadowflg(false);
-	m_position.x = 0.0f;				//X座標
+	//オーディオ初期化
+	m_pAudio = new CAudio();
+	m_pAudio->Initialize(
+		"Audio\\Audio.xgs",
+		"Audio\\Wave Bank.xwb",
+		"Audio\\Audio.xsb");
+
+	m_position.x = 250.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
@@ -27,11 +36,14 @@ void CPlayer::Initialize()
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;
 	state = StateFly;
+	windflag = false;
 
 }
 
 void CPlayer::Update()
 {
+	m_pAudio->Run();
+
 
 	Died();//死亡判定
 	if (state == StateWalk)
@@ -48,9 +60,16 @@ void CPlayer::Update()
 		m_moveSpeed.x *= 0.98f;
 		m_moveSpeed.y *= 0.98f;
 		if (D3DXVec3Length(&m_moveSpeed) < 0.1f){
+			windflag = false;
 			state = StateWalk;
 		}
+		if (windflag == false)
+		{
+			m_pAudio->PlayCue("wind");
+			windflag = true;
+		}
 	}
+
 	m_IsIntersect.Intersect(&m_position, &m_moveSpeed, m_callbackList);//m_positionからの移動量(あたり判定)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 

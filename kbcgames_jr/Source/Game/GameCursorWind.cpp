@@ -96,6 +96,7 @@ void CGameCursorWind::Update()
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
 				WindPower();//風に力を
+				g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 		}
 		else
@@ -105,6 +106,7 @@ void CGameCursorWind::Update()
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
 				WindPower();//風に力を
+				g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 		}
 		RotScalY();//回転と拡大
@@ -136,16 +138,18 @@ void CGameCursorWind::Ray()
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
-			//レイを飛ばしてデブリを生成する座標を決める。
+			//レイを飛ばして生成する座標を決める。
 			if (GAMEFLG->Getflg() == true)
 			{
 				//SetPosition(callback.hitPos);
-				SetPosition(g_stage->GetPlayer()->GetPosition());
+				//SetPosition(g_stage->GetPlayer()->GetPosition());
+				SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
 			}
 			else
 			{
 				//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
-				SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+				//SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+				SetPosition(g_stage->GetPlayer()->GetPosition());
 			}
 #if 0
 			start.x = g_stage->GetCursor()->GetPosition().x;

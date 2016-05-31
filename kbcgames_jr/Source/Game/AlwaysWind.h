@@ -4,6 +4,7 @@
 #include"..\Frame\C3DObject.h"
 #include "..\Frame\Rigidbody.h"
 
+
 class CAlwaysWind : public C3DObject
 {
 public:
