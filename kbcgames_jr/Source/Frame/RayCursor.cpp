@@ -1,6 +1,7 @@
 #include "RayCursor.h"
 #include "Ccamera.h"
 #include"GraphicsDevice.h"
+#include "..\Game\Stage1.h"
 
 struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 {
@@ -83,8 +84,8 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 			end.z = 1.0f;
 			end.w = 1.0f;
 
-			int screenW = 960;
-			int screenH = 540;
+		/*	int screenW = 960;
+			int screenH = 540;*/
 			D3DXMATRIX mViewInv = ViewMatrix;
 			D3DXMATRIX mProjInv = ProjectionMatrix;
 #if 1 //DirectXの関数を使用したバージョン。
@@ -151,17 +152,18 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 			callback.startPos.z = start.z;
 			g_bulletPhysics.ConvexSweepTest(m_sphereColli, btStart, btEnd, callback);
 			if (callback.isHit) {//当たったら
-				callback.hitPos.y += 0.5f;
-				//m_Pointa->SetPos(&callback.hitPos);
 				if (GAMEFLG->Getflg() == true)
 				{
-					//m_Pointa->SetPos(D3DXVECTOR3(&callback.hitPos.x,&callback.hitPos.y,0.0f));
-					m_Pointa->SetPos(&callback.hitPos);
+					//ヒットしたXZ座標とPlayerの足元に設置(2D)
+					D3DXVECTOR3 pos = D3DXVECTOR3(callback.hitPos.x, g_stage->GetPlayer()->GetPosition().y - 0.5, callback.hitPos.z);
+					m_Pointa->SetPos(&pos);
 				}
 				else
 				{
+					//ヒットした場所に設置(3D)
 					m_Pointa->SetPos(&callback.hitPos);
 				}
+				g_stage->GetPointa()->SetDraw(true);
 			}
 		}
 		else

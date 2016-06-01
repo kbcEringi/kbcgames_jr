@@ -62,6 +62,10 @@ public:
 	{
 		return &m_GameCursor;
 	}
+	CPointa* GetPointa()
+	{
+		return &m_pointa;
+	}
 private:
 
 	C3DDraw Obj;

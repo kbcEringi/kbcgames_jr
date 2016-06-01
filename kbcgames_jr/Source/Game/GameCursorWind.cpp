@@ -96,7 +96,7 @@ void CGameCursorWind::Update()
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
+				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());//画面の真ん中
 			}
 		}
 		else
@@ -106,7 +106,7 @@ void CGameCursorWind::Update()
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
+				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 		}
 		RotScalY();//回転と拡大
@@ -241,6 +241,7 @@ void CGameCursorWind::RotScalY()
 	D3DVIEWPORT9 vp;
 	(*graphicsDevice()).GetViewport(&vp);
 	//スクリーン座標からワールド座標を求める
+	//2Dカーソル座標を3D座標系に変換する(Zは正規化座標系で0.0)。v0にそれを入れる。
 	D3DXVec3Unproject(
 		reinterpret_cast<D3DXVECTOR3*>(&v0),
 		reinterpret_cast<const D3DXVECTOR3*>(&v0),
@@ -249,6 +250,7 @@ void CGameCursorWind::RotScalY()
 		reinterpret_cast<const D3DXMATRIX*>(&mView),
 		NULL
 		);
+	//2Dカーソル座標を3D座標系に変換する(Zは正規化座標系で1.0)。v1にそれを入れる。
 	D3DXVec3Unproject(
 		reinterpret_cast<D3DXVECTOR3*>(&v1),
 		reinterpret_cast<const D3DXVECTOR3*>(&v1),
@@ -257,8 +259,11 @@ void CGameCursorWind::RotScalY()
 		reinterpret_cast<const D3DXMATRIX*>(&mView),
 		NULL
 		);
+	//3D空間上のz座標0.0がカーソルのレイ上でどの位置にいるかを計算(0.0～1.0)
 	float t = (-v0.z) / (v1.z - v0.z);
+	//カーソルのレイ上でZが0.0になる座標を計算する。
 	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
+	//プレイヤーの足元から、先ほど求めた座標へのベクトルを計算する。
 	D3DXVECTOR3 v4 = v3 - m_position;
 	D3DXVECTOR3 v5 = v4;
 	D3DXVec3Normalize(&v4, &v4);
@@ -274,11 +279,14 @@ void CGameCursorWind::RotScalY()
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
 	D3DXVECTOR3 size;
-	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
-	size = m_aabbMax - m_aabbMin;
+	if (GAMEFLG->Getflg() == true)
+	{
+		CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
+		size = m_aabbMax - m_aabbMin;
 
-	//v5.x /= size.x;
-	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+		//v5.x /= size.x;
+		D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+	}
 }
 
 void CGameCursorWind::RotScalXZ()
@@ -330,6 +338,13 @@ void CGameCursorWind::RotScalXZ()
 		t *= -1.0f;
 	}
 	D3DXMatrixRotationY(&mRotationY, t);//回転
+
+	D3DXVECTOR3 m_aabbMin;
+	D3DXVECTOR3 m_aabbMax;
+	D3DXVECTOR3 size;
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
+	size = m_aabbMax - m_aabbMin;
+	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
 
 }
 

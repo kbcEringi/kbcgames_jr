@@ -6,6 +6,8 @@
 #include "..\Frame\Turn.h"
 #include "Pointa.h"
 
+#define FRICTION 0.98;//ñÄéC
+
 class CAudio;
 class IPlayerCollisionCallback;
 
@@ -23,6 +25,7 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX);
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
 	void Died();
+	void Positin2D();//2Dç¿ïWÇ…ïœä∑
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
@@ -65,6 +68,7 @@ public:
 	}
 private:
 	State state;
+	D3DXVECTOR3 m_position2D;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;		//à⁄ìÆë¨ìx
@@ -76,7 +80,5 @@ private:
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
-
-	bool windflag;
 
 };

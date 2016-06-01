@@ -19,12 +19,21 @@ public:
 	{
 		m_position = *pos;
 	}
+	void SetDraw(bool flag)
+	{
+		DrawFlag = flag;
+	}
 	LPD3DXMESH GetMesh()
 	{
 		return m_mesh;
+	}
+	bool GetDraw()
+	{
+		return DrawFlag;
 	}
 private:
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;
+	bool DrawFlag;
 };
