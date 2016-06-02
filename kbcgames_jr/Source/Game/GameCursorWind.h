@@ -24,6 +24,7 @@ public:
 	void RotScalY();
 	void RotScalXZ();
 	void WindPower();
+	void Positin2D();//2Dç¿ïWÇ…ïœä∑
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;
@@ -41,8 +42,9 @@ private:
 	
 	State state;
 	//D3DXMATRIX mRotation;
-	D3DXMATRIX mRotationY;
-	D3DXMATRIX mRotationZ;
+	/*D3DXMATRIX mRotationY;
+	D3DXMATRIX mRotationZ;*/
+	float	angle[2];
 	D3DXMATRIX mScale;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;
@@ -50,4 +52,5 @@ private:
 	D3DXVECTOR3 wind;//ïóÇ≈îÚÇ‘
 	btSphereShape* m_sphereColli;
 	btCollisionShape*	m_groundShape;
+	D3DXVECTOR3 m_Cursol2Dpos;//
 };

@@ -86,7 +86,7 @@ void CStage1::Update()
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (!(GAMEFLG->Getflg()))
+		/*if (!(GAMEFLG->Getflg()))
 		{
 			if (GAMEPAD(CGamepad)->GetStickR_X() > 0)
 			{
@@ -96,7 +96,7 @@ void CStage1::Update()
 			{
 				m_camera.RotTransversal(0.05f);
 			}
-		}
+		}*/
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
 		{
 			GAMEFLG->Set2D();
@@ -114,7 +114,7 @@ void CStage1::Update()
 	}
 	else
 	{
-		if (!(GAMEFLG->Getflg()))
+		/*if (!(GAMEFLG->Getflg()))
 		{
 			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 			{
@@ -124,7 +124,7 @@ void CStage1::Update()
 			{
 				m_camera.RotTransversal(0.05f);
 			}
-		}
+		}*/
 		if (GetAsyncKeyState(VK_Q) & 0x8000)
 		{
 			GAMEFLG->Set2D();
@@ -196,9 +196,10 @@ void CStage1::Draw()
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 
-	m_GameCursor.Draw();
+	
 	m_lost.Draw(m_camera.GetViewMatrix());
 	m_hasu.Draw(m_camera.GetViewMatrix());
+	m_GameCursor.Draw();//ゲームカーソル（一番前に表示）
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

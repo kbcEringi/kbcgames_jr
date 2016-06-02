@@ -14,7 +14,9 @@ void CGameCursor::Update()
 
 void CGameCursor::Draw()
 {
+	(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, FALSE);
 	m_2Dobj.Draw(vec3Position, vec3Scale);
+	(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, TRUE);
 }
 
 void CGameCursor::Move()

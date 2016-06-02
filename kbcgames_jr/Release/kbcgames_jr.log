@@ -1,0 +1,118 @@
+﻿2016/06/01 21:13:08 にビルドを開始しました。
+     1>ノード 3 上のプロジェクト "C:\GitHub\kbcGames_jr\kbcgames_jr\kbcgames_jr.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\BulletPhysics\BulletPhysics.cpp Source\Frame\Audio.cpp Source\Frame\C2DObject.cpp Source\Frame\C3DDraw.cpp Source\Frame\CAnimation.cpp Source\Frame\Ccamera.cpp Source\Frame\CGamepad.cpp Source\Frame\CGimmickManager.cpp Source\Frame\CRandom.cpp Source\Frame\GraphicsDevice.cpp Source\Frame\input.cpp Source\Frame\IsIntersect.cpp Source\Frame\RayCursor.cpp Source\Frame\RenderTarget.cpp Source\Frame\Rigidbody.cpp Source\Frame\SceneManager.cpp Source\Frame\Shadow.cpp Source\Frame\SkinModelDate.cpp Source\Frame\Turn.cpp Source\Frame\WinMain.cpp Source\Game\CGameFlg.cpp Source\Game\Debri.cpp Source\Game\GameCursor.cpp Source\Game\GameCursorWind.cpp Source\Game\Goal.cpp Source\Game\Ground.cpp Source\Game\Hasu.cpp Source\Game\LostGround.cpp Source\Game\Movefloor.cpp Source\Game\Player.cpp Source\Game\Pointa.cpp Source\Game\AlwaysWind.cpp Source\Game\Stage1.cpp Source\Game\Stage1Back.cpp Source\Game\Title.cpp Source\Game\TitleCursor.cpp Source\Game\TitleScene.cpp Source\Game\Windmill.cpp Source\Game\wood.cpp
+         BulletPhysics.cpp
+         Audio.cpp
+         C2DObject.cpp
+         C3DDraw.cpp
+     1>Source\Frame\C3DDraw.cpp(50): warning C4244: '引数' : 'DWORD' から 'FLOAT' への変換です。データが失われる可能性があります。
+     1>Source\Frame\C3DDraw.cpp(105): warning C4244: '引数' : 'DWORD' から 'FLOAT' への変換です。データが失われる可能性があります。
+         CAnimation.cpp
+         Ccamera.cpp
+         CGamepad.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         CGimmickManager.cpp
+         CRandom.cpp
+         GraphicsDevice.cpp
+         input.cpp
+         IsIntersect.cpp
+         RayCursor.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+     1>Source\Frame\RayCursor.cpp(158): warning C4244: '引数' : 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+         RenderTarget.cpp
+         Rigidbody.cpp
+         SceneManager.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Shadow.cpp
+         SkinModelDate.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\GraphicsDevice.h(4): warning C4005: 'SAFE_RELEASE' : マクロが再定義されました。
+                 Source\Frame\SkinModelDate.cpp(10) : 'SAFE_RELEASE' の前の定義を確認してください
+     1>Source\Frame\SkinModelDate.cpp(257): warning C4316: 'D3DXFRAME_DERIVED' : ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
+     1>Source\Frame\SkinModelDate.cpp(395): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(112) : 'strcpy' の宣言を確認してください。
+     1>Source\Frame\SkinModelDate.cpp(396): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 'strcat' の宣言を確認してください。
+         Turn.cpp
+         WinMain.cpp
+         コンパイル中...
+         CGameFlg.cpp
+         Debri.cpp
+         GameCursor.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\game\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         GameCursorWind.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\game\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Goal.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Ground.cpp
+         Hasu.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         LostGround.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Movefloor.cpp
+         Player.cpp
+     1>Source\Game\Player.cpp(3): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Pointa.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         AlwaysWind.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Stage1.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Stage1Back.cpp
+         Title.cpp
+         TitleCursor.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\game\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         TitleScene.cpp
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\game\..\Frame\CGamepad.h(118): warning C4800: 'const int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+         Windmill.cpp
+         wood.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\GitHub\kbcGames_jr\Release\kbcgames_jr.exe" /INCREMENTAL:NO /NOLOGO BulletCollision.lib BulletDynamics.lib BulletSoftBody.lib LinearMath.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\GitHub\kbcGames_jr\Release\kbcgames_jr.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\GitHub\kbcGames_jr\Release\kbcgames_jr.lib" /MACHINE:X86 /SAFESEH Release\BulletPhysics.obj
+         Release\Audio.obj
+         Release\C2DObject.obj
+         Release\C3DDraw.obj
+         Release\CAnimation.obj
+         Release\Ccamera.obj
+         Release\CGamepad.obj
+         Release\CGimmickManager.obj
+         Release\CRandom.obj
+         Release\GraphicsDevice.obj
+         Release\input.obj
+         Release\IsIntersect.obj
+         Release\RayCursor.obj
+         Release\RenderTarget.obj
+         Release\Rigidbody.obj
+         Release\SceneManager.obj
+         Release\Shadow.obj
+         Release\SkinModelDate.obj
+         Release\Turn.obj
+         Release\WinMain.obj
+         Release\CGameFlg.obj
+         Release\Debri.obj
+         Release\GameCursor.obj
+         Release\GameCursorWind.obj
+         Release\Goal.obj
+         Release\Ground.obj
+         Release\Hasu.obj
+         Release\LostGround.obj
+         Release\Movefloor.obj
+         Release\Player.obj
+         Release\Pointa.obj
+         Release\AlwaysWind.obj
+         Release\Stage1.obj
+         Release\Stage1Back.obj
+         Release\Title.obj
+         Release\TitleCursor.obj
+         Release\TitleScene.obj
+         Release\Windmill.obj
+         Release\wood.obj
+         コード生成しています。
+     1>c:\github\kbcgames_jr\kbcgames_jr\source\frame\audio.cpp(145): warning C4715: 'CAudio::CreateSoundBank' : 値を返さないコントロール パスがあります。
+         コード生成が終了しました。
+         kbcgames_jr.vcxproj -> C:\GitHub\kbcGames_jr\Release\kbcgames_jr.exe
+     1>プロジェクト "C:\GitHub\kbcGames_jr\kbcgames_jr\kbcgames_jr.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:35.18
