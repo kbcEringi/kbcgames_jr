@@ -21,6 +21,7 @@ public:
 		m_aabbMax += obj.position;
 		m_aabbMin += obj.position;
 	}
+
 private:
 	D3DXMATRIX m_rotationMatrix;
 	D3DXVECTOR3 m_force;
