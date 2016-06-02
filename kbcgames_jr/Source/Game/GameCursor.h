@@ -16,6 +16,10 @@ public:
 	{
 		return vec3Position;
 	}
+	void SetPos(D3DXVECTOR3 pos)
+	{
+		vec3Position = pos;
+	}
 
 private:
 	C2DObject m_2Dobj;

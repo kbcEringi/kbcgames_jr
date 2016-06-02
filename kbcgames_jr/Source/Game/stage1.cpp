@@ -30,6 +30,8 @@ SGimmickData gimmick2dobj[] = {
 
 void CStage1::Initialize()
 {
+	m_isAdd2DCollision = false;
+	m_isAdd3DCollision = false;
 	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
@@ -52,6 +54,7 @@ void CStage1::Initialize()
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
+	m_Goal.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -94,14 +97,14 @@ void CStage1::Update()
 				m_camera.RotTransversal(0.05f);
 			}
 		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER))
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
 		{
 			GAMEFLG->Set2D();
 			m_camera.Set2DProj();
 			Remove3DRigidBody();
 			Add2DRigidBody();
 		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER))
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
 		{
 			GAMEFLG->Set3D();
 			m_camera.Set3DProj();
@@ -134,16 +137,23 @@ void CStage1::Update()
 			m_camera.Set3DProj();
 		}
 	}
-	if (GAMEFLG->Getflg())
+	/*if (GAMEFLG->Getflg())
 	{
 		this->CreateCollision2D();
 	}
 	else
 	{
 		this->CreateCollision3D();
-	}
+	}*/
 
 	m_pAudio->Run();	//周期タスク実行
+	//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
+	//{
+	//	m_camera.SetLookat(m_GameCursor.GetPosition());//Playerを追いかけるカメラ
+	//}
+	//else{
+	//	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+	//}
 	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	m_camera.Update();
 
@@ -154,13 +164,12 @@ void CStage1::Update()
 	m_gimmick.Update();
 
 	m_pointa.Update();//ポインタ
-
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.Update();//ゲームカーソルかぜ　
 	m_lost.Update();
 	m_Back1.Update();
 	m_hasu.Update();
-
+	m_Goal.Update();//ゴール
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -172,6 +181,7 @@ void CStage1::Draw()
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
+	m_Goal.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゴール
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	
@@ -275,36 +285,48 @@ void CStage1::CreateCollision2D()
 
 void CStage1::Add2DRigidBody()//ワールドに追加。
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable2D);
-	for (int i = 0; i < arraySize; i++)
-	{
-		g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
+	if (!m_isAdd2DCollision){
+		m_isAdd2DCollision = true;
+		int arraySize = ARRAYSIZE(collisionInfoTable2D);
+		for (int i = 0; i < arraySize; i++)
+		{
+			g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
+		}
 	}
 }
 
 void CStage1::Add3DRigidBody()//ワールドに追加。
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable3D);
-	for (int i = 0; i < arraySize; i++)
-	{
-		g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
+	if (!m_isAdd3DCollision){
+		m_isAdd3DCollision = true;
+		int arraySize = ARRAYSIZE(collisionInfoTable3D);
+		for (int i = 0; i < arraySize; i++)
+		{
+			g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
+		}
 	}
 }
 
 void CStage1::Remove2DRigidBody()//ワールドから削除
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable2D);
-	for (int i = 0; i < arraySize; i++)
-	{
-		g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
+	if (m_isAdd2DCollision){
+		m_isAdd2DCollision = false;
+		int arraySize = ARRAYSIZE(collisionInfoTable2D);
+		for (int i = 0; i < arraySize; i++)
+		{
+			g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
+		}
 	}
 }
 
 void CStage1::Remove3DRigidBody()//ワールドから削除
 {
-	int arraySize = ARRAYSIZE(collisionInfoTable3D);
-	for (int i = 0; i < arraySize; i++)
-	{
-		g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
+	if (m_isAdd3DCollision){
+		m_isAdd3DCollision = false;
+		int arraySize = ARRAYSIZE(collisionInfoTable3D);
+		for (int i = 0; i < arraySize; i++)
+		{
+			g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
+		}
 	}
 }

@@ -41,6 +41,7 @@ struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 
 		}
 
+
 		isHit = true;
 		return 0.0f;
 	}
@@ -67,6 +68,10 @@ void CGameCursorWind::Initialize()
 
 void CGameCursorWind::Update()
 {
+	if (g_stage->GetPlayer()->GetState() == CPlayer::StateFly)
+	{
+		return;
+	}
 	if (state == State_Hide)
 	{
 		
@@ -89,6 +94,9 @@ void CGameCursorWind::Update()
 		{
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
+				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				WindPower();//風に力を
+				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());//画面の真ん中
 			}
 		}
 		else
@@ -96,6 +104,9 @@ void CGameCursorWind::Update()
 			if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
 			{
 				state = State_Hide;
+				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				WindPower();//風に力を
+				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 		}
 		RotScalY();//回転と拡大
@@ -127,8 +138,20 @@ void CGameCursorWind::Ray()
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
-			//レイを飛ばしてデブリを生成する座標を決める。
-			
+			//レイを飛ばして生成する座標を決める。
+			if (GAMEFLG->Getflg() == true)
+			{
+				//SetPosition(callback.hitPos);
+				//SetPosition(g_stage->GetPlayer()->GetPosition());
+				SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+			}
+			else
+			{
+				//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
+				//SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+				SetPosition(g_stage->GetPlayer()->GetPosition());
+			}
+#if 0
 			start.x = g_stage->GetCursor()->GetPosition().x;
 			start.y = g_stage->GetCursor()->GetPosition().y;
 			start.z = 0.0f;
@@ -189,6 +212,7 @@ void CGameCursorWind::Ray()
 					SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
 				}
 			}
+#endif
 		}
 		else
 		{
@@ -217,6 +241,7 @@ void CGameCursorWind::RotScalY()
 	D3DVIEWPORT9 vp;
 	(*graphicsDevice()).GetViewport(&vp);
 	//スクリーン座標からワールド座標を求める
+	//2Dカーソル座標を3D座標系に変換する(Zは正規化座標系で0.0)。v0にそれを入れる。
 	D3DXVec3Unproject(
 		reinterpret_cast<D3DXVECTOR3*>(&v0),
 		reinterpret_cast<const D3DXVECTOR3*>(&v0),
@@ -225,6 +250,7 @@ void CGameCursorWind::RotScalY()
 		reinterpret_cast<const D3DXMATRIX*>(&mView),
 		NULL
 		);
+	//2Dカーソル座標を3D座標系に変換する(Zは正規化座標系で1.0)。v1にそれを入れる。
 	D3DXVec3Unproject(
 		reinterpret_cast<D3DXVECTOR3*>(&v1),
 		reinterpret_cast<const D3DXVECTOR3*>(&v1),
@@ -233,8 +259,11 @@ void CGameCursorWind::RotScalY()
 		reinterpret_cast<const D3DXMATRIX*>(&mView),
 		NULL
 		);
+	//3D空間上のz座標0.0がカーソルのレイ上でどの位置にいるかを計算(0.0～1.0)
 	float t = (-v0.z) / (v1.z - v0.z);
+	//カーソルのレイ上でZが0.0になる座標を計算する。
 	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
+	//プレイヤーの足元から、先ほど求めた座標へのベクトルを計算する。
 	D3DXVECTOR3 v4 = v3 - m_position;
 	D3DXVECTOR3 v5 = v4;
 	D3DXVec3Normalize(&v4, &v4);
@@ -250,11 +279,14 @@ void CGameCursorWind::RotScalY()
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
 	D3DXVECTOR3 size;
-	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
-	size = m_aabbMax - m_aabbMin;
+	if (GAMEFLG->Getflg() == true)
+	{
+		CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
+		size = m_aabbMax - m_aabbMin;
 
-	//v5.x /= size.x;
-	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+		//v5.x /= size.x;
+		D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+	}
 }
 
 void CGameCursorWind::RotScalXZ()
@@ -307,4 +339,19 @@ void CGameCursorWind::RotScalXZ()
 	}
 	D3DXMatrixRotationY(&mRotationY, t);//回転
 
+	D3DXVECTOR3 m_aabbMin;
+	D3DXVECTOR3 m_aabbMax;
+	D3DXVECTOR3 size;
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
+	size = m_aabbMax - m_aabbMin;
+	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
+
+}
+
+void CGameCursorWind::WindPower()
+{
+	wind.x = m_matWorld.m[0][0] * 5.0f;
+	wind.y = m_matWorld.m[0][1] * 5.0f;
+	wind.z = m_matWorld.m[0][2] * 5.0f;
+	g_stage->GetPlayer()->ApplyForce(wind);
 }

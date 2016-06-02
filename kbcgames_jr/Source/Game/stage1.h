@@ -17,12 +17,12 @@
 #include "AlwaysWind.h"
 #include "Windmill.h"
 #include "Movefloor.h"
-#include "Debri.h"
 #include "Pointa.h"
 #include "Stage1Back.h"
 #include "LostGround.h"
 #include "GameCursorWind.h"
 #include "Hasu.h"
+#include "Goal.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -63,6 +63,10 @@ public:
 	{
 		return &m_GameCursor;
 	}
+	CPointa* GetPointa()
+	{
+		return &m_pointa;
+	}
 private:
 
 	C3DDraw Obj;
@@ -87,6 +91,7 @@ private:
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
+	CGoal m_Goal;
 
 	//ギミックManager
 	CGimmickManager m_gimmick;
@@ -96,6 +101,7 @@ private:
 	btRigidBody*		m_rigidBody3D[MAX_COLLISION];	//剛体3D。
 	btRigidBody*		m_rigidBody2D[MAX_COLLISION];	//剛体2D。
 	btDefaultMotionState* m_myMotionState;
-	
+	bool				m_isAdd2DCollision;
+	bool				m_isAdd3DCollision;
 };
 extern CStage1* g_stage;

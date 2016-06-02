@@ -107,10 +107,10 @@
     <ClCompile Include="Source\Frame\WinMain.cpp" />
     <ClCompile Include="Source\Game\CGameFlg.cpp" />
     <ClCompile Include="Source\Game\CSelectCursor.cpp" />
-    <ClCompile Include="Source\Game\Debri.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
     <ClCompile Include="Source\Game\GameScene.cpp" />
+    <ClCompile Include="Source\Game\Goal.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Hasu.cpp" />
     <ClCompile Include="Source\Game\LostGround.cpp" />
@@ -157,10 +157,10 @@
     <ClInclude Include="Source\Frame\WinMain.h" />
     <ClInclude Include="Source\Game\CGameFlg.h" />
     <ClInclude Include="Source\Game\CSelectCursor.h" />
-    <ClInclude Include="Source\Game\Debri.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
     <ClInclude Include="Source\Game\GameScene.h" />
+    <ClInclude Include="Source\Game\Goal.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Hasu.h" />
     <ClInclude Include="Source\Game\LostGround.h" />
