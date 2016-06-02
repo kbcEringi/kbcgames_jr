@@ -13,11 +13,11 @@ struct SCollisionInfo {
 };
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include "CollisionInfo3D.h"
+#include "Collision3D_stage1.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
-#include "CollisionInfo2D.h"
+#include "Collision2D_stage1.h"
 };
 
 SGimmickData gimmick3dobj[] = {
@@ -138,14 +138,6 @@ void CStage1::Update()
 			m_camera.Set3DProj();
 		}
 	}
-	/*if (GAMEFLG->Getflg())
-	{
-		this->CreateCollision2D();
-	}
-	else
-	{
-		this->CreateCollision3D();
-	}*/
 
 	m_pAudio->Run();	//周期タスク実行
 	//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))

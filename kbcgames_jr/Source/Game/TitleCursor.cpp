@@ -5,7 +5,7 @@ void CTitleCursor::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\buttefly.png");
 	m_scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
-	m_position = D3DXVECTOR3(320.0f, 200.0f, 0.0f);
+	m_position = D3DXVECTOR3(480.0f, 320.0f, 0.0f);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -15,7 +15,7 @@ void CTitleCursor::Initialize()
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_selectIndex = 0;
-	m_moveDistance = 130;
+	m_moveDistance = 120;
 
 }
 
@@ -31,7 +31,7 @@ void CTitleCursor::Update()
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()<0)//↓押されたら
+		if (GAMEPAD(CGamepad)->GetStickL_Y()<0)//↓押されたら
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex < MAX_COMAND_NUM - 1)
@@ -39,7 +39,26 @@ void CTitleCursor::Update()
 				dir = 1;
 			}
 		}
-		else if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()>0)//↑押されたら
+		else if (GAMEPAD(CGamepad)->GetStickL_Y()>0)//↑押されたら
+		{
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex > 0)
+			{
+				dir = -1;
+			}
+		}
+	}
+	else
+	{
+		if (KEYDOWN(diks, DIK_DOWN))//↓押されたら
+		{
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex < MAX_COMAND_NUM - 1)
+			{
+				dir = 1;
+			}
+		}
+		else if (KEYDOWN(diks, DIK_UP))//↑押されたら
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex > 0)
