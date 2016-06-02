@@ -5,7 +5,7 @@ void CTitleCursor::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\buttefly.png");
 	m_scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
-	m_position = D3DXVECTOR3(320.0f, 200.0f, 0.0f);
+	m_position = D3DXVECTOR3(480.0f, 320.0f, 0.0f);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -15,7 +15,7 @@ void CTitleCursor::Initialize()
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_selectIndex = 0;
-	m_moveDistance = 130;
+	m_moveDistance = 120;
 
 }
 
