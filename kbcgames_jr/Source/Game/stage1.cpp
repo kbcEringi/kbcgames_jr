@@ -55,6 +55,7 @@ void CStage1::Initialize()
 	m_lost.Initialize();
 	m_hasu.Initialize();
 	m_Goal.Initialize();
+	m_Movefloor.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -162,6 +163,7 @@ void CStage1::Update()
 	m_Back1.Update();
 	m_hasu.Update();
 	m_Goal.Update();//ゴール
+	m_Movefloor.Update();
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -169,14 +171,12 @@ void CStage1::Update()
 
 void CStage1::Draw()
 {
-
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Goal.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゴール
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	
 	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
@@ -199,6 +199,8 @@ void CStage1::Draw()
 	
 	m_lost.Draw(m_camera.GetViewMatrix());
 	m_hasu.Draw(m_camera.GetViewMatrix());
+	
+	m_Movefloor.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_GameCursor.Draw();//ゲームカーソル（一番前に表示）
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
