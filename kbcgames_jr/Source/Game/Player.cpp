@@ -10,7 +10,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\TestDate.x");	//プレイヤーXファイル
+	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
 	m_SkinModel.Setshadowflg(false);
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 4.0f;				//Y座標
