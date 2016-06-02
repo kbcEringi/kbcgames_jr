@@ -55,6 +55,7 @@ void CStage1::Initialize()
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
+	m_Goal.Initialize();
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -164,14 +165,13 @@ void CStage1::Update()
 	m_gimmick.Update();
 
 	m_pointa.Update();//ポインタ
-
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.Update();//ゲームカーソルかぜ　
 	m_windmill.Update();
 	m_lost.Update();
 	m_Back1.Update();
 	m_hasu.Update();
-
+	m_Goal.Update();//ゴール
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -183,6 +183,7 @@ void CStage1::Draw()
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
+	m_Goal.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゴール
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	

@@ -31,7 +31,7 @@ void CTitleCursor::Update()
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()<0)//«‰Ÿ‚³‚ê‚½‚ç
+		if (GAMEPAD(CGamepad)->GetStickL_Y()<0)//«‰Ÿ‚³‚ê‚½‚ç
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex < MAX_COMAND_NUM - 1)
@@ -39,7 +39,26 @@ void CTitleCursor::Update()
 				dir = 1;
 			}
 		}
-		else if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y()>0)//ª‰Ÿ‚³‚ê‚½‚ç
+		else if (GAMEPAD(CGamepad)->GetStickL_Y()>0)//ª‰Ÿ‚³‚ê‚½‚ç
+		{
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex > 0)
+			{
+				dir = -1;
+			}
+		}
+	}
+	else
+	{
+		if (KEYDOWN(diks, DIK_DOWN))//«‰Ÿ‚³‚ê‚½‚ç
+		{
+			m_pAudio->PlayCue("select");
+			if (m_selectIndex < MAX_COMAND_NUM - 1)
+			{
+				dir = 1;
+			}
+		}
+		else if (KEYDOWN(diks, DIK_UP))//ª‰Ÿ‚³‚ê‚½‚ç
 		{
 			m_pAudio->PlayCue("select");
 			if (m_selectIndex > 0)

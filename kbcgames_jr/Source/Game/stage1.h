@@ -1,7 +1,9 @@
 #pragma once
 
+//ステージ１クラス
+#include"..\Frame\Stage\CStage.h"
+
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\Scene.h"
 #include"..\Frame\Ccamera.h"
 #include "..\Frame\RayCursor.h"//カーソル
 
@@ -15,12 +17,12 @@
 #include "AlwaysWind.h"
 #include "Windmill.h"
 #include "Movefloor.h"
-#include "Debri.h"
 #include "Pointa.h"
 #include "Stage1Back.h"
 #include "LostGround.h"
 #include "GameCursorWind.h"
 #include "Hasu.h"
+#include "Goal.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -30,16 +32,16 @@
 
 #define MAX_COLLISION 100
 
-class CSceneManager;
 class CAudio;
 class C3DObject;
 
 enum GIMMICK{ AlwaysWind };
 
-class CStage1 : public CScene
+class CStage1 : public CStage
 {
 public:
-	CStage1(const string& name) :CScene(name){}
+	CStage1(){}
+	~CStage1(){}
 	void Initialize();
 	void Update();
 	void Draw();
@@ -60,6 +62,10 @@ public:
 	CGameCursor* GetCursor()
 	{
 		return &m_GameCursor;
+	}
+	CPointa* GetPointa()
+	{
+		return &m_pointa;
 	}
 private:
 
@@ -85,6 +91,7 @@ private:
 	CLostGround m_lost;
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
+	CGoal m_Goal;
 
 	//ギミックManager
 	CGimmickManager m_gimmick;
