@@ -85,9 +85,6 @@
     <ClCompile Include="Source\Frame\Rigidbody.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Stage1.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game\Stage1Back.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\TitleCursor.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\TitleScene.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\Turn.cpp">
@@ -111,6 +105,27 @@
     </ClCompile>
     <ClCompile Include="Source\Game\Hasu.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\Stage\CStageManager.cpp">
+      <Filter>Frame\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage1.cpp">
+      <Filter>Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\TitleScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\CGimmickManager.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\SelectScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\CSelectCursor.cpp">
+      <Filter>Game\SelectScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +228,6 @@
     <ClInclude Include="Source\Frame\Rigidbody.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Stage1.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\Stage1Back.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -223,9 +235,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TitleCusor.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\TitleScene.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Turn.h">
@@ -240,6 +249,30 @@
     <ClInclude Include="Source\Game\Hasu.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Frame\Stage\CStage.h">
+      <Filter>Frame\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Stage\CStageManager.h">
+      <Filter>Frame\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage1.h">
+      <Filter>Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\CGimmickManager.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\SelectScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\CSelectCursor.h">
+      <Filter>Game\SelectScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Frame">
@@ -247,6 +280,18 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{ee6b3297-3e6b-4a18-89ec-8d055874dced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\Stage">
+      <UniqueIdentifier>{bf17b08a-1769-434b-a8c7-997d40fd282d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Stage">
+      <UniqueIdentifier>{2209adb1-8bcc-42b1-b95b-30883ea5ec3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{e4b78a81-9966-46fe-b290-0642dfc5dd93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SelectScene">
+      <UniqueIdentifier>{91485832-4c1a-4971-835c-401e1d787082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

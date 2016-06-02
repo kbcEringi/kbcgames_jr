@@ -15,7 +15,20 @@ CGimmickManager::CGimmickManager()
 
 CGimmickManager::~CGimmickManager()
 {
-	
+	p = m_2DGimmick.begin();
+	while (p != m_2DGimmick.end())
+	{
+		delete *p;
+		p++;
+	}
+	p = m_3DGimmick.begin();
+	while (p != m_3DGimmick.end())
+	{
+		delete *p;
+		p++;
+	}
+	m_3DGimmick.clear();
+	m_2DGimmick.clear();
 }
 
 void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmickData* gimmick2dobj, int num2d)
