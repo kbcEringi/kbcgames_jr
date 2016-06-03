@@ -4,7 +4,7 @@
 
 class CScene;
 
-enum SCENE {TITLE,SELECT,GAME};
+enum SCENE {TITLE,SELECT,GAME,RESULT};
 
 #define SINSTANCE(p) p::getInstance()
 

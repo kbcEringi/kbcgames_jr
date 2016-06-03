@@ -1,6 +1,7 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
+#include "..\Frame\SceneManager.h"
 
 CShadowMap g_Shadow;
 

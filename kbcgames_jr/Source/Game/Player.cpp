@@ -4,6 +4,7 @@
 #include "Stage1.h"
 #include"CGameFlg.h"
 #include "..\Frame\Audio.h"
+#include "ResultScene.h"
 
 CPlayer::~CPlayer()
 {
@@ -32,6 +33,8 @@ void CPlayer::Initialize()
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
+
+	deid = false;
 
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;
@@ -139,8 +142,8 @@ void CPlayer::Move(D3DXVECTOR3 pos)//ˆÚ“®
 
 void CPlayer::Died()
 {
-	if (m_position.y <= -5.0)
+	if (m_position.y < -5.0f)
 	{
-		PostQuitMessage(0);
+		deid = true;
 	}
 }

@@ -66,6 +66,10 @@ public:
 	{
 		return state;
 	}
+	bool GetDeid()
+	{
+		return deid;
+	}
 private:
 	State state;
 	D3DXVECTOR3 m_position;
@@ -79,5 +83,6 @@ private:
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
+	bool deid;//€‚ñ‚¾H
 
 };
