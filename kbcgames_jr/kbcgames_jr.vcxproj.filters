@@ -133,6 +133,9 @@
     <ClCompile Include="Source\Game\ResultScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\GameCursor3D.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
@@ -284,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="Source\Game\ResultScene.h">
       <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameCursor3D.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

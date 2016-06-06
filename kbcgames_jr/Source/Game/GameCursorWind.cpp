@@ -62,6 +62,7 @@ void CGameCursorWind::Initialize()
 	end = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 0.0f);
 	state = State_Hide;
 	D3DXMatrixIdentity(&mScale);
+	D3DXMatrixIdentity(&mScale2);
 	angle[0] = 0.0f;
 	angle[1] = 0.0f;
 }
@@ -89,6 +90,8 @@ void CGameCursorWind::Update()
 	{
 		if (GAMEFLG->Getflg() == true)
 		{
+			g_stage->GetCursor3D()->SetState(g_stage->GetCursor3D()->nonselect);
+			g_stage->GetCursor()->SetState(g_stage->GetCursor()->view);
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
@@ -100,22 +103,49 @@ void CGameCursorWind::Update()
 		}
 		else
 		{
+			g_stage->GetCursor3D()->SetState(g_stage->GetCursor3D()->select);
+			g_stage->GetCursor()->SetState(g_stage->GetCursor()->nonview);
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
 			{
+				g_stage->GetCursor3D()->SetState(g_stage->GetCursor3D()->nonselect);
+				g_stage->GetCursor()->SetState(g_stage->GetCursor()->view);
 				state = State_Hide;
 				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
 				WindPower();//風に力を
 				Positin2D();//2Dのポジションに変換
 				g_stage->GetCursor()->SetPos(m_Cursol2Dpos);
+				g_stage->GetCursor3D()->SetPos(m_position);
 			}
 			else{
-				if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
+				/*if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
 				{
 					RotScalY();//回転と拡大
-				}
-				else{
-					RotScalXZ();
-				}
+				}*/
+				D3DXVECTOR3 v0, v1, v2;
+				v0 = g_stage->GetCursor3D()->GetPos();//カーソルの位置
+				v1 = m_position;//現在の風カーソル位置
+				v2 = v0 - v1;
+				float length;
+				length = D3DXVec3Length(&v2);
+				D3DXVec3Normalize(&v2, &v2);//正規化
+				float t;
+				static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
+				t = D3DXVec3Dot(&v2, &vRIGHT);//内関
+				//float angle;
+				angle[2] = acosf(t);
+				//D3DXVECTOR3 vAxis;
+				D3DXVec3Cross(&vAxis, &vRIGHT, &v2);//外積
+				//D3DXMatrixRotationAxis(&mat, &vAxis, angle[2]);
+
+				D3DXVECTOR3 m_aabbMin;
+				D3DXVECTOR3 m_aabbMax;
+				D3DXVECTOR3 size;
+
+				CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
+				size = m_aabbMax - m_aabbMin;
+
+				D3DXMatrixScaling(&mScale2, length / size.x, 1.0f, 1.0f);
+
 			}
 		}
 		
@@ -124,12 +154,25 @@ void CGameCursorWind::Update()
 
 void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-	D3DXMATRIX mRot, mTmp;
-	D3DXMatrixRotationY(&mRot, angle[0]);
-	D3DXVECTOR3 v(mRot.m[2][0], mRot.m[2][1], mRot.m[2][2]);
-	D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
-	m_matWorld = mScale * mRot * mTmp * m_matWorld;
+	if (GAMEFLG->Getflg() == true)
+	{
+		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+		D3DXMATRIX mRot, mTmp;
+		D3DXMatrixRotationY(&mRot, angle[0]);
+		D3DXVECTOR3 v(mRot.m[2][0], mRot.m[2][1], mRot.m[2][2]);
+		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
+		m_matWorld = mScale * mRot * mTmp * m_matWorld;
+	}
+	else 
+	{
+		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+		D3DXMATRIX mRot, mTmp, mRot2;
+		/*D3DXMatrixRotationY(&mRot, angle[0]);
+		D3DXVECTOR3 v(mRot.m[2][0], mRot.m[2][1], mRot.m[2][2]);
+		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);*/
+		D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);
+		m_matWorld = mScale2 * mRot /* mTmp*/ * m_matWorld;
+	}
 	if (state != State_Hide)
 	{
 		m_SkinModel.Draw(m_matWorld, view, proj);
@@ -150,6 +193,7 @@ void CGameCursorWind::Ray()
 			else
 			{
 				SetPosition(g_stage->GetPlayer()->GetPosition());
+				g_stage->GetCursor3D()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 		}
 		else
@@ -228,67 +272,6 @@ void CGameCursorWind::RotScalY()
 		//v5.x /= size.x;
 		D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
 	}
-}
-
-//XZ方向
-void CGameCursorWind::RotScalXZ()
-{
-	D3DXVECTOR4 v0, v1;
-	float Far = g_stage->GetCamera()->GetFar();
-	float Near = g_stage->GetCamera()->GetNear();
-	v0.x = g_stage->GetCursor()->GetPosition().x;
-	v0.y = g_stage->GetCursor()->GetPosition().y;
-	v0.z = 0.0f;
-	v0.w = 1.0f;
-
-	v1.x = g_stage->GetCursor()->GetPosition().x;
-	v1.y = g_stage->GetCursor()->GetPosition().y;
-	v1.z = 1.0f;
-	v1.w = 1.0f;
-
-	D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
-	D3DVIEWPORT9 vp;
-	(*graphicsDevice()).GetViewport(&vp);
-	//スクリーン座標からワールド座標を求める
-	D3DXVec3Unproject(
-		reinterpret_cast<D3DXVECTOR3*>(&v0),
-		reinterpret_cast<const D3DXVECTOR3*>(&v0),
-		&vp,
-		reinterpret_cast<const D3DXMATRIX*>(&mProj),
-		reinterpret_cast<const D3DXMATRIX*>(&mView),
-		NULL
-		);
-	D3DXVec3Unproject(
-		reinterpret_cast<D3DXVECTOR3*>(&v1),
-		reinterpret_cast<const D3DXVECTOR3*>(&v1),
-		&vp,
-		reinterpret_cast<const D3DXMATRIX*>(&mProj),
-		reinterpret_cast<const D3DXMATRIX*>(&mView),
-		NULL
-		);
-	float t = (m_position.y - v0.y) / (v1.y - v0.y);
-	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
-	D3DXVECTOR3 v4 = v3 - m_position;
-	D3DXVECTOR3 v5 = v4;
-	D3DXVec3Normalize(&v4, &v4);
-	static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);
-	D3DXVec3Cross(&v3, &v4, &vRIGHT);
-	D3DXVec3Normalize(&v3, &v3);
-	t = acos(D3DXVec3Dot(&v4, &vRIGHT));
-	if (v3.y > 0.0f){
-		t *= -1.0f;
-	}
-	angle[0] = t;
-	//D3DXMatrixRotationY(&mRotationY, t);//回転
-
-	D3DXVECTOR3 m_aabbMin;
-	D3DXVECTOR3 m_aabbMax;
-	D3DXVECTOR3 size;
-	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//サイズ取得hjkm
-	size = m_aabbMax - m_aabbMin;
-	D3DXMatrixScaling(&mScale, D3DXVec3Length(&v5) / size.x, 1.0f, 1.0f);
-
 }
 
 //風の力を与える

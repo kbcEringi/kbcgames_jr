@@ -57,6 +57,7 @@ void CStage1::Initialize()
 	m_hasu.Initialize();
 	m_Goal.Initialize();
 	m_Movefloor.Initialize();
+	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -88,7 +89,7 @@ void CStage1::Update()
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		/*if (!(GAMEFLG->Getflg()))
+		if (!(GAMEFLG->Getflg()))
 		{
 			if (GAMEPAD(CGamepad)->GetStickR_X() > 0)
 			{
@@ -98,7 +99,7 @@ void CStage1::Update()
 			{
 				m_camera.RotTransversal(0.05f);
 			}
-		}*/
+		}
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
 		{
 			GAMEFLG->Set2D();
@@ -116,7 +117,7 @@ void CStage1::Update()
 	}
 	else
 	{
-		/*if (!(GAMEFLG->Getflg()))
+		if (!(GAMEFLG->Getflg()))
 		{
 			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 			{
@@ -126,7 +127,7 @@ void CStage1::Update()
 			{
 				m_camera.RotTransversal(0.05f);
 			}
-		}*/
+		}
 		if (GetAsyncKeyState(VK_Q) & 0x8000)
 		{
 			GAMEFLG->Set2D();
@@ -165,6 +166,7 @@ void CStage1::Update()
 	m_hasu.Update();
 	m_Goal.Update();//ゴール
 	m_Movefloor.Update();
+	m_GameCursor3D.Update();//ゲームカーソル３D
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -203,6 +205,7 @@ void CStage1::Draw()
 	
 	m_Movefloor.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_GameCursor.Draw();//ゲームカーソル（一番前に表示）
+	m_GameCursor3D.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル３D
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

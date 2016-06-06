@@ -22,7 +22,6 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX);
 	void Ray();
 	void RotScalY();
-	void RotScalXZ();
 	void WindPower();
 	void Positin2D();//2DÀ•W‚É•ÏŠ·
 	void SetPosition(D3DXVECTOR3 pos)
@@ -38,14 +37,19 @@ public:
 		this->state = state;
 
 	}
+	State GetState()
+	{
+		return state;
+	}
 private:
 	
 	State state;
 	//D3DXMATRIX mRotation;
 	/*D3DXMATRIX mRotationY;
 	D3DXMATRIX mRotationZ;*/
-	float	angle[2];
-	D3DXMATRIX mScale;
+	float	angle[3];
+	D3DXVECTOR3 vAxis;
+	D3DXMATRIX mScale,mScale2;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;
 	D3DXVECTOR4 end;

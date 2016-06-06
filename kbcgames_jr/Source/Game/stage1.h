@@ -23,6 +23,7 @@
 #include "GameCursorWind.h"
 #include "Hasu.h"
 #include "Goal.h"
+#include "GameCursor3D.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
@@ -63,9 +64,17 @@ public:
 	{
 		return &m_GameCursor;
 	}
+	CGameCursor3D* GetCursor3D()
+	{
+		return& m_GameCursor3D;
+	}
 	CPointa* GetPointa()
 	{
 		return &m_pointa;
+	}
+	CGameCursorWind* GetWind()
+	{
+		return& m_GCursorWind;
 	}
 private:
 
@@ -92,6 +101,7 @@ private:
 	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
 	CGoal m_Goal;
+	CGameCursor3D m_GameCursor3D;
 
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;
