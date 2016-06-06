@@ -30,6 +30,7 @@
 #include"..\Frame\Shadow.h"
 #include"..\Frame\CGimmickManager.h"
 
+
 #define MAX_COLLISION 100
 
 class CAudio;

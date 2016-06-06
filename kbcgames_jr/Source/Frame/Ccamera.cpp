@@ -42,6 +42,14 @@ void Ccamera::Update()
 		xaxis.y, yaxis.y, zaxis.y, 0,
 		xaxis.z, yaxis.z, zaxis.z, 0,
 		-D3DXVec3Dot(&xaxis, &m_vEyePt), -D3DXVec3Dot(&yaxis, &m_vEyePt), -D3DXVec3Dot(&zaxis, &m_vEyePt), 1);
+
+	D3DXMATRIX Inve;
+	D3DXMatrixInverse(&Inve, NULL, &m_viewMatrix);
+	m_RotationMatrix = Inve;
+	m_RotationMatrix.m[3][0] = 0.0f;
+	m_RotationMatrix.m[3][1] = 0.0f;
+	m_RotationMatrix.m[3][2] = 0.0f;
+	m_RotationMatrix.m[3][3] = 1.0f;
 }
 
 

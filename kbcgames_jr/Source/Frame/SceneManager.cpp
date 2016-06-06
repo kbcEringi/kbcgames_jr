@@ -17,7 +17,7 @@ void CSceneManager::InitializeScene()
 	Add(new CTitleScene("Title"));
 	Add(new CSelectScene("Select"));
 	Add(new CGameScene("Game"));
-	ChangeScene(SCENE::TITLE);
+	ChangeScene(SCENE::SELECT);
 
 	if (m_nowScene == -1){
 		//ƒV[ƒ“‚ğì‚Á‚Ä‚Ë

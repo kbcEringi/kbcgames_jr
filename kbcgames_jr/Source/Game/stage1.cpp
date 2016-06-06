@@ -2,6 +2,7 @@
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 
+
 CShadowMap g_Shadow;
 
 CStage1* g_stage = NULL;
@@ -79,6 +80,7 @@ void CStage1::Initialize()
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 
 	g_stage = this;
+
 }
 
 void CStage1::Update()
@@ -173,6 +175,7 @@ void CStage1::Update()
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
 }
 
 void CStage1::Draw()
