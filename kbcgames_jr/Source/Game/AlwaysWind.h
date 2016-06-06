@@ -28,7 +28,6 @@ private:
 	D3DXVECTOR3 m_force;
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
-	//bool m_Ground;					//’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚©H
 	float SpeedPower;				//‰Á‘¬‚ğ‰Á‚¦‚é‘¬“x
 
 };
