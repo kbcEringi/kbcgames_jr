@@ -3,6 +3,10 @@
 #include"..\Frame\GraphicsDevice.h"
 #include "Stage1.h"
 #include"CGameFlg.h"
+#include"..\Frame\Stage\CStageManager.h"
+
+
+
 
 struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 {
@@ -68,7 +72,7 @@ void CGameCursorWind::Initialize()
 
 void CGameCursorWind::Update()
 {
-	if (g_stage->GetPlayer()->GetState() == CPlayer::StateFly)
+	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() == CPlayer::StateFly)
 	{
 		return;
 	}
@@ -94,9 +98,9 @@ void CGameCursorWind::Update()
 		{
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
-				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());//画面の真ん中
+				//STAGEMANEGER->GetStage()->GetCursor()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());//画面の真ん中
 			}
 		}
 		else
@@ -104,9 +108,9 @@ void CGameCursorWind::Update()
 			if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
 			{
 				state = State_Hide;
-				g_stage->GetPlayer()->SetState(g_stage->GetPlayer()->StateFly);
+				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				//g_stage->GetCursor()->SetPos(g_stage->GetPlayer()->GetPosition());
+				//STAGEMANEGER->GetStage()->GetCursor()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
 			}
 		}
 		RotScalY();//回転と拡大
@@ -142,29 +146,29 @@ void CGameCursorWind::Ray()
 			if (GAMEFLG->Getflg() == true)
 			{
 				//SetPosition(callback.hitPos);
-				//SetPosition(g_stage->GetPlayer()->GetPosition());
-				SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+				//SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
+				SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
 			}
 			else
 			{
 				//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
-				//SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
-				SetPosition(g_stage->GetPlayer()->GetPosition());
+				//SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
+				SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
 			}
 #if 0
-			start.x = g_stage->GetCursor()->GetPosition().x;
-			start.y = g_stage->GetCursor()->GetPosition().y;
+			start.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+			start.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 			start.z = 0.0f;
 			start.w = 1.0f;
-			end.x = g_stage->GetCursor()->GetPosition().x;
-			end.y = g_stage->GetCursor()->GetPosition().y;
+			end.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+			end.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 			end.z = 1.0f;
 			end.w = 1.0f;
 
 			int screenW = 960;
 			int screenH = 540;
-			D3DXMATRIX mViewInv = g_stage->GetCamera()->GetViewMatrix();
-			D3DXMATRIX mProjInv = g_stage->GetCamera()->GetProjectionMatrix();
+			D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+			D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
 			//DirectXの関数を使用したバージョン。
 			{
 				D3DVIEWPORT9 vp;
@@ -204,12 +208,12 @@ void CGameCursorWind::Ray()
 				if (GAMEFLG->Getflg() == true)
 				{
 					//SetPosition(callback.hitPos);
-					SetPosition(g_stage->GetPlayer()->GetPosition());
+					SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
 				}
 				else
 				{
 					//SetPosition(D3DXVECTOR3(callback.hitPos.x, callback.hitPos.y,0.0f));
-					SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
+					SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
 				}
 			}
 #endif
@@ -224,20 +228,20 @@ void CGameCursorWind::Ray()
 void CGameCursorWind::RotScalY()
 {
 	D3DXVECTOR4 v0, v1;
-	float Far = g_stage->GetCamera()->GetFar();
-	float Near = g_stage->GetCamera()->GetNear();
-	v0.x = g_stage->GetCursor()->GetPosition().x;
-	v0.y = g_stage->GetCursor()->GetPosition().y;
+	float Far = STAGEMANEGER->GetStage()->GetCamera()->GetFar();
+	float Near = STAGEMANEGER->GetStage()->GetCamera()->GetNear();
+	v0.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+	v0.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 	v0.z = 0.0f;
 	v0.w = 1.0f;
 
-	v1.x = g_stage->GetCursor()->GetPosition().x;
-	v1.y = g_stage->GetCursor()->GetPosition().y;
+	v1.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+	v1.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 	v1.z = 1.0f;
 	v1.w = 1.0f;
 
-	D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
+	D3DXMATRIX mView = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProj = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
 	D3DVIEWPORT9 vp;
 	(*graphicsDevice()).GetViewport(&vp);
 	//スクリーン座標からワールド座標を求める
@@ -292,20 +296,20 @@ void CGameCursorWind::RotScalY()
 void CGameCursorWind::RotScalXZ()
 {
 	D3DXVECTOR4 v0, v1;
-	float Far = g_stage->GetCamera()->GetFar();
-	float Near = g_stage->GetCamera()->GetNear();
-	v0.x = g_stage->GetCursor()->GetPosition().x;
-	v0.y = g_stage->GetCursor()->GetPosition().y;
+	float Far = STAGEMANEGER->GetStage()->GetCamera()->GetFar();
+	float Near = STAGEMANEGER->GetStage()->GetCamera()->GetNear();
+	v0.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+	v0.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 	v0.z = 0.0f;
 	v0.w = 1.0f;
 
-	v1.x = g_stage->GetCursor()->GetPosition().x;
-	v1.y = g_stage->GetCursor()->GetPosition().y;
+	v1.x = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().x;
+	v1.y = STAGEMANEGER->GetStage()->GetCursor()->GetPosition().y;
 	v1.z = 1.0f;
 	v1.w = 1.0f;
 
-	D3DXMATRIX mView = g_stage->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProj = g_stage->GetCamera()->GetProjectionMatrix();
+	D3DXMATRIX mView = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProj = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
 	D3DVIEWPORT9 vp;
 	(*graphicsDevice()).GetViewport(&vp);
 	//スクリーン座標からワールド座標を求める
@@ -353,5 +357,5 @@ void CGameCursorWind::WindPower()
 	wind.x = m_matWorld.m[0][0] * 5.0f;
 	wind.y = m_matWorld.m[0][1] * 5.0f;
 	wind.z = m_matWorld.m[0][2] * 5.0f;
-	g_stage->GetPlayer()->ApplyForce(wind);
+	STAGEMANEGER->GetStage()->GetPlayer()->ApplyForce(wind);
 }

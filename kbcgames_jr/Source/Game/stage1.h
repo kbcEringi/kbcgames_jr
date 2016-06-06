@@ -4,20 +4,16 @@
 #include"..\Frame\Stage\CStage.h"
 
 #include"..\Frame\DXCommon.h"
-#include"..\Frame\Ccamera.h"
 #include "..\Frame\RayCursor.h"//カーソル
 
 /********オブジェクト2D********/
-#include "GameCursor.h"
 /********オブジェクト3D********/
 #include"..\Frame\C3DObject.h"
-#include "Player.h"
 #include "Ground.h"
 #include "wood.h"
 #include "AlwaysWind.h"
 #include "Windmill.h"
 #include "Movefloor.h"
-#include "Pointa.h"
 #include "Stage1Back.h"
 #include "LostGround.h"
 #include "GameCursorWind.h"
@@ -52,40 +48,18 @@ public:
 	void Add2DRigidBody();
 	void Remove3DRigidBody();
 	void Remove2DRigidBody();
-	CPlayer* GetPlayer()
-	{
-		return &m_Player;
-	}
-	Ccamera* GetCamera()
-	{
-		return &m_camera;
-	}
-	CGameCursor* GetCursor()
-	{
-		return &m_GameCursor;
-	}
-	CPointa* GetPointa()
-	{
-		return &m_pointa;
-	}
+
 private:
 
 	C3DDraw Obj;
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 
-	Ccamera m_camera;
 	CAudio* m_pAudio;
 	CRayCursor m_Ray;
-	/********オブジェクト2D********/
-	CGameCursor m_GameCursor;
-	/******オブジェクト3d*****/
-	//CTestObj test;
-	CPlayer m_Player;
+	
 	CGround m_Ground;
 	CWood m_wood;
-	CPointa m_pointa;
-	//CAlwaysWind m_setwind;
 	CWindmill m_windmill;
 	CMovefloor m_Movefloor;
 	CStage1Back m_Back1;
@@ -105,4 +79,3 @@ private:
 	bool				m_isAdd2DCollision;
 	bool				m_isAdd3DCollision;
 };
-extern CStage1* g_stage;

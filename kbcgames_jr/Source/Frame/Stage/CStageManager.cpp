@@ -38,8 +38,8 @@ void CStageManager::SelectStage(int num)
 		switch (m_nowStage)
 		{
 		case 1:
-			m_stage = new CStagetest;
-			//m_stage = new CStage1;
+			//m_stage = new CStagetest;
+			m_stage = new CStage1;
 			break;
 		default:
 			break;

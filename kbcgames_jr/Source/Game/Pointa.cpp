@@ -1,5 +1,6 @@
 #include "Pointa.h"
 #include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 CPointa::~CPointa()
 {
@@ -29,7 +30,7 @@ void CPointa::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	D3DXVECTOR3 pos;
-	pos = m_position - g_stage->GetPlayer()->GetPosition();//プレイヤーとの距離を求める。
+	pos = m_position - STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();//プレイヤーとの距離を求める。
 	pos.y = 0.0f;
 	if (DrawFlag == true)
 	{

@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\Ccamera.h";
-#include "Stage1.h"
 #include"CGameFlg.h"
 #include "..\Frame\Audio.h"
+
+#include"..\Frame\Stage\CStageManager.h"
+
 
 CPlayer::~CPlayer()
 {
@@ -47,13 +49,13 @@ void CPlayer::Update()
 	Died();//€–S”»’è
 	if (state == StateWalk)
 	{
-		if (g_stage->GetPointa()->GetDraw() == true)
+		if (STAGEMANEGER->GetStage()->GetPointa()->GetDraw() == true)
 		{
 			Move(m_Pointa->GetPosition());//ˆÚ“®ŠÖ”
 		}
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
-			g_stage->GetPointa()->SetDraw(false);
+			STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		}
 	}
 	m_moveSpeed += m_applyForce;
@@ -66,13 +68,13 @@ void CPlayer::Update()
 		m_moveSpeed.x *= FRICTION;
 		m_moveSpeed.y *= FRICTION;
 		m_moveSpeed.z *= FRICTION;
-		g_stage->GetPointa()->SetDraw(false);
+		STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
 			Positin2D();//2D‚Ìƒ|ƒWƒVƒ‡ƒ“‚É•ÏŠ·
-			g_stage->GetCursor()->SetPos(m_position2D);
+			STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_position2D);
 			state = StateWalk;
-			g_stage->GetPointa()->SetPos(&m_position);
+			STAGEMANEGER->GetStage()->GetPointa()->SetPos(&m_position);
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.y = 0.0f;
 			m_moveSpeed.z = 0.0f;
@@ -148,8 +150,8 @@ void CPlayer::Died()
 
 void CPlayer::Positin2D()
 {
-	D3DXMATRIX mViewInv = g_stage->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProjInv = g_stage->GetCamera()->GetProjectionMatrix();
+	D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
 	D3DVIEWPORT9 vp;
 	(*graphicsDevice()).GetViewport(&vp);
 	D3DXVec3Project(

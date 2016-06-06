@@ -5,7 +5,6 @@
 
 CShadowMap g_Shadow;
 
-CStage1* g_stage = NULL;
 //オブジェクトの詳細
 struct SCollisionInfo {
 	D3DXVECTOR3 pos;
@@ -33,7 +32,6 @@ void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -78,9 +76,6 @@ void CStage1::Initialize()
 	this->Add3DRigidBody();
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
-
-	g_stage = this;
-
 }
 
 void CStage1::Update()
