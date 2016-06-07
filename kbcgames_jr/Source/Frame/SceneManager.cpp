@@ -4,6 +4,7 @@
 #include"..\Game\TitleScene.h"
 #include"..\Game\SelectScene.h"
 #include"..\Game\GameScene.h"
+#include "..\Game\ResultScene.h"
 
 CSceneManager* CSceneManager::m_pInstance = new CSceneManager();
 
@@ -17,7 +18,8 @@ void CSceneManager::InitializeScene()
 	Add(new CTitleScene("Title"));
 	Add(new CSelectScene("Select"));
 	Add(new CGameScene("Game"));
-	ChangeScene(SCENE::SELECT);
+	Add(new CResultScene("Result"));
+	ChangeScene(SCENE::TITLE);
 
 	if (m_nowScene == -1){
 		//ÉVÅ[ÉìÇçÏÇ¡ÇƒÇÀ

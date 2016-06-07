@@ -11,8 +11,8 @@ void CGoal::Initialize()
 	m_SkinModel.Initialize("XFile\\Goal.x");
 
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//AABB
-	m_position.x = 255.0f;
-	m_position.y = 0.0f;
+	m_position.x = 395;
+	m_position.y = 7.0f;
 	m_position.z = 0.0f;
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;

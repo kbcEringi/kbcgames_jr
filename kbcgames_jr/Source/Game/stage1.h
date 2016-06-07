@@ -16,7 +16,6 @@
 #include "Movefloor.h"
 #include "Stage1Back.h"
 #include "LostGround.h"
-#include "GameCursorWind.h"
 #include "Hasu.h"
 #include "Goal.h"
 
@@ -64,7 +63,6 @@ private:
 	CMovefloor m_Movefloor;
 	CStage1Back m_Back1;
 	CLostGround m_lost;
-	CGameCursorWind m_GCursorWind;
 	CHasu m_hasu;
 	CGoal m_Goal;
 

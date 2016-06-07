@@ -1,6 +1,7 @@
 #include "Stage1.h"
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
+#include "..\Frame\SceneManager.h"
 
 CShadowMap g_Shadow;
 
@@ -13,11 +14,11 @@ struct SCollisionInfo {
 };
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include "CollisionInfo3D.h"
+#include "Collision3D_stage1.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
-#include "CollisionInfo2D.h"
+#include "Collision2D_stage1.h"
 };
 
 SGimmickData gimmick3dobj[] = {
@@ -54,6 +55,8 @@ void CStage1::Initialize()
 	m_lost.Initialize();
 	m_hasu.Initialize();
 	m_Goal.Initialize();
+	m_Movefloor.Initialize();
+	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
@@ -133,14 +136,6 @@ void CStage1::Update()
 			m_camera.Set3DProj();
 		}
 	}
-	/*if (GAMEFLG->Getflg())
-	{
-		this->CreateCollision2D();
-	}
-	else
-	{
-		this->CreateCollision3D();
-	}*/
 
 	m_pAudio->Run();	//周期タスク実行
 	//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
@@ -171,6 +166,8 @@ void CStage1::Update()
 	m_Back1.Update();
 	m_hasu.Update();
 	m_Goal.Update();//ゴール
+	m_Movefloor.Update();
+	m_GameCursor3D.Update();//ゲームカーソル３D
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -179,14 +176,12 @@ void CStage1::Update()
 
 void CStage1::Draw()
 {
-
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_Goal.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゴール
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	
 	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
@@ -206,9 +201,13 @@ void CStage1::Draw()
 	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 
-	m_GameCursor.Draw();
+	
 	m_lost.Draw(m_camera.GetViewMatrix());
 	m_hasu.Draw(m_camera.GetViewMatrix());
+	
+	m_Movefloor.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	m_GameCursor.Draw();//ゲームカーソル（一番前に表示）
+	m_GameCursor3D.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル３D
 	/***************************これ以降は半透明にならない処理*********************************/
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	/*******************************************************************************************/

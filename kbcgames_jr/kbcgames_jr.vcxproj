@@ -110,7 +110,9 @@
     <ClCompile Include="Source\Game\CGameFlg.cpp" />
     <ClCompile Include="Source\Game\CSelectCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
+    <ClCompile Include="Source\Game\GameCursor3D.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
+    <ClCompile Include="Source\Game\Gameover.cpp" />
     <ClCompile Include="Source\Game\GameScene.cpp" />
     <ClCompile Include="Source\Game\Goal.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
@@ -120,6 +122,7 @@
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\Pointa.cpp" />
     <ClCompile Include="Source\Game\AlwaysWind.cpp" />
+    <ClCompile Include="Source\Game\ResultScene.cpp" />
     <ClCompile Include="Source\Game\SelectScene.cpp" />
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Stage1Back.cpp" />
@@ -163,7 +166,9 @@
     <ClInclude Include="Source\Game\CGameFlg.h" />
     <ClInclude Include="Source\Game\CSelectCursor.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />
+    <ClInclude Include="Source\Game\GameCursor3D.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
+    <ClInclude Include="Source\Game\Gameover.h" />
     <ClInclude Include="Source\Game\GameScene.h" />
     <ClInclude Include="Source\Game\Goal.h" />
     <ClInclude Include="Source\Game\Ground.h" />
@@ -173,6 +178,7 @@
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\Pointa.h" />
     <ClInclude Include="Source\Game\AlwaysWind.h" />
+    <ClInclude Include="Source\Game\ResultScene.h" />
     <ClInclude Include="Source\Game\SelectScene.h" />
     <ClInclude Include="Source\Game\Stage1.h" />
     <ClInclude Include="Source\Game\Stage1Back.h" />
