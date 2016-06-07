@@ -74,6 +74,8 @@ void CParticle::Update()
 	mTrans.m[3][1] = position.y;
 	mTrans.m[3][2] = position.z;
 
+	rotateZ += 0.005;
+
 	if (isBillboard) {
 		//ビルボード
 		D3DXMATRIX rot = camera->GetRotationMatrix();

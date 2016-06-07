@@ -78,4 +78,6 @@ private:
 	btDefaultMotionState* m_myMotionState;
 	bool				m_isAdd2DCollision;
 	bool				m_isAdd3DCollision;
+
+
 };

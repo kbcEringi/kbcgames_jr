@@ -21,8 +21,8 @@ public:
 	}
 public:
 	virtual void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int) = 0;
-	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool) = 0;
-	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool,bool) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool) = 0;
 	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
@@ -35,8 +35,8 @@ public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
 	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool)override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool,bool) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool)override;
 	void OnEndRender();
 };
 
@@ -45,8 +45,8 @@ public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
 	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool) override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool) override;
 	void OnEndRender();
 	void SetEffect(ID3DXEffect* effect)
 	{
@@ -102,6 +102,7 @@ public:
 		m_animation.PlayAnimation(idx, 0.1f);
 	}
 	void Setshadowflg(bool flg){ shadowflg = flg; }
+	void Sethureneruflg(bool flg){ hureneru = flg; }
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
@@ -120,4 +121,5 @@ protected:
 	D3DXMATRIX m_matWorld;
 
 	bool shadowflg;
+	bool hureneru;
 };

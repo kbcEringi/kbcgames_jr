@@ -1,6 +1,8 @@
 #include"Ccamera.h"
 #include"..\Game\CGameFlg.h"
 
+extern D3DXMATRIX viewMatrixRotInv;
+
 void Ccamera::Initialize()
 {
 	m_vEyePt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -8,7 +10,7 @@ void Ccamera::Initialize()
 	m_vUpVec = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_v3DNormal = D3DXVECTOR3(-0.5f, 0.5f, -1.0f);
 	D3DXVec3Normalize(&m_NormalizeObject, &m_NormalizeObject);
-	m_Distance = 10.0f;
+	m_Distance = 7.0f;
 	m_vFovy = D3DXToRadian(45.0f);
 	m_vAspect = 960.0f / 580.0f;
 	m_vNear = 1.0f;
@@ -43,13 +45,13 @@ void Ccamera::Update()
 		xaxis.z, yaxis.z, zaxis.z, 0,
 		-D3DXVec3Dot(&xaxis, &m_vEyePt), -D3DXVec3Dot(&yaxis, &m_vEyePt), -D3DXVec3Dot(&zaxis, &m_vEyePt), 1);
 
-	D3DXMATRIX Inve;
-	D3DXMatrixInverse(&Inve, NULL, &m_viewMatrix);
-	m_RotationMatrix = Inve;
+	D3DXMatrixInverse(&m_viewMatrixRotInv, NULL, &m_viewMatrix);
+	m_RotationMatrix = m_viewMatrixRotInv;
 	m_RotationMatrix.m[3][0] = 0.0f;
 	m_RotationMatrix.m[3][1] = 0.0f;
 	m_RotationMatrix.m[3][2] = 0.0f;
 	m_RotationMatrix.m[3][3] = 1.0f;
+	D3DXMatrixTranspose(&viewMatrixRotInv, &m_RotationMatrix);
 }
 
 
