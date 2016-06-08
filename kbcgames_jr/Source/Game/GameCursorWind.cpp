@@ -81,7 +81,7 @@ void CGameCursorWind::Update()
 		{
 			angle[0] = 0.0f;
 			angle[1] = 0.0f;
-			Ray();
+			//Ray();
 			state = State_DecideYPower;
 		}
 	}
@@ -180,30 +180,28 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	}
 }
 
-void CGameCursorWind::Ray()
-{
-	GAMEPAD(CGamepad)->UpdateControllerState();
-	if (GAMEPAD(CGamepad)->GetConnected())
-	{
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
-			if (GAMEFLG->Getflg() == true)
-			{
-				//SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
-				SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
-				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
-			}
-			else
-			{
-				SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
-				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
-			}
-		}
-		else
-		{
-			(*GetKeyDevice()).Acquire();//キーデバイス取得
-		}
-	}
-}
+//void CGameCursorWind::Ray()
+//{
+//	GAMEPAD(CGamepad)->UpdateControllerState();
+//	if (GAMEPAD(CGamepad)->GetConnected())
+//	{
+//		//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
+//		//	if (GAMEFLG->Getflg() == true)
+//		//	{
+//		//		//SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
+//		//		SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
+//		//	}
+//		//	else
+//		//	{
+//		//		
+//		//	}
+//		//}
+//		else
+//		{
+//			(*GetKeyDevice()).Acquire();//キーデバイス取得
+//		}
+//	}
+//}
 
 //Y方向
 void CGameCursorWind::RotScalY()

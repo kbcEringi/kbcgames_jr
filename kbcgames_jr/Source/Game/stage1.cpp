@@ -2,6 +2,7 @@
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
+#include "..\Frame\Stage\CStageManager.h"
 
 CShadowMap g_Shadow;
 
@@ -33,6 +34,7 @@ void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
+	isButtomTriger = false;		//ボタンが押されているか？
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -54,7 +56,8 @@ void CStage1::Initialize()
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
-	m_Goal.Initialize();
+	//m_Goal.SetPos(D3DXVECTOR3(260.0f, 6.0f, 0.0f));
+	m_Goal.Initialize(D3DXVECTOR3(260.0f, 0.0f, 0.0f));
 	m_Movefloor.Initialize();
 	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
@@ -149,15 +152,28 @@ void CStage1::Update()
 	{
 		if (GAMEFLG->Getflg() == true)
 		{
+			if (isButtomTriger == false)
+			{
+				m_GCursorWind.SetPosition(m_Player.GetPosition());
+				m_GameCursor3D.SetPos(m_Player.GetPosition());
+				isButtomTriger = true;
+			}
 			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 		}
 		else
 		{
+			if (isButtomTriger == false)
+			{
+				m_GCursorWind.SetPosition(m_Player.GetPosition());
+				m_GameCursor3D.SetPos(m_Player.GetPosition());
+				isButtomTriger = true;
+			}
 			m_camera.SetLookat(m_GameCursor3D.GetPos());//Playerを追いかけるカメラ
 		}
 	}
 	else
 	{
+		isButtomTriger = false;
 		m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	}
 	
@@ -184,8 +200,17 @@ void CStage1::Update()
 	m_Movefloor.Update();
 	m_GameCursor3D.Update();//ゲームカーソル３D
 
+
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
+	if (m_Goal.GetGoal() == true)
+	{
+		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		STAGEMANEGER->SelectStage(2);
+		Remove3DRigidBody();
+		Remove2DRigidBody();
+	}
 
 }
 

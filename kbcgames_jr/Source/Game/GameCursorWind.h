@@ -20,7 +20,7 @@ public:
 	void Initialize()override;
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);
-	void Ray();
+	/*void Ray();*/
 	void RotScalY();
 	void RotScalXZ();
 	void WindPower();
