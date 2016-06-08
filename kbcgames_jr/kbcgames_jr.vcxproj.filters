@@ -127,6 +127,12 @@
     <ClCompile Include="Source\Frame\CGimmickManager.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Gameover.cpp">
+      <Filter>Game\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\ResultScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
@@ -272,6 +278,12 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\CGimmickManager.h">
       <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Gameover.h">
+      <Filter>Game\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\ResultScene.h">
+      <Filter>Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

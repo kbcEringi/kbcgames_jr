@@ -12,7 +12,7 @@ void Ccamera::Initialize()
 	m_vFovy = D3DXToRadian(45.0f);
 	m_vAspect = 960.0f / 580.0f;
 	m_vNear = 1.0f;
-	m_vFar = 100.0f;
+	m_vFar = 10000.0f;
 	Volume = 15.0f;
 	m_viewVolumeW = Volume * m_vAspect;
 	m_viewVolumeH = Volume;

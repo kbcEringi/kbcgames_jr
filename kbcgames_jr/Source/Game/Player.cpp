@@ -4,6 +4,7 @@
 #include "Stage1.h"
 #include"CGameFlg.h"
 #include "..\Frame\Audio.h"
+#include "ResultScene.h"
 
 CPlayer::~CPlayer()
 {
@@ -32,7 +33,11 @@ void CPlayer::Initialize()
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
- 
+
+
+	deid = false;
+
+
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;
 	state = StateWalk;
@@ -69,8 +74,7 @@ void CPlayer::Update()
 		g_stage->GetPointa()->SetDraw(false);
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
-			Positin2D();//2D‚Ìƒ|ƒWƒVƒ‡ƒ“‚É•ÏŠ·
-			g_stage->GetCursor()->SetPos(m_position2D);
+			
 			state = StateWalk;
 			g_stage->GetPointa()->SetPos(&m_position);
 			m_moveSpeed.x = 0.0f;
@@ -140,24 +144,8 @@ void CPlayer::Move(D3DXVECTOR3 pos)//ˆÚ“®
 
 void CPlayer::Died()
 {
-	if (m_position.y <= -5.0)
+	if (m_position.y < -5.0f)
 	{
-		PostQuitMessage(0);
+		deid = true;
 	}
-}
-
-void CPlayer::Positin2D()
-{
-	D3DXMATRIX mViewInv = g_stage->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProjInv = g_stage->GetCamera()->GetProjectionMatrix();
-	D3DVIEWPORT9 vp;
-	(*graphicsDevice()).GetViewport(&vp);
-	D3DXVec3Project(
-		reinterpret_cast<D3DXVECTOR3*>(&m_position2D),
-		reinterpret_cast<const D3DXVECTOR3*>(&m_position),
-		&vp,
-		reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
-		reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
-		NULL
-		);
 }
