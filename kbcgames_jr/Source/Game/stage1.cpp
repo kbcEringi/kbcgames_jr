@@ -149,7 +149,22 @@ void CStage1::Update()
 	//else{
 	//	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	//}
-	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
+	{
+		if (GAMEFLG->Getflg() == true)
+		{
+			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+		}
+		else
+		{
+			m_camera.SetLookat(m_GameCursor3D.GetPos());//Playerを追いかけるカメラ
+		}
+	}
+	else
+	{
+		m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+	}
+	
 	m_camera.Update();
 
 	m_Player.Update();//プレイヤー

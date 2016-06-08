@@ -11,7 +11,7 @@ void CGoal::Initialize()
 
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//AABB
 	m_position.x = 395;
-	m_position.y = 7.0f;
+	m_position.y = 6.0f;
 	m_position.z = 0.0f;
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
@@ -20,17 +20,31 @@ void CGoal::Initialize()
 void CGoal::Update()
 {
 	D3DXVECTOR3 pos = g_stage->GetPlayer()->GetPosition();
-	
-	if (m_aabbMin.x < pos.x
-		&& m_aabbMin.y < pos.y
-		&& m_aabbMin.z < pos.z
-		&& m_aabbMax.x > pos.x
-		&& m_aabbMax.y > pos.y
-		&& m_aabbMax.z > pos.z
-		)
+	if (GAMEFLG->Getflg() == true)
 	{
-		MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
-		exit(0);
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			)
+		{
+			MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
+			exit(0);
+		}
+	}
+	else
+	{
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMin.z < pos.z
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			&& m_aabbMax.z > pos.z
+			)
+		{
+			MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
+			exit(0);
+		}
 	}
 }
 

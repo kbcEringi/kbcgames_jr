@@ -98,6 +98,7 @@ void CGameCursorWind::Update()
 				WindPower();//•—‚É—Í‚ð
 				Positin2D();//2D‚Ìƒ|ƒWƒVƒ‡ƒ“‚É•ÏŠ·
 				g_stage->GetCursor()->SetPos(m_Cursol2Dpos);
+				g_stage->GetCursor3D()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 			RotScalY();//‰ñ“]‚ÆŠg‘å
 		}
@@ -189,6 +190,7 @@ void CGameCursorWind::Ray()
 			{
 				//SetPosition(D3DXVECTOR3(g_stage->GetPlayer()->GetPosition().x, g_stage->GetPlayer()->GetPosition().y, 0.0f));
 				SetPosition(g_stage->GetPlayer()->GetPosition());
+				g_stage->GetCursor3D()->SetPos(g_stage->GetPlayer()->GetPosition());
 			}
 			else
 			{

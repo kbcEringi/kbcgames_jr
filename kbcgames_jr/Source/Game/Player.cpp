@@ -50,7 +50,7 @@ void CPlayer::Update()
 	Died();//€–S”»’è
 	if (state == StateWalk)
 	{
-		if (g_stage->GetPointa()->GetDraw() == true)
+		if (g_stage->GetPointa()->GetDraw() == true) 
 		{
 			Move(m_Pointa->GetPosition());//ˆÚ“®ŠÖ”
 		}
