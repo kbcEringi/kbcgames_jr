@@ -1,5 +1,5 @@
 #include "GameCursor3D.h"
-#include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 CGameCursor3D::~CGameCursor3D()
 {
@@ -41,7 +41,7 @@ void CGameCursor3D::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 
 void CGameCursor3D::Move()
 {
-	Ccamera* cam = g_stage->GetCamera();
+	Ccamera* cam = STAGEMANEGER->GetStage()->GetCamera();
 	D3DXMATRIX mCam = cam->GetViewMatrix();
 	//カメラ行列を逆行列にすると、カメラのワールド行列になる。
 	D3DXMatrixInverse(&mCam, NULL, &mCam);

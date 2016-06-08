@@ -76,7 +76,7 @@ void CGameCursorWind::Update()
 	//é~Ç‹Ç¡ÇƒÇ¢ÇÈÇ∆Ç´
 	if (state == State_Hide)
 	{
-		
+
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
 		{
 			angle[0] = 0.0f;
@@ -120,7 +120,7 @@ void CGameCursorWind::Update()
 			else{
 				/*if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
 				{
-					RotScalY();//âÒì]Ç∆ägëÂ
+				RotScalY();//âÒì]Ç∆ägëÂ
 				}*/
 				D3DXVECTOR3 v0, v1, v2;
 				v0 = g_stage->GetCursor3D()->GetPos();//ÉJÅ[É\ÉãÇÃà íu
@@ -149,7 +149,7 @@ void CGameCursorWind::Update()
 
 			}
 		}
-		
+
 	}
 }
 
@@ -164,7 +164,7 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
 		m_matWorld = mScale * mRot * mTmp * m_matWorld;
 	}
-	else 
+	else
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 		D3DXMATRIX mRot, mTmp, mRot2;

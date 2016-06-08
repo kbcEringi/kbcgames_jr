@@ -5,7 +5,7 @@
 
 CShadowMap g_Shadow;
 
-CStage1* g_stage = NULL;
+
 //オブジェクトの詳細
 struct SCollisionInfo {
 	D3DXVECTOR3 pos;
@@ -33,7 +33,6 @@ void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	g_stage = this;
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -61,9 +60,8 @@ void CStage1::Initialize()
 
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
-	g_Shadow.Entry(&m_pointa);
-	g_Shadow.SetLightPosition(m_pointa.GetPosition() + D3DXVECTOR3(0.0f, 5.0f, 0.0f));
-	g_Shadow.SetLightDirection(D3DXVECTOR3(0.0f,-1.0f,0.0f));
+	
+	
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);
@@ -80,8 +78,6 @@ void CStage1::Initialize()
 	this->Add3DRigidBody();
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
-
-	g_stage = this;
 }
 
 void CStage1::Update()
@@ -168,6 +164,11 @@ void CStage1::Update()
 	m_camera.Update();
 
 	m_Player.Update();//プレイヤー
+	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.5f, 2.0f, 0.0f);
+	g_Shadow.SetLightPosition(lightPos);
+	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
+	D3DXVec3Normalize(&lightDir, &lightDir);
+	g_Shadow.SetLightDirection(lightDir);
 	m_Ground.Update();//地面
 	m_wood.Update();//木
 	
@@ -185,6 +186,7 @@ void CStage1::Update()
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
 }
 
 void CStage1::Draw()

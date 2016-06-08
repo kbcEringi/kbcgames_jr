@@ -1,10 +1,11 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\Ccamera.h";
-#include "Stage1.h"
 #include"CGameFlg.h"
 #include "..\Frame\Audio.h"
-#include "ResultScene.h"
+
+#include"..\Frame\Stage\CStageManager.h"
+
 
 CPlayer::~CPlayer()
 {
@@ -15,6 +16,7 @@ void CPlayer::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
 	m_SkinModel.Setshadowflg(false);
+	m_SkinModel.Sethureneruflg(true);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -34,8 +36,6 @@ void CPlayer::Initialize()
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
 
-	deid = false;
-
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;
 	state = StateWalk;
@@ -50,13 +50,13 @@ void CPlayer::Update()
 	Died();//死亡判定
 	if (state == StateWalk)
 	{
-		if (g_stage->GetPointa()->GetDraw() == true) 
+		if (STAGEMANEGER->GetStage()->GetPointa()->GetDraw() == true)
 		{
 			Move(m_Pointa->GetPosition());//移動関数
 		}
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
-			g_stage->GetPointa()->SetDraw(false);
+			STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		}
 	}
 	m_moveSpeed += m_applyForce;
@@ -69,12 +69,13 @@ void CPlayer::Update()
 		m_moveSpeed.x *= FRICTION;
 		m_moveSpeed.y *= FRICTION;
 		m_moveSpeed.z *= FRICTION;
-		g_stage->GetPointa()->SetDraw(false);
+		STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
-			
+			Positin2D();//2Dのポジションに変換
+			STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_position2D);
 			state = StateWalk;
-			g_stage->GetPointa()->SetPos(&m_position);
+			STAGEMANEGER->GetStage()->GetPointa()->SetPos(&m_position);
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.y = 0.0f;
 			m_moveSpeed.z = 0.0f;
@@ -142,8 +143,24 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 
 void CPlayer::Died()
 {
-	if (m_position.y < -5.0f)
+	if (m_position.y <= -5.0)
 	{
-		deid = true;
+		PostQuitMessage(0);
 	}
+}
+
+void CPlayer::Positin2D()
+{
+	D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
+	D3DVIEWPORT9 vp;
+	(*graphicsDevice()).GetViewport(&vp);
+	D3DXVec3Project(
+		reinterpret_cast<D3DXVECTOR3*>(&m_position2D),
+		reinterpret_cast<const D3DXVECTOR3*>(&m_position),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
+		reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
+		NULL
+		);
 }

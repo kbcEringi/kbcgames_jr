@@ -1,5 +1,6 @@
 #include "Hasu.h"
 #include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 #define QUAKE 100
 #define DOWN 150
@@ -45,12 +46,12 @@ void CHasu::Initialize()
 	m_quake = D3DXToRadian(5);
 	down = 1;
 	matWorld2 = matWorld;
-	g_stage->GetPlayer()->AddCollisionCallback(this);
+	STAGEMANEGER->GetStage()->GetPlayer()->AddCollisionCallback(this);
 }
 
 void CHasu::Update()
 {
-	CPlayer* player = g_stage->GetPlayer();
+	CPlayer* player = STAGEMANEGER->GetStage()->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
 	if (m_timerFlag == true){
 		m_time++;

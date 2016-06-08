@@ -1,5 +1,5 @@
 #include"GameScene.h"
-#include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 void CGameScene::Initialize()
 {
@@ -20,8 +20,8 @@ void CGameScene::Draw()
 
 void CGameScene::Deid()
 {
-	if (g_stage->GetPlayer()->GetDeid() == true)
+	/*if (STAGEMANEGER->GetStage()->GetPlayer()->GetDeid() == true)
 	{
 		SINSTANCE(CSceneManager)->ChangeScene(SCENE::RESULT);
-	}
+	}*/
 }

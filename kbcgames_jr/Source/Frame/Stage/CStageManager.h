@@ -24,11 +24,14 @@ public:
 	void ReleaseStage();
 public:
 	static CStageManager* getInstance();
+	CStage* GetStage(){ return m_stage; }
 private:
 	CStageManager() :
 		m_selectStage(-1),
 		m_nowStage(-1)
-	{}
+	{
+		m_stage = NULL;
+	}
 	static CStageManager* m_pInstance;
 private:
 	int m_selectStage;

@@ -10,6 +10,7 @@
 
 class CAudio;
 class IPlayerCollisionCallback;
+class CPointa;
 
 class CPlayer : public C3DObject
 {
@@ -18,14 +19,14 @@ public:
 		StateWalk,
 		StateFly,
 	};
-	CPlayer() : C3DObject(){}
+	CPlayer(){}
 	~CPlayer();
 	void Initialize()override;
-	void Update();
-	void Draw(D3DXMATRIX, D3DXMATRIX);
+	void Update()override;
+	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
 	void Died();
-	
+	void Positin2D();//2Dç¿ïWÇ…ïœä∑
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
@@ -66,12 +67,9 @@ public:
 	{
 		return state;
 	}
-	bool GetDeid()
-	{
-		return deid;
-	}
 private:
 	State state;
+	D3DXVECTOR3 m_position2D;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	D3DXVECTOR3 m_moveSpeed;		//à⁄ìÆë¨ìx
@@ -83,6 +81,5 @@ private:
 	float					m_currentAngleY;
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
-	bool deid;//éÄÇÒÇæÅH
 
 };
