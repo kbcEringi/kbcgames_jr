@@ -45,6 +45,8 @@ private:
 	D3DXMATRIX mRotationY;
 	D3DXMATRIX mRotationZ;
 	D3DXMATRIX mScale;
+	float	angle[3];
+	D3DXVECTOR3 vAxis;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;
 	D3DXVECTOR4 end;
