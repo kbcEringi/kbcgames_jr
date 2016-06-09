@@ -5,6 +5,7 @@
 #include"DXCommon.h"
 #include"C3DDraw.h"
 
+
 struct ObjectData
 {
 	D3DXVECTOR3 position;

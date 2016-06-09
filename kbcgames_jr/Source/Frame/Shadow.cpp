@@ -48,9 +48,10 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 
 	D3DVIEWPORT9 viewport = { 0, 0, 512, 512, 0.0f, 1.0f };
 	(*graphicsDevice()).SetViewport(&viewport);
+	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	float aspect;
 	aspect = (float)viewport.Width / (float)viewport.Height;
-	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, aspect, 1.0f, 100.0f);
+	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, aspect, D3DXToRadian(120.0f), 100.0f);
 	CreateLight(m_projMatrix);
 	int size = m_shadowModels.size();
 	CSetEffectCallbackShadowMap callback;
@@ -66,7 +67,7 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 	(*graphicsDevice()).SetRenderTarget(0, m_Backbuffer);
 	(*graphicsDevice()).SetDepthStencilSurface(m_BackZ);
 	(*graphicsDevice()).SetViewport(&m_viewport);
-
+	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	g_hoge = m_shadowMapRT.GetTexture();
 }
 

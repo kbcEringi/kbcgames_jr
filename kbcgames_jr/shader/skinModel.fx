@@ -9,6 +9,9 @@ float4x4    g_mViewProj : VIEWPROJECTION;
 float		g_numBone;			//骨の数。
 bool shadowflg;
 
+bool hureneruflg;
+float4x4 g_viewMatrixRotInv;	////カメラの回転行列の逆行列。
+
 float4x4 g_worldMatrix;
 float4x4 g_lvpMatrix;	//プロジェクション行列。
 float3 vEyePos;//カメラの位置
@@ -64,6 +67,7 @@ struct VS_OUTPUT
     float2  Tex0    : TEXCOORD0;
 	float4  specColor : TEXCOORD1;
 	float4 shadowpos : TEXCOORD2;
+	float3	normal	: TEXCOORD3;
 };
 
 void CalcWorldMatrixFromSkinMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
@@ -112,20 +116,23 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 	else{
 		CalcWorldMatrix(In, Pos, Normal);
 	}
-	
+
+	float4 color;
 	float4 lig = 0.0f;
 	{
 		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
 		{
-			lig.xyz += max(0.0f, dot(Normal, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
+			lig.xyz += max(0.0f, dot(Normal.xyz, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
 		}
 		lig += g_ambientLight;
 	}
-	Out.color = lig;
-	
+	color = lig;
+
+	Out.color = color;
 	Out.shadowpos = mul(float4(Pos, 1.0f), g_lvpMatrix);
 	Out.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);
 	Out.Tex0 = In.Tex0;
+	Out.normal = Normal;
 	return Out;
 }
 /*!
@@ -141,10 +148,22 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 	if (shadowflg)
 	{
 		if (uv.x < 1.0f && uv.y < 1.0f){
-			color *= tex2D(g_ShadowTextureSampler, uv);
+			if (dot(In.normal, float3(0, 1, 0)) >= 0.2f)
+			{
+				color *= tex2D(g_ShadowTextureSampler, uv);
+			}
 		}
 	}
-	return color * In.color;
+	float t = 0.0f;;
+	if (hureneruflg)
+	{
+		float3 normalInCamera = mul(In.normal, g_viewMatrixRotInv);
+		t = 1.0f - abs(dot(normalInCamera, float3(0.0f, 0.0f, 1.0f)));
+		t = pow(t, 1.5f);
+	}
+	color *= In.color;
+	color.xyz += t;
+	return color;
 }
 
 

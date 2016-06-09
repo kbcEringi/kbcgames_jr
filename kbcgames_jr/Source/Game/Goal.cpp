@@ -1,5 +1,6 @@
 #include "Goal.h"
-#include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
+
 
 CGoal::~CGoal()
 {
@@ -19,7 +20,7 @@ void CGoal::Initialize()
 
 void CGoal::Update()
 {
-	D3DXVECTOR3 pos = g_stage->GetPlayer()->GetPosition();
+	D3DXVECTOR3 pos = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
 	
 	if (m_aabbMin.x < pos.x
 		&& m_aabbMin.y < pos.y

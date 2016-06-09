@@ -8,6 +8,11 @@
 class CGameCursor
 {
 public:
+	enum State
+	{
+		view,
+		nonview
+	};
 	void Initialize();
 	void Update();
 	void Draw();
@@ -20,7 +25,11 @@ public:
 	{
 		vec3Position = pos;
 	}
+	void SetState(State state)
+	{
+		this->state = state;
 
+	}
 private:
 	C2DObject m_2Dobj;
 
@@ -28,5 +37,5 @@ private:
 	D3DXVECTOR3 vec3Scale;
 
 	BYTE diks[256];
-
+	State state;
 };

@@ -15,12 +15,14 @@ public:
 	void Update();
 	D3DXMATRIX GetViewMatrix(){ return m_viewMatrix; }
 	D3DXMATRIX GetProjectionMatrix(){ return m_projectionMatrix; }
+	D3DXMATRIX GetRotationMatrix(){ return m_RotationMatrix; }
+	D3DXMATRIX GetInveMatrix(){ return m_viewMatrixRotInv; }
 	void AddLookat(D3DXVECTOR3 vec){ m_vLookatPt += vec; }
 	void SetLookat(D3DXVECTOR3 vec){ m_vLookatPt = vec; }
 	void SetEyePt(D3DXVECTOR3 vec){ m_vEyePt = vec; }
 	void RotTransversal(float RotY);	//横回転
 	void RotLongitudinal(float RotX); //縦回転
-
+	void AddDistance(float add){ m_Distance += add; }
 	//滑らかに移動させるのと
 	//直前の３Ｄ座標を記憶させる
 	void Set2DProj(){
@@ -58,6 +60,8 @@ public:
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。
+	D3DXMATRIX		m_RotationMatrix;		//回転行列
+	D3DXMATRIX m_viewMatrixRotInv;			//回転行列の逆行列。
 	D3DXVECTOR3		m_vEyePt;				//カメラの位置。
 	D3DXVECTOR3		m_vLookatPt;			//カメラの注視点。
 	D3DXVECTOR3		m_vUpVec;				//カメラの上方向。

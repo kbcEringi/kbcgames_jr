@@ -5,6 +5,7 @@ void CGameCursor::Initialize()
 	m_2Dobj.Initialize("Texture\\buttefly.png");
 	vec3Scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	vec3Position = D3DXVECTOR3(480.0f, 280.0f, 0.0f);
+	state = view;//•\Ž¦‚µ‚Ä‚¢‚é
 }
 
 void CGameCursor::Update()
@@ -14,9 +15,12 @@ void CGameCursor::Update()
 
 void CGameCursor::Draw()
 {
-	(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, FALSE);
-	m_2Dobj.Draw(vec3Position, vec3Scale);
-	(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, TRUE);
+	if (state == view)
+	{
+		(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, FALSE);
+		m_2Dobj.Draw(vec3Position, vec3Scale);
+		(*graphicsDevice()).SetRenderState(D3DRS_ZENABLE, TRUE);
+	}
 }
 
 void CGameCursor::Move()

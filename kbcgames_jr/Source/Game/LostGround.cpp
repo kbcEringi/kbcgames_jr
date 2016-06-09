@@ -1,5 +1,6 @@
 #include "LostGround.h"
 #include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 #define QUAKE 100
 #define DOWN 150
@@ -44,12 +45,12 @@ void CLostGround::Initialize()
 	m_timerFlag = false;
 	m_quake = D3DXToRadian(5);
 	matWorld2 = matWorld;
-	g_stage->GetPlayer()->AddCollisionCallback(this);
+	STAGEMANEGER->GetStage()->GetPlayer()->AddCollisionCallback(this);
 }
 
 void CLostGround::Update()
 {
-	CPlayer* player = g_stage->GetPlayer();
+	CPlayer* player = STAGEMANEGER->GetStage()->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
 	if (m_timerFlag==true){
 		m_time++;

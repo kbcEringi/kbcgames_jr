@@ -49,8 +49,8 @@ void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmic
 	p = m_3DGimmick.begin();
 	for (int i = 0; i < num3d; i++, p++)
 	{
-		(*p)->Initialize();
 		(*p)->SetObjectData(gimmick3dobj[i].data);
+		(*p)->Initialize();
 	}
 	
 	for (int i = 0; i < num2d; i++)
@@ -69,8 +69,8 @@ void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmic
 	p = m_2DGimmick.begin();
 	for (int i = 0; i < num2d; i++, p++)
 	{
-		(*p)->Initialize();
 		(*p)->SetObjectData(gimmick2dobj[i].data);
+		(*p)->Initialize();
 	}
 }
 

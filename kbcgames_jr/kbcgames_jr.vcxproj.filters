@@ -127,11 +127,14 @@
     <ClCompile Include="Source\Frame\CGimmickManager.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Gameover.cpp">
-      <Filter>Game\System</Filter>
+    <ClCompile Include="Source\Frame\particle\CParticle.cpp">
+      <Filter>Frame\particle</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\ResultScene.cpp">
-      <Filter>Game\Scene</Filter>
+    <ClCompile Include="Source\Frame\particle\CParticleEmitter.cpp">
+      <Filter>Frame\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\stagetest.cpp">
+      <Filter>Game\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,11 +282,14 @@
     <ClInclude Include="Source\Frame\CGimmickManager.h">
       <Filter>Frame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Gameover.h">
-      <Filter>Game\System</Filter>
+    <ClInclude Include="Source\Frame\particle\CParticle.h">
+      <Filter>Frame\particle</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\ResultScene.h">
-      <Filter>Game\Scene</Filter>
+    <ClInclude Include="Source\Frame\particle\CParticleEmitter.h">
+      <Filter>Frame\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\stagetest.h">
+      <Filter>Game\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +325,9 @@
     </Filter>
     <Filter Include="Frame\Stage">
       <UniqueIdentifier>{386e551d-55c3-42bb-b704-d62953f53d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\particle">
+      <UniqueIdentifier>{71d98cfd-dc2a-4063-b2a2-4b04712a2ca1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

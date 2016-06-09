@@ -25,9 +25,9 @@ void CWindmill::Initialize()
 
 void CWindmill::Update()
 {
-	CPlayer* player = g_stage->GetPlayer();
-	D3DXVECTOR3 pos = player->GetPosition();
-	if (m_aabbMin.x<pos.x
+	//CPlayer* player = g_stage->GetPlayer();
+	//D3DXVECTOR3 pos = player->GetPosition();
+	/*if (m_aabbMin.x<pos.x
 		&& m_aabbMin.y < pos.y
 		&& m_aabbMin.z < pos.z
 		&& m_aabbMax.x > pos.x
@@ -35,7 +35,7 @@ void CWindmill::Update()
 		&& m_aabbMax.z > pos.z)
 	{
 		
-	}
+	}*/
 }
 
 void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)
