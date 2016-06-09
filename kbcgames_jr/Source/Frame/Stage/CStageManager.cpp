@@ -51,7 +51,7 @@ void CStageManager::SelectStage(int num)
 			m_stage = new CStage2;
 			break;
 		default:
-			
+			STAGEMANEGER->GetStage()->GetPlayer()->Initialize();
 			break;
 		}
 	}
