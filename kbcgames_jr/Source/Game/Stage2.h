@@ -1,6 +1,6 @@
 #pragma once
 
-//ステージ１クラス
+//ステージ2クラス
 #include"..\Frame\Stage\CStage.h"
 
 #include"..\Frame\DXCommon.h"
@@ -31,13 +31,14 @@
 class CAudio;
 class C3DObject;
 
-enum GIMMICK{ AlwaysWind };
 
-class CStage1 : public CStage
+//enum GIMMICK{ AlwaysWind };
+
+class CStage2 : public CStage
 {
 public:
-	CStage1(){}
-	~CStage1(){}
+	CStage2(){}
+	~CStage2(){}
 	void Initialize();
 	void Update();
 	void Draw();
@@ -56,8 +57,8 @@ private:
 
 	CAudio* m_pAudio;
 	CRayCursor m_Ray;
-	
-	CGround m_Ground;
+
+	CGround m_Ground2;
 	CWood m_wood;
 	CWindmill m_windmill;
 	CMovefloor m_Movefloor;
@@ -70,12 +71,12 @@ private:
 	CGimmickManager m_gimmick;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
-	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
+	btCollisionShape*	m_ground2Shape[MAX_COLLISION];	//地面のコリジョン形状。
 	btRigidBody*		m_rigidBody3D[MAX_COLLISION];	//剛体3D。
 	btRigidBody*		m_rigidBody2D[MAX_COLLISION];	//剛体2D。
 	btDefaultMotionState* m_myMotionState;
 	bool				m_isAdd2DCollision;
 	bool				m_isAdd3DCollision;
 
-	bool				isButtomTriger;
+
 };

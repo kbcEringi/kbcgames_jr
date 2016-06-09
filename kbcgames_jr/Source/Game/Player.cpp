@@ -72,9 +72,7 @@ void CPlayer::Update()
 		STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		if (D3DXVec3Length(&m_moveSpeed) < 0.2f)
 		{
-			Positin2D();//2Dのポジションに変換
-			STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_position2D);
-			state = StateWalk;
+			state = StateWalk;	
 			STAGEMANEGER->GetStage()->GetPointa()->SetPos(&m_position);
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.y = 0.0f;
@@ -106,37 +104,67 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
 	//m_moveSpeed.y = 0.0f;//受ける風の力のy座標の初期化
 	m_moveSpeed.z = 0.0f;//受ける風の力のz座標の初期化
+	D3DXVECTOR3 moveDir = pos - m_position;
+	moveDir.y = 0.0f;
+	D3DXVec3Normalize(&moveDir, &moveDir);
+	
+	if (!GAMEFLG->Getflg()){
+		m_moveSpeed.x = moveDir.x * 2.0f;
+		m_moveSpeed.z = moveDir.z * 2.0f;
+		D3DXVECTOR3 Axix(1.0f, 0.0f, 0.0f);
+		m_targetAngleY = D3DXVec3Dot(&moveDir, &Axix);
+		m_targetAngleY = acosf(m_targetAngleY);
+		D3DXVECTOR3 v;
+		D3DXVec3Cross(&v, &moveDir, &Axix);
+		if (v.y > 0.0f)
+		{
+			m_targetAngleY *= -1.0f;
+		}
+		isTurn = true;
+	}
+	else{
+		m_moveSpeed.x = moveDir.x / abs(moveDir.x) * 2.0f;
+		if (moveDir.x > 0.0f){
+			m_targetAngleY = D3DXToRadian(0.0f);
+		}
+		else{
+			m_targetAngleY = D3DXToRadian(180.0f);
+		}
+		isTurn = true;
+	}
+#if 0
 	if (m_position.x <= pos.x && fabs(m_position.x - pos.x) > 0.1f)//右
 	{
-		m_moveSpeed.x += 2.0f;
+	//	m_moveSpeed.x += 2.0f;
 		//右方向を向かせる。
-		m_targetAngleY = D3DXToRadian(0.0f);
+	//	m_targetAngleY = D3DXToRadian(0.0f);
 		isTurn = true;
 	}
 	else if (m_position.x >= pos.x && fabs(m_position.x - pos.x) > 0.1f)//左
 	{
-		m_moveSpeed.x -= 2.0f;
+	//	m_moveSpeed.x -= 2.0f;
 		//左方向を向かせる
-		m_targetAngleY = D3DXToRadian(180.0f);
+	//	m_targetAngleY = D3DXToRadian(180.0f);
 		isTurn = true;
 	}
 	if (GAMEFLG->Getflg() == false)
 	{
 		if (m_position.z <= pos.z && fabs(m_position.z - pos.z) > 0.1f)//上
 		{
-			m_moveSpeed.z += 2.0f;
+		//	m_moveSpeed.z += 2.0f;
 			//180度向かせる。
-			m_targetAngleY = D3DXToRadian(-90.0f);
+		//	m_targetAngleY = D3DXToRadian(-90.0f);
 			isTurn = true;
 		}
 		else if (m_position.z >= pos.z && fabs(m_position.z - pos.z) > 0.1f)//下
 		{
-			m_moveSpeed.z -= 2.0f;
+		//	m_moveSpeed.z -= 2.0f;
 			//正面を向かせる。
-			m_targetAngleY = D3DXToRadian(90.0f);
+		//	m_targetAngleY = D3DXToRadian(90.0f);
 			isTurn = true;
 		}
 	}
+#endif
 	m_currentAngleY = m_Turn.Update(isTurn, m_targetAngleY);
 
 }
@@ -147,20 +175,4 @@ void CPlayer::Died()
 	{
 		PostQuitMessage(0);
 	}
-}
-
-void CPlayer::Positin2D()
-{
-	D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
-	D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
-	D3DVIEWPORT9 vp;
-	(*graphicsDevice()).GetViewport(&vp);
-	D3DXVec3Project(
-		reinterpret_cast<D3DXVECTOR3*>(&m_position2D),
-		reinterpret_cast<const D3DXVECTOR3*>(&m_position),
-		&vp,
-		reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
-		reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
-		NULL
-		);
 }

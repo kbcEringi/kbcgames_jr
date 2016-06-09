@@ -11,11 +11,22 @@ class CGoal : public C3DObject
 public:
 	CGoal() : C3DObject(){}
 	~CGoal();
-	void Initialize()override;
+	void Initialize()override{};
+	void Initialize(D3DXVECTOR3 pos);
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);
+	void SetPos(D3DXVECTOR3 pos)
+	{
+		m_position = pos;
+	}
+	bool GetGoal()
+	{
+		return goalflag;
+	}
 private:
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
+
+	bool goalflag;
 };

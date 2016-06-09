@@ -136,6 +136,15 @@
     <ClCompile Include="Source\Game\stagetest.cpp">
       <Filter>Game\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\GameCursor3D.cpp" />
+    <ClCompile Include="Source\Game\Gameover.cpp" />
+    <ClCompile Include="Source\Game\ResultScene.cpp" />
+    <ClCompile Include="Source\Game\Ground2.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage2.cpp">
+      <Filter>Game\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
@@ -289,6 +298,15 @@
       <Filter>Frame\particle</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\stagetest.h">
+      <Filter>Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameCursor3D.h" />
+    <ClInclude Include="Source\Game\Gameover.h" />
+    <ClInclude Include="Source\Game\ResultScene.h" />
+    <ClInclude Include="Source\Game\Ground2.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage2.h">
       <Filter>Game\Stage</Filter>
     </ClInclude>
   </ItemGroup>

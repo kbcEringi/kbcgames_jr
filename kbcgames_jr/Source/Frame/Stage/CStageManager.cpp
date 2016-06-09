@@ -4,6 +4,7 @@ CStageManager* CStageManager::m_pInstance = new CStageManager();
 
 //ステージインクルード
 #include"..\..\Game\Stage1.h"
+#include"..\..\Game\Stage2.h"
 #include"..\..\Game\stagetest.h"
 
 //#define TEST
@@ -46,7 +47,11 @@ void CStageManager::SelectStage(int num)
 			m_stage = new CStage1;
 #endif
 			break;
+		case 2:
+			m_stage = new CStage2;
+			break;
 		default:
+			
 			break;
 		}
 	}
