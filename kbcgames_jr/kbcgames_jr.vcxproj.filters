@@ -309,6 +309,9 @@
     <ClInclude Include="Source\Game\Stage2.h">
       <Filter>Game\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Frame\CLight.h">
+      <Filter>Frame\graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Frame">

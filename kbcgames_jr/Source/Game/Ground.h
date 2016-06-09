@@ -7,6 +7,7 @@
 class CGround : public C3DObject
 {
 public:
+	
 	CGround() : C3DObject(){}
 	~CGround();
 	void Initialize()override;

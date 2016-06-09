@@ -10,6 +10,7 @@ void CGround::Initialize()
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;
+	m_SkinModel.GetLight()->m_ambientLight = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 void CGround::Update()
