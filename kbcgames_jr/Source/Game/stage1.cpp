@@ -204,7 +204,7 @@ void CStage1::Update()
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
-	if (m_Goal.GetGoal() == true)
+	if (m_Goal.GetGoal() == false)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		STAGEMANEGER->SelectStage(2);
@@ -355,6 +355,7 @@ void CStage1::Remove2DRigidBody()//ワールドから削除
 		int arraySize = ARRAYSIZE(collisionInfoTable2D);
 		for (int i = 0; i < arraySize; i++)
 		{
+			if (m_rigidBody2D[i]!=NULL)
 			g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
 		}
 	}
@@ -367,6 +368,7 @@ void CStage1::Remove3DRigidBody()//ワールドから削除
 		int arraySize = ARRAYSIZE(collisionInfoTable3D);
 		for (int i = 0; i < arraySize; i++)
 		{
+			if (m_rigidBody3D[i] != NULL)
 			g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
 		}
 	}

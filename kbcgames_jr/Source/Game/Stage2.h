@@ -9,7 +9,7 @@
 /********オブジェクト2D********/
 /********オブジェクト3D********/
 #include"..\Frame\C3DObject.h"
-#include "Ground.h"
+#include "Ground2.h"
 #include "wood.h"
 #include "AlwaysWind.h"
 #include "Windmill.h"
@@ -58,7 +58,7 @@ private:
 	CAudio* m_pAudio;
 	CRayCursor m_Ray;
 
-	CGround m_Ground2;
+	CGround2 m_Ground2;
 	CWood m_wood;
 	CWindmill m_windmill;
 	CMovefloor m_Movefloor;
