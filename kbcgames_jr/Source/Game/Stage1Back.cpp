@@ -8,7 +8,7 @@ CStage1Back::~CStage1Back()
 void CStage1Back::Initialize()
 {
 	m_pPlayer = NULL;
-	m_SkinModel.Initialize("XFile\\Back.x");	//ぽいんたXファイル
+	m_SkinModel.Initialize("XFile\\skybox.x");	//ぽいんたXファイル
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 0.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標

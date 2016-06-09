@@ -54,8 +54,7 @@ void CStage2::Initialize()
 	m_GCursorWind.Initialize();//ゲームカーソル風
 	m_lost.Initialize();
 	m_hasu.Initialize();
-	m_Goal.Initialize();
-	m_Goal.SetPos(D3DXVECTOR3(395.0f, 6.0f, 0.0f));
+	m_Goal.Initialize(D3DXVECTOR3(395.0f, 6.0f, 0.0f));
 	m_Movefloor.Initialize();
 	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
