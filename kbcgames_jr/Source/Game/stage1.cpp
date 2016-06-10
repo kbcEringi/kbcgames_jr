@@ -181,7 +181,7 @@ void CStage1::Update()
 	m_camera.Update();
 
 	m_Player.Update();//プレイヤー
-	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.5f, 2.0f, 0.0f);
+	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.0f, 1.5f, 1.25f);
 	g_Shadow.SetLightPosition(lightPos);
 	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 	D3DXVec3Normalize(&lightDir, &lightDir);
@@ -206,7 +206,7 @@ void CStage1::Update()
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
-	if (m_Goal.GetGoal() == false)
+	if (m_Goal.GetGoal() == true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		STAGEMANEGER->SelectStage(2);
