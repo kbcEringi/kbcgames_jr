@@ -7,11 +7,20 @@
 #include "..\..\Game\GameCursor3D.h"
 #include "..\..\Game\GameCursorWind.h"
 
+#define MAX_COLLISION 100
+
+//オブジェクトの詳細
+struct SCollisionInfo {
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 angle;
+	D3DXVECTOR3 scale;
+};
+
 //今後ステージは此奴を継承する
 class CStage
 {
 public:
-	CStage(){}
+	CStage();
 	~CStage(){}
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
@@ -40,6 +49,12 @@ public:
 	{
 		return&m_GCursorWind;
 	}
+	void Add3DRigidBody(int arraySize);
+	void Add2DRigidBody(int arraySize);
+	void Remove3DRigidBody(int arraySize);
+	void Remove2DRigidBody(int arraySize);
+protected:
+	void ExecuteChangeCamera(int araySize2D,int araySize3D);
 protected:
 	CPlayer m_Player;
 	Ccamera m_camera;
@@ -48,4 +63,13 @@ protected:
 	CGameCursor3D m_GameCursor3D;
 	CGameCursorWind m_GCursorWind;
 
+	bool				isButtomTriger;
+
+	//ここからbulletPhysicsの剛体を使用するために必要な変数。
+	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。
+	btRigidBody*		m_rigidBody3D[MAX_COLLISION];	//剛体3D。
+	btRigidBody*		m_rigidBody2D[MAX_COLLISION];	//剛体2D。
+	btDefaultMotionState* m_myMotionState;
+	bool				m_isAdd2DCollision;
+	bool				m_isAdd3DCollision;
 };

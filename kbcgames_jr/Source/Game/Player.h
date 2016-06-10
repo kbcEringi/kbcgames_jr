@@ -71,6 +71,8 @@ public:
 		return state;
 	}
 	void Pos2D();
+	void SetRunAudio();
+	void StopRunAudio();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;

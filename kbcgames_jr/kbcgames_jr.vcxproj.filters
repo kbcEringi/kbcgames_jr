@@ -145,6 +145,9 @@
     <ClCompile Include="Source\Game\Stage2.cpp">
       <Filter>Game\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\Stage\CStage.cpp">
+      <Filter>Frame\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">

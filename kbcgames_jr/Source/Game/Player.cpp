@@ -41,7 +41,7 @@ void CPlayer::Initialize()
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
 
-
+	
 
 	//deid = false;
 
@@ -72,7 +72,9 @@ void CPlayer::Update()
 		{
 			Move(m_Pointa->GetPosition());//ˆÚ“®ŠÖ”
 		}
-		if (D3DXVec3Length(&m_moveSpeed) < 0.1f)
+
+
+		if (D3DXVec3Length(&m_moveSpeed) < 1.0f)
 		{
 			STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 		}
@@ -83,6 +85,7 @@ void CPlayer::Update()
 	m_applyForce.z = 0.0f;
 	if (state == StateFly)
 	{
+		m_pAudio->StopCue("run");
 		//”ò‚ñ‚Å‚¢‚éB‹ó‹C’ïRB
 		m_moveSpeed.x *= FRICTION;
 		m_moveSpeed.y *= FRICTION;
@@ -125,9 +128,13 @@ void CPlayer::Move(D3DXVECTOR3 pos)//ˆÚ“®
 	D3DXVECTOR3 moveDir;
 	moveDir = pos - m_position;
 	moveDir.y = 0.0f;
-	D3DXVec3Normalize(&moveDir, &moveDir);
-	if (D3DXVec3Length(&moveDir) > 0.1f)
+	if (GAMEFLG->Getflg() == true)
 	{
+		moveDir.z = 0.0f;
+	}
+	if (D3DXVec3Length(&moveDir) > 0.2f)
+	{
+		D3DXVec3Normalize(&moveDir, &moveDir);
 		if (!GAMEFLG->Getflg()){
 			m_moveSpeed.x = moveDir.x * 2.0f;
 			m_moveSpeed.z = moveDir.z * 2.0f;
@@ -179,4 +186,14 @@ void CPlayer::Died()
 	{
 		PostQuitMessage(0);
 	}
+}
+
+void CPlayer::SetRunAudio()
+{
+	m_pAudio->PlayCue("run");
+}
+
+void CPlayer::StopRunAudio()
+{
+	m_pAudio->StopCue("run");
 }

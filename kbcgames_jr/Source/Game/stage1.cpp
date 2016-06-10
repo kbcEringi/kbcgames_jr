@@ -6,14 +6,6 @@
 
 CShadowMap g_Shadow;
 
-
-//オブジェクトの詳細
-struct SCollisionInfo {
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 angle;
-	D3DXVECTOR3 scale;
-};
-
 SCollisionInfo collisionInfoTable3D[] = {
 #include "Collision3D_stage1.h"
 };
@@ -34,14 +26,13 @@ void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	isButtomTriger = false;		//ボタンが押されているか？
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
@@ -79,41 +70,18 @@ void CStage1::Initialize()
 	
 	this->CreateCollision3D();
 	this->CreateCollision2D();
-	this->Add3DRigidBody();
+	this->Add3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 }
 
 void CStage1::Update()
 {
+	
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (!(GAMEFLG->Getflg()))
-		{
-			if (GAMEPAD(CGamepad)->GetStickR_X() > 0)
-			{
-				m_camera.RotTransversal(-0.05f);
-			}
-			if (GAMEPAD(CGamepad)->GetStickR_X() < 0)
-			{
-				m_camera.RotTransversal(0.05f);
-			}
-		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
-		{
-			GAMEFLG->Set2D();
-			m_camera.Set2DProj();
-			Remove3DRigidBody();
-			Add2DRigidBody();
-		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
-		{
-			GAMEFLG->Set3D();
-			m_camera.Set3DProj();
-			Remove2DRigidBody();
-			Add3DRigidBody();
-		}
+		ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
 	}
 	else
 	{
@@ -142,43 +110,9 @@ void CStage1::Update()
 	}
 
 	m_pAudio->Run();	//周期タスク実行
-	//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
-	//{
-	//	m_camera.SetLookat(m_GameCursor.GetPosition());//Playerを追いかけるカメラ
-	//}
-	//else{
-	//	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-	//}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
-	{
-		if (GAMEFLG->Getflg() == true)
-		{
-			if (isButtomTriger == false)
-			{
-				m_GCursorWind.SetPosition(m_Player.GetPosition());
-				m_GameCursor3D.SetPos(m_Player.GetPosition());
-				isButtomTriger = true;
-			}
-			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-		}
-		else
-		{
-			if (isButtomTriger == false)
-			{
-				m_GCursorWind.SetPosition(m_Player.GetPosition());
-				m_GameCursor3D.SetPos(m_Player.GetPosition());
-				isButtomTriger = true;
-			}
-			m_camera.SetLookat(m_GameCursor3D.GetPos());//Playerを追いかけるカメラ
-		}
-	}
-	else
-	{
-		isButtomTriger = false;
-		m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-	}
-	
 	m_camera.Update();
+
+	CStage::Update();
 
 	m_Player.Update();//プレイヤー
 	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.0f, 1.5f, 1.25f);
@@ -209,9 +143,9 @@ void CStage1::Update()
 	if (m_Goal.GetGoal() == true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
+		Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
 		STAGEMANEGER->SelectStage(2);
-		Remove3DRigidBody();
-		Remove2DRigidBody();
 	}
 
 }
@@ -325,53 +259,3 @@ void CStage1::CreateCollision2D()
 	}
 }
 
-
-void CStage1::Add2DRigidBody()//ワールドに追加。
-{
-	if (!m_isAdd2DCollision){
-		m_isAdd2DCollision = true;
-		int arraySize = ARRAYSIZE(collisionInfoTable2D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
-		}
-	}
-}
-
-void CStage1::Add3DRigidBody()//ワールドに追加。
-{
-	if (!m_isAdd3DCollision){
-		m_isAdd3DCollision = true;
-		int arraySize = ARRAYSIZE(collisionInfoTable3D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
-		}
-	}
-}
-
-void CStage1::Remove2DRigidBody()//ワールドから削除
-{
-	if (m_isAdd2DCollision){
-		m_isAdd2DCollision = false;
-		int arraySize = ARRAYSIZE(collisionInfoTable2D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			if (m_rigidBody2D[i]!=NULL)
-			g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
-		}
-	}
-}
-
-void CStage1::Remove3DRigidBody()//ワールドから削除
-{
-	if (m_isAdd3DCollision){
-		m_isAdd3DCollision = false;
-		int arraySize = ARRAYSIZE(collisionInfoTable3D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			if (m_rigidBody3D[i] != NULL)
-			g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
-		}
-	}
-}
