@@ -156,6 +156,23 @@ void CPlayer::Move(D3DXVECTOR3 pos)//ˆÚ“®
 	m_currentAngleY = m_Turn.Update(isTurn, m_targetAngleY);
 }
 
+//‚QDÀ•W‚É•ÏŠ·
+void CPlayer::Pos2D()
+{
+	D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
+	D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
+	D3DVIEWPORT9 vp;
+	(*graphicsDevice()).GetViewport(&vp);
+	D3DXVec3Project(
+		reinterpret_cast<D3DXVECTOR3*>(&m_position2D),
+		reinterpret_cast<const D3DXVECTOR3*>(&m_position),
+		&vp,
+		reinterpret_cast<const D3DXMATRIX*>(&mProjInv),
+		reinterpret_cast<const D3DXMATRIX*>(&mViewInv),
+		NULL
+		);
+}
+
 void CPlayer::Died()
 {
 	if (m_position.y <= -5.0)

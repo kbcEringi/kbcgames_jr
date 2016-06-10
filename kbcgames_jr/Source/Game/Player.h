@@ -26,6 +26,10 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
 	void Died();
+	D3DXVECTOR3 Get2DPos()
+	{
+		return m_position2D;
+	}
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
@@ -66,6 +70,7 @@ public:
 	{
 		return state;
 	}
+	void Pos2D();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;

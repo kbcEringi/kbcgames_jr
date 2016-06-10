@@ -125,6 +125,7 @@ void CGameCursorWind::Update()
 				D3DXVECTOR3 v0, v1, v2;
 				v0 = STAGEMANEGER->GetStage()->GetCursor3D()->GetPos();//カーソルの位置
 				v1 = m_position;//現在の風カーソル位置
+				//v1 = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
 				v2 = v0 - v1;
 				float length;
 				length = D3DXVec3Length(&v2);
@@ -168,11 +169,8 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 		D3DXMATRIX mRot, mTmp, mRot2;
-		/*D3DXMatrixRotationY(&mRot, angle[0]);
-		D3DXVECTOR3 v(mRot.m[2][0], mRot.m[2][1], mRot.m[2][2]);
-		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);*/
 		D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);
-		m_matWorld = mScale * mRot /* mTmp*/ * m_matWorld;
+		m_matWorld = mScale * mRot * m_matWorld;
 	}
 	if (state != State_Hide)
 	{
@@ -180,28 +178,6 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	}
 }
 
-//void CGameCursorWind::Ray()
-//{
-//	GAMEPAD(CGamepad)->UpdateControllerState();
-//	if (GAMEPAD(CGamepad)->GetConnected())
-//	{
-//		//if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)) {
-//		//	if (GAMEFLG->Getflg() == true)
-//		//	{
-//		//		//SetPosition(D3DXVECTOR3(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y, 0.0f));
-//		//		SetPosition(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
-//		//	}
-//		//	else
-//		//	{
-//		//		
-//		//	}
-//		//}
-//		else
-//		{
-//			(*GetKeyDevice()).Acquire();//キーデバイス取得
-//		}
-//	}
-//}
 
 //Y方向
 void CGameCursorWind::RotScalY()
@@ -277,9 +253,10 @@ void CGameCursorWind::RotScalY()
 //風の力を与える
 void CGameCursorWind::WindPower()
 {
-	wind.x = m_matWorld.m[0][0] * 5.0f;
-	wind.y = m_matWorld.m[0][1] * 5.0f;
-	wind.z = m_matWorld.m[0][2] * 5.0f;
+	const float WIND = 8.0f;
+	wind.x = m_matWorld.m[0][0] * WIND;
+	wind.y = m_matWorld.m[0][1] * WIND;
+	wind.z = m_matWorld.m[0][2] * WIND;
 	STAGEMANEGER->GetStage()->GetPlayer()->ApplyForce(wind);
 }
 

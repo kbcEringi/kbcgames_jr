@@ -250,7 +250,7 @@ void CStage2::CreateCollision3D()
 		//剛体を初期化。
 		{
 			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
-			m_ground2Shape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
 			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
@@ -258,7 +258,7 @@ void CStage2::CreateCollision3D()
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 			m_myMotionState = new btDefaultMotionState(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_ground2Shape[i], btVector3(0, 0, 0));
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
 			m_rigidBody3D[i] = new btRigidBody(rbInfo);
 
 			//ワールドに追加。
@@ -281,7 +281,7 @@ void CStage2::CreateCollision2D()
 		//剛体を初期化。
 		{
 			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
-			m_ground2Shape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
 			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
@@ -289,7 +289,7 @@ void CStage2::CreateCollision2D()
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 			m_myMotionState = new btDefaultMotionState(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_ground2Shape[i], btVector3(0, 0, 0));
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
 			m_rigidBody2D[i] = new btRigidBody(rbInfo);
 
 			//ワールドに追加。
