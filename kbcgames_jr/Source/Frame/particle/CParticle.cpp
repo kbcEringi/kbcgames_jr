@@ -135,6 +135,7 @@ void CParticle::Draw(DWORD m_NumMaterials,
 {
 
 	D3DXMATRIX m;
+	D3DXMatrixIdentity(&m);
 	D3DXMatrixMultiply(&m, &m_matWorld, &camera->GetViewMatrix());
 	D3DXMatrixMultiply(&m, &m, &camera->GetProjectionMatrix());
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);

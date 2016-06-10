@@ -49,6 +49,7 @@ void CStage1::Initialize()
 	m_Player.SetPointa(&m_pointa);
 	m_Ground.Initialize();
 	m_wood.Initialize();
+	m_windmill.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_pointa.Initialize();
@@ -193,6 +194,7 @@ void CStage1::Update()
 	m_pointa.Update();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.Update();//ゲームカーソルかぜ　
+	m_windmill.Update();
 	m_lost.Update();
 	m_Back1.Update();
 	m_hasu.Update();

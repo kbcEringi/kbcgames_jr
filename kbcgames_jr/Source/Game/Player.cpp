@@ -1,6 +1,11 @@
 #include "Player.h"
 #include "..\BulletPhysics\BulletPhysics.h"
-#include "..\Frame\Ccamera.h";
+
+#include "..\Frame\Ccamera.h"
+#include "Stage1.h"
+
+//#include "..\Frame\Ccamera.h";
+
 #include"CGameFlg.h"
 #include "..\Frame\Audio.h"
 
@@ -35,6 +40,12 @@ void CPlayer::Initialize()
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;
 	m_applyForce.z = 0.0f;
+
+
+
+	//deid = false;
+
+
 
 	m_currentAngleY = 0.0f;
 	m_targetAngleY = 0.0f;

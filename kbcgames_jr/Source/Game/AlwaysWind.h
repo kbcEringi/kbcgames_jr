@@ -3,6 +3,9 @@
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
 #include "..\Frame\Rigidbody.h"
+#include"..\Frame\CRandom.h"
+#include"..\Frame\Ccamera.h"
+#include "..\Frame\particle\CParticleEmitter.h"
 
 
 class CAlwaysWind : public C3DObject
@@ -22,12 +25,15 @@ public:
 		m_aabbMax += obj.position;
 		m_aabbMin += obj.position;
 	}
+
 private:
+	CRandom random;
 	D3DXMATRIX m_rotationMatrix;
 	D3DXVECTOR3 m_force;
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
-	//bool m_Ground;					//ínñ Ç…Ç¬Ç¢ÇƒÇ¢ÇÈÇ©ÅH
 	float SpeedPower;				//â¡ë¨Çâ¡Ç¶ÇÈë¨ìx
+	CParticleEmitter emi;
 
 };
+

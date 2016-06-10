@@ -82,3 +82,4 @@ void CParticleEmitter::Render()
 		(*p++)->Draw(m_NumMaterials, m_pMesh, m_pTextures,m_pEffect);
 	}
 }
+

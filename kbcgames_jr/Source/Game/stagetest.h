@@ -26,8 +26,8 @@ private:
 
 	Ccamera m_camera;
 	CRandom random;
-	CParticleEmitter emi;
-	CParticleEmitter emi2;
+	/*CParticleEmitter emi;
+	CParticleEmitter emi2;*/
 	CWood wood;
 
 };
