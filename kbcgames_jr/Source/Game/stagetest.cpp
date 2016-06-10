@@ -1,7 +1,6 @@
 #include "stagetest.h"
 #include<time.h>
 
-<<<<<<< HEAD
 //SParicleEmitParameter particleParameterTbl[] =
 //{
 //	{
