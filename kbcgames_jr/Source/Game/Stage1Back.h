@@ -24,4 +24,6 @@ private:
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
 	CPlayer* m_pPlayer;
+	D3DXMATRIX proj;
+	D3DXMATRIX view;
 };
