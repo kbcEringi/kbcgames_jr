@@ -1,7 +1,8 @@
 #include "Stage2.h"
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
-#include "..\Frame\SceneManager.h"
+#include "..\Frame\SceneManager.h"]
+#include"..\Frame\Stage\CStageManager.h"
 
 //CShadowMap g_Shadow;
 
@@ -342,7 +343,7 @@ void CStage2::Remove3DRigidBody()//ƒ[ƒ‹ƒh‚©‚çíœ
 		int arraySize = ARRAYSIZE(collision2InfoTable3D);
 		for (int i = 0; i < arraySize; i++)
 		{
-			g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
+				g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
 		}
 	}
 }
