@@ -34,17 +34,17 @@ CSetEffectCallbackDefault::~CSetEffectCallbackDefault()
 		m_pEffect->Release();
 	}
 }
-void CSetEffectCallbackDefault::OnBeginRender(D3DXVECTOR4* m_diffuseLightDirection, D3DXVECTOR4* m_diffuseLightColor, D3DXVECTOR4 m_ambientLight,int pass)
+void CSetEffectCallbackDefault::OnBeginRender(CLight light, int pass)
 {
 	m_pEffect->SetTechnique("SkinModel");
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(pass);
 
 	//ライトの向きを転送。
-	m_pEffect->SetVectorArray("g_diffuseLightDirection", m_diffuseLightDirection, C3DDraw::LIGHT_NUM);
+	m_pEffect->SetVectorArray("g_diffuseLightDirection", light.m_diffuseLightDirection, light.LIGHT_NUM);
 	//ライトのカラーを転送。
-	m_pEffect->SetVectorArray("g_diffuseLightColor", m_diffuseLightColor, C3DDraw::LIGHT_NUM);
-	m_pEffect->SetVector("g_ambientLight", &m_ambientLight);
+	m_pEffect->SetVectorArray("g_diffuseLightColor", light.m_diffuseLightColor, light.LIGHT_NUM);
+	m_pEffect->SetVector("g_ambientLight", &light.m_ambientLight);
 }
 void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, bool shadowflg, bool hureneruflg)
 {
@@ -99,7 +99,7 @@ CSetEffectCallbackShadowMap::~CSetEffectCallbackShadowMap()
 {
 	
 }
-void CSetEffectCallbackShadowMap::OnBeginRender(D3DXVECTOR4* m_diffuseLightDirection, D3DXVECTOR4* m_diffuseLightColor, D3DXVECTOR4 m_ambientLight, int pass)
+void CSetEffectCallbackShadowMap::OnBeginRender(CLight light, int pass)
 {
 	m_pEffect->SetTechnique("SkinModel");
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -147,29 +147,6 @@ void C3DDraw::Initialize(LPCSTR FileName)
 	m_skinmodel->LoadModelData(FileName,&m_animation);
 	m_currentSetEffectCallback = &m_defaultSetEffectCallback;
 
-	{//ライト設定
-		//ディフューズライト方向
-		m_diffuseLightDirection[0] = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
-		m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
-		m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
-		m_diffuseLightDirection[3] = D3DXVECTOR4(-0.75f, -0.75f, 0.75f, 1.0f);
-		//m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, -1.0f, 0.0f, 1.0f);
-		//m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
-		for (int i = 0; i < LIGHT_NUM; i++)
-		{
-			D3DXVec4Normalize(&m_diffuseLightDirection[i], &m_diffuseLightDirection[i]);
-		}
-		//ディフューズライト色
-		memset(m_diffuseLightColor, 0, sizeof(m_diffuseLightColor));
-		m_diffuseLightColor[0] = D3DXVECTOR4(0.5f, 0.5f, 0.5f, 5.0f);
-		m_diffuseLightColor[1] = D3DXVECTOR4(0.5f, 0.5f, 0.5f, 5.0f);
-		m_diffuseLightColor[2] = D3DXVECTOR4(0.5f, 0.5f, 0.5f, 5.0f);
-		m_diffuseLightColor[3] = D3DXVECTOR4(0.5f, 0.5f, 0.5f, 5.0f);
-/*		m_diffuseLightColor[4] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);
-		m_diffuseLightColor[5] = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 5.0f);*/
-		//環境光。
-		m_ambientLight = D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f);
-	}
 	shadowflg = true;
 	hureneru = false;
 }
@@ -241,7 +218,7 @@ void C3DDraw::DrawMeshContainer(
 	if (pMeshContainer->pSkinInfo != NULL)
 	{
 		//スキン情報有り。
-		m_currentSetEffectCallback->OnBeginRender(m_diffuseLightDirection, m_diffuseLightColor, m_ambientLight, 0);
+		m_currentSetEffectCallback->OnBeginRender(m_light, 0);
 
 		pBoneComb = reinterpret_cast<LPD3DXBONECOMBINATION>(pMeshContainer->pBoneCombinationBuf->GetBufferPointer());
 		for (iAttrib = 0; iAttrib < pMeshContainer->NumAttributeGroups; iAttrib++)
@@ -264,7 +241,7 @@ void C3DDraw::DrawMeshContainer(
 		}
 	}
 	else {
-		m_currentSetEffectCallback->OnBeginRender(m_diffuseLightDirection, m_diffuseLightColor, m_ambientLight, 1);
+		m_currentSetEffectCallback->OnBeginRender(m_light, 1);
 
 		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, m_matWorld, viewProj, shadowflg,hureneru);
 	}

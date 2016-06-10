@@ -1,6 +1,7 @@
 #include "stagetest.h"
 #include<time.h>
 
+<<<<<<< HEAD
 //SParicleEmitParameter particleParameterTbl[] =
 //{
 //	{
@@ -60,14 +61,17 @@
 //};
 
 
+
 void CStagetest::Initialize()
 {
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	random.Init((unsigned long)time);
 
+
 	//emi.Init(random, m_camera, particleParameterTbl[0], D3DXVECTOR3(0, 0, 0));
 	//emi2.Init(random, m_camera, particleParameterTbl[2], D3DXVECTOR3(0, 0, 0));
+
 	wood.Initialize();
 
 }
@@ -103,6 +107,7 @@ void CStagetest::Update()
 	m_camera.SetLookat(D3DXVECTOR3(0,0,0));//Player‚ğ’Ç‚¢‚©‚¯‚éƒJƒƒ‰
 	m_camera.Update();
 
+
 	//emi.Update();
 	//emi2.Update();
 
@@ -111,15 +116,23 @@ void CStagetest::Update()
 		//emi2.ApplyForce(D3DXVECTOR3(0.5, 0, 0));
 	}
 	//pa.Update(m_camera.GetRotationMatrix());
+
+
+	//if (GetAsyncKeyState(VK_C) & 0x8000){
+	//	emi.ApplyForce(D3DXVECTOR3(0, 0, 10));
+	//}
+
 	wood.Update();
 
 }
 
 void CStagetest::Draw()
 {
+
 	//emi.Render();
 	//emi2.Render();
 	//pa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
 	wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
 }

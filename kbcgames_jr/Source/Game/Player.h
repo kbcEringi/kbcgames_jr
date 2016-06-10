@@ -26,7 +26,6 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
 	void Died();
-	void Positin2D();//2Dç¿ïWÇ…ïœä∑
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;

@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include"SkinModelDate.h"
 #include"CAnimation.h"
-
-
+#include"CLight.h"
 
 class C3DDraw;
 /*
@@ -20,7 +19,7 @@ public:
 	{
 	}
 public:
-	virtual void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int) = 0;
+	virtual void OnBeginRender(CLight,int) = 0;
 	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool,bool) = 0;
 	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool) = 0;
 	virtual void OnEndRender() = 0;
@@ -34,7 +33,7 @@ class CSetEffectCallbackDefault : public ISetEffectCallback{
 public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
-	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
+	void OnBeginRender(CLight, int);
 	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool,bool) override;
 	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool)override;
 	void OnEndRender();
@@ -44,7 +43,7 @@ class CSetEffectCallbackShadowMap : public ISetEffectCallback{
 public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
-	void OnBeginRender(D3DXVECTOR4*, D3DXVECTOR4*, D3DXVECTOR4,int);
+	void OnBeginRender(CLight, int);
 	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool) override;
 	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool) override;
 	void OnEndRender();
@@ -94,7 +93,7 @@ public:
 	}
 	LPD3DXMESH GetMesh()
 	{
-		 return m_skinmodel->GetFrameRoot()->pMeshContainer->MeshData.pMesh;
+		return m_skinmodel->GetFrameRoot()->pMeshContainer->MeshData.pMesh;
 	}
 	void SetAnimation(int idx)
 	{
@@ -103,17 +102,12 @@ public:
 	}
 	void Setshadowflg(bool flg){ shadowflg = flg; }
 	void Sethureneruflg(bool flg){ hureneru = flg; }
+	CLight* GetLight(){ return &m_light; }
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
 	CAnimation m_animation;
-
-
-	static const int LIGHT_NUM = 6;
-	D3DXVECTOR4 m_diffuseLightDirection[LIGHT_NUM];	//ライトの方向。
-	D3DXVECTOR4	m_diffuseLightColor[LIGHT_NUM];		//ライトの色。
-	D3DXVECTOR4	m_ambientLight;						//環境光
-
+	CLight m_light;
 	int m_Graphicspass;
 	CSetEffectCallbackDefault m_defaultSetEffectCallback;
 	ISetEffectCallback* m_currentSetEffectCallback;

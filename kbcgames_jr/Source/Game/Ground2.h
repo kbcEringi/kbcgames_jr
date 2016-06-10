@@ -4,12 +4,11 @@
 #include"..\Frame\C3DObject.h"
 #include"..\BulletPhysics\BulletPhysics.h"
 
-class CGround : public C3DObject
+class CGround2 : public C3DObject
 {
 public:
-	
-	CGround() : C3DObject(){}
-	~CGround();
+	CGround2() : C3DObject(){}
+	~CGround2();
 	void Initialize()override;
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);

@@ -1,5 +1,6 @@
 #include"Ccamera.h"
 #include"..\Game\CGameFlg.h"
+#include"GraphicsDevice.h"
 
 extern D3DXMATRIX viewMatrixRotInv;
 

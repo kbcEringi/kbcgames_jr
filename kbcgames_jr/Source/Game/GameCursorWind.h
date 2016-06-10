@@ -20,10 +20,11 @@ public:
 	void Initialize()override;
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);
-	void Ray();
+	/*void Ray();*/
 	void RotScalY();
 	void RotScalXZ();
 	void WindPower();
+	void Positin2D();
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;
@@ -44,10 +45,13 @@ private:
 	D3DXMATRIX mRotationY;
 	D3DXMATRIX mRotationZ;
 	D3DXMATRIX mScale;
+	float	angle[3];
+	D3DXVECTOR3 vAxis;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR4 start;
 	D3DXVECTOR4 end;
 	D3DXVECTOR3 wind;//•—‚Å”ò‚Ô
 	btSphereShape* m_sphereColli;
 	btCollisionShape*	m_groundShape;
+	D3DXVECTOR3 m_Cursol2Dpos;
 };

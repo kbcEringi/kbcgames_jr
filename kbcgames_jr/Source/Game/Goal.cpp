@@ -1,37 +1,57 @@
 #include "Goal.h"
 #include"..\Frame\Stage\CStageManager.h"
+#include"..\Frame\SceneManager.h"
 
 
 CGoal::~CGoal()
 {
 }
 
-void CGoal::Initialize()
+void CGoal::Initialize(D3DXVECTOR3 pos)
 {
 	m_SkinModel.Initialize("XFile\\Goal.x");
 
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//AABB
-	m_position.x = 395;
-	m_position.y = 7.0f;
-	m_position.z = 0.0f;
+	m_position.x = pos.x;
+	m_position.y = pos.y;
+	m_position.z = pos.z;
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
+
+	goalflag = false;
 }
 
 void CGoal::Update()
 {
 	D3DXVECTOR3 pos = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
-	
-	if (m_aabbMin.x < pos.x
-		&& m_aabbMin.y < pos.y
-		&& m_aabbMin.z < pos.z
-		&& m_aabbMax.x > pos.x
-		&& m_aabbMax.y > pos.y
-		&& m_aabbMax.z > pos.z
-		)
+	if (GAMEFLG->Getflg() == true)
 	{
-		MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
-		exit(0);
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			)
+		{
+			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
+			exit(0);*/
+			goalflag = true;
+			
+		}
+	}
+	else
+	{
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMin.z < pos.z
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			&& m_aabbMax.z > pos.z
+			)
+		{
+			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
+			exit(0);*/
+			goalflag = true;
+		}
 	}
 }
 
