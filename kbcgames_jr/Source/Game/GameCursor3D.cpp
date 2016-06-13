@@ -76,7 +76,7 @@ void CGameCursor3D::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 	const float MOVE_SPEED = 0.2f;
-	const float LENGTH = 10.0f;
+	const float LENGTH = 100.0f;
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
 	D3DXVECTOR3 add(0.0f, 0.0f, 0.0f);

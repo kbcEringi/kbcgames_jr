@@ -19,7 +19,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\unitychan.x");	//プレイヤーXファイル
+	m_SkinModel.Initialize("XFile\\unity.x");	//プレイヤーXファイル
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
 	//オーディオ初期化
