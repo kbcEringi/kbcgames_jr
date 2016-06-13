@@ -12,6 +12,12 @@
 #include"..\Frame\Stage\CStageManager.h"
 
 
+enum PlayerAnim{
+	PlayerAnim_Stand,
+	PlayerAnim_Walk,
+	PlayerAnim_Run,
+	PlayerAnim_Jump,
+};
 CPlayer::~CPlayer()
 {
 }
@@ -19,7 +25,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\unity.x");	//プレイヤーXファイル
+	m_SkinModel.Initialize("XFile\\Unity.x");	//プレイヤーXファイル
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
 	//オーディオ初期化
@@ -58,6 +64,8 @@ void CPlayer::Initialize()
 	D3DXVECTOR4 dir = D3DXVECTOR4(-0.75f, -0.75f, -0.75f, 1.0f);
 	D3DXVec4Normalize(&dir, &dir);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
+	m_SkinModel.SetAnimation(PlayerAnim_Stand);//スタンドアニメーション
+	currentAnimation = false;//アニメーションしていない
 }
 
 void CPlayer::Update()
@@ -77,6 +85,13 @@ void CPlayer::Update()
 		if (D3DXVec3Length(&m_moveSpeed) < 1.0f)
 		{
 			STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
+			if (currentAnimation == true)//アニメーションしているなら止まる
+			{
+				m_SkinModel.SetAnimation(PlayerAnim_Stand);//止まっている
+				currentAnimation = false;
+				m_pAudio->StopCue("run");
+			}
+			
 		}
 	}
 	m_moveSpeed += m_applyForce;
@@ -98,6 +113,7 @@ void CPlayer::Update()
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.y = 0.0f;
 			m_moveSpeed.z = 0.0f;
+			m_pAudio->StopCue("bu-n");
 		}
 	}
 
@@ -110,16 +126,25 @@ void CPlayer::Update()
 
 void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y-0.3f, m_position.z);
 	D3DXMATRIX mRot;
-	D3DXMatrixRotationY(&mRot, m_currentAngleY);
-	m_matWorld = mRot * m_matWorld;
+	D3DXMATRIX mScale;
+	D3DXMatrixRotationY(&mRot, m_currentAngleY + D3DXToRadian(90.0f));
+	D3DXMatrixScaling(&mScale,1.8f, 1.8f, 1.8f);
+	m_matWorld = mScale * mRot * m_matWorld;
 	m_SkinModel.Draw(m_matWorld, view, proj);
 }
 
 void CPlayer::Move(D3DXVECTOR3 pos)//移動
 {
 	bool isTurn = false;
+	const float MOVESPEED = 5.0f;
+
+	if (currentAnimation == false)
+	{
+		m_SkinModel.SetAnimation(PlayerAnim_Run);//走るアニメーション
+		currentAnimation = true;
+	}
 
 	D3DXMatrixIdentity(&m_matWorld);
 	m_moveSpeed.x = 0.0f;//受ける風の力のx座標の初期化
@@ -136,8 +161,8 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	{
 		D3DXVec3Normalize(&moveDir, &moveDir);
 		if (!GAMEFLG->Getflg()){
-			m_moveSpeed.x = moveDir.x * 2.0f;
-			m_moveSpeed.z = moveDir.z * 2.0f;
+			m_moveSpeed.x = moveDir.x * MOVESPEED;
+			m_moveSpeed.z = moveDir.z * MOVESPEED;
 			D3DXVECTOR3 Axix(1.0f, 0.0f, 0.0f);
 			m_targetAngleY = D3DXVec3Dot(&moveDir, &Axix);
 			m_targetAngleY = acosf(m_targetAngleY);
@@ -150,7 +175,7 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 			isTurn = true;
 		}
 		else{
-			m_moveSpeed.x = moveDir.x / abs(moveDir.x) * 2.0f;
+			m_moveSpeed.x = moveDir.x / abs(moveDir.x) * MOVESPEED;
 			if (moveDir.x > 0.0f){
 				m_targetAngleY = D3DXToRadian(0.0f);
 			}
@@ -196,4 +221,14 @@ void CPlayer::SetRunAudio()
 void CPlayer::StopRunAudio()
 {
 	m_pAudio->StopCue("run");
+}
+
+void CPlayer::SetJumpAudio()
+{
+	m_pAudio->PlayCue("bu-n");
+}
+
+void CPlayer::StopJumpAudio()
+{
+	m_pAudio->StopCue("bu-n");
 }

@@ -99,6 +99,7 @@ void CGameCursorWind::Update()
 				Positin2D();//2Dのポジションに変換
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
 				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
+				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
 			}
 			RotScalY();//回転と拡大
 		}
@@ -115,7 +116,8 @@ void CGameCursorWind::Update()
 				WindPower();//風に力を
 				Positin2D();//2Dのポジションに変換
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
-				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
+				//STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
+				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
 			}
 			else{
 				/*if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
@@ -156,7 +158,7 @@ void CGameCursorWind::Update()
 
 void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	if (GAMEFLG->Getflg() == true)
+	if (GAMEFLG->Getflg() == true)//2D
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 		D3DXMATRIX mRot, mTmp;
@@ -165,7 +167,7 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
 		m_matWorld = mScale * mRot * mTmp * m_matWorld;
 	}
-	else
+	else//3D
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 		D3DXMATRIX mRot, mTmp, mRot2;
