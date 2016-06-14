@@ -19,7 +19,7 @@ void CWindmill::Initialize()
 	m_data.position.x = 1.0f;
 	m_data.position.y = 0.0f;
 	m_data.position.z = 0.0f;
-	m_data.rotation = D3DXVECTOR3(0, 0, 0);
+	m_data.rotation = D3DXQUATERNION(0, 0, 0, 1.0f);
 	m_data.scale = D3DXVECTOR3(0, 0, 0);
 	m_aabbMin += m_data.position;
 	m_aabbMax += m_data.position;

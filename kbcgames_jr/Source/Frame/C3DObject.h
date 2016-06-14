@@ -9,7 +9,7 @@
 struct ObjectData
 {
 	D3DXVECTOR3 position;
-	D3DXVECTOR3 rotation;
+	D3DXQUATERNION rotation;
 	D3DXVECTOR3 scale;
 };
 

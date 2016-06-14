@@ -43,14 +43,14 @@ SParicleEmitParameter particleParameterTbl
 {
 	"Texture\\leaf.png",	//const char* texturePath;						//!<テクスチャのファイルパス。
 	D3DXVECTOR3(5.0f, 0.0f, 0.0f),		//D3DXVECTOR3	initVelocity;						//!<初速度。
-	3.0f,							//float		life;								//!<寿命。単位は秒。
+	1.5f,							//float		life;								//!<寿命。単位は秒。
 	0.1f,							//float		intervalTime;						//!<発生時間。単位は秒。
 	1.0f,							//float		w;									//!<パーティクルの幅。
 	1.0f,							//float		h;									//!<パーティクルの高さ。
-	D3DXVECTOR3(3.0f, 1.0f, 1.0f),		//D3DXVECTOR3	initPositionRandomMargin;			//!<初期位置のランダム幅。
+	D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//D3DXVECTOR3	initPositionRandomMargin;			//!<初期位置のランダム幅。
 	D3DXVECTOR3(0.3f, 0.0f, 0.3f),		//D3DXVECTOR3	initVelocityVelocityRandomMargin;	//!<初速度のランダム幅。
 	D3DXVECTOR3(0.005f, 0.0f, 0.005f),	//D3DXVECTOR3	addVelocityRandomMargih;			//!<速度の積分のときのランダム幅。
-	D3DXVECTOR3(0.0f, 0.0f, -3.0f),		//D3DXVECTOR3	gravity;							//!<重力。
+	D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//D3DXVECTOR3	gravity;							//!<重力。
 	true,							//bool		isFade;								//!<死ぬときにフェードアウトする？
 	0.1f,							//float		fadeTime;							//!<フェードする時間。
 	1.0f,							//float		initAlpha;							//!<初期アルファ値。
@@ -73,7 +73,7 @@ CAlwaysWind::~CAlwaysWind()
 
 void CAlwaysWind::Initialize()
 {
-	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), particleParameterTbl, m_data.position);
+	
 	m_SkinModel.Initialize("XFile\\wood.x");
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
 
@@ -81,15 +81,37 @@ void CAlwaysWind::Initialize()
 	//m_data.position.y = 1.0f;
 	//m_data.position.z = 0.0f;
 
-	D3DXQUATERNION rot;
+	/*D3DXQUATERNION rot;
 	rot.x = 0.0f;
 	rot.y = 0.0f;
 	rot.z = 0.0f;
 	rot.w = 1.0f;
-	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);
-	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &rot);
+	D3DXQuaternionRotationAxis(&rot, &D3DXVECTOR3(0.0f, 1.0f, 0.0f), 3.14f*0.25f);*/
+	D3DXMatrixRotationQuaternion(&m_rotationMatrix, &m_data.rotation);
 	m_aabbMin += m_data.position;
 	m_aabbMax += m_data.position;
+
+	D3DXVECTOR3 initPositionRandomMargin;
+	initPositionRandomMargin.x = m_rotationMatrix.m[2][0];
+	initPositionRandomMargin.y = m_rotationMatrix.m[2][1];
+	initPositionRandomMargin.z = m_rotationMatrix.m[2][2];
+	initPositionRandomMargin *= 3.0f;
+	initPositionRandomMargin.x += m_rotationMatrix.m[1][0];
+	initPositionRandomMargin.y += m_rotationMatrix.m[1][1];
+	initPositionRandomMargin.z += m_rotationMatrix.m[1][2];
+
+	initPositionRandomMargin.x += m_rotationMatrix.m[0][0];
+	initPositionRandomMargin.y += m_rotationMatrix.m[0][1];
+	initPositionRandomMargin.z += m_rotationMatrix.m[0][2];
+
+	D3DXVECTOR3 initSpeed;
+	initSpeed.x = m_rotationMatrix.m[0][0];
+	initSpeed.y = m_rotationMatrix.m[0][1];
+	initSpeed.z = m_rotationMatrix.m[0][2];
+
+	particleParameterTbl.initPositionRandomMargin = initPositionRandomMargin;
+	particleParameterTbl.initVelocity = initSpeed *5;
+	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), particleParameterTbl, m_data.position);
 
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
