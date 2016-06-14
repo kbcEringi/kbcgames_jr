@@ -18,7 +18,9 @@ void CGameCursor3D::Initialize()
 
 void CGameCursor3D::Update()
 {
+
 	Move();//移動
+
 }
 
 void CGameCursor3D::Draw(D3DXMATRIX view, D3DXMATRIX proj)
@@ -74,9 +76,11 @@ void CGameCursor3D::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 	const float MOVE_SPEED = 0.2f;
+	const float LENGTH = 20.0f;
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
 	D3DXVECTOR3 add(0.0f, 0.0f, 0.0f);
+
 
 	if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
 	{
@@ -95,24 +99,35 @@ void CGameCursor3D::Move()
 		{
 			add += xAxisInCamera * MOVE_SPEED;
 		}
-		if (KEYDOWN(diks, DIK_LEFT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()<0)//左
-		{
-			add -= xAxisInCamera * MOVE_SPEED;
-		}
-
 		if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() > 0)//奥
 		{
 			add += zAxisInCamera * MOVE_SPEED;
+		}
+		if (KEYDOWN(diks, DIK_LEFT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X() < 0)//左
+		{
+			add -= xAxisInCamera * MOVE_SPEED;
 		}
 		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() < 0)//手前
 		{
 			add -= zAxisInCamera * MOVE_SPEED;
 		}
+
 	}
 	//else
 	//{
 	//	(*GetKeyDevice()).Acquire();//キーデバイス取得
 	//}
+
 	m_position += add;
 
+	D3DXVECTOR3 v;
+	v = m_position - STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
+	float length;
+	length = D3DXVec3Length(&v);
+	if (length >= LENGTH)
+	{
+		D3DXVec3Normalize(&v, &v);
+		v *= LENGTH;
+		m_position = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition() + v;
+	}
 }

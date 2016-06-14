@@ -6,6 +6,8 @@
 
 extern void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max);
 
+class CAudio;
+
 class CGoal : public C3DObject
 {
 public:
@@ -28,5 +30,6 @@ private:
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
 
+	CAudio* m_pAudio;
 	bool goalflag;
 };

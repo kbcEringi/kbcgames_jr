@@ -1,7 +1,7 @@
 #include "Goal.h"
 #include"..\Frame\Stage\CStageManager.h"
 #include"..\Frame\SceneManager.h"
-
+#include "..\Frame\Audio.h"
 
 CGoal::~CGoal()
 {
@@ -10,6 +10,12 @@ CGoal::~CGoal()
 void CGoal::Initialize(D3DXVECTOR3 pos)
 {
 	m_SkinModel.Initialize("XFile\\Goal.x");
+	//オーディオ初期化
+	m_pAudio = new CAudio();
+	m_pAudio->Initialize(
+		"Audio\\Audio.xgs",
+		"Audio\\Wave Bank.xwb",
+		"Audio\\Audio.xsb");
 
 	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);//AABB
 	m_position.x = pos.x;
@@ -23,6 +29,7 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 
 void CGoal::Update()
 {
+	m_pAudio->Run();
 	D3DXVECTOR3 pos = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
 	if (GAMEFLG->Getflg() == true)
 	{
@@ -35,7 +42,7 @@ void CGoal::Update()
 			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
 			exit(0);*/
 			goalflag = true;
-			
+			m_pAudio->PlayCue("goal");
 		}
 	}
 	else
@@ -51,8 +58,10 @@ void CGoal::Update()
 			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
 			exit(0);*/
 			goalflag = true;
+			m_pAudio->PlayCue("goal");
 		}
 	}
+	m_pAudio->StopCue("goal");
 }
 
 void CGoal::Draw(D3DXMATRIX view, D3DXMATRIX proj)

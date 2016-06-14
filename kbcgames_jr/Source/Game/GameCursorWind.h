@@ -20,7 +20,6 @@ public:
 	void Initialize()override;
 	void Update();
 	void Draw(D3DXMATRIX, D3DXMATRIX);
-	/*void Ray();*/
 	void RotScalY();
 	void RotScalXZ();
 	void WindPower();
@@ -41,7 +40,6 @@ public:
 private:
 	
 	State state;
-	//D3DXMATRIX mRotation;
 	D3DXMATRIX mRotationY;
 	D3DXMATRIX mRotationZ;
 	D3DXMATRIX mScale;

@@ -9,7 +9,7 @@ void CTitleScene::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("title");	//タイトル音楽再生
+	//m_pAudio->PlayCue("title");	//タイトル音楽再生
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_title.Initialize();
@@ -56,7 +56,7 @@ void CTitleScene::Select()
 				SINSTANCE(CSceneManager)->ChangeScene(SCENE::SELECT);
 
 				m_pAudio->StopCue("title");//タイトル音楽ストップ
-				m_pAudio->PlayCue("uni1512");//スタート
+				m_pAudio->PlayCue("start");//スタート
 				break;
 			case COMMAND_SELECT::EXIT:
 				PostQuitMessage(0);
@@ -76,7 +76,7 @@ void CTitleScene::Select()
 				SINSTANCE(CSceneManager)->ChangeScene(SCENE::SELECT);
 
 				m_pAudio->StopCue("title");//タイトル音楽ストップ
-				m_pAudio->PlayCue("uni1512");//スタート
+				m_pAudio->PlayCue("start");//スタート
 				break;
 			case COMMAND_SELECT::EXIT:
 				PostQuitMessage(0);

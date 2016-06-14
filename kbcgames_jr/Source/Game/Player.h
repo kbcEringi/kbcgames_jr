@@ -26,6 +26,10 @@ public:
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Move関数
 	void Died();
+	D3DXVECTOR3 Get2DPos()
+	{
+		return m_position2D;
+	}
 	D3DXVECTOR3 GetPosition()
 	{
 		return m_position;
@@ -66,6 +70,11 @@ public:
 	{
 		return state;
 	}
+	void Pos2D();
+	void SetRunAudio();
+	void StopRunAudio();
+	void SetJumpAudio();
+	void StopJumpAudio();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;
@@ -81,4 +90,5 @@ private:
 	float					m_targetAngleY;
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
 
+	bool currentAnimation;//アニメーションしている?
 };

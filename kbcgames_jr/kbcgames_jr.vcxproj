@@ -104,6 +104,7 @@
     <ClCompile Include="Source\Frame\SceneManager.cpp" />
     <ClCompile Include="Source\Frame\Shadow.cpp" />
     <ClCompile Include="Source\Frame\SkinModelDate.cpp" />
+    <ClCompile Include="Source\Frame\Stage\CStage.cpp" />
     <ClCompile Include="Source\Frame\Stage\CStageManager.cpp" />
     <ClCompile Include="Source\Frame\Turn.cpp" />
     <ClCompile Include="Source\Frame\WinMain.cpp" />

@@ -6,13 +6,6 @@
 
 //CShadowMap g_Shadow;
 
-//オブジェクトの詳細
-struct SCollisionInfo {
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 angle;
-	D3DXVECTOR3 scale;
-};
-
 SCollisionInfo collision2InfoTable3D[] = {
 #include "Collision3D_stage10.h"
 
@@ -76,41 +69,19 @@ void CStage2::Initialize()
 
 	this->CreateCollision3D();
 	this->CreateCollision2D();
-	this->Add3DRigidBody();
+	this->Add3DRigidBody(ARRAYSIZE(collision2InfoTable3D));
 
 	//m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 }
 
 void CStage2::Update()
 {
+	
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (!(GAMEFLG->Getflg()))
-		{
-			if (GAMEPAD(CGamepad)->GetStickR_X() > 0)
-			{
-				m_camera.RotTransversal(-0.05f);
-			}
-			if (GAMEPAD(CGamepad)->GetStickR_X() < 0)
-			{
-				m_camera.RotTransversal(0.05f);
-			}
-		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
-		{
-			GAMEFLG->Set2D();
-			m_camera.Set2DProj();
-			Remove3DRigidBody();
-			Add2DRigidBody();
-		}
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
-		{
-			GAMEFLG->Set3D();
-			m_camera.Set3DProj();
-			Remove2DRigidBody();
-			Add3DRigidBody();
-		}
+		//カメラの切り替え処理。
+		ExecuteChangeCamera(ARRAYSIZE(collision2InfoTable2D), ARRAYSIZE(collision2InfoTable3D));
 	}
 	else
 	{
@@ -163,7 +134,7 @@ void CStage2::Update()
 	}
 
 	m_camera.Update();
-
+	CStage::Update();
 	m_Player.Update();//プレイヤー
 	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.5f, 2.0f, 0.0f);
 	//g_Shadow.SetLightPosition(lightPos);
@@ -250,7 +221,7 @@ void CStage2::CreateCollision3D()
 		//剛体を初期化。
 		{
 			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
-			m_ground2Shape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
 			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
@@ -258,7 +229,7 @@ void CStage2::CreateCollision3D()
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 			m_myMotionState = new btDefaultMotionState(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_ground2Shape[i], btVector3(0, 0, 0));
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
 			m_rigidBody3D[i] = new btRigidBody(rbInfo);
 
 			//ワールドに追加。
@@ -281,7 +252,7 @@ void CStage2::CreateCollision2D()
 		//剛体を初期化。
 		{
 			//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
-			m_ground2Shape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
+			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
 			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
@@ -289,61 +260,12 @@ void CStage2::CreateCollision2D()
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
 			m_myMotionState = new btDefaultMotionState(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_ground2Shape[i], btVector3(0, 0, 0));
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, m_myMotionState, m_groundShape[i], btVector3(0, 0, 0));
 			m_rigidBody2D[i] = new btRigidBody(rbInfo);
 
 			//ワールドに追加。
-			//g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
+			//g_bulletPhysics.AddRigidBody(m_rigidBody2D2[i]);
 
-		}
-	}
-}
-
-
-void CStage2::Add2DRigidBody()//ワールドに追加。
-{
-	if (!m_isAdd2DCollision){
-		m_isAdd2DCollision = true;
-		int arraySize = ARRAYSIZE(collision2InfoTable2D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			g_bulletPhysics.AddRigidBody(m_rigidBody2D[i]);
-		}
-	}
-}
-
-void CStage2::Add3DRigidBody()//ワールドに追加。
-{
-	if (!m_isAdd3DCollision){
-		m_isAdd3DCollision = true;
-		int arraySize = ARRAYSIZE(collision2InfoTable3D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			g_bulletPhysics.AddRigidBody(m_rigidBody3D[i]);
-		}
-	}
-}
-
-void CStage2::Remove2DRigidBody()//ワールドから削除
-{
-	if (m_isAdd2DCollision){
-		m_isAdd2DCollision = false;
-		int arraySize = ARRAYSIZE(collision2InfoTable2D);
-		for (int i = 0; i < arraySize; i++)
-		{
-			g_bulletPhysics.RemoveRigidBody(m_rigidBody2D[i]);
-		}
-	}
-}
-
-void CStage2::Remove3DRigidBody()//ワールドから削除
-{
-	if (m_isAdd3DCollision){
-		m_isAdd3DCollision = false;
-		int arraySize = ARRAYSIZE(collision2InfoTable3D);
-		for (int i = 0; i < arraySize; i++)
-		{
-				g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
 		}
 	}
 }

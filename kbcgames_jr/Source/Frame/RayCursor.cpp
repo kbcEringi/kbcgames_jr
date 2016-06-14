@@ -163,6 +163,8 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 					m_Pointa->SetPos(&callback.hitPos);
 				}
 				STAGEMANEGER->GetStage()->GetPointa()->SetDraw(true);
+				STAGEMANEGER->GetStage()->GetPlayer()->StopRunAudio();
+				STAGEMANEGER->GetStage()->GetPlayer()->SetRunAudio();
 			}
 		}
 		else
