@@ -116,7 +116,7 @@ void CGameCursorWind::Update()
 				WindPower();//風に力を
 				Positin2D();//2Dのポジションに変換
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
-				//STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
+				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
 				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
 			}
 			else{
