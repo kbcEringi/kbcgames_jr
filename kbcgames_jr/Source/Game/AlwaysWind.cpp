@@ -1,6 +1,7 @@
 #include "AlwaysWind.h"
 #include "Stage1.h"
 #include "..\Frame\Stage\CStageManager.h"
+#include "CGameFlg.h"
 
 /*!
 *@brief	ID3DXMeshからAABBのサイズを計算する関数。
@@ -75,8 +76,13 @@ void CAlwaysWind::Initialize()
 {
 	
 	m_SkinModel.Initialize("XFile\\wood.x");
-	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
-
+	//CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
+	m_aabbMax.z = 1.5f;
+	m_aabbMin.z = -1.5f;
+	m_aabbMax.y = 0.5f;
+	m_aabbMin.y = -0.5f;
+	m_aabbMax.x = 5.0f*1.5;
+	m_aabbMin.x = 0;
 	//m_data.position.x = 14.0f;
 	//m_data.position.y = 1.0f;
 	//m_data.position.z = 0.0f;
@@ -122,27 +128,54 @@ void CAlwaysWind::Update()
 
 	CPlayer* player = STAGEMANEGER->GetStage()->GetPlayer();
 	D3DXVECTOR3 pos = player->GetPosition();
-	if (m_aabbMin.x < pos.x
-		&& m_aabbMin.y < pos.y
-		&& m_aabbMin.z < pos.z
-		&& m_aabbMax.x > pos.x
-		&& m_aabbMax.y > pos.y
-		&& m_aabbMax.z > pos.z
-		){
-		m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
-		D3DXVECTOR4 force;
-		D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
-		m_force.x = force.x;
-		m_force.y = force.y;
-		m_force.z = force.z;
+	//2Dの時
+	if (GAMEFLG->Getflg()){
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			){
+			m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
+			D3DXVECTOR4 force;
+			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
+			m_force.x = force.x;
+			m_force.y = force.y;
+
+		}
+		else{
+			if (D3DXVec3Length(&m_force) < 0.1f){
+				m_force.x = 0.0f;
+				m_force.y = 0.0f;
+			}
+			else{
+				m_force *= 0.95f;
+			}
+		}
 	}
-	else{
-		if (D3DXVec3Length(&m_force) < 0.1f){
-			m_force.x = 0.0f;
-			m_force.y = 0.0f;
-			m_force.z = 0.0f;
-		}else{
-			m_force *= 0.95f;
+	else {
+		if (m_aabbMin.x < pos.x
+			&& m_aabbMin.y < pos.y
+			&& m_aabbMin.z < pos.z
+			&& m_aabbMax.x > pos.x
+			&& m_aabbMax.y > pos.y
+			&& m_aabbMax.z > pos.z
+			){
+			m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
+			D3DXVECTOR4 force;
+			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
+			m_force.x = force.x;
+			m_force.y = force.y;
+			m_force.z = force.z;
+		}
+		else{
+			if (D3DXVec3Length(&m_force) < 0.1f){
+				m_force.x = 0.0f;
+				m_force.y = 0.0f;
+				m_force.z = 0.0f;
+			}
+			else{
+				m_force *= 0.95f;
+			}
 		}
 	}
 	player->ApplyForce(m_force);
