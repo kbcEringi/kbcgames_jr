@@ -531,6 +531,7 @@ void CSkinModelData::Release()
 {
 	if (m_pAnimController) {
 		m_pAnimController->Release();
+		m_pAnimController = NULL;
 	}
 }
 

@@ -9,6 +9,8 @@ void CShadowMap::Create(int w, int h)
 	this->h = h;
 	this->w = w;
 
+	m_shadowModels.clear();
+
 	LPD3DXBUFFER  compileErrorBuffer = NULL;
 	HRESULT hr = D3DXCreateEffectFromFile(
 		graphicsDevice(),
@@ -29,8 +31,6 @@ void CShadowMap::Create(int w, int h)
 
 void CShadowMap::Draw(D3DXMATRIX proj)
 {
-	
-
 	(*graphicsDevice()).GetViewport(&m_viewport);
 	(*graphicsDevice()).GetRenderTarget(0, &m_Backbuffer);
 	(*graphicsDevice()).GetDepthStencilSurface(&m_BackZ);
@@ -92,8 +92,9 @@ void CShadowMap::CreateLight(D3DXMATRIX proj)
 void CShadowMap::Release()
 {
 	m_shadowMapRT.Release();
-	if (m_pEffect != NULL) {
+	if (m_pEffect != nullptr) {
 		m_pEffect->Release();
+		m_pEffect = nullptr;
 	}
 }
 

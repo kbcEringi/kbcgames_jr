@@ -105,7 +105,17 @@ C2DObject::~C2DObject()
 {
 	if (m_pEffect != NULL) {
 		m_pEffect->Release();
+		m_pEffect = NULL;
 	}
 	if (m_pVB != NULL)
+	{
 		m_pVB->Release();
+		m_pVB = NULL;
+	}
+	if (tex != NULL)
+	{
+		//tex->Release();
+		tex = NULL;
+	}
+
 }

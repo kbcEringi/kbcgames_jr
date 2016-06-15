@@ -4,7 +4,6 @@
 #include "..\Frame\SceneManager.h"
 #include "..\Frame\Stage\CStageManager.h"
 
-CShadowMap g_Shadow;
 
 SCollisionInfo collisionInfoTable3D[] = {
 #include "Collision3D_stage1.h"
@@ -15,11 +14,11 @@ SCollisionInfo collisionInfoTable2D[] = {
 };
 
 SGimmickData gimmick3dobj[] = {
-#include"..\Game\Gimmick3DInfo.h"
+#include"..\Game\Gimmick3D_stage1.h"
 };
 
 SGimmickData gimmick2dobj[] = {
-#include"..\Game\Gimmick2DInfo.h"
+#include"..\Game\Gimmick2D_stage1.h"
 };
 
 void CStage1::Initialize()
@@ -48,7 +47,7 @@ void CStage1::Initialize()
 
 	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
-	g_Shadow.Create(512*3, 512*3);
+	g_Shadow.Create(512 * 3, 512 * 3);
 	g_Shadow.Entry(&m_Player);
 	
 	m_goal.Initialize(D3DXVECTOR3(260,0,0));
@@ -131,7 +130,7 @@ void CStage1::Update()
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
 	m_goal.Update();
-	if (m_goal.GetGoal() == true)
+	if (m_goal.GetGoal() != true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));

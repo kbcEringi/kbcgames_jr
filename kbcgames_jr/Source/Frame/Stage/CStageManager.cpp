@@ -31,29 +31,26 @@ void CStageManager::DrawStage()
 void CStageManager::SelectStage(int num)
 {
 	m_selectStage = num;
-	if (m_selectStage != m_nowStage)
+	if (m_nowStage != -1)
 	{
-		if (m_nowStage != -1)
-		{
-			ReleaseStage();
-		}
-		m_nowStage = m_selectStage;
-		switch (m_nowStage)
-		{
-		case 1:
+		ReleaseStage();
+	}
+	m_nowStage = m_selectStage;
+	switch (m_nowStage)
+	{
+	case 1:
 #ifdef TEST
-			m_stage = new CStagetest;
+		m_stage = new CStagetest;
 #else
-			m_stage = new CStage1;
+		m_stage = new CStage1;
 #endif
-			break;
-		case 2:
-			m_stage = new CStage2;
-			break;
-		default:
-			STAGEMANEGER->GetStage()->GetPlayer()->Initialize();
-			break;
-		}
+		break;
+	case 2:
+		m_stage = new CStage2;
+		break;
+	default:
+		STAGEMANEGER->GetStage()->GetPlayer()->Initialize();
+		break;
 	}
 	InitStage();
 }

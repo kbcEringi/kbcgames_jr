@@ -1,5 +1,7 @@
 #include "CStage.h"
 
+CShadowMap g_Shadow;
+
 CStage::CStage()
 {
 	GAMEFLG->Set3D();

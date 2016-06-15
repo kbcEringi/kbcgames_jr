@@ -3,9 +3,7 @@ using System.Collections;
 
 public class Gimmick : MonoBehaviour {
     public int type = -1;
-    //public int enemytype = -1;
-    //public int gimmicktype = -1;
-    
+    public Vector3 PlayerParameter = new Vector3( 0, 0, 0 );    
 	// Use this for initialization
 	void Start () {
 	
