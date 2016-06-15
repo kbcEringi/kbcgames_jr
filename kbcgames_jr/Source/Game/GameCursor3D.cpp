@@ -36,7 +36,7 @@ void CGameCursor3D::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 		mat.m[3][3] = 1;
 
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-		m_SkinModel.Draw(mat * m_matWorld, view, proj);//‰ñ“]‚µ‚Ä‚©‚ç
+		m_SkinModel.Draw(mat * m_matWorld, view, proj,m_matRot);//‰ñ“]‚µ‚Ä‚©‚ç
 	}
 	
 }

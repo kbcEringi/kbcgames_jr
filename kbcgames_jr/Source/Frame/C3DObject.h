@@ -16,7 +16,7 @@ struct ObjectData
 class C3DObject
 {
 public:
-	C3DObject(){D3DXMatrixIdentity(&m_matWorld);}
+	C3DObject(){ D3DXMatrixIdentity(&m_matWorld); D3DXMatrixIdentity(&m_matRot); }
 	~C3DObject(){}
 public:
 	virtual void Initialize()=0;
@@ -28,4 +28,5 @@ protected:
 	C3DDraw m_SkinModel;
 	ObjectData m_data;
 	D3DXMATRIX m_matWorld;
+	D3DXMATRIX m_matRot;
 };

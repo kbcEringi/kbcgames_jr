@@ -5,14 +5,14 @@ void CMovefloor::Initialize()
 	m_SkinModel.Initialize("XFile\\Lost.x");
 	D3DXMatrixIdentity(&m_matWorld);
 	CreateCollision();
-	m_position.x = 250.0f;						//X座標
-	m_position.y = 0.0f;						//Y座標
-	m_position.z = 0.0f;						//Z座標
+	m_data.position.x = 250.0f;						//X座標
+	m_data.position.y = 0.0f;						//Y座標
+	m_data.position.z = 0.0f;						//Z座標
 	m_moveSpeed = D3DXVECTOR3(0.0f, 0.05f, 0.0f);
 	haba = 2.0f;
-	m_up = D3DXVECTOR3(0.0f, m_position.y+haba, 0.0f);
-	m_down = D3DXVECTOR3(0.0f, m_position.y - haba, 0.0f);
-	m_up.y += m_position.y;
+	m_up = D3DXVECTOR3(0.0f, m_data.position.y + haba, 0.0f);
+	m_down = D3DXVECTOR3(0.0f, m_data.position.y - haba, 0.0f);
+	m_up.y += m_data.position.y;
 }
 
 
@@ -24,14 +24,14 @@ void CMovefloor::Update()
 void CMovefloor::Move()
 {	
 	btTransform groundTransform;
-	if (m_position.y > m_up.y || m_position.y < m_down.y)//上や下の方向切替
+	if (m_data.position.y > m_up.y || m_data.position.y < m_down.y)//上や下の方向切替
 	{
 			m_moveSpeed.y *= -1;
 	}
-	m_position += m_moveSpeed;
+	m_data.position += m_moveSpeed;
 
 	groundTransform.setIdentity();
-	groundTransform.setOrigin(btVector3(m_position.x, m_position.y, m_position.z));
+	groundTransform.setOrigin(btVector3(m_data.position.x, m_data.position.y, m_data.position.z));
 
 	m_rigidBody->setWorldTransform(groundTransform);
 	
@@ -39,9 +39,9 @@ void CMovefloor::Move()
 
 void CMovefloor::Draw(D3DXMATRIX view,D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
 
-	m_SkinModel.Draw(m_matWorld, view, proj);
+	m_SkinModel.Draw(m_matWorld, view, proj,m_matRot);
 }
 void CMovefloor::CreateCollision()
 {
@@ -55,7 +55,7 @@ void CMovefloor::CreateCollision()
 		m_groundShape = new btBoxShape(btVector3(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f));
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		groundTransform.setOrigin(btVector3(m_position.x, m_position.y, m_position.z));
+		groundTransform.setOrigin(btVector3(m_data.position.x, m_data.position.y, m_data.position.z));
 		float mass = 0.0f;
 
 		//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects

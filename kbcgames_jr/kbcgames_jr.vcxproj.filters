@@ -28,12 +28,6 @@
     <ClCompile Include="Source\Frame\IsIntersect.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\LostGround.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Movefloor.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game\Pointa.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -53,15 +47,6 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\Turn.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Windmill.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\wood.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Goal.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\AlwaysWind.cpp">
@@ -136,18 +121,40 @@
     <ClCompile Include="Source\Game\stagetest.cpp">
       <Filter>Game\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Gameover.cpp" />
-    <ClCompile Include="Source\Game\ResultScene.cpp" />
     <ClCompile Include="Source\Game\Ground2.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Stage2.cpp">
       <Filter>Game\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\BloomRender.cpp">
+      <Filter>Frame\Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Movefloor.cpp">
+      <Filter>Game\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Windmill.cpp">
+      <Filter>Game\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\wood.cpp">
+      <Filter>Game\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\ResultScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Gameover.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameCursor3D.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Frame\Stage\CStage.cpp">
       <Filter>Frame\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameCursor3D.cpp">
+    <ClCompile Include="Source\Game\LostGround.cpp">
+      <Filter>Game\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Goal.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,12 +192,6 @@
     <ClInclude Include="Source\Frame\IsIntersect.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\LostGround.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Movefloor.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\Pointa.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -210,15 +211,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Turn.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Windmill.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\wood.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Goal.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\AlwaysWind.h">
@@ -305,8 +297,6 @@
     <ClInclude Include="Source\Game\stagetest.h">
       <Filter>Game\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Gameover.h" />
-    <ClInclude Include="Source\Game\ResultScene.h" />
     <ClInclude Include="Source\Game\Ground2.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
@@ -316,7 +306,34 @@
     <ClInclude Include="Source\Frame\CLight.h">
       <Filter>Frame\graphic</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Frame\BloomRender.h">
+      <Filter>Frame\Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\haba.h">
+      <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Movefloor.h">
+      <Filter>Game\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Windmill.h">
+      <Filter>Game\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\wood.h">
+      <Filter>Game\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\ResultScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Gameover.h">
+      <Filter>Game</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Game\GameCursor3D.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\LostGround.h">
+      <Filter>Game\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Goal.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,6 +373,9 @@
     </Filter>
     <Filter Include="Frame\particle">
       <UniqueIdentifier>{71d98cfd-dc2a-4063-b2a2-4b04712a2ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame\Bloom">
+      <UniqueIdentifier>{40cfc408-7a34-4fdc-8f2b-573621722750}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

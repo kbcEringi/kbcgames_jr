@@ -44,7 +44,7 @@ void CWindmill::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
 
-	m_SkinModel.Draw(m_matWorld, view, proj);
+	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 }
 
 

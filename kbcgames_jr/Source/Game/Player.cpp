@@ -50,7 +50,7 @@ void CPlayer::Initialize()
 	
 
 	//deid = false;
-
+	m_SkinModel.Setunitychanflg();
 
 
 	m_currentAngleY = 0.0f;
@@ -128,11 +128,12 @@ void CPlayer::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y-0.3f, m_position.z);
 	D3DXMATRIX mRot;
+
 	D3DXMATRIX mScale;
 	D3DXMatrixRotationY(&mRot, m_currentAngleY + D3DXToRadian(90.0f));
 	D3DXMatrixScaling(&mScale,1.8f, 1.8f, 1.8f);
 	m_matWorld = mScale * mRot * m_matWorld;
-	m_SkinModel.Draw(m_matWorld, view, proj);
+	m_SkinModel.Draw(m_matWorld, view, proj, mRot);
 }
 
 void CPlayer::Move(D3DXVECTOR3 pos)//ˆÚ“®

@@ -23,6 +23,7 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 	m_position.z = pos.z;
 	m_aabbMin += m_position;
 	m_aabbMax += m_position;
+	m_SkinModel.Sethureneruflg(true);
 
 	goalflag = false;
 }
@@ -67,5 +68,5 @@ void CGoal::Update()
 void CGoal::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-	m_SkinModel.Draw(m_matWorld, view, proj);
+	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 }

@@ -40,6 +40,7 @@ private:
 	D3DVIEWPORT9       m_viewport;  // テクスチャのビューポート
 	LPDIRECT3DSURFACE9 m_Backbuffer;
 	LPDIRECT3DSURFACE9 m_BackZ;
+	int w, h;
 
 	Frame::CRenderTarget m_shadowMapRT;
 	std::vector<C3DObject*> m_shadowModels;

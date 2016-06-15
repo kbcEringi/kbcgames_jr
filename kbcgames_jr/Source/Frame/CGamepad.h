@@ -140,8 +140,8 @@ public:
 	}
 private:
 	static CGamepad *s_gamepad;
-	CGamepad(){}
+	CGamepad(){ m_bConnected = false; }
 
 	XINPUT_STATE m_state;	//状態
-	bool m_bConnected = false;	//コントローラー生存
+	bool m_bConnected;	//コントローラー生存
 };

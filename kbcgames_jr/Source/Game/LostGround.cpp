@@ -16,9 +16,9 @@ CLostGround::~CLostGround()
 {
 }
 
-bool CLostGround::OnHitGroundTrigger(const btCollisionObject* hitObject)
+bool CLostGround::OnHitGroundTrigger(const btCollisionObject* hitm_SkinModelect)
 {
-	if (hitObject == m_rigidBody){
+	if (hitm_SkinModelect == m_rigidBody){
 		//あたった。
 		m_time = 0;
 		m_timerFlag = true;		//時間計測用フラグ立てる
@@ -26,7 +26,7 @@ bool CLostGround::OnHitGroundTrigger(const btCollisionObject* hitObject)
 	}
 	return false;
 }
-void CLostGround::OnHitGroundLeave(const btCollisionObject* hitObject)
+void CLostGround::OnHitGroundLeave(const btCollisionObject* hitm_SkinModelect)
 {
 
 }
@@ -34,17 +34,16 @@ void CLostGround::OnHitGroundLeave(const btCollisionObject* hitObject)
 void CLostGround::Initialize()
 {
 	
-	Obj.Initialize("XFile\\Lost.x");
+	m_SkinModel.Initialize("XFile\\Lost.x");
 	
-	D3DXMatrixIdentity(&matWorld);
-	m_position.x = 2.0f;
-	m_position.y = 4.0f;
-	m_position.z = 0.0f;
-	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
+	D3DXMatrixIdentity(&m_matRot);
+	m_data.position.x = 2.0f;
+	m_data.position.y = 4.0f;
+	m_data.position.z = 0.0f;
 	CreateCollision();
 	m_timerFlag = false;
 	m_quake = D3DXToRadian(5);
-	matWorld2 = matWorld;
+	matWorld2 = m_matWorld;
 	STAGEMANEGER->GetStage()->GetPlayer()->AddCollisionCallback(this);
 }
 
@@ -59,7 +58,7 @@ void CLostGround::Update()
 	}
 
 	if (m_time >= DOWN){
-		m_position.y -= 0.1f;
+		m_data.position.y -= 0.1f;
 		if (m_timerFlag == true){
 			g_bulletPhysics.RemoveRigidBody(m_rigidBody);
 		}
@@ -73,11 +72,11 @@ void CLostGround::Update()
 	}
 }
 
-void CLostGround::Draw(D3DXMATRIX view)
+void CLostGround::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&matWorld, m_position.x, m_position.y, m_position.z);
-	matWorld=matWorld2*matWorld;
-	Obj.Draw(matWorld, view, m_projMatrix);
+	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
+	m_matWorld=matWorld2*m_matWorld;
+	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 }
 
 void CLostGround::CreateCollision()
@@ -85,17 +84,17 @@ void CLostGround::CreateCollision()
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;
 	D3DXVECTOR3 size;
-	CalcAABBSizeFromMesh(Obj.GetMesh(), m_aabbMin, m_aabbMax);
+	CalcAABBSizeFromMesh(m_SkinModel.GetMesh(), m_aabbMin, m_aabbMax);
 	size = m_aabbMax - m_aabbMin;
 	{
 		//この引数に渡すのはボックスのhalfsizeなので、0.5倍する。
 		m_groundShape = new btBoxShape(btVector3(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f));
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		groundTransform.setOrigin(btVector3(m_position.x, m_position.y, m_position.z));
+		groundTransform.setOrigin(btVector3(m_data.position.x, m_data.position.y, m_data.position.z));
 		float mass = 0.0f;
 
-		//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+		//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' m_SkinModelects
 		m_myMotionState = new btDefaultMotionState(groundTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(0.0f, m_myMotionState, m_groundShape, btVector3(0, 0, 0));
 		m_rigidBody = new btRigidBody(rbInfo);

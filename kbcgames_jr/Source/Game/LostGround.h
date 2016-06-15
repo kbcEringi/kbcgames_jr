@@ -4,24 +4,24 @@
 #include"..\Frame\C3DDraw.h"
 #include"..\BulletPhysics\BulletPhysics.h"
 #include "..\Frame\IPlayerCollisionCallback.h"
+#include"..\Frame\C3DObject.h"
 
 extern void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max);
 
-class CLostGround : public IPlayerCollisionCallback
+class CLostGround : public C3DObject, public IPlayerCollisionCallback
 {
 public:
 	CLostGround();
 	~CLostGround();
-	void Initialize();
-	void Update();
-	void Draw(D3DXMATRIX);
+	void Initialize()override;
+	void Update()override;
+	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void CreateCollision();
 	virtual bool OnHitGroundTrigger(const btCollisionObject* hitObject );
 	virtual void OnHitGroundLeave(const btCollisionObject* hitObject);
 private:
-	C3DDraw Obj;
-	D3DXMATRIX matWorld,matWorld2,sumMatWorld, m_projMatrix;
-	D3DXVECTOR3 m_position;
+	D3DXMATRIX matWorld2,sumMatWorld;
+	D3DXMATRIX m_matRot;
 
 	D3DXVECTOR3 m_aabbMin;
 	D3DXVECTOR3 m_aabbMax;

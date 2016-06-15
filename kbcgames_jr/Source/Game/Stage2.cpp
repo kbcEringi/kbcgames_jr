@@ -40,16 +40,12 @@ void CStage2::Initialize()
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
 	m_Ground2.Initialize();
-	m_wood.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_pointa.Initialize();
 	m_GameCursor.Initialize();//ゲームカーソル000
 	m_GCursorWind.Initialize();//ゲームカーソル風
-	m_lost.Initialize();
-	m_hasu.Initialize();
 	m_Goal.Initialize(D3DXVECTOR3(395.0f, 6.0f, 0.0f));
-	m_Movefloor.Initialize();
 	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
 	//g_Shadow.Create(512, 512);
@@ -142,18 +138,14 @@ void CStage2::Update()
 	D3DXVec3Normalize(&lightDir, &lightDir);
 	//g_Shadow.SetLightDirection(lightDir);
 	m_Ground2.Update();//地面
-	m_wood.Update();//木
 
 	m_gimmick.Update();
 
 	m_pointa.Update();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
 	m_GCursorWind.Update();//ゲームカーソルかぜ　
-	m_lost.Update();
 	m_Back1.Update();
-	m_hasu.Update();
 	m_Goal.Update();//ゴール
-	m_Movefloor.Update();
 	m_GameCursor3D.Update();//ゲームカーソル３D
 
 	//レイカーソルに値をセット
@@ -181,18 +173,8 @@ void CStage2::Draw()
 	(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	(*graphicsDevice()).SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	/*******************************************************************************************/
-	if (GetAsyncKeyState('Q')){
-		m_wood.ApplyForce(D3DXVECTOR3(0.3f, 0.0f, 0.0f));
-	}
-	m_wood.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());	//木描画
-	m_windmill.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//風車描画
 
 
-
-	m_lost.Draw(m_camera.GetViewMatrix());
-	m_hasu.Draw(m_camera.GetViewMatrix());
-
-	m_Movefloor.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	m_GameCursor.Draw();//ゲームカーソル（一番前に表示）
 	m_GameCursor3D.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ゲームカーソル３D
 	/***************************これ以降は半透明にならない処理*********************************/

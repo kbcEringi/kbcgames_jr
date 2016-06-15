@@ -6,7 +6,8 @@ extern LPDIRECT3DTEXTURE9 g_hoge;
 void CShadowMap::Create(int w, int h)
 {
 	m_shadowMapRT.Create(w, h, 1, D3DFMT_A8R8G8B8, D3DFMT_D16, D3DMULTISAMPLE_NONE, 0);
-	
+	this->h = h;
+	this->w = w;
 
 	LPD3DXBUFFER  compileErrorBuffer = NULL;
 	HRESULT hr = D3DXCreateEffectFromFile(
@@ -38,7 +39,6 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 	(*graphicsDevice()).SetDepthStencilSurface(m_shadowMapRT.GetDepthSurfaceDx());
 
 	(*graphicsDevice()).Clear(
-
 		0,
 		NULL,
 		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
@@ -46,7 +46,7 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 		1.0f,
 		0);
 
-	D3DVIEWPORT9 viewport = { 0, 0, 512, 512, 0.0f, 1.0f };
+	D3DVIEWPORT9 viewport = { 0, 0, w, h, 0.0f, 1.0f };
 	(*graphicsDevice()).SetViewport(&viewport);
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	float aspect;

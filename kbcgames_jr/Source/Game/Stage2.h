@@ -10,13 +10,7 @@
 /********オブジェクト3D********/
 #include"..\Frame\C3DObject.h"
 #include "Ground2.h"
-#include "wood.h"
-#include "AlwaysWind.h"
-#include "Windmill.h"
-#include "Movefloor.h"
 #include "Stage1Back.h"
-#include "LostGround.h"
-#include "Hasu.h"
 #include "Goal.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
@@ -55,12 +49,7 @@ private:
 	CRayCursor m_Ray;
 
 	CGround2 m_Ground2;
-	CWood m_wood;
-	CWindmill m_windmill;
-	CMovefloor m_Movefloor;
 	CStage1Back m_Back1;
-	CLostGround m_lost;
-	CHasu m_hasu;
 	CGoal m_Goal;
 
 	//ギミックManager

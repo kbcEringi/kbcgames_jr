@@ -10,7 +10,7 @@ struct SGimmickData
 	int type;
 };
 
-enum GIMMICKNUMBER { ALWAYSWIND = 0 };
+enum GIMMICKNUMBER { ALWAYSWIND = 0,WINDMILL,WOOD,MOVEFLOOR,HASU,LOSTFROUND};
 
 class CGimmickManager
 {

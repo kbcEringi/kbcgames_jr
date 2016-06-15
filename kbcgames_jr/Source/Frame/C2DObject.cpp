@@ -1,4 +1,6 @@
 #include"C2DObject.h"
+#include"haba.h"
+
 
 void C2DObject::Initialize(LPCSTR FileName)
 {
@@ -19,6 +21,41 @@ void C2DObject::Initialize(LPCSTR FileName)
 	}
 	tex = 0;
 	D3DXCreateTextureFromFile(graphicsDevice(), FileName, &tex);
+
+	SVertex vertices[] = {
+		{ -1.0f, -1.0f, 0.0f, 1.0f, 0xffffffff, 0.0f, 1.0f, },
+		{ -1.0f, 1.0f, 0.0f, 1.0f, 0xffffffff, 0.0f, 0.0f, },
+		{ 1.0f, -1.0f, 0.0f, 1.0f, 0xffffffff, 1.0f, 1.0f, },
+		{ 1.0f, -1.0f, 0.0f, 1.0f, 0xffffffff, 1.0f, 1.0f, },
+		{ -1.0f, 1.0f, 0.0f, 1.0f, 0xffffffff, 0.0f, 0.0f, },
+		{ 1.0f, 1.0f, 0.0f, 1.0f, 0xffffffff, 1.0f, 0.0f, },
+	};
+	(*graphicsDevice()).CreateVertexBuffer(6 * sizeof(SVertex), 0, D3DFVF_CUSTOMVERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL);
+	VOID* pVertices;
+	m_pVB->Lock(0, sizeof(vertices), (void**)&pVertices, 0);
+	memcpy(pVertices, vertices, sizeof(vertices));
+	m_pVB->Unlock();
+}
+
+void C2DObject::Initialize()
+{
+	LPD3DXBUFFER  compileErrorBuffer = NULL;
+	HRESULT hr = D3DXCreateEffectFromFile(
+		graphicsDevice(),
+		"shader\\2Dshader.fx",
+		NULL,
+		NULL,
+		D3DXSHADER_DEBUG,
+		NULL,
+		&m_pEffect,
+		&compileErrorBuffer
+		);
+	if (FAILED(hr)) {
+		MessageBox(NULL, (char*)(compileErrorBuffer->GetBufferPointer()), "error", MB_OK);
+		abort();
+	}
+
+	tex = NULL;
 
 	SVertex vertices[] = {
 		{ -1.0f, -1.0f, 0.0f, 1.0f, 0xffffffff, 0.0f, 1.0f, },

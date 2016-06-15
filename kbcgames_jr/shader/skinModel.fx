@@ -9,6 +9,8 @@ float4x4    g_mViewProj : VIEWPROJECTION;
 float		g_numBone;			//骨の数。
 bool shadowflg;
 
+float4x4 g_mRotation;
+
 bool hureneruflg;
 float4x4 g_viewMatrixRotInv;	////カメラの回転行列の逆行列。
 
@@ -102,7 +104,7 @@ void CalcWorldMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
 	Pos = 0.0f;
 	Normal = 0.0f;
 	Pos = mul(In.Pos, g_worldMatrix);
-	Normal = mul(In.Normal, g_worldMatrix);
+	Normal = mul(In.Normal, g_mRotation);
 }
 
 VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )

@@ -19,9 +19,6 @@ public:
 	void CreateCollision();
 
 private:
-	C3DDraw Obj;
-	D3DXMATRIX matWorld, m_projMatrix, m_rotationMatrix;
-	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
 	D3DXVECTOR3 m_moveSpeed;		//ˆÚ“®‘¬“x
 	float haba;						//‰ŠúˆÊ’u‚©‚çãŒÀ(‰ºŒÀ)‚Ü‚Å‚Ì•

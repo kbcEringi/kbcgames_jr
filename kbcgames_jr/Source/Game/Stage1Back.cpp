@@ -46,7 +46,7 @@ void CStage1Back::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	}
-	m_SkinModel.Draw(m_matWorld, view, this->proj);
+	m_SkinModel.Draw(m_matWorld, view, this->proj, m_matRot);
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
 }

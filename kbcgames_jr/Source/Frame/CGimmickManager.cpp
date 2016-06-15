@@ -3,9 +3,11 @@
 #include"..\Game\CGameFlg.h"
 //ÉMÉ~ÉbÉNí«â¡
 #include"..\Game\AlwaysWind.h"
-
-
-
+#include"..\Game\Windmill.h"
+#include"..\Game\wood.h"
+#include"..\Game\Movefloor.h"
+#include"..\Game\Hasu.h"
+#include"..\Game\LostGround.h"
 
 CGimmickManager::CGimmickManager()
 {
@@ -42,6 +44,31 @@ void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmic
 			always = new CAlwaysWind;
 			m_3DGimmick.push_back(always);
 			break;
+		case GIMMICKNUMBER::WINDMILL:
+			CWindmill* windmill;
+			windmill = new CWindmill;
+			m_3DGimmick.push_back(windmill);
+			break;
+		case GIMMICKNUMBER::WOOD:
+			CWood* wood;
+			wood = new CWood;
+			m_3DGimmick.push_back(wood);
+			break;
+		case GIMMICKNUMBER::MOVEFLOOR:
+			CMovefloor* movefloor;
+			movefloor = new CMovefloor;
+			m_3DGimmick.push_back(movefloor);
+			break;
+		case GIMMICKNUMBER::HASU:
+			CHasu* hasu;
+			hasu = new CHasu;
+			m_3DGimmick.push_back(hasu);
+			break;
+		case GIMMICKNUMBER::LOSTFROUND:
+			CLostGround* lost;
+			lost = new CLostGround;
+			m_3DGimmick.push_back(lost);
+			break;
 		default:
 			break;
 		}
@@ -61,6 +88,31 @@ void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmic
 			CAlwaysWind* always;
 			always = new CAlwaysWind;
 			m_2DGimmick.push_back(always);
+			break;
+		case GIMMICKNUMBER::WINDMILL:
+			CWindmill* windmill;
+			windmill = new CWindmill;
+			m_2DGimmick.push_back(windmill);
+			break;
+		case GIMMICKNUMBER::WOOD:
+			CWood* wood;
+			wood = new CWood;
+			m_2DGimmick.push_back(wood);
+			break;
+		case GIMMICKNUMBER::MOVEFLOOR:
+			CMovefloor* movefloor;
+			movefloor = new CMovefloor;
+			m_2DGimmick.push_back(movefloor);
+			break;
+		case GIMMICKNUMBER::HASU:
+			CHasu* hasu;
+			hasu = new CHasu;
+			m_2DGimmick.push_back(hasu);
+			break;
+		case GIMMICKNUMBER::LOSTFROUND:
+			CLostGround* lost;
+			lost = new CLostGround;
+			m_2DGimmick.push_back(lost);
 			break;
 		default:
 			break;

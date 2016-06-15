@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="Source\BulletPhysics\BulletPhysics.cpp" />
     <ClCompile Include="Source\Frame\Audio.cpp" />
+    <ClCompile Include="Source\Frame\BloomRender.cpp" />
     <ClCompile Include="Source\Frame\C2DObject.cpp" />
     <ClCompile Include="Source\Frame\C3DDraw.cpp" />
     <ClCompile Include="Source\Frame\CAnimation.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Source\BulletPhysics\BulletPhysics.h" />
     <ClInclude Include="Source\Frame\Audio.h" />
+    <ClInclude Include="Source\Frame\BloomRender.h" />
     <ClInclude Include="Source\Frame\C2DObject.h" />
     <ClInclude Include="Source\Frame\C3DDraw.h" />
     <ClInclude Include="Source\Frame\C3DObject.h" />
@@ -150,6 +152,7 @@
     <ClInclude Include="Source\Frame\CRandom.h" />
     <ClInclude Include="Source\Frame\DXCommon.h" />
     <ClInclude Include="Source\Frame\GraphicsDevice.h" />
+    <ClInclude Include="Source\Frame\haba.h" />
     <ClInclude Include="Source\Frame\Input.h" />
     <ClInclude Include="Source\Frame\IPlayerCollisionCallback.h" />
     <ClInclude Include="Source\Frame\IsIntersect.h" />

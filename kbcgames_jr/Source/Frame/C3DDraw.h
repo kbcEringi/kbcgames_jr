@@ -20,8 +20,8 @@ public:
 	}
 public:
 	virtual void OnBeginRender(CLight,int) = 0;
-	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool,bool) = 0;
-	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool,bool,D3DXMATRIX) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX) = 0;
 	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
@@ -34,8 +34,8 @@ public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool,bool) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool,bool)override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX)override;
 	void OnEndRender();
 };
 
@@ -44,8 +44,8 @@ public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool) override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX) override;
 	void OnEndRender();
 	void SetEffect(ID3DXEffect* effect)
 	{
@@ -75,7 +75,7 @@ public:
 	*第一引数　ワールドマトリクス（自分の位置）
 	*第二引数　ビューマトリクス（カメラの位置）
 	*/
-	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
+	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX,D3DXMATRIX);
 	void DrawFrame(
 		LPD3DXFRAME pFrame, D3DXMATRIX, D3DXMATRIX);
 
@@ -103,6 +103,7 @@ public:
 	void Setshadowflg(bool flg){ shadowflg = flg; }
 	void Sethureneruflg(bool flg){ hureneru = flg; }
 	CLight* GetLight(){ return &m_light; }
+	void Setunitychanflg(){ unitychanflg = true; }
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
@@ -113,7 +114,10 @@ protected:
 	ISetEffectCallback* m_currentSetEffectCallback;
 
 	D3DXMATRIX m_matWorld;
+	D3DXMATRIX m_matRot;
 
 	bool shadowflg;
 	bool hureneru;
+
+	bool unitychanflg;
 };

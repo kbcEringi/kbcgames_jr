@@ -37,6 +37,6 @@ void CWood::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_Rigidbody.Draw();		//çÑëÃdraw
-	m_SkinModel.Draw(m_matWorld, view, proj);
+	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 }
 

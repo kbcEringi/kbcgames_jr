@@ -158,25 +158,32 @@ void CGameCursorWind::Update()
 
 void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	if (GAMEFLG->Getflg() == true)//2D
+	D3DXMATRIX mTmp;
+	//D3DXMatrixIdentity(&m_matRot);
+	if (GAMEFLG->Getflg() == true)
 	{
 		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-		D3DXMATRIX mRot, mTmp;
-		D3DXMatrixRotationY(&mRot, angle[0]);
-		D3DXVECTOR3 v(mRot.m[2][0], mRot.m[2][1], mRot.m[2][2]);
+		D3DXMatrixRotationY(&m_matRot, angle[0]);
+		D3DXVECTOR3 v(m_matRot.m[2][0], m_matRot.m[2][1], m_matRot.m[2][2]);
 		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
-		m_matWorld = mScale * mRot * mTmp * m_matWorld;
+		m_matWorld = mScale * m_matRot * mTmp * m_matWorld;
 	}
 	else//3D
 	{
-		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+		//D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+		/*D3DXMatrixRotationY(&m_matRot, angle[0]);
+		D3DXVECTOR3 v(m_matRot.m[2][0], m_matRot.m[2][1], m_matRot.m[2][2]);
+		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);*/
+		//D3DXMatrixRotationAxis(&m_matRot, &vAxis, angle[2]);
+		//m_matWorld = mScale * m_matRot /* mTmp*/ * m_matWorld;
+
 		D3DXMATRIX mRot, mTmp, mRot2;
 		D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);
 		m_matWorld = mScale * mRot * m_matWorld;
 	}
 	if (state != State_Hide)
 	{
-		m_SkinModel.Draw(m_matWorld, view, proj);
+		m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 	}
 }
 

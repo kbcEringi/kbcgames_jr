@@ -34,6 +34,6 @@ void CPointa::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	pos.y = 0.0f;
 	if (DrawFlag == true)
 	{
-		m_SkinModel.Draw(m_matWorld, view, proj);
+		m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 	}
 }

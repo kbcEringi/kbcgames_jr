@@ -6,7 +6,7 @@
 #include "..\Frame\Turn.h"
 #include "Pointa.h"
 
-#define FRICTION 0.98;//–€ŽC
+#define FRICTION 0.98f;//–€ŽC
 
 class CAudio;
 class IPlayerCollisionCallback;
