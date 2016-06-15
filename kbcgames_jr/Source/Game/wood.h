@@ -18,10 +18,9 @@ public:
 	void ApplyForce(D3DXVECTOR3 force){ m_force = force; }	//JUMPä÷êî
 	D3DXVECTOR3 GetPosition()
 	{
-		return m_position;
+		return m_data.position;
 	}
 private:
-	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_force;
 	bool m_Ground;					//ínñ Ç…Ç¬Ç¢ÇƒÇ¢ÇÈÇ©ÅH
 	float SpeedPower;				//â¡ë¨Çâ¡Ç¶ÇÈë¨ìx

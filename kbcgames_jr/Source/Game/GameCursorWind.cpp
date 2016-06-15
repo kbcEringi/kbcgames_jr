@@ -170,12 +170,7 @@ void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	}
 	else//3D
 	{
-		//D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-		/*D3DXMatrixRotationY(&m_matRot, angle[0]);
-		D3DXVECTOR3 v(m_matRot.m[2][0], m_matRot.m[2][1], m_matRot.m[2][2]);
-		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);*/
-		//D3DXMatrixRotationAxis(&m_matRot, &vAxis, angle[2]);
-		//m_matWorld = mScale * m_matRot /* mTmp*/ * m_matWorld;
+		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 
 		D3DXMATRIX mRot, mTmp, mRot2;
 		D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);

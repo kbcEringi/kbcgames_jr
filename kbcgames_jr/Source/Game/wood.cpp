@@ -6,12 +6,10 @@ CWood::~CWood()
 void CWood::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\wood.x");
-	m_position.x = 0.0f;
-	m_position.y = -5.0f;
-	m_position.z = 0.0f;
+
 	m_Ground = true;
 	size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
-	m_Rigidbody.Initialize(&m_position, &size);//çÑëÃèâä˙âª
+	m_Rigidbody.Initialize(&m_data.position, &size);//çÑëÃèâä˙âª
 
 }
 
@@ -35,7 +33,7 @@ void CWood::Update()
 
 void CWood::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
-	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
 	m_Rigidbody.Draw();		//çÑëÃdraw
 	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 }

@@ -37,9 +37,7 @@ void CHasu::Initialize()
 	m_SkinModel.Initialize("XFile\\Lost.x");
 
 	D3DXMatrixIdentity(&m_matRot);
-	m_data.position.x = -4.0f;
-	m_data.position.y = 2.0f;
-	m_data.position.z = 0.0f;
+
 	CreateCollision();
 	m_timerFlag = false;
 	m_quake = D3DXToRadian(5);

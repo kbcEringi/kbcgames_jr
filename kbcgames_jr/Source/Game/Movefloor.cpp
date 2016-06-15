@@ -5,9 +5,7 @@ void CMovefloor::Initialize()
 	m_SkinModel.Initialize("XFile\\Lost.x");
 	D3DXMatrixIdentity(&m_matWorld);
 	CreateCollision();
-	m_data.position.x = 250.0f;						//Xç¿ïW
-	m_data.position.y = 0.0f;						//Yç¿ïW
-	m_data.position.z = 0.0f;						//Zç¿ïW
+
 	m_moveSpeed = D3DXVECTOR3(0.0f, 0.05f, 0.0f);
 	haba = 2.0f;
 	m_up = D3DXVECTOR3(0.0f, m_data.position.y + haba, 0.0f);
