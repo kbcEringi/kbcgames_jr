@@ -98,9 +98,9 @@ CSetEffectCallbackShadowMap::CSetEffectCallbackShadowMap()
 }
 CSetEffectCallbackShadowMap::~CSetEffectCallbackShadowMap()
 {
-	if (this->m_pEffect != NULL) {
+	/*if (this->m_pEffect != NULL) {
 		this->m_pEffect->Release();
-	}
+	}*/
 }
 void CSetEffectCallbackShadowMap::OnBeginRender(CLight light, int pass)
 {
@@ -268,7 +268,7 @@ C3DDraw::~C3DDraw()
 	if (m_skinmodel != NULL)
 	{
 		m_skinmodel->Release();
-		delete m_skinmodel;
+		//delete m_skinmodel;
 		m_skinmodel = NULL;
 	}
 

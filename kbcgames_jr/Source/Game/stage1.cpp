@@ -130,7 +130,7 @@ void CStage1::Update()
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
 	m_goal.Update();
-	if (m_goal.GetGoal() != true)
+	if (m_goal.GetGoal() == true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));

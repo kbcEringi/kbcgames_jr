@@ -93,7 +93,7 @@ void CShadowMap::Release()
 {
 	m_shadowMapRT.Release();
 	if (m_pEffect != nullptr) {
-		m_pEffect->Release();
+		//m_pEffect->Release();
 		m_pEffect = nullptr;
 	}
 }
