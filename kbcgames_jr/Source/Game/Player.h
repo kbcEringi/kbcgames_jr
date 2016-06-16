@@ -71,11 +71,11 @@ public:
 	{
 		return state;
 	}
+	void JumpAnime();
 	void Pos2D();
 	void SetRunAudio();
 	void StopRunAudio();
 	void SetJumpAudio();
-	void StopJumpAudio();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;

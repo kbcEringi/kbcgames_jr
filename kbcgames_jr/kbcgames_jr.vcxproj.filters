@@ -43,9 +43,6 @@
     <ClCompile Include="Source\Game\Title.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\TitleCursor.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\Turn.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -157,6 +154,12 @@
     <ClCompile Include="Source\Game\Goal.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\TitleStart.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\TitleUnitychan.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Audio.h">
@@ -205,9 +208,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Title.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\TitleCusor.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\Turn.h">
@@ -334,6 +334,12 @@
       <Filter>Game\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Goal.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleStart.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleUnitychan.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

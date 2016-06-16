@@ -169,6 +169,7 @@ void C3DDraw::UpdateWorldMatrix(D3DXMATRIX worldMatrix)
 */
 void C3DDraw::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix, D3DXMATRIX rot)
 {
+	m_light.UpLight();
 	m_matWorld = worldMatrix;
 	m_matRot = rot;
 	if (m_skinmodel) {

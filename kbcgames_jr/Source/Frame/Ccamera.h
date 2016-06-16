@@ -66,6 +66,10 @@ public:
 	{
 		targetVolume = target;
 	}
+	void SetDistance(float distance)
+	{
+		m_Distance = distance;
+	}
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。

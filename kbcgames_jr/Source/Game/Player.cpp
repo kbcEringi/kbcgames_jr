@@ -228,8 +228,3 @@ void CPlayer::SetJumpAudio()
 {
 	m_pAudio->PlayCue("bu-n");
 }
-
-void CPlayer::StopJumpAudio()
-{
-	m_pAudio->StopCue("bu-n");
-}
