@@ -70,6 +70,15 @@ public:
 	{
 		m_Distance = distance;
 	}
+	void SetNear(float Near)
+	{
+		m_vNear = Near;
+	}
+	//タイトルシーン以外で使わない！！！バグが出ても知らないよ！
+	void UpdateProjectionMatrix()
+	{
+		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
+	}
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。

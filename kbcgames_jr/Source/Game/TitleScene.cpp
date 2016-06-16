@@ -13,7 +13,13 @@ void CTitleScene::Initialize()
 	m_pAudio->PlayCue("title");	//タイトル音楽再生
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 	m_camera.Initialize();
-	m_camera.SetDistance(6.0f);
+	m_camera.SetNear(0.1f);
+	
+	m_camera.SetDistance(4.0f);
+	m_camera.RotLongitudinal(D3DXToRadian(-20.0f));
+	m_camera.SetLookat(D3DXVECTOR3(-1.0f, 0.0f, 0.0f));
+	m_camera.UpdateProjectionMatrix();
+	m_camera.Update();
 	m_title.Initialize();
 	m_start.Initialize();
 	m_Unitychan.Initialize();
