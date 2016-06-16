@@ -4,7 +4,6 @@
 #include "..\Frame\SceneManager.h"]
 #include"..\Frame\Stage\CStageManager.h"
 
-//CShadowMap g_Shadow;
 
 SCollisionInfo collision2InfoTable3D[] = {
 #include "Collision3D_stage10.h"

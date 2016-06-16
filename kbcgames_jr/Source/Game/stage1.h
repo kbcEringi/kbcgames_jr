@@ -15,7 +15,6 @@
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
-#include"..\Frame\Shadow.h"
 #include"..\Frame\CGimmickManager.h"
 
 #include"Goal.h"

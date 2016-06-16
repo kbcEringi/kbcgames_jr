@@ -11,13 +11,14 @@ struct ObjectData
 	D3DXVECTOR3 position;
 	D3DXQUATERNION rotation;
 	D3DXVECTOR3 scale;
+	D3DXVECTOR3 PlayerParameter;
 };
 
 class C3DObject
 {
 public:
 	C3DObject(){ D3DXMatrixIdentity(&m_matWorld); D3DXMatrixIdentity(&m_matRot); }
-	~C3DObject(){}
+	virtual ~C3DObject(){}
 public:
 	virtual void Initialize()=0;
 	virtual void Update()=0;

@@ -55,4 +55,5 @@ private:
 	//ƒMƒ~ƒbƒNManager
 	CGimmickManager m_gimmick;
 
+
 };

@@ -1,7 +1,6 @@
 #include"C3DDraw.h"
 
-#include"Shadow.h"
-extern CShadowMap g_Shadow;
+#include"Stage\CStage.h"
 LPDIRECT3DTEXTURE9 g_hoge = NULL; //@todo for debug
 
 extern UINT                 g_NumBoneMatricesMax;
@@ -99,7 +98,9 @@ CSetEffectCallbackShadowMap::CSetEffectCallbackShadowMap()
 }
 CSetEffectCallbackShadowMap::~CSetEffectCallbackShadowMap()
 {
-	
+	/*if (this->m_pEffect != NULL) {
+		this->m_pEffect->Release();
+	}*/
 }
 void CSetEffectCallbackShadowMap::OnBeginRender(CLight light, int pass)
 {
@@ -264,5 +265,11 @@ void C3DDraw::DrawMeshContainer(
 
 C3DDraw::~C3DDraw()
 {
+	if (m_skinmodel != NULL)
+	{
+		m_skinmodel->Release();
+		//delete m_skinmodel;
+		m_skinmodel = NULL;
+	}
 
 }

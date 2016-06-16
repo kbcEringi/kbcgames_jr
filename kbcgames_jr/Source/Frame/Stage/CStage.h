@@ -6,6 +6,7 @@
 #include "..\..\Game\Pointa.h"
 #include "..\..\Game\GameCursor3D.h"
 #include "..\..\Game\GameCursorWind.h"
+#include"..\Shadow.h"
 
 #define MAX_COLLISION 100
 
@@ -21,7 +22,7 @@ class CStage
 {
 public:
 	CStage();
-	~CStage(){}
+	virtual ~CStage(){}
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
@@ -63,6 +64,7 @@ protected:
 	CGameCursor3D m_GameCursor3D;
 	CGameCursorWind m_GCursorWind;
 
+
 	bool				isButtomTriger;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
@@ -73,3 +75,5 @@ protected:
 	bool				m_isAdd2DCollision;
 	bool				m_isAdd3DCollision;
 };
+
+extern CShadowMap g_Shadow;
