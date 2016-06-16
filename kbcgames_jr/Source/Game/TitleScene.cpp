@@ -9,7 +9,7 @@ void CTitleScene::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	//m_pAudio->PlayCue("title");	//タイトル音楽再生
+	m_pAudio->PlayCue("title");	//タイトル音楽再生
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
 	m_title.Initialize();
