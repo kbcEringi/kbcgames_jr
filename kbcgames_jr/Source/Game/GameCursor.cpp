@@ -1,5 +1,6 @@
 #include"GameCursor.h"
 #include "Stage1.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 void CGameCursor::Initialize()
 {
@@ -30,6 +31,8 @@ void CGameCursor::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
+	const float LENGTH = 360.0f;
+
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
@@ -53,5 +56,16 @@ void CGameCursor::Move()
 		{
 			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
+	}
+
+	D3DXVECTOR3 v;
+	v = vec3Position - STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos();
+	float length = 0.0f;
+	length = D3DXVec3Length(&v);
+	if (length >= LENGTH)
+	{
+		D3DXVec3Normalize(&v, &v);
+		v *= LENGTH;
+		vec3Position = STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos() + v;
 	}
 }

@@ -2,6 +2,10 @@
 
 #include"DXCommon.h"
 #include"..\Game\CGameFlg.h"
+#include"CGamepad.h"
+
+#define DEFAULT_VOLUME 10.0f
+#define TARGET_VOLUME 30.0f
 
 class Ccamera
 {
@@ -57,6 +61,11 @@ public:
 	{
 		return m_vFar;
 	}
+	void TargetVolume();
+	void SetTarget(float target)
+	{
+		targetVolume = target;
+	}
 private:
 	D3DXMATRIX		m_viewMatrix;			//ビュー行列。
 	D3DXMATRIX		m_projectionMatrix;		//プロジェクション行列。
@@ -74,6 +83,7 @@ private:
 	float m_viewVolumeW;							//!<ビューボリュームの幅(2Dカメラの時だけ有効。)
 	float m_viewVolumeH;							//!<ビューボリュームの高さ(2Dカメラの時だけ有効。)
 	float Volume;
+	float targetVolume;//Bが押された場合の大きさ
 private://課題用変数
 	float m_vFovy;		//画角
 	float m_vAspect;	//アスペクト比

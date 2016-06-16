@@ -14,9 +14,10 @@ void Ccamera::Initialize()
 	m_Distance = 7.0f;
 	m_vFovy = D3DXToRadian(45.0f);
 	m_vAspect = 960.0f / 580.0f;
-	m_vNear = 1.0f;
-	m_vFar = 10000.0f;
-	Volume = 15.0f;
+	m_vNear = 5.0f;
+	m_vFar = 1000.0f;
+	Volume = DEFAULT_VOLUME;
+	targetVolume = DEFAULT_VOLUME;
 	m_viewVolumeW = Volume * m_vAspect;
 	m_viewVolumeH = Volume;
 	flg = !(GAMEFLG->Getflg());
@@ -33,6 +34,8 @@ void Ccamera::Initialize()
 void Ccamera::Update()
 {
 	m_vEyePt = m_NormalizeObject * m_Distance + m_vLookatPt;
+
+	TargetVolume();
 
 	D3DXVECTOR3 zaxis;//注視点から視点への方向（正規化）
 	D3DXVec3Normalize(&zaxis, &D3DXVECTOR3(m_vLookatPt - m_vEyePt));
@@ -76,4 +79,23 @@ void Ccamera::RotLongitudinal(float rotx)
 	D3DXQuaternionRotationAxis(&qua, &D3DXVECTOR3(-m_NormalizeObject.z,0,m_NormalizeObject.x), rotx);
 	D3DXMatrixRotationQuaternion(&tmp, &qua);
 	D3DXVec3TransformCoord(&m_NormalizeObject, &m_NormalizeObject, &tmp);
+}
+
+void Ccamera::TargetVolume()
+{
+	const float VOL = 0.5f;
+	if (Volume < targetVolume)
+	{
+		Volume += VOL;
+	}
+	if (targetVolume < Volume)
+	{
+		Volume -= VOL;
+	}
+	if (flg == true)
+	{
+		m_viewVolumeW = Volume * m_vAspect;
+		m_viewVolumeH = Volume;
+		D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
+	}
 }

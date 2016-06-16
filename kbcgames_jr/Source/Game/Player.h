@@ -28,6 +28,7 @@ public:
 	void Died();
 	D3DXVECTOR3 Get2DPos()
 	{
+		Pos2D();
 		return m_position2D;
 	}
 	D3DXVECTOR3 GetPosition()

@@ -18,7 +18,7 @@ void CPointa::Initialize()
 	m_moveSpeed.y = 5.0f;				//Yç¿ïW
 	m_moveSpeed.z = 0.0f;				//Zç¿ïW
 
-	DrawFlag = true;
+	DrawFlag = false;
 }
 
 void CPointa::Update()

@@ -52,6 +52,7 @@ struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 {
 	D3DXVECTOR3 hitNormalXZ;
+	D3DXVECTOR3 hotNormal;
 	bool isHit;
 	D3DXVECTOR3 hitPos;
 	const btCollisionObject* hitCollisionObject;
@@ -84,10 +85,7 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 		//XZ平面での法線。
 		hitNormalXZ.x = hitPointNormal.x;
 		hitNormalXZ.y = 0.0f;
-		hitNormalXZ.z = hitPointNormal.z;// hitPointNormal.z
-		//D3DXVec3Normalize(&hitNormalXZ, &hitNormalXZ);
-		//D3DXVec3Normalize(&hitNormalXZ, &hitPointNormal);
-
+		hitNormalXZ.z = hitPointNormal.z;
 
 		btTransform transform = convexResult.m_hitCollisionObject->getWorldTransform();
 
@@ -117,7 +115,7 @@ void CIsIntersect::CollisitionInitialize(D3DXVECTOR3* m_position)
 
 	m_radius = 0.3f;						//バウンディングスフィアの半径。
 	//コリジョン初期化。
-	m_collisionShape = new btBoxShape(btVector3(m_radius, m_radius, m_radius));
+	m_collisionShape = new btSphereShape(m_radius);
 	float mass = 1000.0f;
 	btTransform rbTransform;
 	rbTransform.setIdentity();
@@ -197,6 +195,10 @@ void CIsIntersect::Intersect(
 				break;
 			}
 		}
+		if (loopCount != 0)
+		{
+			m_moveSpeed->x = m_moveSpeed->x * -1.0f;
+		}
 	}
 	//下方向を調べる。
 	{
@@ -219,8 +221,19 @@ void CIsIntersect::Intersect(
 			//当たった。
 			//地面。
 			m_moveSpeed->y = 0.0f;
+			D3DXVECTOR3 Circle;
+			float x = 0.0f;
+			float offset = 0.0f;	//押し戻す量。
+			Circle = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+			Circle = *m_position;
+			Circle.y = callback.hitPos.y;//円の中心
+			D3DXVECTOR3 v = Circle - callback.hitPos;
+			x = D3DXVec3Length(&v);//物体の角とプレイヤーの間の横幅の距離が求まる。
+
+			offset = sqrt(m_radius*m_radius - x*x);//yの平方根を求める。
 			addPos.y = callback.hitPos.y - m_position->y;
-			addPos.y += m_radius;
+			addPos.y += offset;
 			for (auto p : callbackList){
 				p->OnHitGround(callback.hitCollisionObject);
 				if (!p->IsHitGround()){
