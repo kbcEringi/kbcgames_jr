@@ -59,6 +59,7 @@ sampler_state
 };
 bool Normalflg;
 
+bool isLuminance;
 
 /*!
  * @brief	入力頂点
@@ -156,9 +157,23 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 	return Out;
 }
 /*!
+* @brief	アルファに埋め込む輝度を計算。
+*/
+float CalcLuminance(float3 color)
+{
+	float luminance = dot(color, float3(0.2125f, 0.7154f, 0.0721f));
+	if (luminance > 1.0f){
+		luminance = 1.0f / luminance;
+	}
+	else{
+		luminance = 1.0f;
+	}
+	return luminance;
+}
+/*!
  * @brief	ピクセルシェーダー。
  */
-float4 PSMain( VS_OUTPUT In ) : COLOR
+float4 PSMain(VS_OUTPUT In) : COLOR
 {
 	float3 normal = In.normal;
 	if (Normalflg)
@@ -183,7 +198,7 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 	{
 		float4 pos = In.shadowpos;
 		float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
-		if (uv.x < 1.0f && uv.y < 1.0f){
+		if (uv.x < 1.0f && uv.y < 1.0f && uv.x >= 0.0f && uv.y >= 0.0f ){
 			if (dot(In.normal, float3(0, 1, 0)) >= 0.2f)
 			{
 				color *= tex2D(g_ShadowTextureSampler, uv);
@@ -198,6 +213,13 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 		t = pow(t, 1.5f);
 	}
 	color.xyz += t;
+	//アルファに輝度を埋め込む
+	if (isLuminance){
+		color.a = CalcLuminance(color.xyz);
+	}
+	else{
+		color.a = 1.0f;
+	}
 	return color;
 
 }

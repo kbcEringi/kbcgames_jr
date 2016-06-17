@@ -339,32 +339,38 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 	pMesh->GetDevice(&pd3dDevice);
 	NumFaces = pMesh->GetNumFaces();
 
-	// if no normals are in the mesh, add them
-	if (!(pMesh->GetFVF() & D3DFVF_NORMAL))
-	{
-		pMeshContainer->MeshData.Type = D3DXMESHTYPE_MESH;
+	//// if no normals are in the mesh, add them
+	//if (!(pMesh->GetFVF() & D3DFVF_NORMAL))
+	//{
+	//	pMeshContainer->MeshData.Type = D3DXMESHTYPE_MESH;
 
-		// clone the mesh to make room for the normals
-		hr = pMesh->CloneMeshFVF(pMesh->GetOptions(),
-			pMesh->GetFVF() | D3DFVF_NORMAL,
-			pd3dDevice, &pMeshContainer->MeshData.pMesh);
-		if (FAILED(hr))
-			goto e_Exit;
+	//	// clone the mesh to make room for the normals
+	//	hr = pMesh->CloneMeshFVF(pMesh->GetOptions(),
+	//		pMesh->GetFVF() | D3DFVF_NORMAL,
+	//		pd3dDevice, &pMeshContainer->MeshData.pMesh);
+	//	if (FAILED(hr))
+	//		goto e_Exit;
 
-		// get the new pMesh pointer back out of the mesh container to use
-		// NOTE: we do not release pMesh because we do not have a reference to it yet
-		pMesh = pMeshContainer->MeshData.pMesh;
+	//	// get the new pMesh pointer back out of the mesh container to use
+	//	// NOTE: we do not release pMesh because we do not have a reference to it yet
+	//	pMesh = pMeshContainer->MeshData.pMesh;
 
-		// now generate the normals for the pmesh
-		D3DXComputeNormals(pMesh, NULL);
-	}
-	else  // if no normals, just add a reference to the mesh for the mesh container
-	{
-		pMeshContainer->MeshData.pMesh = pMesh;
-		pMeshContainer->MeshData.Type = D3DXMESHTYPE_MESH;
+	//	// now generate the normals for the pmesh
+	//	D3DXComputeNormals(pMesh, NULL);
+	//}
+	//else  // if no normals, just add a reference to the mesh for the mesh container
+	//{
+	//	pMeshContainer->MeshData.pMesh = pMesh;
+	//	pMeshContainer->MeshData.Type = D3DXMESHTYPE_MESH;
 
-		pMesh->AddRef();
-	}
+	//	pMesh->AddRef();
+	//}
+
+	pMeshContainer->MeshData.pMesh = pMesh;
+	pMeshContainer->MeshData.Type = D3DXMESHTYPE_MESH;
+
+	pMesh->AddRef();
+
 	D3DVERTEXELEMENT9 decl[] = {
 		{ 0, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
 		{ 0, 16, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT, 0 },

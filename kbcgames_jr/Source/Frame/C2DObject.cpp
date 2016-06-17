@@ -82,16 +82,12 @@ void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 	vec3Trans.x = -1.0f + t.x * 2.0f;
 	vec3Trans.y = 1.0f - t.y * 2.0f;
 	D3DXMatrixIdentity(&matWorld);
-	//D3DXMatrixScaling(&matScale, vec3Scale.x, vec3Scale.y, vec3Scale.z);
-	//D3DXMatrixTranslation(&matTrans, vec3Trans.x, vec3Trans.y, vec3Trans.z);
-	//D3DXMatrixRotationZ(&matRot, D3DXToRadian(angle));
-	//matWorld = matScale * matRot * matTrans;
-
-	D3DXMATRIX tm;
-	D3DXMatrixTranslation(&tm, vec3Trans.x - WINDOW_WIDTH / 2, vec3Trans.y, vec3Trans.z - WINDOW_HEIGHT / 2);
-	D3DXMatrixRotationZ(&tm, D3DXToRadian(angle));
 	D3DXMatrixScaling(&matScale, vec3Scale.x, vec3Scale.y, vec3Scale.z);
-	matWorld = matScale * tm;
+	D3DXMatrixTranslation(&matTrans, vec3Trans.x, vec3Trans.y, vec3Trans.z);
+	D3DXMatrixRotationZ(&matRot, D3DXToRadian(angle));
+	matWorld = matScale * matRot * matTrans;
+
+	
 
 
 
@@ -101,14 +97,19 @@ void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 
 	m_pEffect->SetMatrix("matWorld", &matWorld);
 	m_pEffect->SetTexture("g_diffuseTexture", tex);
-	(*graphicsDevice()).SetStreamSource(0, m_pVB, 0, sizeof(SVertex));
-	(*graphicsDevice()).SetFVF(D3DFVF_CUSTOMVERTEX);
-	(*graphicsDevice()).DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
 	m_pEffect->CommitChanges();
+
+	DrawPrimitiveOnly();
+	
 	m_pEffect->EndPass();
 	m_pEffect->End();
 }
-
+void C2DObject::DrawPrimitiveOnly()
+{
+	(*graphicsDevice()).SetStreamSource(0, m_pVB, 0, sizeof(SVertex));
+	(*graphicsDevice()).SetFVF(D3DFVF_CUSTOMVERTEX);
+	(*graphicsDevice()).DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
+}
 C2DObject::~C2DObject()
 {
 	if (m_pEffect != NULL) {

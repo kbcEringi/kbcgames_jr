@@ -56,10 +56,10 @@ void CTitleScene::Select()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
-	GAMEPAD(CGamepad)->UpdateControllerState();
+
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A))
 		{
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::SELECT);
 			m_pAudio->StopCue("title");//タイトル音楽ストップ
@@ -82,4 +82,7 @@ void CTitleScene::Select()
 			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
 	}
+
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }

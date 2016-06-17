@@ -24,6 +24,7 @@ public:
 	 *第三引数　回転度数（反時計回り）：記入しない場合０がデフォルト
 	 */
 	void Draw(D3DXVECTOR3, D3DXVECTOR3,float angle =0);
+	void DrawPrimitiveOnly();
 	~C2DObject();
 protected:
 	IDirect3DTexture9 *tex;

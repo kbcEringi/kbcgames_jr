@@ -13,10 +13,9 @@ void CSelectScene::Update()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
-	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A))
 		{
 			STAGEMANEGER->SelectStage(1);
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
@@ -30,6 +29,9 @@ void CSelectScene::Update()
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
 		}
 	}
+
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }
 
 void CSelectScene::Draw()

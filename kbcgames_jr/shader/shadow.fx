@@ -59,7 +59,7 @@ VS_OUTPUT VSShadow(VS_INPUT In, uniform bool hasSkin)
 	else{
 		CalcWorldMatrix(In, Pos);
 	}
-	Out.pos = mul(float4(Pos, 1.0f), g_viewprojMatrix);			//ワールド空間からビュー空間に変換。
+	Out.pos = mul(float4(Pos.xyz, 1.0f), g_viewprojMatrix);			//ワールド空間からビュー空間に変換。
 	return Out;
 }
 /*!

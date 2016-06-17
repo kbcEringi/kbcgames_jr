@@ -49,12 +49,20 @@ public:
 		if (XInputGetState(0, &m_state) == ERROR_SUCCESS)
 		{
 			m_bConnected = true;
+			ZeroMemory(&m_GPOldBuf, sizeof(m_GPOldBuf));
+			memcpy(&m_GPOldBuf, &m_GPNowBuf, sizeof(m_GPNowBuf));
+			m_GPNowBuf = m_state.Gamepad.wButtons;
 		}
 		else
 		{
 			m_bConnected = false;
 		}
 	
+	}
+
+	void ClearBuffer(){
+		ZeroMemory(&m_GPNowBuf, sizeof(m_GPNowBuf));
+		memcpy(&m_GPOldBuf, &m_GPNowBuf, sizeof(m_GPNowBuf));
 	}
 	/*
 	 *	左スティックの傾き量　
@@ -115,7 +123,12 @@ public:
 	 */
 	bool isButtonsDown(const int& Buttons)
 	{
-		return (m_state.Gamepad.wButtons & Buttons);
+		return (m_GPNowBuf & Buttons);
+	}
+	// ボタンが押されたか判定
+	bool isButtonsTrg(const int& Buttons)
+	{
+		return (!(m_GPOldBuf & Buttons) && (m_GPNowBuf & Buttons));
 	}
 	/*
 	 *	左トリガーの深度
@@ -139,8 +152,15 @@ public:
 		return m_bConnected;
 	}
 private:
+	WORD m_GPNowBuf;
+	WORD m_GPOldBuf;
+
 	static CGamepad *s_gamepad;
-	CGamepad(){ m_bConnected = false; }
+	CGamepad(){
+		m_bConnected = false;
+		m_GPNowBuf = false;
+		m_GPOldBuf = false;
+	}
 
 	XINPUT_STATE m_state;	//状態
 	bool m_bConnected;	//コントローラー生存

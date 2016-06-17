@@ -47,12 +47,12 @@ void BloomRender::Render()
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_luminanceRenderTarget.GetSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
-			m_pEffect->SetTechnique("SamplingLuminance");
+			HRESULT hr = m_pEffect->SetTechnique("SamplingLuminance");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 			m_pEffect->BeginPass(0);
-			m_pEffect->SetTexture("g_scene", RT.GetTexture());
+			m_pEffect->SetTexture("g_Scene", RT.GetTexture());
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 			m_pEffect->EndPass();
 			m_pEffect->End();
@@ -79,7 +79,7 @@ void BloomRender::Render()
 
 			m_pEffect->SetTexture("g_blur", m_luminanceRenderTarget.GetTexture());
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 
 			m_pEffect->EndPass();
@@ -107,7 +107,7 @@ void BloomRender::Render()
 
 			m_pEffect->SetTexture( "g_blur", m_downSamplingRenderTarget[0].GetTexture());
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 
 			m_pEffect->EndPass();
@@ -135,7 +135,7 @@ void BloomRender::Render()
 
 			m_pEffect->SetTexture( "g_blur", m_downSamplingRenderTarget[1].GetTexture());
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 
 			m_pEffect->EndPass();
@@ -163,7 +163,7 @@ void BloomRender::Render()
 
 			m_pEffect->SetTexture( "g_blur", m_downSamplingRenderTarget[2].GetTexture());
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 
 			m_pEffect->EndPass();
@@ -187,7 +187,7 @@ void BloomRender::Render()
 			m_pEffect->SetTexture( "g_blur", m_downSamplingRenderTarget[3].GetTexture());
 			m_pEffect->SetValue( "g_offset", offset, sizeof(offset));
 			m_pEffect->CommitChanges();
-			fullscreen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
+			fullscreen.DrawPrimitiveOnly();
 
 
 			m_pEffect->EndPass();

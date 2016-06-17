@@ -2,20 +2,23 @@
 
 void CAnimation::Init(ID3DXAnimationController* anim)
 {
-	m_pAnimController = anim;
+	pAnimController = anim;
 	ID3DXAnimationSet* animSet;
-	m_pAnimController->GetAnimationSet(0, &animSet);
-	m_numAnimSet = m_pAnimController->GetMaxNumAnimationSets();
-	m_numMaxTracks = m_pAnimController->GetMaxNumTracks();
-	m_blendRateTable.reset(new float[m_numMaxTracks]);
-	m_animationSets.reset(new ID3DXAnimationSet*[m_numAnimSet]);
-	for (int i = 0; i < m_numMaxTracks; i++){
-		m_blendRateTable[i] = 1.0f;
+	pAnimController->GetAnimationSet(0, &animSet);
+	numAnimSet = pAnimController->GetMaxNumAnimationSets();
+	numMaxTracks = pAnimController->GetMaxNumTracks();
+	blendRateTable.reset(new float[numMaxTracks]);
+	animationEndTime.reset(new double[numAnimSet]);
+	animationSets.reset(new ID3DXAnimationSet*[numAnimSet]);
+	for (int i = 0; i < numMaxTracks; i++){
+		blendRateTable[i] = 1.0f;
 	}
 	//アニメーションセットを初期化。
-	for (int i = 0; i < m_numAnimSet; i++) {
-		m_pAnimController->GetAnimationSet(i, &m_animationSets[i]);
+	for (int i = 0; i < numAnimSet; i++) {
+		pAnimController->GetAnimationSet(i, &animationSets[i]);
+		animationEndTime[i] = -1.0;
 	}
+	localAnimationTime = 0.0;
 }
 #if 0
 void CAnimation::BlendAnimation(int animationSetIndex)
@@ -35,66 +38,84 @@ void CAnimation::BlendAnimation(int animationSetIndex)
 #endif
 void CAnimation::PlayAnimation(int animationSetIndex)
 {
-	if (animationSetIndex < m_numAnimSet) {
-		if (m_pAnimController) {
-			m_currentAnimationSetNo = animationSetIndex;
-			m_currentTrackNo = 0;
+	if (animationSetIndex < numAnimSet) {
+		if (pAnimController) {
+			currentAnimationSetNo = animationSetIndex;
+			currentTrackNo = 0;
 			//0番目以外のトラックは無効にする。
-			for (int i = 1; i < m_numMaxTracks; i++) {
-				m_pAnimController->SetTrackEnable(i, FALSE);
+			for (int i = 1; i < numMaxTracks; i++) {
+				pAnimController->SetTrackEnable(i, FALSE);
 			}
-			m_pAnimController->SetTrackWeight(0, 1.0f);
-			m_pAnimController->SetTrackAnimationSet(m_currentTrackNo, m_animationSets[m_currentAnimationSetNo]);
-			m_pAnimController->SetTrackEnable(0, TRUE);
-			m_pAnimController->SetTrackPosition(0, 0.0f);
+			pAnimController->SetTrackWeight(0, 1.0f);
+			pAnimController->SetTrackAnimationSet(currentTrackNo, animationSets[currentAnimationSetNo]);
+			pAnimController->SetTrackEnable(0, TRUE);
+			pAnimController->SetTrackPosition(0, 0.0f);
+			localAnimationTime = 0.0;
 		}
 	}
+	
 }
 void CAnimation::PlayAnimation(int animationSetIndex, float interpolateTime)
 {
-	if (animationSetIndex < m_numAnimSet) {
-		if (m_pAnimController) {
+	if (animationSetIndex < numAnimSet) {
+		if (pAnimController) {
 			//補間開始の印。
-			m_isInterpolate = true;
-			this->m_interpolateTime = 0.0f;
-			m_interpolateEndTime = interpolateTime;
-			m_currentTrackNo = (m_currentTrackNo + 1) % m_numMaxTracks;
-			m_pAnimController->SetTrackAnimationSet(m_currentTrackNo, m_animationSets[animationSetIndex]);
-			m_pAnimController->SetTrackEnable(m_currentTrackNo, TRUE);
-			m_pAnimController->SetTrackSpeed(m_currentTrackNo, 1.0f);
-			m_pAnimController->SetTrackPosition(m_currentTrackNo, 0.0f);
+			isInterpolate = true;
+			this->interpolateTime = 0.0f;
+			interpolateEndTime = interpolateTime;
+			currentTrackNo = (currentTrackNo + 1) % numMaxTracks;
+			pAnimController->SetTrackAnimationSet(currentTrackNo, animationSets[animationSetIndex]);
+			pAnimController->SetTrackEnable(currentTrackNo, TRUE);
+			pAnimController->SetTrackSpeed(currentTrackNo, 1.0f);
+			pAnimController->SetTrackPosition(currentTrackNo, 0.0f);
+			localAnimationTime = 0.0;
+			currentAnimationSetNo = animationSetIndex;
 		}
 	}
 }
 void CAnimation::Update(float deltaTime)
 {
-	if (m_pAnimController) {
-		m_pAnimController->AdvanceTime(deltaTime, NULL);
-		if (m_isInterpolate) {
+	if (pAnimController) {
+		localAnimationTime += deltaTime;
+
+		if (animationEndTime[currentAnimationSetNo] > 0.0 //アニメーションの終了時間が設定されている。
+			&& localAnimationTime > animationEndTime[currentAnimationSetNo] //アニメーションの終了時間を超えた。
+			) {
+			localAnimationTime -= animationEndTime[currentAnimationSetNo];
+			pAnimController->SetTrackPosition(currentTrackNo, localAnimationTime);
+			pAnimController->AdvanceTime(0, NULL);
+		}
+		else {
+			//普通に再生。
+			pAnimController->AdvanceTime(deltaTime, NULL);
+		}
+		if (isInterpolate) {
+			ID3DXAnimationSet* animSet = animationSets[2];
+			float period = animSet->GetPeriod();
 			//補間中。
-			m_interpolateTime += deltaTime;
+			interpolateTime += deltaTime;
 			float weight = 0.0f;
-			if (m_interpolateTime > m_interpolateEndTime) {
+			if (interpolateTime > interpolateEndTime) {
 				//補間終了。
-				m_isInterpolate = false;
+				isInterpolate = false;
 				weight = 1.0f;
 				//現在のトラック以外を無効にする。
-				for (int i = 0; i < m_numMaxTracks; i++) {
-					if (i != m_currentTrackNo) {
-						m_pAnimController->SetTrackEnable(i, FALSE);
+				for (int i = 0; i < numMaxTracks; i++) {
+					if (i != currentTrackNo) {
+						pAnimController->SetTrackEnable(i, FALSE);
 					}
 				}
 			}
 			else {
-				weight = m_interpolateTime / m_interpolateEndTime;
+				weight = interpolateTime / interpolateEndTime;
 				float invWeight = 1.0f - weight;
 				//ウェイトを設定していく。
-				for (int i = 0; i < m_numMaxTracks; i++) {
-					if (i != m_currentTrackNo) {
-						m_pAnimController->SetTrackWeight(i, m_blendRateTable[i] * invWeight);
+				for (int i = 0; i < numMaxTracks; i++) {
+					if (i != currentTrackNo) {
+						pAnimController->SetTrackWeight(i, blendRateTable[i] * invWeight);
 					}
 					else {
-						m_pAnimController->SetTrackWeight(i, weight);
+						pAnimController->SetTrackWeight(i, weight);
 					}
 				}
 			}

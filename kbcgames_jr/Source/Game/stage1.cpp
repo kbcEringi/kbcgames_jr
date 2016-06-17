@@ -110,7 +110,7 @@ void CStage1::Update()
 
 	m_Player.Update();//ÉvÉåÉCÉÑÅ[
 
-	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.0f, 1.7f, 1.25f);
+	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
 	g_Shadow.SetLightPosition(lightPos);
 	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 	D3DXVec3Normalize(&lightDir, &lightDir);

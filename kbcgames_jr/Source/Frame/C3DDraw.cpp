@@ -45,7 +45,7 @@ void CSetEffectCallbackDefault::OnBeginRender(CLight light, int pass)
 	m_pEffect->SetVectorArray("g_diffuseLightColor", light.m_diffuseLightColor, light.LIGHT_NUM);
 	m_pEffect->SetVector("g_ambientLight", &light.m_ambientLight);
 }
-void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, bool shadowflg, bool hureneruflg, D3DXMATRIX rot,IDirect3DTexture9* Normal)
+void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot, IDirect3DTexture9* Normal, Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_mViewProj", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
@@ -53,8 +53,9 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	m_pEffect->SetMatrix("g_lvpMatrix", &g_Shadow.Getlipmatrix());
 	m_pEffect->SetMatrix("g_viewMatrixRotInv", &viewMatrixRotInv);
 	m_pEffect->SetMatrix("g_mRotation", &rot);
-	m_pEffect->SetBool("shadowflg", shadowflg);
-	m_pEffect->SetBool("hureneruflg", hureneruflg);
+	m_pEffect->SetBool("shadowflg", rens.shadowflg);
+	m_pEffect->SetBool("hureneruflg", rens.hureneruflg);
+	m_pEffect->SetBool("isLuminance", rens.isLuminance);
 
 	if (Normal != NULL)
 	{
@@ -77,16 +78,17 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	// draw the subset with the current world matrix palette and material state
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, bool shadowflg, bool hureneruflg, D3DXMATRIX rot, IDirect3DTexture9* Normal)
+void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot, IDirect3DTexture9* Normal, Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_mViewProj", &viewproj);
 	m_pEffect->SetMatrix("g_lvpMatrix", &g_Shadow.Getlipmatrix());
-	m_pEffect->SetBool("shadowflg", shadowflg);
+	m_pEffect->SetBool("shadowflg", rens.shadowflg);
 	m_pEffect->SetMatrix("g_viewMatrixRotInv", &viewMatrixRotInv);
 	m_pEffect->SetMatrix("g_mRotation", &rot);
 
-	m_pEffect->SetBool("hureneruflg", hureneruflg);
+	m_pEffect->SetBool("hureneruflg", rens.hureneruflg);
+	m_pEffect->SetBool("isLuminance", rens.isLuminance);
 
 	if (Normal != NULL)
 	{
@@ -130,7 +132,7 @@ void CSetEffectCallbackShadowMap::OnBeginRender(CLight light, int pass)
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(pass);
 }
-void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, bool shadowflg, bool hureneruflg, D3DXMATRIX rot, IDirect3DTexture9* Normal)
+void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot, IDirect3DTexture9* Normal, Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
@@ -141,7 +143,7 @@ void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMesh
 	m_pEffect->CommitChanges();
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, bool shadowflg, bool hureneruflg, D3DXMATRIX rot, IDirect3DTexture9* Normal)
+void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot, IDirect3DTexture9* Normal, Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewproj);//ビュープロジェクション行列の転送。
@@ -172,9 +174,7 @@ void C3DDraw::Initialize(LPCSTR FileName)
 	m_skinmodel->LoadModelData(FileName,&m_animation);
 	m_currentSetEffectCallback = &m_defaultSetEffectCallback;
 
-	shadowflg = true;
-	hureneru = false;
-	unitychanflg = false;
+	
 }
 
 void C3DDraw::AddAnimation()
@@ -265,12 +265,12 @@ void C3DDraw::DrawMeshContainer(
 				}
 			}
 			//シェーダー適用開始。
-			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib, shadowflg, hureneru, m_matRot, NormalTex);
+			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib, m_matRot, NormalTex, rens);
 		}
 	}
 	else {
 		D3DXMATRIX mWorld;
-		if (pFrame != NULL && unitychanflg)
+		if (pFrame != NULL && rens.unitychanflg)
 		{
 			mWorld = pFrame->CombinedTransformationMatrix;
 		}
@@ -281,7 +281,7 @@ void C3DDraw::DrawMeshContainer(
 
 		m_currentSetEffectCallback->OnBeginRender(m_light, 1);
 
-		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, mWorld, viewProj, shadowflg, hureneru, m_matRot, NormalTex);
+		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, mWorld, viewProj, m_matRot, NormalTex,rens);
 	}
 	m_currentSetEffectCallback->OnEndRender();
 }

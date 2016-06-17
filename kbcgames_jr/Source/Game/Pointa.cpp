@@ -10,6 +10,8 @@ CPointa::~CPointa()
 void CPointa::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Pointa.x");	//ぽいんたXファイル
+	//m_SkinModel.Sethureneruflg(true);
+	m_SkinModel.SetNormalMap("Texture\\1_normals.png");
 	m_position.x = 2.0f;				//X座標
 	m_position.y = 5.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
@@ -19,6 +21,7 @@ void CPointa::Initialize()
 	m_moveSpeed.z = 0.0f;				//Z座標
 
 	DrawFlag = false;
+
 }
 
 void CPointa::Update()

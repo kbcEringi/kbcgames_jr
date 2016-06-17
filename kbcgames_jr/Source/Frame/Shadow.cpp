@@ -53,7 +53,7 @@ void CShadowMap::Draw(D3DXMATRIX proj)
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	float aspect;
 	aspect = (float)viewport.Width / (float)viewport.Height;
-	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, aspect, D3DXToRadian(120.0f), 100.0f);
+	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DXToRadian(120.0f), aspect, 0.1f, 100.0f);
 	CreateLight(m_projMatrix);
 	int size = m_shadowModels.size();
 	CSetEffectCallbackShadowMap callback;

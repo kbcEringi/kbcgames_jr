@@ -29,6 +29,7 @@ void CPlayer::Initialize()
 	m_SkinModel.SetNormalMap("Texture\\utc_nomal.tga");
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
+
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -72,6 +73,7 @@ void CPlayer::Initialize()
 	D3DXVec4Normalize(&dir, &dir);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
 	m_SkinModel.SetAnimation(PlayerAnim_Stand);//スタンドアニメーション
+	m_SkinModel.SetAnimationEndTime(PlayerAnim_Run, 0.8f);	
 	currentAnimation = false;//アニメーションしていない
 }
 

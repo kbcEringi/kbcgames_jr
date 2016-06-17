@@ -7,6 +7,22 @@
 #include"CLight.h"
 
 class C3DDraw;
+
+struct Renderstate
+{
+	bool isLuminance;
+	bool shadowflg;
+	bool hureneruflg;
+	bool unitychanflg;
+	Renderstate()
+	{
+		isLuminance = false;
+		shadowflg = true;
+		hureneruflg = false;
+		unitychanflg = false;
+	}
+};
+
 /*
 *エフェクト設定のコールバッククラス。
 */
@@ -20,8 +36,8 @@ public:
 	}
 public:
 	virtual void OnBeginRender(CLight,int) = 0;
-	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) = 0;
-	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate) = 0;
 	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
@@ -34,8 +50,8 @@ public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*)override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate)override;
 	void OnEndRender();
 };
 
@@ -44,8 +60,8 @@ public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
 	void OnEndRender();
 	void SetEffect(ID3DXEffect* effect)
 	{
@@ -54,6 +70,9 @@ public:
 private:
 	ID3DXEffect* m_pEffect;
 };
+
+
+
 /*
 * 3Dオブジェクト。
 */
@@ -100,10 +119,16 @@ public:
 		idx %= m_animation.GetNumAnimationSet();
 		m_animation.PlayAnimation(idx, 0.1f);
 	}
-	void Setshadowflg(bool flg){ shadowflg = flg; }
-	void Sethureneruflg(bool flg){ hureneru = flg; }
+	void SetAnimationEndTime(int idx,float time)
+	{
+		idx %= m_animation.GetNumAnimationSet();
+		m_animation.SetAnimationEndTime(idx, time);
+	}
+	void Setshadowflg(bool flg){ rens.shadowflg = flg; }
+	void Sethureneruflg(bool flg){ rens.hureneruflg = flg; }
 	CLight* GetLight(){ return &m_light; }
-	void Setunitychanflg(){ unitychanflg = true; }
+	void Setunitychanflg(){ rens.unitychanflg = true; }
+	void SetLuminance(bool is){ rens.isLuminance = is; }
 	void SetNormalMap(LPCSTR);
 	~C3DDraw();
 protected:
@@ -117,10 +142,7 @@ protected:
 	D3DXMATRIX m_matWorld;
 	D3DXMATRIX m_matRot;
 
-	bool shadowflg;
-	bool hureneru;
-
-	bool unitychanflg;
+	Renderstate rens;
 
 	IDirect3DTexture9 *NormalTex;
 
