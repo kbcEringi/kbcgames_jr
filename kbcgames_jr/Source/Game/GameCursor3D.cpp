@@ -111,12 +111,12 @@ void CGameCursor3D::Move()
 		{
 			add -= zAxisInCamera * MOVE_SPEED;
 		}
-
+		else
+		{
+			(*GetKeyDevice()).Acquire();//キーデバイス取得
+		}
 	}
-	//else
-	//{
-	//	(*GetKeyDevice()).Acquire();//キーデバイス取得
-	//}
+	
 
 	m_position += add;
 

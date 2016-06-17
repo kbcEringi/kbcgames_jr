@@ -82,10 +82,18 @@ void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 	vec3Trans.x = -1.0f + t.x * 2.0f;
 	vec3Trans.y = 1.0f - t.y * 2.0f;
 	D3DXMatrixIdentity(&matWorld);
+	//D3DXMatrixScaling(&matScale, vec3Scale.x, vec3Scale.y, vec3Scale.z);
+	//D3DXMatrixTranslation(&matTrans, vec3Trans.x, vec3Trans.y, vec3Trans.z);
+	//D3DXMatrixRotationZ(&matRot, D3DXToRadian(angle));
+	//matWorld = matScale * matRot * matTrans;
+
+	D3DXMATRIX tm;
+	D3DXMatrixTranslation(&tm, vec3Trans.x - WINDOW_WIDTH / 2, vec3Trans.y, vec3Trans.z - WINDOW_HEIGHT / 2);
+	D3DXMatrixRotationZ(&tm, D3DXToRadian(angle));
 	D3DXMatrixScaling(&matScale, vec3Scale.x, vec3Scale.y, vec3Scale.z);
-	D3DXMatrixTranslation(&matTrans, vec3Trans.x, vec3Trans.y, vec3Trans.z);
-	D3DXMatrixRotationZ(&matRot, D3DXToRadian(angle));
-	matWorld = matScale * matRot * matTrans;
+	matWorld = matScale * tm;
+
+
 
 	m_pEffect->SetTechnique("Tech");
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);

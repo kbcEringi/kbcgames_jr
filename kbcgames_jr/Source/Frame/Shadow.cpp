@@ -2,6 +2,7 @@
 
 extern LPDIRECT3DTEXTURE9 g_hoge;
 
+#include"Input.h"
 
 void CShadowMap::Create(int w, int h)
 {
@@ -31,6 +32,7 @@ void CShadowMap::Create(int w, int h)
 
 void CShadowMap::Draw(D3DXMATRIX proj)
 {
+
 	(*graphicsDevice()).GetViewport(&m_viewport);
 	(*graphicsDevice()).GetRenderTarget(0, &m_Backbuffer);
 	(*graphicsDevice()).GetDepthStencilSurface(&m_BackZ);

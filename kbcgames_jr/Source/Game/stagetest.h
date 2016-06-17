@@ -8,11 +8,9 @@
 
 #include"..\Frame\Input.h"
 
-#include"..\Frame\particle\CParticleEmitter.h"
-#include"wood.h"
-#include"..\Frame\CRandom.h"
 
 
+#include"..\Frame\C3DDraw.h"
 
 class CStagetest : public CStage
 {
@@ -25,9 +23,6 @@ public:
 private:
 
 	Ccamera m_camera;
-	CRandom random;
-	CParticleEmitter emi;/*
-	CParticleEmitter emi2;*/
-	CWood wood;
 
+	C3DDraw jimen;
 };

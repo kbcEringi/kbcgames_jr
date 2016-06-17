@@ -26,6 +26,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Unity.x");	//プレイヤーXファイル
+	m_SkinModel.SetNormalMap("Texture\\utc_nomal.tga");
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
 	//オーディオ初期化
@@ -61,6 +62,12 @@ void CPlayer::Initialize()
 	m_SkinModel.GetLight()->m_diffuseLightDirection[0] = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, -1.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[0] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[1] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
 	D3DXVECTOR4 dir = D3DXVECTOR4(-0.75f, -0.75f, -0.75f, 1.0f);
 	D3DXVec4Normalize(&dir, &dir);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
@@ -94,6 +101,8 @@ void CPlayer::Update()
 			
 		}
 	}
+
+	
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
 	m_applyForce.y = 0.0f;

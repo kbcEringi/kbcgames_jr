@@ -22,7 +22,8 @@ void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max)
 	mesh->GetVertexBuffer(&vb);
 	D3DVERTEXBUFFER_DESC desc;
 	vb->GetDesc(&desc);
-	int stride = D3DXGetFVFVertexSize(desc.FVF);
+	//int stride = D3DXGetFVFVertexSize(desc.FVF);
+	int stride = 80; //@todo ‰¼‰¼‰¼‰¼
 	char* pVB = NULL;
 	vb->Lock(0, desc.Size, (void**)&pVB, D3DLOCK_DISCARD);
 	int numVertex = desc.Size / stride;

@@ -47,7 +47,7 @@ void CStage1::Initialize()
 
 	m_GameCursor3D.Initialize();//ゲームカーソル３D
 
-	g_Shadow.Create(512 * 3, 512 * 3);
+	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 	
 	m_goal.Initialize(D3DXVECTOR3(260,0,0));
@@ -109,7 +109,8 @@ void CStage1::Update()
 	CStage::Update();
 
 	m_Player.Update();//プレイヤー
-	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.0f, 1.5f, 1.25f);
+
+	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.0f, 1.7f, 1.25f);
 	g_Shadow.SetLightPosition(lightPos);
 	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 	D3DXVec3Normalize(&lightDir, &lightDir);

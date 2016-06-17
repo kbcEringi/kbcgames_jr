@@ -134,6 +134,7 @@ void Update()
 void Draw()
 {
 	//(*graphicsDevice()).Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	(*graphicsDevice()).Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
 
 	(*graphicsDevice()).BeginScene();
 
@@ -161,9 +162,13 @@ void Draw()
 
 
 	gamen.SetTex(RT.GetTexture());
-	gamen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f));
 
-	BR.Render();
+	static float a=0,b=0;
+//	a+=0.5f*1.5;	
+	//b += 1;
+	gamen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH - (WINDOW_WIDTH / 100)*b, WINDOW_HEIGHT - (WINDOW_HEIGHT / 100)*b, 0.0f), a);
+
+	//BR.Render();
 
 	(*graphicsDevice()).EndScene();
 	(*graphicsDevice()).Present(NULL, NULL, NULL, NULL);

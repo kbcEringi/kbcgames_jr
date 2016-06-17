@@ -46,6 +46,20 @@ sampler_state
 	AddressV = Clamp;
 };
 
+texture g_normalMap;		//法線マップ
+sampler g_normalMapSampler =
+sampler_state
+{
+	Texture = <g_normalMap>;
+	MipFilter = NONE;
+	MinFilter = NONE;
+	MagFilter = NONE;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+bool Normalflg;
+
+
 /*!
  * @brief	入力頂点
  */
@@ -55,8 +69,9 @@ struct VS_INPUT
     float4  BlendWeights    : BLENDWEIGHT;
     float4  BlendIndices    : BLENDINDICES;
     float3  Normal          : NORMAL;
-	float4	color	: COLOR0;
-    float3  Tex0            : TEXCOORD0;
+    float3  uv            : TEXCOORD0;
+	float3	tangentNormal	: TANGENT;		//接ベクトル
+
 };
 
 /*!
@@ -65,11 +80,12 @@ struct VS_INPUT
 struct VS_OUTPUT
 {
 	float4  Pos     : POSITION;
-	float4	color	: COLOR0;
-    float2  Tex0    : TEXCOORD0;
+    float2  uv    : TEXCOORD0;
 	float4  specColor : TEXCOORD1;
 	float4 shadowpos : TEXCOORD2;
 	float3	normal	: TEXCOORD3;
+	float3	tangentNormal	: TEXCOORD4;		//接ベクトル
+
 };
 
 void CalcWorldMatrixFromSkinMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
@@ -107,6 +123,19 @@ void CalcWorldMatrix(VS_INPUT In, out float3 Pos, out float3 Normal)
 	Normal = mul(In.Normal, g_mRotation);
 }
 
+float4 CalcLight(float3 normal)
+{
+	float4 lig = 0.0f;
+	{
+		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
+		{
+			lig.xyz += max(0.0f, dot(normal.xyz, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
+		}
+		lig += g_ambientLight;
+	}
+	return lig;
+}
+
 VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 {
 	VS_OUTPUT Out = (VS_OUTPUT)0;
@@ -119,22 +148,11 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 		CalcWorldMatrix(In, Pos, Normal);
 	}
 
-	float4 color;
-	float4 lig = 0.0f;
-	{
-		for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
-		{
-			lig.xyz += max(0.0f, dot(Normal.xyz, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
-		}
-		lig += g_ambientLight;
-	}
-	color = lig;
-
-	Out.color = color;
 	Out.shadowpos = mul(float4(Pos, 1.0f), g_lvpMatrix);
 	Out.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);
-	Out.Tex0 = In.Tex0;
+	Out.uv = In.uv;
 	Out.normal = Normal;
+	Out.tangentNormal = mul(In.tangentNormal, g_mRotation);
 	return Out;
 }
 /*!
@@ -142,14 +160,29 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
  */
 float4 PSMain( VS_OUTPUT In ) : COLOR
 {
-	float4 pos = In.shadowpos;
-	float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
-	
-	float4 color;
-	color = tex2D(g_diffuseTextureSampler, In.Tex0);
+	float3 normal = In.normal;
+	if (Normalflg)
+	{
+		normal = tex2D(g_normalMapSampler, In.uv);
+		float4x4 tangentSpaceMatrix;
+		float3 biNormal = normalize(cross(In.tangentNormal, In.normal));
+		tangentSpaceMatrix[0] = float4(In.tangentNormal, 0.0f);
+		tangentSpaceMatrix[1] = float4(biNormal, 0.0f);
+		tangentSpaceMatrix[2] = float4(In.normal, 0.0f);
+		tangentSpaceMatrix[3] = float4(0.0f, 0.0f, 0.0f, 1.0f);
+		normal = (normal * 2.0f) - 1.0f;
+		normal = tangentSpaceMatrix[0] * normal.x + tangentSpaceMatrix[1] * normal.y + tangentSpaceMatrix[2] * normal.z;
+	}
+	float4 lig = CalcLight(normal);
+	float4 diff = tex2D(g_diffuseTextureSampler, In.uv);
+
+	//float4 color = lig;
+	float4 color = diff*lig;
 
 	if (shadowflg)
 	{
+		float4 pos = In.shadowpos;
+		float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
 		if (uv.x < 1.0f && uv.y < 1.0f){
 			if (dot(In.normal, float3(0, 1, 0)) >= 0.2f)
 			{
@@ -164,9 +197,9 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 		t = 1.0f - abs(dot(normalInCamera, float3(0.0f, 0.0f, 1.0f)));
 		t = pow(t, 1.5f);
 	}
-	color *= In.color;
 	color.xyz += t;
 	return color;
+
 }
 
 

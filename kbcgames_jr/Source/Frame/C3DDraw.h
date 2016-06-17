@@ -20,8 +20,8 @@ public:
 	}
 public:
 	virtual void OnBeginRender(CLight,int) = 0;
-	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT,bool,bool,D3DXMATRIX) = 0;
-	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*) = 0;
 	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
@@ -34,8 +34,8 @@ public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX)override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*)override;
 	void OnEndRender();
 };
 
@@ -44,8 +44,8 @@ public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX) override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, bool, bool, D3DXMATRIX, IDirect3DTexture9*) override;
 	void OnEndRender();
 	void SetEffect(ID3DXEffect* effect)
 	{
@@ -104,6 +104,7 @@ public:
 	void Sethureneruflg(bool flg){ hureneru = flg; }
 	CLight* GetLight(){ return &m_light; }
 	void Setunitychanflg(){ unitychanflg = true; }
+	void SetNormalMap(LPCSTR);
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
@@ -120,4 +121,7 @@ protected:
 	bool hureneru;
 
 	bool unitychanflg;
+
+	IDirect3DTexture9 *NormalTex;
+
 };

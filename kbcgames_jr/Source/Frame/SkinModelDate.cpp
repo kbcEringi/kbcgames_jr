@@ -365,7 +365,15 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 
 		pMesh->AddRef();
 	}
-
+	D3DVERTEXELEMENT9 decl[] = {
+		{ 0, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+		{ 0, 16, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT, 0 },
+		{ 0, 32, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDINDICES, 0 },
+		{ 0, 48, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+		{ 0, 60, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
+		{ 0, 72, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+		D3DDECL_END()
+	};
 	// allocate memory to contain the material information.  This sample uses
 	//   the D3D9 materials and texture names instead of the EffectInstance style materials
 	pMeshContainer->NumMaterials = max(1, NumMaterials);
@@ -444,6 +452,67 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 
 		// GenerateSkinnedMesh will take the general skinning information and transform it to a HW friendly version
 		hr = GenerateSkinnedMesh(pd3dDevice, pMeshContainer);
+		if (FAILED(hr))
+			goto e_Exit;
+		LPD3DXMESH pOutMesh;
+		hr = pMeshContainer->MeshData.pMesh->CloneMesh(
+			pMeshContainer->MeshData.pMesh->GetOptions(),
+			decl,
+			pd3dDevice, &pOutMesh);
+		if (FAILED(hr))
+			goto e_Exit;
+		hr = D3DXComputeTangentFrameEx(
+			pOutMesh,
+			D3DDECLUSAGE_TEXCOORD,
+			0,
+			D3DDECLUSAGE_TANGENT,
+			0,
+			D3DX_DEFAULT,
+			0,
+			D3DDECLUSAGE_NORMAL,
+			0,
+			0,
+			NULL,
+			0.01f,    //ボケ具合.値をおおきくするとぼけなくなる
+			0.25f,
+			0.01f,
+			&pOutMesh,
+			NULL
+			);
+		pMeshContainer->MeshData.pMesh->Release();
+		pMeshContainer->MeshData.pMesh = pOutMesh;
+		if (FAILED(hr))
+			goto e_Exit;
+	}
+	else {
+		LPD3DXMESH pOutMesh;
+		hr = pMeshContainer->MeshData.pMesh->CloneMesh(
+			pMeshContainer->MeshData.pMesh->GetOptions(),
+			decl,
+			pd3dDevice, &pOutMesh);
+
+		hr = D3DXComputeTangentFrameEx(
+			pOutMesh,
+			D3DDECLUSAGE_TEXCOORD,
+			0,
+			D3DDECLUSAGE_TANGENT,
+			0,
+			D3DX_DEFAULT,
+			0,
+			D3DDECLUSAGE_NORMAL,
+			0,
+			0,
+			NULL,
+			0.01f,    //ボケ具合.値をおおきくするとぼけなくなる
+			0.25f,
+			0.01f,
+			&pOutMesh,
+			NULL
+			);
+		pMeshContainer->MeshData.pMesh->Release();
+		pMeshContainer->MeshData.pMesh = pOutMesh;
+
+		
 		if (FAILED(hr))
 			goto e_Exit;
 	}

@@ -41,7 +41,7 @@ public:
 		if (flg == true)
 		{
 			m_NormalizeObject = m_v3DNormal;
-			m_Distance = 15;
+			m_Distance = 10;
 			//D3DXMatrixOrthoLH(&m_projectionMatrix, m_viewVolumeW, m_viewVolumeH, m_vNear, m_vFar);
 			D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, m_vFovy, m_vAspect, m_vNear, m_vFar);
 			flg = false;
