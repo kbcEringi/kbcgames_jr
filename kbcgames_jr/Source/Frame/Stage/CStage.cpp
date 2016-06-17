@@ -1,4 +1,5 @@
 #include "CStage.h"
+#include "CStageManager.h"
 
 CShadowMap g_Shadow;
 
@@ -9,6 +10,7 @@ CStage::CStage()
 void CStage::Initialize()
 {
 	isButtomTriger = false;		//ボタンが押されているか？
+	isDied = false;
 	
 }
 void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
@@ -42,9 +44,9 @@ void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
 
 void CStage::Update()
 {
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))//Bが押された場合
 	{
-		if (GAMEFLG->Getflg() == true)
+		if (GAMEFLG->Getflg() == true)//2Dの場合
 		{
 			if (isButtomTriger == false)
 			{
@@ -54,7 +56,7 @@ void CStage::Update()
 			}
 			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 		}
-		else
+		else//3Dの場合
 		{
 			if (isButtomTriger == false)
 			{
@@ -62,14 +64,35 @@ void CStage::Update()
 				m_GameCursor3D.SetPos(m_Player.GetPosition());
 				isButtomTriger = true;
 			}
-			m_camera.SetLookat(m_GameCursor3D.GetPos());//Playerを追いかけるカメラ
+			m_camera.SetLookat(m_GameCursor3D.GetPos());//カーソルを追いかけるカメラ
 		}
 	}
-	else
+	else//通常の場合
 	{
-		isButtomTriger = false;
-		m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+		//死亡した場合のカメラ切り替え
+		if (STAGEMANEGER->GetStage()->GetPlayer()->GetDied() == true)
+		{
+			if (isDied == false)
+			{
+				D3DXVECTOR3 pos = m_Player.GetPosition();
+				m_camera.SetLookat(pos);
+				STAGEMANEGER->GetStage()->GetCamera()->RotLongitudinal(D3DXToRadian(20.0f));
+				m_Player.SetDied();
+				isDied = true;
+			}
+		}
+		else
+		{
+			if (isDied == true)
+			{
+				m_Player.StopDied();
+			}
+				isDied = false;
+			isButtomTriger = false;
+			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
+		}
 	}
+	
 }
 
 void CStage::Draw()

@@ -6,7 +6,6 @@
 #include"..\Frame\SceneManager.h"
 #include"..\Frame\Input.h"
 #include"..\Frame\CGamepad.h"
-#include "..\Game\Gameover.h"
 
 class CSceneManager;
 class CAudio;
@@ -22,7 +21,6 @@ public:
 	void Draw();
 	//void Select();
 private:
-	CGameover m_gameover;
 
 	CAudio* m_pAudio;
 	BYTE diks[256];

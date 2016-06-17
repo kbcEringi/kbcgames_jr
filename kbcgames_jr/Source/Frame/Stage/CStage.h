@@ -66,6 +66,7 @@ protected:
 
 
 	bool				isButtomTriger;
+	bool				isDied;
 
 	//ここからbulletPhysicsの剛体を使用するために必要な変数。
 	btCollisionShape*	m_groundShape[MAX_COLLISION];	//地面のコリジョン形状。

@@ -25,7 +25,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -114,7 +114,6 @@
     <ClCompile Include="Source\Game\GameCursor.cpp" />
     <ClCompile Include="Source\Game\GameCursor3D.cpp" />
     <ClCompile Include="Source\Game\GameCursorWind.cpp" />
-    <ClCompile Include="Source\Game\Gameover.cpp" />
     <ClCompile Include="Source\Game\GameScene.cpp" />
     <ClCompile Include="Source\Game\Goal.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="Source\Game\GameCursor.h" />
     <ClInclude Include="Source\Game\GameCursor3D.h" />
     <ClInclude Include="Source\Game\GameCursorWind.h" />
-    <ClInclude Include="Source\Game\Gameover.h" />
     <ClInclude Include="Source\Game\GameScene.h" />
     <ClInclude Include="Source\Game\Goal.h" />
     <ClInclude Include="Source\Game\Ground.h" />
