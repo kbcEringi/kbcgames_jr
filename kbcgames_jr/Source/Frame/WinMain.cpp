@@ -168,7 +168,7 @@ void Draw()
 	//b += 1;
 	gamen.Draw(D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f), D3DXVECTOR3(WINDOW_WIDTH - (WINDOW_WIDTH / 100)*b, WINDOW_HEIGHT - (WINDOW_HEIGHT / 100)*b, 0.0f), a);
 
-	BR.Render();
+	//BR.Render();
 
 	(*graphicsDevice()).EndScene();
 	(*graphicsDevice()).Present(NULL, NULL, NULL, NULL);

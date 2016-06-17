@@ -43,6 +43,8 @@ void CTitleUnitychan::Initialize()
 	//D3DXVECTOR4 dir = D3DXVECTOR4(0.0f, 0.0f, 0.5f, 1.0f);
 	//D3DXVec4Normalize(&dir, &dir);
 	//m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
+	m_SkinModel.SetAnimationEndTime(Run, 0.8f);
+
 
 	m_SkinModel.Setunitychanflg();
 	m_SkinModel.SetAnimation(Run);//スタンドアニメーション
