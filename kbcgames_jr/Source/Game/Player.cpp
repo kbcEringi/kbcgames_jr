@@ -49,7 +49,7 @@ void CPlayer::Initialize()
 
 	
 
-	//deid = false;
+	m_died = false;
 	m_SkinModel.Setunitychanflg();
 
 
@@ -211,7 +211,11 @@ void CPlayer::Died()
 {
 	if (m_position.y <= -5.0)
 	{
-		PostQuitMessage(0);
+		m_died = true;
+	}
+	else
+	{
+		m_died = false;
 	}
 }
 
@@ -242,4 +246,15 @@ void CPlayer::SetHit()
 void CPlayer::StopHit()
 {
 	m_pAudio->StopCue("yuniiii");
+}
+
+void CPlayer::SetDied()
+{
+	m_pAudio->PlayCue("yuni-");
+	m_pAudio->PlayCue("fall");
+}
+void CPlayer::StopDied()
+{
+	m_pAudio->StopCue("yuni-");
+	m_pAudio->StopCue("fall");
 }

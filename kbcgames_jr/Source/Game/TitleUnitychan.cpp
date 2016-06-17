@@ -45,7 +45,7 @@ void CTitleUnitychan::Initialize()
 	//m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
 
 	m_SkinModel.Setunitychanflg();
-	m_SkinModel.SetAnimation(Jump);//スタンドアニメーション
+	m_SkinModel.SetAnimation(Run);//スタンドアニメーション
 }
 
 void CTitleUnitychan::Update()

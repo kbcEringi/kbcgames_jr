@@ -11,14 +11,14 @@ void CResultScene::Initialize()
 		"Audio\\Audio.xsb");
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 
-	m_gameover.Initialize();
+	
 }
 
 void CResultScene::Update()
 {
 	m_pAudio->Run();	//周期タスク実行
 
-	m_gameover.Update();
+	
 
 	if (GetAsyncKeyState(VK_RETURN))
 	{
@@ -30,7 +30,7 @@ void CResultScene::Update()
 
 void CResultScene::Draw()
 {
-	m_gameover.Draw();
+	
 }
 
 //void CResultScene::Select()

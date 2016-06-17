@@ -79,6 +79,12 @@ public:
 	void StopJumpAudio();
 	void SetHit();
 	void StopHit();
+	void SetDied();
+	void StopDied();
+	bool GetDied()
+	{
+		return m_died;
+	}
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;
@@ -95,4 +101,5 @@ private:
 	std::vector<IPlayerCollisionCallback*>	m_callbackList;
 
 	bool currentAnimation;//アニメーションしている?
+	bool m_died;			//死亡フラグ
 };
