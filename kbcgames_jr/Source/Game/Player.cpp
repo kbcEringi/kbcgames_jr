@@ -114,6 +114,7 @@ void CPlayer::Update()
 			m_moveSpeed.y = 0.0f;
 			m_moveSpeed.z = 0.0f;
 			m_pAudio->StopCue("bu-n");
+			m_pAudio->StopCue("yuniiii");
 		}
 	}
 
@@ -227,4 +228,18 @@ void CPlayer::StopRunAudio()
 void CPlayer::SetJumpAudio()
 {
 	m_pAudio->PlayCue("bu-n");
+}
+
+void CPlayer::StopJumpAudio()
+{
+	m_pAudio->StopCue("bu-n");
+}
+
+void CPlayer::SetHit()
+{
+	m_pAudio->PlayCue("yuniiii");
+}
+void CPlayer::StopHit()
+{
+	m_pAudio->StopCue("yuniiii");
 }

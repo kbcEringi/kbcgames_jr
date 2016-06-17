@@ -7,14 +7,35 @@ void CTitleStart::Initialize()
 	vec3Scale = D3DXVECTOR3(200.0f, 100.0f, 1.0f);
 	//vec3Position = D3DXVECTOR3(450.0f, 250.0f, 0.0f);
 	vec3Position = D3DXVECTOR3(480.0f, 400.0f, 0.0f);
+	scale = MAX;
 }
 
 void CTitleStart::Update()
 {
-
+	Scale();
 }
 
 void CTitleStart::Draw()
 {
 	m_2Dobj.Draw(vec3Position, vec3Scale);
+}
+
+void CTitleStart::Scale()
+{
+	if (vec3Scale.x < scale)
+	{
+		vec3Scale.x += 1.0f;
+		if (vec3Scale.x == scale)
+		{
+			scale = MIN;
+		}
+	}
+	if (vec3Scale.x > scale)
+	{
+		vec3Scale.x -= 1.0f;
+		if (vec3Scale.x == scale)
+		{
+			scale = MAX;
+		}
+	}
 }
