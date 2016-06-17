@@ -76,6 +76,9 @@ public:
 	void SetRunAudio();
 	void StopRunAudio();
 	void SetJumpAudio();
+	void StopJumpAudio();
+	void SetHit();
+	void StopHit();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;

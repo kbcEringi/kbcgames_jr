@@ -1,6 +1,7 @@
 #include "IsIntersect.h"
 #include <vector>
 #include "IPlayerCollisionCallback.h"
+#include"..\Frame\Stage\CStageManager.h"
 //‚ ‚½‚è”»’è
 
 struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
@@ -198,6 +199,10 @@ void CIsIntersect::Intersect(
 		if (loopCount != 0)
 		{
 			m_moveSpeed->x = m_moveSpeed->x * -1.0f;
+			STAGEMANEGER->GetStage()->GetPlayer()->StopJumpAudio();
+			STAGEMANEGER->GetStage()->GetPlayer()->StopHit();
+			STAGEMANEGER->GetStage()->GetPlayer()->SetHit();
+			
 		}
 	}
 	//‰º•ûŒü‚ğ’²‚×‚éB
