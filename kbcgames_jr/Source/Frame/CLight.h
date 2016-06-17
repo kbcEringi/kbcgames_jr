@@ -15,7 +15,7 @@ public:
 		//m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
 		for (int i = 0; i < LIGHT_NUM; i++)
 		{
-			D3DXVec4Normalize(&m_diffuseLightDirection[i], &m_diffuseLightDirection[i]);
+			D3DXVec3Normalize((D3DXVECTOR3*)(&m_diffuseLightDirection[i]), (D3DXVECTOR3*)(&m_diffuseLightDirection[i]));
 		}
 		//ディフューズライト色
 		memset(m_diffuseLightColor, 0, sizeof(m_diffuseLightColor));
@@ -28,7 +28,13 @@ public:
 		//環境光。
 		m_ambientLight = D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f);
 	}
-	
+	void UpLight()
+	{
+		for (int i = 0; i < LIGHT_NUM; i++)
+		{
+			D3DXVec3Normalize((D3DXVECTOR3*)(&m_diffuseLightDirection[i]), (D3DXVECTOR3*)(&m_diffuseLightDirection[i]));
+		}
+	}
 public:
 	static const int LIGHT_NUM = 6;
 	D3DXVECTOR4 m_diffuseLightDirection[LIGHT_NUM];	//ライトの方向。

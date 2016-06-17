@@ -28,6 +28,7 @@ public:
 	void Died();
 	D3DXVECTOR3 Get2DPos()
 	{
+		Pos2D();
 		return m_position2D;
 	}
 	D3DXVECTOR3 GetPosition()
@@ -70,11 +71,11 @@ public:
 	{
 		return state;
 	}
+	void JumpAnime();
 	void Pos2D();
 	void SetRunAudio();
 	void StopRunAudio();
 	void SetJumpAudio();
-	void StopJumpAudio();
 private:
 	State state;
 	D3DXVECTOR3 m_position2D;

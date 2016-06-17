@@ -4,6 +4,7 @@
 #include "Stage1.h"
 #include"CGameFlg.h"
 #include"..\Frame\Stage\CStageManager.h"
+#include "..\Frame\haba.h"
 
 struct SCollisionResult : public btCollisionWorld::ConvexResultCallback
 {
@@ -83,6 +84,7 @@ void CGameCursorWind::Update()
 			angle[1] = 0.0f;
 			//Ray();
 			state = State_DecideYPower;
+			STAGEMANEGER->GetStage()->GetCamera()->SetTarget(TARGET_VOLUME);
 		}
 	}
 	//Y方向
@@ -94,9 +96,11 @@ void CGameCursorWind::Update()
 			STAGEMANEGER->GetStage()->GetCursor()->SetState(STAGEMANEGER->GetStage()->GetCursor()->view);
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
+				STAGEMANEGER->GetStage()->GetCamera()->SetTarget(DEFAULT_VOLUME);
 				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
 				Positin2D();//2Dのポジションに変換
+				
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
 				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
 				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
@@ -115,8 +119,10 @@ void CGameCursorWind::Update()
 				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
 				Positin2D();//2Dのポジションに変換
+				m_Cursol2Dpos.x = WINDOW_WIDTH * 0.5f;
+				m_Cursol2Dpos.y = WINDOW_HEIGHT * 0.5f;
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
-				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
+				//STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(m_position);
 				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
 			}
 			else{
@@ -227,7 +233,7 @@ void CGameCursorWind::RotScalY()
 	//カーソルのレイ上でZが0.0になる座標を計算する。
 	D3DXVECTOR3 v3 = (v1 - v0) * t + v0;
 	//プレイヤーの足元から、先ほど求めた座標へのベクトルを計算する。
-	D3DXVECTOR3 v4 = v3 - m_position;
+	D3DXVECTOR3 v4 = v3 - D3DXVECTOR3(m_position.x, m_position.y, 0.0f);
 	D3DXVECTOR3 v5 = v4;
 	D3DXVec3Normalize(&v4, &v4);
 	static const D3DXVECTOR3 vRIGHT(1.0f, 0.0f, 0.0f);

@@ -4,17 +4,17 @@
 
 #include"..\Frame\Scene.h"
 #include"..\Frame\SceneManager.h"
-
 #include"..\Frame\Input.h"
+#include "..\Frame\Ccamera.h"
+#include"..\Frame\CGamepad.h"
 
 #include"Title.h"
-#include "TitleCusor.h"
-#include"..\Frame\CGamepad.h"
+#include "TitleStart.h"
+#include "TitleUnitychan.h"
+
 
 class CSceneManager;
 class CAudio;
-
-enum COMMAND_SELECT { START = 0, EXIT };
 
 class CTitleScene : public CScene
 {
@@ -27,9 +27,9 @@ public:
 
 private:
 	CTitle  m_title;
-	CTitleCursor m_TitleCusor;
-
+	CTitleStart m_start;
 	CAudio* m_pAudio;
 	BYTE diks[256];
-
+	Ccamera m_camera;
+	CTitleUnitychan m_Unitychan;
 };

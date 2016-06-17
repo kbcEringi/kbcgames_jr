@@ -24,7 +24,7 @@ private:
 	D3DXVECTOR3 m_moveSpeed;		//移動速度
 	//ここからBulletPhysicsで衝突判定を行うためのメンバ変数。
 	btGhostObject*		m_ghostObject;		//!<ゴースト。剛体の変わりになるもの。完全に物理挙動に任せたいものは剛体を使う。
-	btBoxShape*		m_collisionShape;	//!<コリジョン形状。
+	btSphereShape*		m_collisionShape;	//!<コリジョン形状。
 	btRigidBody*			m_rigidBody;
 	btDefaultMotionState*	m_myMotionState;
 };

@@ -132,8 +132,9 @@
     <ClCompile Include="Source\Game\Stage2.cpp" />
     <ClCompile Include="Source\Game\stagetest.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
-    <ClCompile Include="Source\Game\TitleCursor.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
+    <ClCompile Include="Source\Game\TitleStart.cpp" />
+    <ClCompile Include="Source\Game\TitleUnitychan.cpp" />
     <ClCompile Include="Source\Game\Windmill.cpp" />
     <ClCompile Include="Source\Game\wood.cpp" />
   </ItemGroup>
@@ -193,8 +194,9 @@
     <ClInclude Include="Source\Game\Stage2.h" />
     <ClInclude Include="Source\Game\stagetest.h" />
     <ClInclude Include="Source\Game\Title.h" />
-    <ClInclude Include="Source\Game\TitleCusor.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
+    <ClInclude Include="Source\Game\TitleStart.h" />
+    <ClInclude Include="Source\Game\TitleUnitychan.h" />
     <ClInclude Include="Source\Game\Windmill.h" />
     <ClInclude Include="Source\Game\wood.h" />
   </ItemGroup>

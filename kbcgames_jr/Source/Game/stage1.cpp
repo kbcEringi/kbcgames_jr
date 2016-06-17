@@ -31,7 +31,7 @@ void CStage1::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
