@@ -31,7 +31,7 @@ void CPlayer::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 
-	m_position.x = 250.0f;				//X座標
+	m_position.x = 0.0f;				//X座標
 	m_position.y = 8.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
