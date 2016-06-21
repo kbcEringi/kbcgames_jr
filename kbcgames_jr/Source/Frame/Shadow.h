@@ -36,6 +36,20 @@ public:
 	{
 		m_pEffect = effect;
 	}
+	/*!
+	* @brief	近平面。
+	*/
+	float GetNear() const
+	{
+		return m_near;
+	}
+	/*!
+	* @brief	遠平面
+	*/
+	float GetFar() const
+	{
+		return m_far;
+	}
 private:
 	D3DVIEWPORT9       m_viewport;  // テクスチャのビューポート
 	LPDIRECT3DSURFACE9 m_Backbuffer;
@@ -51,4 +65,6 @@ private:
 	D3DXMATRIX m_LVPMatrix;
 	D3DXMATRIX m_projMatrix;
 	ID3DXEffect* m_pEffect;
+	float						m_near;				//!<近平面。
+	float						m_far;				//!<遠平面。
 };

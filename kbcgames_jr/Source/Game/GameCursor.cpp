@@ -5,6 +5,7 @@
 void CGameCursor::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\buttefly.png");
+	m_2Dobj.SetLuminance(true, 0.2);
 	vec3Scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	vec3Position = D3DXVECTOR3(480.0f, 280.0f, 0.0f);
 	state = view;//•\Ž¦‚µ‚Ä‚¢‚é

@@ -14,12 +14,14 @@ struct Renderstate
 	bool shadowflg;
 	bool hureneruflg;
 	bool unitychanflg;
+	float Luminance;
 	Renderstate()
 	{
 		isLuminance = false;
 		shadowflg = true;
 		hureneruflg = false;
 		unitychanflg = false;
+		Luminance = 0.0f;
 	}
 };
 
@@ -128,7 +130,7 @@ public:
 	void Sethureneruflg(bool flg){ rens.hureneruflg = flg; }
 	CLight* GetLight(){ return &m_light; }
 	void Setunitychanflg(){ rens.unitychanflg = true; }
-	void SetLuminance(bool is){ rens.isLuminance = is; }
+	void SetLuminance(bool is, float lum = 0){ rens.isLuminance = is; rens.Luminance = lum; }
 	void SetNormalMap(LPCSTR);
 	~C3DDraw();
 protected:

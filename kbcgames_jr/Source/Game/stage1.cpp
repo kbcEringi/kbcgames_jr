@@ -6,11 +6,11 @@
 
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include "Collision3D_stage10.h"
+#include "Collision3D_stage1.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
-#include "Collision2D_stage10.h"
+#include "Collision2D_stage1.h"
 };
 
 SGimmickData gimmick3dobj[] = {

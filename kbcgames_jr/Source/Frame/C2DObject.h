@@ -25,6 +25,7 @@ public:
 	 */
 	void Draw(D3DXVECTOR3, D3DXVECTOR3,float angle =0);
 	void DrawPrimitiveOnly();
+	void SetLuminance(bool is, float lum = 0){ isLuminance = is; Luminance = lum; }
 	~C2DObject();
 protected:
 	IDirect3DTexture9 *tex;
@@ -32,4 +33,7 @@ protected:
 	LPDIRECT3DVERTEXBUFFER9 m_pVB;
 
 	D3DXMATRIX  matWorld, matTrans, matScale, matRot;
+
+	bool isLuminance;
+	float Luminance;
 };

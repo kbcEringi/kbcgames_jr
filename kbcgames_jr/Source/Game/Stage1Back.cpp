@@ -10,7 +10,9 @@ void CStage1Back::Initialize()
 {
 	m_pPlayer = NULL;
 	m_SkinModel.Initialize("XFile\\sky.x");	//ぽいんたXファイル
-	m_SkinModel.SetLuminance(true);
+	m_SkinModel.SetLuminance(true,0.2);
+	m_SkinModel.Setshadowflg(false);
+
 	m_position.x = 0.0f;				//X座標
 	m_position.y = 120.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標

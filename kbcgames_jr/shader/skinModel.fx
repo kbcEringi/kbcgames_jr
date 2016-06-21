@@ -23,6 +23,9 @@ float4 g_diffuseLightDirection[DIFFUSE_LIGHT_NUM];
 float4 g_diffuseLightColor[DIFFUSE_LIGHT_NUM];
 float4 g_ambientLight;
 
+float2		g_farNear;	//遠平面と近平面。xに遠平面、yに近平面。
+
+
 texture g_diffuseTexture;		//ディフューズテクスチャ。
 sampler g_diffuseTextureSampler = 
 sampler_state
@@ -60,6 +63,7 @@ sampler_state
 bool Normalflg;
 
 bool isLuminance;
+float g_luminance;
 
 /*!
  * @brief	入力頂点
@@ -132,7 +136,7 @@ float4 CalcLight(float3 normal)
 		{
 			lig.xyz += max(0.0f, dot(normal.xyz, -g_diffuseLightDirection[i].xyz)) * g_diffuseLightColor[i].xyz;
 		}
-		lig += g_ambientLight;
+		//lig += g_ambientLight;
 	}
 	return lig;
 }
@@ -149,7 +153,7 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 		CalcWorldMatrix(In, Pos, Normal);
 	}
 
-	Out.shadowpos = mul(float4(Pos, 1.0f), g_lvpMatrix);
+	Out.shadowpos = mul(float4(Pos.xyz, 1.0f), g_lvpMatrix);
 	Out.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);
 	Out.uv = In.uv;
 	Out.normal = Normal;
@@ -161,7 +165,7 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 */
 float CalcLuminance(float3 color)
 {
-	float luminance = dot(color, float3(0.2125f, 0.7154f, 0.0721f));
+	float luminance = dot(color, float3(0.2125f, 0.7154f, 0.0721f)) + g_luminance;
 	if (luminance > 1.0f){
 		luminance = 1.0f / luminance;
 	}
@@ -191,21 +195,31 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 	float4 lig = CalcLight(normal);
 	float4 diff = tex2D(g_diffuseTextureSampler, In.uv);
 
-	//float4 color = lig;
-	float4 color = diff*lig;
+
 
 	if (shadowflg)
 	{
 		float4 pos = In.shadowpos;
 		float2 uv = float2(0.5f, -0.5f) * pos.xy / pos.w + float2(0.5f, 0.5f);
-		if (uv.x < 1.0f && uv.y < 1.0f && uv.x >= 0.0f && uv.y >= 0.0f ){
-			if (dot(In.normal, float3(0, 1, 0)) >= 0.2f)
+		float shadow_val = 1.0f;
+		if (uv.x <= 1.0f && uv.y <= 1.0f && uv.x >= 0.0f && uv.y >= 0.0f ){
+			if (dot(In.normal, float3(0, 1, 0)) >= 0.4f)
 			{
-				color *= tex2D(g_ShadowTextureSampler, uv);
+				shadow_val = tex2D(g_ShadowTextureSampler, uv).r;
 			}
 		}
+		float depth = (pos.z - g_farNear.y) / (g_farNear.x - g_farNear.y);
+		if (depth > shadow_val){
+			//影になっている。
+			lig = 0.0f;
+		}
 	}
-	float t = 0.0f;;
+
+	lig += g_ambientLight;
+	float4 color = diff*lig;
+
+
+	float t = 0.0f;
 	if (hureneruflg)
 	{
 		float3 normalInCamera = mul(In.normal, g_viewMatrixRotInv);
@@ -215,11 +229,9 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 	color.xyz += t;
 	//アルファに輝度を埋め込む
 	if (isLuminance){
-		color.a = CalcLuminance(color.xyz);
+		color.a *= CalcLuminance(color.xyz);
 	}
-	else{
-		color.a = 1.0f;
-	}
+	
 	return color;
 
 }

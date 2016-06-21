@@ -8,7 +8,7 @@ CGameCursor3D::~CGameCursor3D()
 void CGameCursor3D::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Cursor3D.x");
-	m_SkinModel.SetLuminance(true);
+	m_SkinModel.SetLuminance(true,0.2);
 
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
@@ -77,7 +77,7 @@ void CGameCursor3D::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 	const float MOVE_SPEED = 0.2f;
-	const float LENGTH = 20.0f;
+	const float LENGTH = 2000000.0f;
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
 	D3DXVECTOR3 add(0.0f, 0.0f, 0.0f);
