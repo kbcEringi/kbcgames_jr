@@ -222,7 +222,18 @@ void CPlayer::Died()
 {
 	if (m_position.y <= -5.0)
 	{
-		m_died = true;
+		/*m_died = true;*/
+		m_position.x = 0.0f;				//X座標
+		m_position.y = 8.0f;				//Y座標
+		m_position.z = 0.0f;				//Z座標
+
+		m_moveSpeed.x = 0.0f;				//移動速度
+		m_moveSpeed.y = 0.0f;
+		m_moveSpeed.z = 0.0f;				//移動速度
+
+		m_applyForce.x = 0.0f;
+		m_applyForce.y = 0.0f;
+		m_applyForce.z = 0.0f;
 	}
 	else
 	{
