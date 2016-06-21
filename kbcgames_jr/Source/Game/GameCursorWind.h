@@ -37,6 +37,10 @@ public:
 		this->state = state;
 
 	}
+	State GetState()
+	{
+		return state;
+	}
 private:
 	
 	State state;

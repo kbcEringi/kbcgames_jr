@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Frame\Audio.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Frame\Ccamera.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
@@ -157,11 +154,11 @@
     <ClCompile Include="Source\Game\TitleUnitychan.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Frame\Audio.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Frame\Audio.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Frame\Ccamera.h">
       <Filter>Frame</Filter>
     </ClInclude>
@@ -335,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="Source\Game\TitleUnitychan.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\Audio.h">
+      <Filter>Frame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
