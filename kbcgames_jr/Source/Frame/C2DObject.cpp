@@ -35,6 +35,9 @@ void C2DObject::Initialize(LPCSTR FileName)
 	m_pVB->Lock(0, sizeof(vertices), (void**)&pVertices, 0);
 	memcpy(pVertices, vertices, sizeof(vertices));
 	m_pVB->Unlock();
+
+	isLuminance = false;
+	Luminance = 0.0f;
 }
 
 void C2DObject::Initialize()
@@ -97,6 +100,8 @@ void C2DObject::Draw(D3DXVECTOR3 vec3Trans, D3DXVECTOR3 vec3Scale, float angle)
 
 	m_pEffect->SetMatrix("matWorld", &matWorld);
 	m_pEffect->SetTexture("g_diffuseTexture", tex);
+	m_pEffect->SetBool("isLuminance", isLuminance);
+	m_pEffect->SetFloat("g_luminance", Luminance);
 	m_pEffect->CommitChanges();
 
 	DrawPrimitiveOnly();

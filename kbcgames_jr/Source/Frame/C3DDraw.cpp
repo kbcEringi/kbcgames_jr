@@ -56,6 +56,13 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	m_pEffect->SetBool("shadowflg", rens.shadowflg);
 	m_pEffect->SetBool("hureneruflg", rens.hureneruflg);
 	m_pEffect->SetBool("isLuminance", rens.isLuminance);
+	m_pEffect->SetFloat("g_luminance", rens.Luminance);
+
+	float farNear[] = {
+		g_Shadow.GetFar(),
+		g_Shadow.GetNear(),
+	};
+	m_pEffect->SetValue("g_farNear", farNear, sizeof(farNear));
 
 	if (Normal != NULL)
 	{
@@ -89,6 +96,14 @@ void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMes
 
 	m_pEffect->SetBool("hureneruflg", rens.hureneruflg);
 	m_pEffect->SetBool("isLuminance", rens.isLuminance);
+	m_pEffect->SetFloat("g_luminance", rens.Luminance);
+
+
+	float farNear[] = {
+		g_Shadow.GetFar(),
+		g_Shadow.GetNear(),
+	};
+	m_pEffect->SetValue("g_farNear", farNear, sizeof(farNear));
 
 	if (Normal != NULL)
 	{
@@ -137,6 +152,11 @@ void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMesh
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
 	m_pEffect->SetFloat("g_numBone", pMeshContainer->NumInfl);
+	float farNear[] = {
+		g_Shadow.GetFar(),
+		g_Shadow.GetNear(),
+	};
+	m_pEffect->SetValue("g_farNear", farNear, sizeof(farNear));
 
 	// ボーン数。
 	m_pEffect->SetInt("CurNumBones", pMeshContainer->NumInfl - 1);
@@ -147,6 +167,11 @@ void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pM
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewproj);//ビュープロジェクション行列の転送。
+	float farNear[] = {
+		g_Shadow.GetFar(),
+		g_Shadow.GetNear(),
+	};
+	m_pEffect->SetValue("g_farNear", farNear, sizeof(farNear));
 	m_pEffect->CommitChanges();//この関数を呼び出すことで、データの転送が確定する。描画を行う前に一回だけ呼び出す。
 	for (DWORD i = 0; i < pMeshContainer->NumMaterials; i++)
 	{
