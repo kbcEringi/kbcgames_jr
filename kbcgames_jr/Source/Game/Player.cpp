@@ -12,12 +12,6 @@
 #include"..\Frame\Stage\CStageManager.h"
 
 
-enum PlayerAnim{
-	PlayerAnim_Stand,
-	PlayerAnim_Walk,
-	PlayerAnim_Run,
-	PlayerAnim_Jump,
-};
 CPlayer::~CPlayer()
 {
 }
@@ -37,7 +31,7 @@ void CPlayer::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 
-	m_position.x = 0.0f;				//X座標
+	m_position.x = 250.0f;				//X座標
 	m_position.y = 8.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
@@ -81,8 +75,6 @@ void CPlayer::Update()
 {
 	m_pAudio->Run();
 
-
-	Died();//死亡判定
 	if (state == StateWalk)
 	{
 		if (STAGEMANEGER->GetStage()->GetPointa()->GetDraw() == true)
@@ -222,18 +214,21 @@ void CPlayer::Died()
 {
 	if (m_position.y <= -5.0)
 	{
-		/*m_died = true;*/
-		m_position.x = 0.0f;				//X座標
-		m_position.y = 8.0f;				//Y座標
-		m_position.z = 0.0f;				//Z座標
+		m_died = true;
+		if (m_position.y <= -10.0f)
+		{
+			m_position.x = 0.0f;				//X座標
+			m_position.y = 8.0f;				//Y座標
+			m_position.z = 0.0f;				//Z座標
 
-		m_moveSpeed.x = 0.0f;				//移動速度
-		m_moveSpeed.y = 0.0f;
-		m_moveSpeed.z = 0.0f;				//移動速度
+			m_moveSpeed.x = 0.0f;				//移動速度
+			m_moveSpeed.y = 0.0f;
+			m_moveSpeed.z = 0.0f;				//移動速度
 
-		m_applyForce.x = 0.0f;
-		m_applyForce.y = 0.0f;
-		m_applyForce.z = 0.0f;
+			m_applyForce.x = 0.0f;
+			m_applyForce.y = 0.0f;
+			m_applyForce.z = 0.0f;
+		}
 	}
 	else
 	{

@@ -23,7 +23,7 @@ public:
 	void RotScalY();
 	void RotScalXZ();
 	void WindPower();
-	void Positin2D();
+	void Position2D();
 	void SetPosition(D3DXVECTOR3 pos)
 	{
 		m_position = pos;
@@ -40,6 +40,11 @@ public:
 	State GetState()
 	{
 		return state;
+	}
+	D3DXVECTOR3 Get2DPosition()
+	{
+		Position2D();
+		return m_Cursol2Dpos;
 	}
 private:
 	

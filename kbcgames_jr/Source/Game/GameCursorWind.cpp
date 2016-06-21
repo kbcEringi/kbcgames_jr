@@ -100,7 +100,7 @@ void CGameCursorWind::Update()
 				STAGEMANEGER->GetStage()->GetCamera()->SetTarget(DEFAULT_VOLUME);
 				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				Positin2D();//2Dのポジションに変換
+				Position2D();//2Dのポジションに変換
 				
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
 				STAGEMANEGER->GetStage()->GetCursor3D()->SetPos(STAGEMANEGER->GetStage()->GetPlayer()->GetPosition());
@@ -119,7 +119,7 @@ void CGameCursorWind::Update()
 				state = State_Hide;
 				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
 				WindPower();//風に力を
-				Positin2D();//2Dのポジションに変換
+				Position2D();//2Dのポジションに変換
 				m_Cursol2Dpos.x = WINDOW_WIDTH * 0.5f;
 				m_Cursol2Dpos.y = WINDOW_HEIGHT * 0.5f;
 				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_Cursol2Dpos);
@@ -272,7 +272,7 @@ void CGameCursorWind::WindPower()
 }
 
 //２D座標に変換
-void CGameCursorWind::Positin2D()
+void CGameCursorWind::Position2D()
 {
 	D3DXMATRIX mViewInv = STAGEMANEGER->GetStage()->GetCamera()->GetViewMatrix();
 	D3DXMATRIX mProjInv = STAGEMANEGER->GetStage()->GetCamera()->GetProjectionMatrix();
