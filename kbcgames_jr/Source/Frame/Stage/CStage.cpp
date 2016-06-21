@@ -26,24 +26,29 @@ void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
 			m_camera.RotTransversal(0.05f);
 		}
 	}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
+	if (m_GCursorWind.GetState() == m_GCursorWind.State_Hide)
 	{
-		GAMEFLG->Set2D();
-		m_camera.Set2DProj();
-		Remove3DRigidBody(araySize3D);
-		Add2DRigidBody(araySize2D);
-	}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
-	{
-		GAMEFLG->Set3D();
-		m_camera.Set3DProj();
-		Remove2DRigidBody(araySize2D);
-		Add3DRigidBody(araySize3D);
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
+		{
+			GAMEFLG->Set2D();
+			m_camera.Set2DProj();
+			Remove3DRigidBody(araySize3D);
+			Add2DRigidBody(araySize2D);
+		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
+		{
+			GAMEFLG->Set3D();
+			m_camera.Set3DProj();
+			Remove2DRigidBody(araySize2D);
+			Add3DRigidBody(araySize3D);
+		}
 	}
 }
 
 void CStage::Update()
 {
+	m_Player.Died();
+
 	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))//Bが押された場合
 	{
 		if (GAMEFLG->Getflg() == true)//2Dの場合
@@ -76,7 +81,7 @@ void CStage::Update()
 			{
 				D3DXVECTOR3 pos = m_Player.GetPosition();
 				m_camera.SetLookat(pos);
-				STAGEMANEGER->GetStage()->GetCamera()->RotLongitudinal(D3DXToRadian(20.0f));
+				m_camera.RotLongitudinal(D3DXToRadian(20.0f));
 				m_Player.SetDied();
 				isDied = true;
 			}
@@ -86,8 +91,12 @@ void CStage::Update()
 			if (isDied == true)
 			{
 				m_Player.StopDied();
+				//初期化
+				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_GCursorWind.Get2DPosition());
+				m_pointa.SetPos(&m_Player.GetPosition());//ポインタ位置初期化
+				m_camera.RotLongitudinal(D3DXToRadian(-20.0f));//カメラ初期回転位置
 			}
-				isDied = false;
+			isDied = false;
 			isButtomTriger = false;
 			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 		}

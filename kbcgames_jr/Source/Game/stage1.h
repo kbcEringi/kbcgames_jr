@@ -44,13 +44,9 @@ private:
 
 	CAudio* m_pAudio;
 	CRayCursor m_Ray;
-	
 	CGround m_Ground;
-
 	CStage1Back m_Back1;
-
 	CGoal m_goal;
-
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;
 

@@ -58,6 +58,7 @@ void CStage1::Initialize()
 	m_Ray.Initialize();//レイカーソル初期化
 	m_Ray.SetPointa(&m_pointa);
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
+
 	//this->CreateCollision();
 
 	//D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
@@ -71,72 +72,79 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
-	
-	GAMEPAD(CGamepad)->UpdateControllerState();
-	if (GAMEPAD(CGamepad)->GetConnected())
+	if (m_goal.GetGoal() != true)
 	{
-		ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
-	}
-	else
-	{
-		if (!(GAMEFLG->Getflg()))
+		GAMEPAD(CGamepad)->UpdateControllerState();
+		if (GAMEPAD(CGamepad)->GetConnected())
 		{
-			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+			ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
+		}
+		else
+		{
+			if (!(GAMEFLG->Getflg()))
 			{
-				m_camera.RotTransversal(-0.05f);
+				if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+				{
+					m_camera.RotTransversal(-0.05f);
+				}
+				if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+				{
+					m_camera.RotTransversal(0.05f);
+				}
 			}
-			if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+			if (GetAsyncKeyState(VK_Q) & 0x8000)
 			{
-				m_camera.RotTransversal(0.05f);
+				GAMEFLG->Set2D();
+				m_camera.Set2DProj();
+
+			}
+			if (GetAsyncKeyState(VK_W) & 0x8000)
+			{
+				GAMEFLG->Set3D();
+				m_camera.Set3DProj();
 			}
 		}
-		if (GetAsyncKeyState(VK_Q) & 0x8000)
-		{
-			GAMEFLG->Set2D();
-			m_camera.Set2DProj();
 
-		}
-		if (GetAsyncKeyState(VK_W) & 0x8000)
-		{
-			GAMEFLG->Set3D();
-			m_camera.Set3DProj();
-		}
+		m_pAudio->Run();	//周期タスク実行
+		m_camera.Update();
+
+		CStage::Update();
+
+		m_Player.Update();//プレイヤー
+
+		D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
+		g_Shadow.SetLightPosition(lightPos);
+		D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
+		D3DXVec3Normalize(&lightDir, &lightDir);
+		g_Shadow.SetLightDirection(lightDir);
+		m_Ground.Update();//地面
+
+		m_gimmick.Update();
+
+		m_pointa.Update();//ポインタ
+		m_GameCursor.Update();//ゲームカーソル
+		m_GCursorWind.Update();//ゲームカーソルかぜ　
+		m_Back1.Update();
+
+		m_GameCursor3D.Update();//ゲームカーソル３D
+
+
+
+		//レイカーソルに値をセット
+		m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
+		m_goal.Update();
 	}
-
-	m_pAudio->Run();	//周期タスク実行
-	m_camera.Update();
-
-	CStage::Update();
-
-	m_Player.Update();//プレイヤー
-
-	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
-	g_Shadow.SetLightPosition(lightPos);
-	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
-	D3DXVec3Normalize(&lightDir, &lightDir);
-	g_Shadow.SetLightDirection(lightDir);
-	m_Ground.Update();//地面
-	
-	m_gimmick.Update();
-
-	m_pointa.Update();//ポインタ
-	m_GameCursor.Update();//ゲームカーソル
-	m_GCursorWind.Update();//ゲームカーソルかぜ　
-	m_Back1.Update();
-
-	m_GameCursor3D.Update();//ゲームカーソル３D
-
-
-	//レイカーソルに値をセット
-	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-
-	m_goal.Update();
-	if (m_goal.GetGoal() == true)
+	else if (m_goal.GetGoal() == true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
-		Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
-		Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
-		STAGEMANEGER->SelectStage(2);
+		m_Player.Update();//プレイヤー
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+		{
+			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
+			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
+			STAGEMANEGER->SelectStage(2);
+		}
 	}
 
 }
@@ -148,7 +156,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	//m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
 	{
@@ -194,7 +202,7 @@ void CStage1::CreateCollision3D()
 			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
-			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
+			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, collision.pos.z));
 			float mass = 0.0f;
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects

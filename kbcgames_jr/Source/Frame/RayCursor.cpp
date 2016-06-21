@@ -71,7 +71,9 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (KEYDOWN(diks, DIK_SPACE) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A)) {
+		if (KEYDOWN(diks, DIK_SPACE) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A) 
+			&& STAGEMANEGER->GetStage()->GetWind()->GetState() != STAGEMANEGER->GetStage()->GetWind()->State_DecideYPower)
+		{
 			//レイを飛ばしてデブリを生成する座標を決める。
 
 			start.x = pos.x;

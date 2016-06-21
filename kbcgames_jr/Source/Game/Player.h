@@ -19,6 +19,12 @@ public:
 		StateWalk,
 		StateFly,
 	};
+	enum PlayerAnim{
+		PlayerAnim_Stand,
+		PlayerAnim_Walk,
+		PlayerAnim_Run,
+		PlayerAnim_Jump,
+	};
 	CPlayer(){}
 	~CPlayer();
 	void Initialize()override;
@@ -70,6 +76,10 @@ public:
 	State GetState()
 	{
 		return state;
+	}
+	PlayerAnim SetAnime()
+	{
+
 	}
 	void JumpAnime();
 	void Pos2D();
