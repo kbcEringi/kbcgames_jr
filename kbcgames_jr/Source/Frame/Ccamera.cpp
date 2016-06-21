@@ -14,7 +14,7 @@ void Ccamera::Initialize()
 	m_Distance = 7.0f;
 	m_vFovy = D3DXToRadian(45.0f);
 	m_vAspect = 960.0f / 580.0f;
-	m_vNear = 5.0f;
+	m_vNear = 1.0f;
 	m_vFar = 1000.0f;
 	Volume = DEFAULT_VOLUME;
 	targetVolume = DEFAULT_VOLUME;

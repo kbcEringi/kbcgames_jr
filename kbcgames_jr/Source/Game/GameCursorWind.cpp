@@ -56,6 +56,7 @@ CGameCursorWind::~CGameCursorWind()
 void CGameCursorWind::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Arrow.x");
+
 	m_position.x = 0.0f;
 	m_position.y = 5.0f;
 	m_position.z = 0.0f;

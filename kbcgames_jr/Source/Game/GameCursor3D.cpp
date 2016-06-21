@@ -8,7 +8,7 @@ CGameCursor3D::~CGameCursor3D()
 void CGameCursor3D::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Cursor3D.x");
-	m_SkinModel.SetLuminance(true);
+	//m_SkinModel.SetLuminance(true);
 
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;

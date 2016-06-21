@@ -214,12 +214,13 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 	}
 	color.xyz += t;
 	//アルファに輝度を埋め込む
-	if (isLuminance){
+	/*if (isLuminance){
 		color.a = CalcLuminance(color.xyz);
 	}
 	else{
 		color.a = 1.0f;
-	}
+	}*/
+
 	return color;
 
 }

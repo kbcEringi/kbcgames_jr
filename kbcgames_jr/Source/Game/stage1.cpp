@@ -148,7 +148,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒXƒe[ƒW‚P‚ð•`‰æ
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒ|ƒCƒ“ƒ^•`‰æ
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Player‚ð•`‰æ
-	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	//m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
 	{
@@ -194,7 +194,7 @@ void CStage1::CreateCollision3D()
 			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
-			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
+			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, collision.pos.z));
 			float mass = 0.0f;
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects

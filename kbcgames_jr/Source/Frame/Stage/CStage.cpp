@@ -26,19 +26,22 @@ void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
 			m_camera.RotTransversal(0.05f);
 		}
 	}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
+	if (m_GCursorWind.GetState() == m_GCursorWind.State_Hide)
 	{
-		GAMEFLG->Set2D();
-		m_camera.Set2DProj();
-		Remove3DRigidBody(araySize3D);
-		Add2DRigidBody(araySize2D);
-	}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
-	{
-		GAMEFLG->Set3D();
-		m_camera.Set3DProj();
-		Remove2DRigidBody(araySize2D);
-		Add3DRigidBody(araySize3D);
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_LEFT_SHOULDER) && !GAMEFLG->Getflg())
+		{
+			GAMEFLG->Set2D();
+			m_camera.Set2DProj();
+			Remove3DRigidBody(araySize3D);
+			Add2DRigidBody(araySize2D);
+		}
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_RIGHT_SHOULDER) && GAMEFLG->Getflg())
+		{
+			GAMEFLG->Set3D();
+			m_camera.Set3DProj();
+			Remove2DRigidBody(araySize2D);
+			Add3DRigidBody(araySize3D);
+		}
 	}
 }
 
