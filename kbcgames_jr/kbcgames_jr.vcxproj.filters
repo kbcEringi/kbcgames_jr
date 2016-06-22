@@ -122,7 +122,7 @@
       <Filter>Game\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Source\Frame\BloomRender.cpp">
-      <Filter>Frame\Bloom</Filter>
+      <Filter>Frame\Render</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Movefloor.cpp">
       <Filter>Game\Gimmick</Filter>
@@ -156,6 +156,15 @@
     </ClCompile>
     <ClCompile Include="Source\Frame\Audio.cpp">
       <Filter>Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frame\DepthField.cpp">
+      <Filter>Frame\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\FlowerManager.cpp">
+      <Filter>Game\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\CFlower.cpp">
+      <Filter>Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,7 +310,7 @@
       <Filter>Frame\graphic</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\BloomRender.h">
-      <Filter>Frame\Bloom</Filter>
+      <Filter>Frame\Render</Filter>
     </ClInclude>
     <ClInclude Include="Source\Frame\haba.h">
       <Filter>Frame</Filter>
@@ -335,6 +344,15 @@
     </ClInclude>
     <ClInclude Include="Source\Frame\Audio.h">
       <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Frame\DepthField.h">
+      <Filter>Frame\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\FlowerManager.h">
+      <Filter>Game\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\CFlower.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -374,7 +392,7 @@
     <Filter Include="Frame\particle">
       <UniqueIdentifier>{71d98cfd-dc2a-4063-b2a2-4b04712a2ca1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Frame\Bloom">
+    <Filter Include="Frame\Render">
       <UniqueIdentifier>{40cfc408-7a34-4fdc-8f2b-573621722750}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

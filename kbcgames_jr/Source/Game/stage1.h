@@ -18,7 +18,7 @@
 #include"..\Frame\CGamepad.h"
 #include"..\Frame\CGimmickManager.h"
 
-
+#include"FlowerManager.h"
 
 class CAudio;
 class C3DObject;
@@ -50,6 +50,7 @@ private:
 	CGoal m_goal;
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;
+	FlowerManager m_flower;
 
 	bool anime;
 };
