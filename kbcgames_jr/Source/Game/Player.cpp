@@ -31,7 +31,7 @@ void CPlayer::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 
-	m_position.x = 0.0f;				//X座標
+	m_position.x =0.0f;				//X座標
 	m_position.y = 8.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
@@ -66,7 +66,7 @@ void CPlayer::Initialize()
 	D3DXVECTOR4 dir = D3DXVECTOR4(-0.75f, -0.75f, -0.75f, 1.0f);
 	D3DXVec4Normalize(&dir, &dir);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
-	m_SkinModel.SetAnimation(PlayerAnim_Stand);//スタンドアニメーション
+	SetAnime(PlayerAnim_Stand);//スタンドアニメーション
 	m_SkinModel.SetAnimationEndTime(PlayerAnim_Run, 0.8f);	
 	currentAnimation = false;//アニメーションしていない
 }
@@ -74,6 +74,7 @@ void CPlayer::Initialize()
 void CPlayer::Update()
 {
 	m_pAudio->Run();
+
 
 	if (state == StateWalk)
 	{
@@ -88,7 +89,7 @@ void CPlayer::Update()
 			STAGEMANEGER->GetStage()->GetPointa()->SetDraw(false);
 			if (currentAnimation == true)//アニメーションしているなら止まる
 			{
-				m_SkinModel.SetAnimation(PlayerAnim_Stand);//止まっている
+				SetAnime(PlayerAnim_Stand);//止まっている
 				currentAnimation = false;
 				m_pAudio->StopCue("run");
 			}
@@ -147,7 +148,7 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 
 	if (currentAnimation == false)
 	{
-		m_SkinModel.SetAnimation(PlayerAnim_Run);//走るアニメーション
+		SetAnime(PlayerAnim_Run);//走るアニメーション
 		currentAnimation = true;
 	}
 
@@ -215,7 +216,7 @@ void CPlayer::Died()
 	if (m_position.y <= -5.0)
 	{
 		m_died = true;
-		if (m_position.y <= -10.0f)
+		if (m_position.y <= -15.0f)
 		{
 			m_position.x = 0.0f;				//X座標
 			m_position.y = 8.0f;				//Y座標
@@ -274,4 +275,15 @@ void CPlayer::StopDied()
 {
 	m_pAudio->StopCue("yuni-");
 	m_pAudio->StopCue("fall");
+}
+void CPlayer::SetAnime(PlayerAnim anime)
+{
+		m_SkinModel.SetAnimation(anime);
+		this->anime = anime;
+}
+
+void CPlayer::GoalAnime()
+{
+		m_SkinModel.SetAnimation(PlayerAnim_Jump);
+		this->anime = anime;
 }

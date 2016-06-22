@@ -49,7 +49,7 @@ void CStage::Update()
 {
 	m_Player.Died();
 
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))//B‚ª‰Ÿ‚³‚ê‚½ê‡
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) && STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly)//B‚ª‰Ÿ‚³‚ê‚½ê‡
 	{
 		if (GAMEFLG->Getflg() == true)//2D‚Ìê‡
 		{

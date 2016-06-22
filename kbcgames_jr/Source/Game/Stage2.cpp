@@ -112,43 +112,40 @@ void CStage2::Update()
 	//else{
 	//	m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
 	//}
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
-	{
-		if (GAMEFLG->Getflg() == true)
-		{
-			m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-		}
-		else
-		{
-			m_camera.SetLookat(m_GameCursor3D.GetPos());//Playerを追いかけるカメラ
-		}
-	}
-	else
-	{
-		m_camera.SetLookat(m_Player.GetPosition());//Playerを追いかけるカメラ
-	}
+	
 
+	m_pAudio->Run();	//周期タスク実行
 	m_camera.Update();
-	CStage::Update();
+
 	m_Player.Update();//プレイヤー
-	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(1.5f, 2.0f, 0.0f);
-	//g_Shadow.SetLightPosition(lightPos);
+
+	CStage::Update();
+
+
+
+	D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
+	g_Shadow.SetLightPosition(lightPos);
 	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 	D3DXVec3Normalize(&lightDir, &lightDir);
-	//g_Shadow.SetLightDirection(lightDir);
+	g_Shadow.SetLightDirection(lightDir);
 	m_Ground2.Update();//地面
 
+	//
 	m_gimmick.Update();
 
 	m_pointa.Update();//ポインタ
 	m_GameCursor.Update();//ゲームカーソル
-	m_GCursorWind.Update();//ゲームカーソルかぜ　
+	m_GCursorWind.Update();//ゲームカーソルかぜ
 	m_Back1.Update();
-	m_Goal.Update();//ゴール
+
 	m_GameCursor3D.Update();//ゲームカーソル３D
+
+
 
 	//レイカーソルに値をセット
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+
+	//m_goal.Update();
 
 }
 

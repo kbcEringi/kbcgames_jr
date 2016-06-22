@@ -76,16 +76,23 @@ void CGameCursorWind::Update()
 		return;
 	}
 	//止まっているとき
-	if (state == State_Hide)
+	//if (state == State_Hide)
+	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly)
 	{
-
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)
+			&& STAGEMANEGER->GetStage()->GetPlayer()->GetAnime() != CPlayer::PlayerAnim_Run)
 		{
 			angle[0] = 0.0f;
 			angle[1] = 0.0f;
-			//Ray();
 			state = State_DecideYPower;
-			STAGEMANEGER->GetStage()->GetCamera()->SetTarget(TARGET_VOLUME);
+			if (GAMEFLG->Getflg() == true)
+			{
+				STAGEMANEGER->GetStage()->GetCamera()->SetTarget(TARGET_VOLUME);
+			}
+			else{
+				STAGEMANEGER->GetStage()->GetCamera()->SetTarget(DEFAULT_VOLUME);
+			}
+			
 		}
 	}
 	//Y方向
@@ -98,7 +105,7 @@ void CGameCursorWind::Update()
 			if (!GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)){
 				state = State_Hide;
 				STAGEMANEGER->GetStage()->GetCamera()->SetTarget(DEFAULT_VOLUME);
-				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
+				STAGEMANEGER->GetStage()->GetPlayer()->SetState(CPlayer::StateFly);
 				WindPower();//風に力を
 				Position2D();//2Dのポジションに変換
 				
@@ -117,7 +124,7 @@ void CGameCursorWind::Update()
 				STAGEMANEGER->GetStage()->GetCursor3D()->SetState(STAGEMANEGER->GetStage()->GetCursor3D()->nonselect);
 				STAGEMANEGER->GetStage()->GetCursor()->SetState(STAGEMANEGER->GetStage()->GetCursor()->view);
 				state = State_Hide;
-				STAGEMANEGER->GetStage()->GetPlayer()->SetState(STAGEMANEGER->GetStage()->GetPlayer()->StateFly);
+				STAGEMANEGER->GetStage()->GetPlayer()->SetState(CPlayer::StateFly);
 				WindPower();//風に力を
 				Position2D();//2Dのポジションに変換
 				m_Cursol2Dpos.x = WINDOW_WIDTH * 0.5f;
@@ -127,14 +134,9 @@ void CGameCursorWind::Update()
 				STAGEMANEGER->GetStage()->GetPlayer()->SetJumpAudio();//ジャンプ音声
 			}
 			else{
-				/*if (GAMEPAD(CGamepad)->GetTriggerL() > 128)
-				{
-				RotScalY();//回転と拡大
-				}*/
 				D3DXVECTOR3 v0, v1, v2;
 				v0 = STAGEMANEGER->GetStage()->GetCursor3D()->GetPos();//カーソルの位置
 				v1 = m_position;//現在の風カーソル位置
-				//v1 = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
 				v2 = v0 - v1;
 				float length;
 				length = D3DXVec3Length(&v2);
@@ -166,26 +168,28 @@ void CGameCursorWind::Update()
 void CGameCursorWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	D3DXMATRIX mTmp;
-	//D3DXMatrixIdentity(&m_matRot);
-	if (GAMEFLG->Getflg() == true)
+	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly)
 	{
-		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-		D3DXMatrixRotationY(&m_matRot, angle[0]);
-		D3DXVECTOR3 v(m_matRot.m[2][0], m_matRot.m[2][1], m_matRot.m[2][2]);
-		D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
-		m_matWorld = mScale * m_matRot * mTmp * m_matWorld;
-	}
-	else//3D
-	{
-		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+		if (GAMEFLG->Getflg() == true)
+		{
+			D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
+			D3DXMatrixRotationY(&m_matRot, angle[0]);
+			D3DXVECTOR3 v(m_matRot.m[2][0], m_matRot.m[2][1], m_matRot.m[2][2]);
+			D3DXMatrixRotationAxis(&mTmp, &v, angle[1]);
+			m_matWorld = mScale * m_matRot * mTmp * m_matWorld;
+		}
+		else//3D
+		{
+			D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 
-		D3DXMATRIX mRot, mTmp, mRot2;
-		D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);
-		m_matWorld = mScale * mRot * m_matWorld;
-	}
-	if (state != State_Hide)
-	{
-		m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
+			D3DXMATRIX mRot, mTmp, mRot2;
+			D3DXMatrixRotationAxis(&mRot, &vAxis, angle[2]);
+			m_matWorld = mScale * mRot * m_matWorld;
+		}
+		if (state != State_Hide)
+		{
+			m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
+		}
 	}
 }
 

@@ -25,7 +25,10 @@ public:
 		PlayerAnim_Run,
 		PlayerAnim_Jump,
 	};
-	CPlayer(){}
+	CPlayer()
+	{
+		anime = PlayerAnim_Stand;
+	}
 	~CPlayer();
 	void Initialize()override;
 	void Update()override;
@@ -77,9 +80,9 @@ public:
 	{
 		return state;
 	}
-	PlayerAnim SetAnime()
+	PlayerAnim GetAnime()
 	{
-
+		return anime;
 	}
 	void JumpAnime();
 	void Pos2D();
@@ -95,8 +98,11 @@ public:
 	{
 		return m_died;
 	}
+	void SetAnime(PlayerAnim anime);
+	void GoalAnime();
 private:
 	State state;
+	PlayerAnim anime;
 	D3DXVECTOR3 m_position2D;
 	D3DXVECTOR3 m_position;
 	LPD3DXMESH m_mesh;
