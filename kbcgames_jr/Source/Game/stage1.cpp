@@ -72,7 +72,7 @@ void CStage1::Initialize()
 	this->Add3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
-	m_flower.InitFlower(flower, ARRAYSIZE(flower));
+	//m_flower.InitFlower(flower, ARRAYSIZE(flower));
 }
 
 void CStage1::Update()
