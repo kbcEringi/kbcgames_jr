@@ -213,6 +213,8 @@ void C3DDraw::UpdateWorldMatrix(D3DXMATRIX worldMatrix)
 /*
 *第一引数　ワールドマトリクス（自分の位置）
 *第二引数　ビューマトリクス（カメラの位置）
+*第三引数　プロジェクションマトリクス
+*第四引数　ローテーションマトリクス
 */
 void C3DDraw::Draw(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix, D3DXMATRIX rot)
 {

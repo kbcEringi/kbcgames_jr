@@ -19,7 +19,6 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
-	//void Select();
 private:
 
 	CAudio* m_pAudio;

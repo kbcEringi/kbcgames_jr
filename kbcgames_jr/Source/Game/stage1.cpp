@@ -21,6 +21,10 @@ SGimmickData gimmick2dobj[] = {
 #include"..\Game\Gimmick2D_stage1.h"
 };
 
+SFlower flower[] = {
+#include"Flower_stage1.h"
+};
+
 void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
@@ -68,6 +72,7 @@ void CStage1::Initialize()
 	this->Add3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
+	m_flower.InitFlower(flower, ARRAYSIZE(flower));
 }
 
 void CStage1::Update()
@@ -157,6 +162,7 @@ void CStage1::Draw()
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒ|ƒCƒ“ƒ^•`‰æ
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Player‚ğ•`‰æ
 	//m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	//m_flower.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
 	{

@@ -16,7 +16,7 @@
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
 #include"..\Frame\CGimmickManager.h"
-
+#include"FlowerManager.h"
 #include"Goal.h"
 
 class CAudio;
@@ -49,5 +49,6 @@ private:
 	CGoal m_goal;
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;
+	FlowerManager m_flower;
 
 };

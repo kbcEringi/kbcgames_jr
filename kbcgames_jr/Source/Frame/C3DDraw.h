@@ -95,6 +95,8 @@ public:
 	/*
 	*第一引数　ワールドマトリクス（自分の位置）
 	*第二引数　ビューマトリクス（カメラの位置）
+	*第三引数　プロジェクションマトリクス
+	*第四引数　ローテーションマトリクス
 	*/
 	void Draw(D3DXMATRIX, D3DXMATRIX, D3DXMATRIX,D3DXMATRIX);
 	void DrawFrame(
