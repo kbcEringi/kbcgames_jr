@@ -1,4 +1,4 @@
-#include "Stage2.h"
+#include "Stage3.h"
 #include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
@@ -22,7 +22,7 @@ SCollisionInfo collision2InfoTable2D[] = {
 //#include"..\Game\Gimmick2DInfo.h"
 //};
 
-void CStage2::Initialize()
+void CStage3::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
@@ -38,7 +38,7 @@ void CStage2::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
-	m_Ground2.Initialize();
+	m_Ground3.Initialize();
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 	m_pointa.Initialize();
@@ -69,7 +69,7 @@ void CStage2::Initialize()
 	//m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 }
 
-void CStage2::Update()
+void CStage3::Update()
 {
 	
 	GAMEPAD(CGamepad)->UpdateControllerState();
@@ -128,7 +128,7 @@ void CStage2::Update()
 	D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 	D3DXVec3Normalize(&lightDir, &lightDir);
 	g_Shadow.SetLightDirection(lightDir);
-	m_Ground2.Update();//’n–Ê
+	m_Ground3.Update();//’n–Ê
 
 	//
 	m_gimmick.Update();
@@ -149,11 +149,11 @@ void CStage2::Update()
 
 }
 
-void CStage2::Draw()
+void CStage3::Draw()
 {
 	//g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	m_Ground2.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒXƒe[ƒW‚P‚ð•`‰æ
+	m_Ground3.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒXƒe[ƒW‚P‚ð•`‰æ
 	m_Goal.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒS[ƒ‹
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒ|ƒCƒ“ƒ^•`‰æ
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Player‚ð•`‰æ
@@ -186,7 +186,7 @@ void CStage2::Draw()
 
 }
 
-void CStage2::CreateCollision3D()
+void CStage3::CreateCollision3D()
 {
 	int arraySize = ARRAYSIZE(collision2InfoTable3D);
 	if (arraySize >= MAX_COLLISION)
@@ -217,7 +217,7 @@ void CStage2::CreateCollision3D()
 	}
 }
 
-void CStage2::CreateCollision2D()
+void CStage3::CreateCollision2D()
 {
 	int arraySize = ARRAYSIZE(collision2InfoTable2D);
 	if (arraySize >= MAX_COLLISION)
