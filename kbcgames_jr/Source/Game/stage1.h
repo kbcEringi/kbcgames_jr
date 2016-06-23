@@ -4,20 +4,21 @@
 #include"..\Frame\Stage\CStage.h"
 
 #include"..\Frame\DXCommon.h"
-#include "..\Frame\RayCursor.h"//カーソル
+
 
 /********オブジェクト2D********/
 /********オブジェクト3D********/
+#include "..\Frame\RayCursor.h"//カーソル
 #include"..\Frame\C3DObject.h"
 #include "Ground.h"
-
+#include"Goal.h"
 #include "Stage1Back.h"
 
 #include"..\BulletPhysics\BulletPhysics.h"
 #include"..\Frame\CGamepad.h"
 #include"..\Frame\CGimmickManager.h"
+
 #include"FlowerManager.h"
-#include"Goal.h"
 
 class CAudio;
 class C3DObject;
@@ -50,5 +51,4 @@ private:
 	//ギミックManager
 	CGimmickManager m_gimmick;
 	FlowerManager m_flower;
-
 };

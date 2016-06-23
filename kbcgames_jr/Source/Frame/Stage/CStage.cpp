@@ -49,7 +49,9 @@ void CStage::Update()
 {
 	m_Player.Died();
 
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))//Bが押された場合
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) 
+		&& STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly
+		&& STAGEMANEGER->GetStage()->GetPlayer()->GetAnime() != CPlayer::PlayerAnim_Run)//Bが押された場合&飛んでないとき&走っていないとき
 	{
 		if (GAMEFLG->Getflg() == true)//2Dの場合
 		{
@@ -75,7 +77,7 @@ void CStage::Update()
 	else//通常の場合
 	{
 		//死亡した場合のカメラ切り替え
-		if (STAGEMANEGER->GetStage()->GetPlayer()->GetDied() == true)
+		if (m_Player.GetDied() == true)
 		{
 			if (isDied == false)
 			{
@@ -92,8 +94,8 @@ void CStage::Update()
 			{
 				m_Player.StopDied();
 				//初期化
-				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_GCursorWind.Get2DPosition());
 				m_pointa.SetPos(&m_Player.GetPosition());//ポインタ位置初期化
+				m_GameCursor.SetPos(m_GCursorWind.Get2DPosition());
 				m_camera.RotLongitudinal(D3DXToRadian(-20.0f));//カメラ初期回転位置
 			}
 			isDied = false;

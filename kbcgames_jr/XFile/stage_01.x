@@ -70865,7 +70865,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Github\\kbcgames_jr\\kbcgames_jr\\Texture\\Cube earth.tga";
+    "Cube earth.tga";
    }
   }
   Material {
@@ -70880,7 +70880,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Github\\kbcgames_jr\\kbcgames_jr\\Texture\\Cube earth.tga";
+    "Cube earth.tga";
    }
   }
  }

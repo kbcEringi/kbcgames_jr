@@ -113,9 +113,11 @@ void CStage1::Update()
 		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
 
+		m_Player.Update();//プレイヤー
+
 		CStage::Update();
 
-		m_Player.Update();//プレイヤー
+		
 
 		D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
 		g_Shadow.SetLightPosition(lightPos);
@@ -124,11 +126,12 @@ void CStage1::Update()
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground.Update();//地面
 
+		//
 		m_gimmick.Update();
 
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
-		m_GCursorWind.Update();//ゲームカーソルかぜ　
+		m_GCursorWind.Update();//ゲームカーソルかぜ
 		m_Back1.Update();
 
 		m_GameCursor3D.Update();//ゲームカーソル３D
@@ -143,15 +146,20 @@ void CStage1::Update()
 	else if (m_goal.GetGoal() == true)
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
-		m_Player.Update();//プレイヤー
+		m_Player.StopRunAudio();
+		m_Player.Update();
+		m_goal.Update();
+		m_Player.SetState(CPlayer::StateGoal);
+
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
 		{
 			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
 			STAGEMANEGER->SelectStage(2);
 		}
+		GAMEPAD(CGamepad)->UpdateControllerState();
 	}
-
+	
 }
 
 void CStage1::Draw()
@@ -239,7 +247,7 @@ void CStage1::CreateCollision2D()
 			m_groundShape[i] = new btBoxShape(btVector3(collision.scale.x*0.5f, collision.scale.y*0.5f, collision.scale.z*0.5f));
 			btTransform groundTransform;
 			groundTransform.setIdentity();
-			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, collision.pos.z));
+			groundTransform.setOrigin(btVector3(-collision.pos.x, collision.pos.y, -collision.pos.z));
 			float mass = 0.0f;
 
 			//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects

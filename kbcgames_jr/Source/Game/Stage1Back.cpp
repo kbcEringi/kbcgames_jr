@@ -1,5 +1,6 @@
 #include "Stage1Back.h"
 #include"CGameFlg.h"
+#include "..\Frame\Stage\CStageManager.h"
 
 CStage1Back::~CStage1Back()
 {
@@ -24,6 +25,7 @@ void CStage1Back::Initialize()
 	m_SkinModel.GetLight()->m_diffuseLightDirection[4] = D3DXVECTOR4(0, 0, 0, 0);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[5] = D3DXVECTOR4(0, 0, 0, 0);
 	D3DXMatrixPerspectiveFovLH(&proj, D3DXToRadian(45.0f), 960.0f / 580.0f, 1.0f, 10000.0f);
+	m_targetPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	
 }
 void CStage1Back::Update()
@@ -41,14 +43,12 @@ void CStage1Back::Update()
 void CStage1Back::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	if (m_pPlayer != NULL)
+	if (m_pPlayer != NULL && STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateGoal)
 	{
-		D3DXMatrixTranslation(&m_matWorld, m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y - m_position.y, m_pPlayer->GetPosition().z);
+		m_targetPosition = m_pPlayer->GetPosition();
+		
 	}
-	else
-	{
-		D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
-	}
+	D3DXMatrixTranslation(&m_matWorld, m_targetPosition.x, m_targetPosition.y - m_position.y, m_targetPosition.z);
 	m_SkinModel.Draw(m_matWorld, view, this->proj, m_matRot);
 	(*graphicsDevice()).SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
