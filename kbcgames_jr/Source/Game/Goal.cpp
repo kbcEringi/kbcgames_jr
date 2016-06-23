@@ -45,6 +45,7 @@ void CGoal::Update()
 			exit(0);*/
 			goalflag = true;
 			m_pAudio->PlayCue("goal");
+
 		}
 	}
 	else
