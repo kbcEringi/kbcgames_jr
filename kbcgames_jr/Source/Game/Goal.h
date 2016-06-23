@@ -3,6 +3,8 @@
 #include"..\Frame\DXCommon.h"
 #include"..\Frame\C3DObject.h"
 #include"..\BulletPhysics\BulletPhysics.h"
+#include "..\Frame\particle\CParticleEmitter.h"
+#include"..\Frame\CRandom.h"
 
 extern void CalcAABBSizeFromMesh(LPD3DXMESH mesh, D3DXVECTOR3& min, D3DXVECTOR3& max);
 
@@ -32,4 +34,7 @@ private:
 
 	CAudio* m_pAudio;
 	bool goalflag;
+
+	CRandom random;
+	CParticleEmitter emi;//パーティクル
 };
