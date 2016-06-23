@@ -34,7 +34,6 @@ void CGameCursor::Move()
 
 	const float LENGTH = 360.0f;
 
-	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
 		if (KEYDOWN(diks, DIK_RIGHT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()>0)//‰E
@@ -69,4 +68,7 @@ void CGameCursor::Move()
 		v *= LENGTH;
 		vec3Position = STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos() + v;
 	}
+
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }
