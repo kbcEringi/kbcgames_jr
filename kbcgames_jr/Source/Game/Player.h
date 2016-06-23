@@ -18,6 +18,7 @@ public:
 	enum State{
 		StateWalk,
 		StateFly,
+		StateGoal,
 	};
 	enum PlayerAnim{
 		PlayerAnim_Stand,
@@ -94,6 +95,8 @@ public:
 	void StopHit();
 	void SetDied();
 	void StopDied();
+	void SetRetry();
+	void StopRetry();
 	bool GetDied()
 	{
 		return m_died;
@@ -101,11 +104,11 @@ public:
 	void SetAnime(PlayerAnim anime);
 	void GoalAnime();
 private:
-	State state;
-	PlayerAnim anime;
-	D3DXVECTOR3 m_position2D;
-	D3DXVECTOR3 m_position;
-	LPD3DXMESH m_mesh;
+	State state;//プレイヤーに状態
+	PlayerAnim anime;//アニメーションの状態
+	D3DXVECTOR3 m_position2D;//2Dポジション
+	D3DXVECTOR3 m_position;//３Dポジション
+	LPD3DXMESH m_mesh;//メッシュ
 	D3DXVECTOR3 m_moveSpeed;		//移動速度
 	D3DXVECTOR3 m_applyForce;		//外部から受けた力。
 	CIsIntersect m_IsIntersect;		//あたり判定

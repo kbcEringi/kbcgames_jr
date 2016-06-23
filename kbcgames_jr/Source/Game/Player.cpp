@@ -31,7 +31,7 @@ void CPlayer::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 
-	m_position.x =0.0f;				//X座標
+	m_position.x =250.0f;				//X座標
 	m_position.y = 8.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
@@ -96,7 +96,19 @@ void CPlayer::Update()
 			
 		}
 	}
-
+	if (state == StateGoal)
+	{
+		if (anime == PlayerAnim_Run)//もし走っているならアニメーションストップ
+		{
+			currentAnimation = false;
+		}
+		//ゴールしたらジャンプをする
+		if (currentAnimation == false)
+		{
+			GoalAnime();//ゴールアニメーション
+			currentAnimation = true;
+		}
+	}
 	
 	m_moveSpeed += m_applyForce;
 	m_applyForce.x = 0.0f;
@@ -146,7 +158,7 @@ void CPlayer::Move(D3DXVECTOR3 pos)//移動
 	bool isTurn = false;
 	const float MOVESPEED = 5.0f;
 
-	if (currentAnimation == false)
+	if (currentAnimation == false && state != StateGoal)
 	{
 		SetAnime(PlayerAnim_Run);//走るアニメーション
 		currentAnimation = true;
@@ -213,10 +225,11 @@ void CPlayer::Pos2D()
 
 void CPlayer::Died()
 {
-	if (m_position.y <= -5.0)
+	if (m_position.y <= -5.0)//死亡判定位置
 	{
+		StopHit();
 		m_died = true;
-		if (m_position.y <= -15.0f)
+		if (m_position.y <= -15.0f)//この位置にきたら初期位置に戻す
 		{
 			m_position.x = 0.0f;				//X座標
 			m_position.y = 8.0f;				//Y座標
@@ -276,14 +289,25 @@ void CPlayer::StopDied()
 	m_pAudio->StopCue("yuni-");
 	m_pAudio->StopCue("fall");
 }
-void CPlayer::SetAnime(PlayerAnim anime)
+
+
+void CPlayer::SetRetry()
 {
-		m_SkinModel.SetAnimation(anime);
-		this->anime = anime;
+	m_pAudio->PlayCue("mokkai");
+}
+
+void CPlayer::StopRetry()
+{
+	m_pAudio->StopCue("mokkai");
 }
 
 void CPlayer::GoalAnime()
 {
-		m_SkinModel.SetAnimation(PlayerAnim_Jump);
+	SetAnime(PlayerAnim_Jump);
+}
+
+void CPlayer::SetAnime(PlayerAnim anime)//アニメーションセット
+{
+		m_SkinModel.SetAnimation(anime);
 		this->anime = anime;
 }

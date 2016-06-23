@@ -51,6 +51,4 @@ private:
 	//ƒMƒ~ƒbƒNManager
 	CGimmickManager m_gimmick;
 	FlowerManager m_flower;
-
-	bool anime;
 };

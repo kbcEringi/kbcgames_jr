@@ -71,8 +71,6 @@ void CStage1::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 
-	anime = false;
-
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 	//m_flower.InitFlower(flower, ARRAYSIZE(flower));
 }
@@ -147,14 +145,10 @@ void CStage1::Update()
 	}
 	else if (m_goal.GetGoal() == true)
 	{
-		m_pAudio->StopCue("stage1");	//ステージ音楽再生.
+		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		m_Player.StopRunAudio();
 		m_Player.Update();
-		if (anime == false)
-		{
-			m_Player.GoalAnime();
-			anime = true;
-		}
+		m_Player.SetState(CPlayer::StateGoal);
 
 		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
 		{

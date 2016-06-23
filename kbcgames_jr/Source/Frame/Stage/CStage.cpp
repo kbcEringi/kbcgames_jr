@@ -49,7 +49,9 @@ void CStage::Update()
 {
 	m_Player.Died();
 
-	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) && STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly)//B‚ª‰Ÿ‚³‚ê‚½ê‡
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) 
+		&& STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly
+		&& STAGEMANEGER->GetStage()->GetPlayer()->GetAnime() != CPlayer::PlayerAnim_Run)//B‚ª‰Ÿ‚³‚ê‚½ê‡&”ò‚ñ‚Å‚È‚¢‚Æ‚«&‘–‚Á‚Ä‚¢‚È‚¢‚Æ‚«
 	{
 		if (GAMEFLG->Getflg() == true)//2D‚Ìê‡
 		{

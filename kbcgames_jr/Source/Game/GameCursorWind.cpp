@@ -77,10 +77,10 @@ void CGameCursorWind::Update()
 	}
 	//Ž~‚Ü‚Á‚Ä‚¢‚é‚Æ‚«
 	//if (state == State_Hide)
-	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly)
+	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly
+		&& STAGEMANEGER->GetStage()->GetPlayer()->GetAnime() != CPlayer::PlayerAnim_Run)
 	{
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B)
-			&& STAGEMANEGER->GetStage()->GetPlayer()->GetAnime() != CPlayer::PlayerAnim_Run)
+		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B))
 		{
 			angle[0] = 0.0f;
 			angle[1] = 0.0f;
