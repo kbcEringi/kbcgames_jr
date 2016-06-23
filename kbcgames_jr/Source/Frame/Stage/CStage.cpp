@@ -77,7 +77,7 @@ void CStage::Update()
 	else//通常の場合
 	{
 		//死亡した場合のカメラ切り替え
-		if (STAGEMANEGER->GetStage()->GetPlayer()->GetDied() == true)
+		if (m_Player.GetDied() == true)
 		{
 			if (isDied == false)
 			{
@@ -94,8 +94,8 @@ void CStage::Update()
 			{
 				m_Player.StopDied();
 				//初期化
-				STAGEMANEGER->GetStage()->GetCursor()->SetPos(m_GCursorWind.Get2DPosition());
 				m_pointa.SetPos(&m_Player.GetPosition());//ポインタ位置初期化
+				m_GameCursor.SetPos(m_GCursorWind.Get2DPosition());
 				m_camera.RotLongitudinal(D3DXToRadian(-20.0f));//カメラ初期回転位置
 			}
 			isDied = false;
