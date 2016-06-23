@@ -6,7 +6,7 @@ CGround4::~CGround4()
 
 void CGround4::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\Stage10.x");
+	m_SkinModel.Initialize("XFile\\Stage4.x");
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;
