@@ -1,5 +1,6 @@
 #include"TitleScene.h"
 #include "..\Frame\Audio.h"
+#include"..\Frame\Stage\CStageManager.h"
 
 
 void CTitleScene::Initialize()
@@ -61,7 +62,8 @@ void CTitleScene::Select()
 	{
 		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A))
 		{
-			SINSTANCE(CSceneManager)->ChangeScene(SCENE::SELECT);
+			STAGEMANEGER->SelectStage(1);
+			SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
 			m_pAudio->StopCue("title");//タイトル音楽ストップ
 			m_pAudio->PlayCue("start");//スタート
 
@@ -72,7 +74,8 @@ void CTitleScene::Select()
 	{
 		if (KEYDOWN(diks, DIK_RETURN))
 		{
-				SINSTANCE(CSceneManager)->ChangeScene(SCENE::SELECT);
+			STAGEMANEGER->SelectStage(1);
+			SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
 
 				m_pAudio->StopCue("title");//タイトル音楽ストップ
 				m_pAudio->PlayCue("start");//スタート

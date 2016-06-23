@@ -16,7 +16,7 @@ void CSceneManager::Add(CScene* pAdd)
 void CSceneManager::InitializeScene()
 {
 	Add(new CTitleScene("Title"));
-	Add(new CSelectScene("Select"));
+	//Add(new CSelectScene("Select"));
 	Add(new CGameScene("Game"));
 	Add(new CResultScene("Result"));
 	ChangeScene(SCENE::TITLE);

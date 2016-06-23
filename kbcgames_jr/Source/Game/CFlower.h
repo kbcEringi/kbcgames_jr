@@ -1,4 +1,4 @@
-#pragma onec
+#pragma once
 #include"..\Frame\C3DObject.h"
 
 struct SFlower
