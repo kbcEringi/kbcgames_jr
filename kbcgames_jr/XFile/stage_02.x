@@ -42595,7 +42595,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Github\\kbcgames_jr\\kbcgames_jr\\Texture\\Cube grass.tga";
+    "Cube grass.tga";
    }
   }
  }

@@ -30,7 +30,7 @@ CGoal::~CGoal()
 void CGoal::Initialize(D3DXVECTOR3 pos)
 {
 	m_SkinModel.Initialize("XFile\\Goal.x");
-	m_SkinModel.SetLuminance(true, 2.0f);
+	m_SkinModel.SetLuminance(true, 0.05f);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
