@@ -51,7 +51,7 @@ void CStage4::Initialize()
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 
-	m_goal.Initialize(D3DXVECTOR3(172.0f, 16.0f, 0.0f));
+	m_goal.Initialize(D3DXVECTOR3(209.0f, 37.0f, 0.0f));
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);

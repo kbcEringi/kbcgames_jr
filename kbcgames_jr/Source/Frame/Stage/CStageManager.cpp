@@ -46,7 +46,7 @@ void CStageManager::SelectStage(int num)
 #ifdef TEST
 		m_stage = new CStagetest;
 #else
-		m_stage = new CStage1;
+		m_stage = new CStage2;
 #endif
 		break;
 	case 2:
