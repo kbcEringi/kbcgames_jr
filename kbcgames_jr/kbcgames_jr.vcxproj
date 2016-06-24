@@ -121,6 +121,10 @@
     <ClCompile Include="Source\Game\Goal.cpp" />
     <ClCompile Include="Source\Game\Ground.cpp" />
     <ClCompile Include="Source\Game\Ground2.cpp" />
+    <ClCompile Include="Source\Game\Ground3.cpp" />
+    <ClCompile Include="Source\Game\Ground4.cpp" />
+    <ClCompile Include="Source\Game\Ground5.cpp" />
+    <ClCompile Include="Source\Game\Ground6.cpp" />
     <ClCompile Include="Source\Game\Hasu.cpp" />
     <ClCompile Include="Source\Game\LostGround.cpp" />
     <ClCompile Include="Source\Game\Movefloor.cpp" />
@@ -132,6 +136,10 @@
     <ClCompile Include="Source\Game\Stage1.cpp" />
     <ClCompile Include="Source\Game\Stage1Back.cpp" />
     <ClCompile Include="Source\Game\Stage2.cpp" />
+    <ClCompile Include="Source\Game\Stage3.cpp" />
+    <ClCompile Include="Source\Game\Stage4.cpp" />
+    <ClCompile Include="Source\Game\Stage5.cpp" />
+    <ClCompile Include="Source\Game\Stage6.cpp" />
     <ClCompile Include="Source\Game\stagetest.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
@@ -185,6 +193,10 @@
     <ClInclude Include="Source\Game\Goal.h" />
     <ClInclude Include="Source\Game\Ground.h" />
     <ClInclude Include="Source\Game\Ground2.h" />
+    <ClInclude Include="Source\Game\Ground3.h" />
+    <ClInclude Include="Source\Game\Ground4.h" />
+    <ClInclude Include="Source\Game\Ground5.h" />
+    <ClInclude Include="Source\Game\Ground6.h" />
     <ClInclude Include="Source\Game\Hasu.h" />
     <ClInclude Include="Source\Game\LostGround.h" />
     <ClInclude Include="Source\Game\Movefloor.h" />
@@ -196,6 +208,10 @@
     <ClInclude Include="Source\Game\Stage1.h" />
     <ClInclude Include="Source\Game\Stage1Back.h" />
     <ClInclude Include="Source\Game\Stage2.h" />
+    <ClInclude Include="Source\Game\Stage3.h" />
+    <ClInclude Include="Source\Game\Stage4.h" />
+    <ClInclude Include="Source\Game\Stage5.h" />
+    <ClInclude Include="Source\Game\Stage6.h" />
     <ClInclude Include="Source\Game\stagetest.h" />
     <ClInclude Include="Source\Game\Title.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />

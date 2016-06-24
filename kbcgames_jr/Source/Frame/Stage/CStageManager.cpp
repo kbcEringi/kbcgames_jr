@@ -5,6 +5,10 @@ CStageManager* CStageManager::m_pInstance = new CStageManager();
 //ステージインクルード
 #include"..\..\Game\Stage1.h"
 #include"..\..\Game\Stage2.h"
+#include"..\..\Game\Stage3.h"
+#include"..\..\Game\Stage4.h"
+#include"..\..\Game\Stage5.h"
+#include"..\..\Game\Stage6.h"
 #include"..\..\Game\stagetest.h"
 
 //#define TEST
@@ -42,11 +46,23 @@ void CStageManager::SelectStage(int num)
 #ifdef TEST
 		m_stage = new CStagetest;
 #else
-		m_stage = new CStage1;
+		m_stage = new CStage2;
 #endif
 		break;
 	case 2:
 		m_stage = new CStage2;
+		break;
+	case 3:
+		m_stage = new CStage3;
+		break;
+	case 4:
+		m_stage = new CStage4;
+		break;
+	case 5:
+		m_stage = new CStage5;
+		break;
+	case 6:
+		m_stage = new CStage6;
 		break;
 	default:
 		STAGEMANEGER->GetStage()->GetPlayer()->Initialize();

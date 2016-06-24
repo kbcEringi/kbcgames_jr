@@ -6,10 +6,17 @@ CGround5::~CGround5()
 
 void CGround5::Initialize()
 {
-	m_SkinModel.Initialize("XFile\\Stage10.x");
+	m_SkinModel.Initialize("XFile\\stage_05.x");
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;
+	m_SkinModel.GetLight()->m_ambientLight = D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[0] = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, -1.0f, 1.0f);
+	D3DXVECTOR4 dir = D3DXVECTOR4(-0.75f, -0.75f, -0.75f, 1.0f);
+	D3DXVec4Normalize(&dir, &dir);
+	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
 }
 
 void CGround5::Update()
