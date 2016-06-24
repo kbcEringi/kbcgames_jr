@@ -51,4 +51,6 @@ private:
 	//ギミックManager
 	CGimmickManager m_gimmick;
 	FlowerManager m_flower;
+
+	int GoalCount;//ゴール後何フレームか後に次のステージへ
 };
