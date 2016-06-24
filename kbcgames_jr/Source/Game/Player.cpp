@@ -20,7 +20,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Unity.x");	//プレイヤーXファイル
-	m_SkinModel.SetNormalMap("Texture\\utc_nomal.tga");
+	m_SkinModel.SetNormalMap("utc_all2.tga", "Texture\\utc_nomal.tga");
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
 

@@ -165,7 +165,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒXƒe[ƒW‚P‚ğ•`‰æ
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒ|ƒCƒ“ƒ^•`‰æ
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Player‚ğ•`‰æ
-	//m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	//m_flower.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
