@@ -6,19 +6,19 @@
 
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include "Collision3D_stage1.h"
+#include "Collision3D_stage01.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
-#include "Collision2D_stage1.h"
+#include "Collision2D_stage01.h"
 };
 
 SGimmickData gimmick3dobj[] = {
-#include"..\Game\Gimmick3D_stage1.h"
+#include"..\Game\Gimmick3D_stage01.h"
 };
 
 SGimmickData gimmick2dobj[] = {
-#include"..\Game\Gimmick2D_stage1.h"
+#include"..\Game\Gimmick2D_stage01.h"
 };
 
 SFlower flower[] = {
@@ -35,7 +35,7 @@ void CStage1::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
@@ -54,7 +54,7 @@ void CStage1::Initialize()
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 	
-	m_goal.Initialize(D3DXVECTOR3(260,0,0));
+	m_goal.Initialize(D3DXVECTOR3(137.0f,12.0f,0.0f));
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);
@@ -73,13 +73,14 @@ void CStage1::Initialize()
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 	//m_flower.InitFlower(flower, ARRAYSIZE(flower));
+
+	GoalCount = 0;
 }
 
 void CStage1::Update()
 {
 	if (m_goal.GetGoal() != true)
 	{
-		GAMEPAD(CGamepad)->UpdateControllerState();
 		if (GAMEPAD(CGamepad)->GetConnected())
 		{
 			ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
@@ -112,32 +113,20 @@ void CStage1::Update()
 
 		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
-
 		m_Player.Update();//プレイヤー
-
 		CStage::Update();
-
-		
-
 		D3DXVECTOR3 lightPos = m_Player.GetPosition() + D3DXVECTOR3(2.0f, 5.0f, 2.0f);
 		g_Shadow.SetLightPosition(lightPos);
 		D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground.Update();//地面
-
-		//
 		m_gimmick.Update();
-
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ
 		m_Back1.Update();
-
 		m_GameCursor3D.Update();//ゲームカーソル３D
-
-
-
 		//レイカーソルに値をセット
 		m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
@@ -147,19 +136,21 @@ void CStage1::Update()
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		m_Player.StopRunAudio();
+		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
 		m_Player.SetState(CPlayer::StateGoal);
+		GoalCount++;
 
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+		if (GoalCount >= 300)
 		{
 			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
 			STAGEMANEGER->SelectStage(2);
 		}
-		GAMEPAD(CGamepad)->UpdateControllerState();
 	}
-	
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }
 
 void CStage1::Draw()
@@ -169,7 +160,7 @@ void CStage1::Draw()
 	m_Ground.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
-	//m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	//m_flower.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)

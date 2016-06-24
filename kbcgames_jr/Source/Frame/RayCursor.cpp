@@ -68,10 +68,10 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 	(*GetKeyDevice()).GetDeviceState(
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
-	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (KEYDOWN(diks, DIK_SPACE) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A) 
+		bool t = GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A);
+		if (KEYDOWN(diks, DIK_SPACE) & 0x80 || GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A)
 			&& STAGEMANEGER->GetStage()->GetWind()->GetState() != STAGEMANEGER->GetStage()->GetWind()->State_DecideYPower)
 		{
 			//レイを飛ばしてデブリを生成する座標を決める。
@@ -174,4 +174,5 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
 	}
+	GAMEPAD(CGamepad)->UpdateControllerState();
 }

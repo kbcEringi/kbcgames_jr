@@ -6,15 +6,15 @@
 SParicleEmitParameter GoalparticleParameterTbl
 {
 	"Texture\\goal_particle.png",	//const char* texturePath;						//!<テクスチャのファイルパス。
-	D3DXVECTOR3(0.0f, 5.0f, 0.0f),		//D3DXVECTOR3	initVelocity;						//!<初速度。
+	D3DXVECTOR3(0.0f, 10.0f, 0.0f),		//D3DXVECTOR3	initVelocity;						//!<初速度。
 	1.5f,							//float		life;								//!<寿命。単位は秒。
-	0.1f,							//float		intervalTime;						//!<発生時間。単位は秒。
-	3.0f,							//float		w;									//!<パーティクルの幅。
-	1.0f,							//float		h;									//!<パーティクルの高さ。
-	D3DXVECTOR3(0.0f, 0.0f, 0.0f),		//D3DXVECTOR3	initPositionRandomMargin;			//!<初期位置のランダム幅。
-	D3DXVECTOR3(1.0f, 0.3f, 1.0f),		//D3DXVECTOR3	initVelocityVelocityRandomMargin;	//!<初速度のランダム幅。
+	0.02f,							//float		intervalTime;						//!<発生時間。単位は秒。
+	0.5,							//float		w;									//!<パーティクルの幅。
+	0.2,							//float		h;									//!<パーティクルの高さ。
+	D3DXVECTOR3(0.5f, 0.0f, 0.5f),		//D3DXVECTOR3	initPositionRandomMargin;			//!<初期位置のランダム幅。
+	D3DXVECTOR3(4.0f, 0.3f, 4.0f),		//D3DXVECTOR3	initVelocityVelocityRandomMargin;	//!<初速度のランダム幅。
 	D3DXVECTOR3(1.0f, 0.5f, 1.0f),	//D3DXVECTOR3	addVelocityRandomMargih;			//!<速度の積分のときのランダム幅。
-	D3DXVECTOR3(0.0f, -1.0f, 0.0f),		//D3DXVECTOR3	gravity;							//!<重力。
+	D3DXVECTOR3(0.0f, -9.8f, 0.0f),		//D3DXVECTOR3	gravity;							//!<重力。
 	true,							//bool		isFade;								//!<死ぬときにフェードアウトする？
 	0.1f,							//float		fadeTime;							//!<フェードする時間。
 	1.0f,							//float		initAlpha;							//!<初期アルファ値。
@@ -48,7 +48,7 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 
 	/*GoalparticleParameterTbl.initPositionRandomMargin = initPositionRandomMargin;
 	GoalparticleParameterTbl.initVelocity = initSpeed * 5;*/
-	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, m_position);
+	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, D3DXVECTOR3(m_position.x+2.5,m_position.y,m_position.z));
 
 	goalflag = false;
 }
