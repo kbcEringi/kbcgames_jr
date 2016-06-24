@@ -29,7 +29,7 @@ CGoal::~CGoal()
 
 void CGoal::Initialize(D3DXVECTOR3 pos)
 {
-	m_SkinModel.Initialize("XFile\\Goal_.x");
+	m_SkinModel.Initialize("XFile\\Goal.x");
 	m_SkinModel.SetLuminance(true, 2.0f);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
@@ -48,7 +48,7 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 
 	/*GoalparticleParameterTbl.initPositionRandomMargin = initPositionRandomMargin;
 	GoalparticleParameterTbl.initVelocity = initSpeed * 5;*/
-	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, m_position);
+	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, D3DXVECTOR3(m_position.x+2.5,m_position.y,m_position.z));
 
 	goalflag = false;
 }
