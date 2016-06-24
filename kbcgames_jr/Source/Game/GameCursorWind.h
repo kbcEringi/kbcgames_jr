@@ -61,4 +61,6 @@ private:
 	btSphereShape* m_sphereColli;
 	btCollisionShape*	m_groundShape;
 	D3DXVECTOR3 m_Cursol2Dpos;
+	bool		m_reqDraw;	//矢印描画のリクエスト
+	bool		m_isDraw;	//矢印描画フラグ。
 };

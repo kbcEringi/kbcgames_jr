@@ -20,7 +20,6 @@ void CSelectCursor::Update()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
-	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
 		if (GAMEPAD(CGamepad)->GetStickL_Y()<0)//↓押されたら
@@ -57,6 +56,9 @@ void CSelectCursor::Update()
 	}
 	m_selectIndex += dir;
 	m_position.y += m_moveDistance * (float)dir;
+
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }
 
 void CSelectCursor::Draw()

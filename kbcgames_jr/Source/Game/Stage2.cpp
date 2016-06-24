@@ -72,7 +72,6 @@ void CStage2::Initialize()
 void CStage2::Update()
 {
 	
-	GAMEPAD(CGamepad)->UpdateControllerState();
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
 		//ƒJƒƒ‰‚ÌØ‚è‘Ö‚¦ˆ—B
@@ -146,6 +145,7 @@ void CStage2::Update()
 	m_Ray.Update(m_GameCursor.GetPosition(), m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 
 	//m_goal.Update();
+	GAMEPAD(CGamepad)->UpdateControllerState();
 
 }
 
