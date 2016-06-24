@@ -25,6 +25,10 @@ SFlower flower[] = {
 #include"Flower_stage1.h"
 };
 
+D3DXVECTOR3 playerpos_stage1 = {
+#include"Player_stage1.h"
+};
+
 void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
@@ -41,6 +45,7 @@ void CStage1::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage1);
 	m_Ground.Initialize();
 
 	m_camera.Initialize();
