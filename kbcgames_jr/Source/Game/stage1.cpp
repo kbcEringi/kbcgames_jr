@@ -6,7 +6,7 @@
 
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include"Collision3D_stage01.h"
+#include "Collision3D_stage01.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
@@ -59,7 +59,7 @@ void CStage1::Initialize()
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 	
-	m_goal.Initialize(D3DXVECTOR3(260,0,0));
+	m_goal.Initialize(D3DXVECTOR3(135,0,0));
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);
@@ -78,6 +78,8 @@ void CStage1::Initialize()
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
 	//m_flower.InitFlower(flower, ARRAYSIZE(flower));
+
+	GoalCount = 0;
 }
 
 void CStage1::Update()
@@ -143,8 +145,9 @@ void CStage1::Update()
 		m_Player.Update();
 		m_goal.Update();
 		m_Player.SetState(CPlayer::StateGoal);
+		GoalCount++;
 
-		if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_A))
+		if (GoalCount >= 60)
 		{
 			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
