@@ -6,7 +6,7 @@ void CStagetest::Initialize()
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
 
 	jimen.Initialize("XFile\\hako.x");
-	jimen.SetNormalMap("Texture\\normal.jpg");
+	//jimen.SetNormalMap("Texture\\normal.jpg");
 	
 	jimen.GetLight()->m_diffuseLightDirection[0] = D3DXVECTOR4(0, 0, 0, 1);
 	jimen.GetLight()->m_diffuseLightDirection[1] = D3DXVECTOR4(0, 0, 0, 1);

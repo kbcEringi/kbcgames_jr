@@ -5,6 +5,7 @@
 #include"SkinModelDate.h"
 #include"CAnimation.h"
 #include"CLight.h"
+#include<map>
 
 class C3DDraw;
 
@@ -38,8 +39,8 @@ public:
 	}
 public:
 	virtual void OnBeginRender(CLight,int) = 0;
-	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) = 0;
-	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate) = 0;
+	virtual void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate) = 0;
+	virtual void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate) = 0;
 	virtual void OnEndRender() = 0;
 protected:
 	ID3DXEffect*	m_pEffect;
@@ -52,8 +53,8 @@ public:
 	CSetEffectCallbackDefault();
 	~CSetEffectCallbackDefault();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate)override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate)override;
 	void OnEndRender();
 };
 
@@ -62,8 +63,8 @@ public:
 	CSetEffectCallbackShadowMap();
 	~CSetEffectCallbackShadowMap();
 	void OnBeginRender(CLight, int);
-	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
-	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, IDirect3DTexture9*, Renderstate) override;
+	void OnRenderAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, LPD3DXBONECOMBINATION, UINT, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate) override;
+	void OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, std::map<const char*, IDirect3DTexture9*>*, Renderstate) override;
 	void OnEndRender();
 	void SetEffect(ID3DXEffect* effect)
 	{
@@ -133,7 +134,8 @@ public:
 	CLight* GetLight(){ return &m_light; }
 	void Setunitychanflg(){ rens.unitychanflg = true; }
 	void SetLuminance(bool is, float lum = 0){ rens.isLuminance = is; rens.Luminance = lum; }
-	void SetNormalMap(LPCSTR);
+	//ディフューズテクスチャパス、ノーマルマップパス
+	void SetNormalMap(LPCSTR, LPCSTR);
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;
@@ -148,6 +150,5 @@ protected:
 
 	Renderstate rens;
 
-	IDirect3DTexture9 *NormalTex;
-
+	std::map<const char*, IDirect3DTexture9*>NormalTex;
 };

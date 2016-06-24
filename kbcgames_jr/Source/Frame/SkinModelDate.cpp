@@ -417,7 +417,7 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 				}
 
 				// don't remember a pointer into the dynamic memory, just forget the name after loading
-				pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
+				//pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
 			}
 		}
 	}

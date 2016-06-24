@@ -192,6 +192,7 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 		normal = (normal * 2.0f) - 1.0f;
 		normal = tangentSpaceMatrix[0] * normal.x + tangentSpaceMatrix[1] * normal.y + tangentSpaceMatrix[2] * normal.z;
 	}
+
 	float4 lig = CalcLight(normal);
 	float4 diff = tex2D(g_diffuseTextureSampler, In.uv);
 
@@ -214,9 +215,9 @@ float4 PSMain(VS_OUTPUT In) : COLOR
 			lig = 0.0f;
 		}
 	}
-
 	lig += g_ambientLight;
 	float4 color = diff*lig;
+
 
 
 	float t = 0.0f;
