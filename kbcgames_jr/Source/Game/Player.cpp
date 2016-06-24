@@ -64,7 +64,7 @@ void CPlayer::Initialize()
 	m_SkinModel.GetLight()->m_diffuseLightDirection[4] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[5] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
 	D3DXVECTOR4 dir = D3DXVECTOR4(-0.75f, -0.75f, -0.75f, 1.0f);
-	D3DXVec4Normalize(&dir, &dir);
+	D3DXVec3Normalize((D3DXVECTOR3*)&dir, (D3DXVECTOR3*)&dir);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[3] = dir;
 	SetAnime(PlayerAnim_Stand);//スタンドアニメーション
 	m_SkinModel.SetAnimationEndTime(PlayerAnim_Run, 0.8f);	

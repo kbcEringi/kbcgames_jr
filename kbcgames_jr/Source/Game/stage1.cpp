@@ -6,19 +6,19 @@
 
 
 SCollisionInfo collisionInfoTable3D[] = {
-#include "Collision3D_stage1.h"
+#include"Collision3D_stage01.h"
 };
 
 SCollisionInfo collisionInfoTable2D[] = {
-#include "Collision2D_stage1.h"
+#include "Collision2D_stage01.h"
 };
 
 SGimmickData gimmick3dobj[] = {
-#include"..\Game\Gimmick3D_stage1.h"
+#include"..\Game\Gimmick3D_stage01.h"
 };
 
 SGimmickData gimmick2dobj[] = {
-#include"..\Game\Gimmick2D_stage1.h"
+#include"..\Game\Gimmick2D_stage01.h"
 };
 
 SFlower flower[] = {
