@@ -142,7 +142,7 @@ void CStage2::Update()
 		{
 			Remove3DRigidBody(ARRAYSIZE(collision2InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision2InfoTable2D));
-			STAGEMANEGER->SelectStage(2);
+			STAGEMANEGER->SelectStage(3);
 		}
 	}
 	GAMEPAD(CGamepad)->UpdateControllerState();

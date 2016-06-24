@@ -1,6 +1,6 @@
 #pragma once
 
-//ステージ2クラス
+//ステージ3クラス
 #include"..\Frame\Stage\CStage.h"
 
 #include"..\Frame\DXCommon.h"
@@ -50,10 +50,10 @@ private:
 
 	CGround4 m_Ground4;
 	CStage1Back m_Back1;
-	CGoal m_Goal;
+	CGoal m_goal;
 
 	//ギミックManager
 	CGimmickManager m_gimmick;
 
-
+	int GoalCount;
 };
