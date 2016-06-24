@@ -161,7 +161,7 @@ void CAlwaysWind::Update()
 			&& m_aabbMax.y > pos.y
 			&& m_aabbMax.z > pos.z
 			){
-			m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
+			m_force = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 			D3DXVECTOR4 force;
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;

@@ -50,10 +50,10 @@ private:
 
 	CGround2 m_Ground2;
 	CStage1Back m_Back1;
-	CGoal m_Goal;
+	CGoal m_goal;
 
 	//ÉMÉ~ÉbÉNManager
 	CGimmickManager m_gimmick;
 
-
+	int GoalCount;
 };
