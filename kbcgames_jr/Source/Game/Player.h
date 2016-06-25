@@ -65,6 +65,10 @@ public:
 	{
 		m_applyForce += force;
 	}
+	void SetMoveSpeed( D3DXVECTOR3 speed )
+	{
+		m_moveSpeed = speed;
+	}
 	void SetPointa(CPointa* pointa)
 	{
 		m_Pointa = pointa;

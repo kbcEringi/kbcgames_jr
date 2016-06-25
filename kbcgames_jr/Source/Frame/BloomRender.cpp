@@ -41,11 +41,14 @@ void BloomRender::Render()
 	{
 		UpdateWeight(25.0f);
 		LPDIRECT3DSURFACE9 rt;
+		LPDIRECT3DSURFACE9 depth;
 		(*graphicsDevice()).GetRenderTarget(0,&rt);
+		(*graphicsDevice()).GetDepthStencilSurface(&depth);
 
 		//ãPìxìEèo
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_luminanceRenderTarget.GetSurfaceDx());
+			(*graphicsDevice()).SetDepthStencilSurface(m_luminanceRenderTarget.GetDepthSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 			HRESULT hr = m_pEffect->SetTechnique("SamplingLuminance");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -61,6 +64,7 @@ void BloomRender::Render()
 		//XBlur
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_downSamplingRenderTarget[0].GetSurfaceDx());
+			(*graphicsDevice()).SetDepthStencilSurface(m_downSamplingRenderTarget[0].GetDepthSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 			m_pEffect->SetTechnique("XBlur");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -89,6 +93,7 @@ void BloomRender::Render()
 		//YBlur
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_downSamplingRenderTarget[1].GetSurfaceDx());
+			(*graphicsDevice()).SetDepthStencilSurface(m_downSamplingRenderTarget[1].GetDepthSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 			m_pEffect->SetTechnique("YBlur");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -117,6 +122,7 @@ void BloomRender::Render()
 		//XBlur2
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_downSamplingRenderTarget[2].GetSurfaceDx());
+			(*graphicsDevice()).SetDepthStencilSurface(m_downSamplingRenderTarget[2].GetDepthSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 			m_pEffect->SetTechnique( "XBlur");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -145,6 +151,7 @@ void BloomRender::Render()
 		//YBlur2
 		{
 			(*graphicsDevice()).SetRenderTarget(0, m_downSamplingRenderTarget[3].GetSurfaceDx());
+			(*graphicsDevice()).SetDepthStencilSurface(m_downSamplingRenderTarget[3].GetDepthSurfaceDx());
 			(*graphicsDevice()).Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 			m_pEffect->SetTechnique( "YBlur");
 			m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
@@ -177,6 +184,7 @@ void BloomRender::Render()
 			};
 			//ñﬂÇ∑ÅB
 			(*graphicsDevice()).SetRenderTarget(0, rt);
+			(*graphicsDevice()).SetDepthStencilSurface(depth);
 			//â¡éZçáê¨ÅB
 			(*graphicsDevice()).SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 			(*graphicsDevice()).SetRenderState(D3DRS_SRCBLEND, D3DBLEND_ONE);
