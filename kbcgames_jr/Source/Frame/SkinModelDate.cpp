@@ -167,7 +167,7 @@ HRESULT SetupBoneMatrixPointersOnMesh(LPD3DXMESHCONTAINER pMeshContainerBase, LP
 	D3DXFRAME_DERIVED* pFrame;
 
 	D3DXMESHCONTAINER_DERIVED* pMeshContainer = (D3DXMESHCONTAINER_DERIVED*)pMeshContainerBase;
-
+	
 	// if there is a skinmesh, then setup the bone matrices
 	if (pMeshContainer->pSkinInfo != NULL)
 	{

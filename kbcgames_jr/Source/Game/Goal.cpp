@@ -30,7 +30,7 @@ CGoal::~CGoal()
 void CGoal::Initialize(D3DXVECTOR3 pos)
 {
 	m_SkinModel.Initialize("XFile\\Goal.x");
-	m_SkinModel.SetLuminance(true, 0.05f);
+	m_SkinModel.SetLuminance(false, 0.0f);
 	//オーディオ初期化
 	m_pAudio = new CAudio();
 	m_pAudio->Initialize(
@@ -96,10 +96,15 @@ void CGoal::Update()
 
 void CGoal::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 {
+	(*graphicsDevice()).SetRenderState(D3DRS_ALPHAREF, (DWORD)0x00000001);
+	(*graphicsDevice()).SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	(*graphicsDevice()).SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);
+
 	if (goalflag == true)
 	{
 		emi.Render();
 	}
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
+	(*graphicsDevice()).SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 }

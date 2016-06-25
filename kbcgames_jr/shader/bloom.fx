@@ -31,6 +31,7 @@ VS_OUTPUT VSSamplingLuminance(VS_INPUT In)
 float4 PSSamplingLuminance(VS_OUTPUT In):COLOR
 {
 	float4 color = tex2D(g_SceneSampler, In.tex);
+	clip(color.a - 0.01f);
 	float t = 1.0f / max(color.a, 0.1f);
 	if (t <= 1.0f){
 		return float4(0.0f, 0.0f, 0.0f, 1.0f);
