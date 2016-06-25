@@ -18,7 +18,7 @@ SGimmickData gimmick3dobj5[] = {
 };
 
 SGimmickData gimmick2dobj5[] = {
-#include"..\Game\Gimmick3D_stage05.h"
+#include"..\Game\Gimmick2D_stage05.h"
 };
 
 void CStage5::Initialize()
@@ -144,6 +144,7 @@ void CStage5::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision5InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision5InfoTable2D));
+			dl.SetData(6);
 			STAGEMANEGER->SelectStage(6);
 		}
 	}

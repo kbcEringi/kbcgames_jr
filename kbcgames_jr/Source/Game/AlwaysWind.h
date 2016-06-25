@@ -7,6 +7,7 @@
 #include"..\Frame\Ccamera.h"
 #include "..\Frame\particle\CParticleEmitter.h"
 
+class CAudio;
 
 class CAlwaysWind : public C3DObject
 {
@@ -25,6 +26,8 @@ public:
 		m_aabbMax += obj.position;
 		m_aabbMin += obj.position;
 	}
+	void SetWindAudio();
+	void StopWindAudio();
 
 private:
 	CRandom random;
@@ -35,5 +38,7 @@ private:
 	float SpeedPower;				//‰Á‘¬‚ð‰Á‚¦‚é‘¬“x
 	CParticleEmitter emi;
 
+	CAudio* m_pAudio;
+	bool AudioFlag;
 };
 

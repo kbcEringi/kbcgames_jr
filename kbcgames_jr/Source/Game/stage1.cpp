@@ -84,6 +84,7 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
+
 	if (m_goal.GetGoal() != true)
 	{
 		if (GAMEPAD(CGamepad)->GetConnected())
@@ -142,6 +143,7 @@ void CStage1::Update()
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
+		
 		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
@@ -154,6 +156,7 @@ void CStage1::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
+			dl.SetData(2);
 			STAGEMANEGER->SelectStage(2);
 		}
 	}

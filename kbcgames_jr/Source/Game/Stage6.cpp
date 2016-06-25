@@ -142,6 +142,7 @@ void CStage6::Update()
 		{
 			Remove3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision6InfoTable2D));
+			dl.SetData(1);
 			STAGEMANEGER->SelectStage(1);
 		}
 	}
