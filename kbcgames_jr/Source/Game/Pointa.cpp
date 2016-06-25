@@ -12,7 +12,7 @@ void CPointa::Initialize()
 	m_SkinModel.Initialize("XFile\\Pointa.x");	//ぽいんたXファイル
 	//m_SkinModel.Sethureneruflg(true);
 	m_SkinModel.SetLuminance(true, 2.0f);
-	m_SkinModel.SetNormalMap("diffuse.png", "Texture\\1_normals.png");
+	m_SkinModel.SetNormalMap("Texture\\1_normals.png");
 	m_position.x = 2.0f;				//X座標
 	m_position.y = 5.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標

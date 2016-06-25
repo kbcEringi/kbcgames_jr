@@ -7,7 +7,6 @@ CGround::~CGround()
 void CGround::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\stage_01.x");
-	m_SkinModel.SetNormalMap("Cube earth.tga", "Texture\\cube earth nrm.tga");
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;

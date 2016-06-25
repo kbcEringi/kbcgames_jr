@@ -45,7 +45,7 @@ void CSetEffectCallbackDefault::OnBeginRender(CLight light, int pass)
 	m_pEffect->SetVectorArray("g_diffuseLightColor", light.m_diffuseLightColor, light.LIGHT_NUM);
 	m_pEffect->SetVector("g_ambientLight", &light.m_ambientLight);
 }
-void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot, std::map<const char*, IDirect3DTexture9*>* Normal, Renderstate rens)
+void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot,  Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_mViewProj", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
@@ -64,12 +64,12 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	};
 	m_pEffect->SetValue("g_farNear", farNear, sizeof(farNear));
 
-	//if (Normal->size() !=0)
-	//{
-	//	//m_pEffect->SetTexture("g_normalMap", Normal[pMeshContainer->pMaterials[0].pTextureFilename]);
-	//	//m_pEffect->SetBool("Normalflg", true);
-	//}
-	//else
+	if (rens.normal != nullptr)
+	{
+		m_pEffect->SetTexture("g_normalMap", rens.normal);
+		m_pEffect->SetBool("Normalflg", true);
+	}
+	else
 	{
 		m_pEffect->SetBool("Normalflg", false);
 	}
@@ -85,7 +85,7 @@ void CSetEffectCallbackDefault::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshCo
 	// draw the subset with the current world matrix palette and material state
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot, std::map<const char*, IDirect3DTexture9*>* Normal, Renderstate rens)
+void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot,  Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_mViewProj", &viewproj);
@@ -113,12 +113,12 @@ void CSetEffectCallbackDefault::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMes
 	for (DWORD i = 0; i < pMeshContainer->NumMaterials; i++)
 	{
 		m_pEffect->SetTexture("g_diffuseTexture", pMeshContainer->ppTextures[i]);
-		//if (Normal->size() > i)
-		//{
-		//	m_pEffect->SetTexture("g_normalMap", Normal->at(pMeshContainer->pMaterials[i].pTextureFilename));
-		//	m_pEffect->SetBool("Normalflg", true);
-		//}
-		//else
+		if (rens.normal != nullptr)
+		{
+			m_pEffect->SetTexture("g_normalMap", rens.normal);
+			m_pEffect->SetBool("Normalflg", true);
+		}
+		else
 		{
 			m_pEffect->SetBool("Normalflg", false);
 		}
@@ -148,7 +148,7 @@ void CSetEffectCallbackShadowMap::OnBeginRender(CLight light, int pass)
 	m_pEffect->Begin(NULL, D3DXFX_DONOTSAVESHADERSTATE);
 	m_pEffect->BeginPass(pass);
 }
-void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot, std::map<const char*, IDirect3DTexture9*>* Normal, Renderstate rens)
+void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX viewProj, LPD3DXBONECOMBINATION pBoneComb, UINT iAttrib, D3DXMATRIX rot,  Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewProj);
 	m_pEffect->SetMatrixArray("g_mWorldMatrixArray", g_pBoneMatrices, pMeshContainer->NumPaletteEntries);
@@ -164,7 +164,7 @@ void CSetEffectCallbackShadowMap::OnRenderAnime(D3DXMESHCONTAINER_DERIVED* pMesh
 	m_pEffect->CommitChanges();
 	pMeshContainer->MeshData.pMesh->DrawSubset(iAttrib);
 }
-void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot, std::map<const char*, IDirect3DTexture9*>* Normal, Renderstate rens)
+void CSetEffectCallbackShadowMap::OnRenderNonAnime(D3DXMESHCONTAINER_DERIVED* pMeshContainer, D3DXMATRIX worldMatrix, D3DXMATRIX viewproj, D3DXMATRIX rot,  Renderstate rens)
 {
 	m_pEffect->SetMatrix("g_worldMatrix", &worldMatrix);//ワールド行列の転送。
 	m_pEffect->SetMatrix("g_viewprojMatrix", &viewproj);//ビュープロジェクション行列の転送。
@@ -188,7 +188,6 @@ void CSetEffectCallbackShadowMap::OnEndRender()
 
 C3DDraw::C3DDraw() : m_skinmodel(nullptr)
 {
-	NormalTex.clear();
 }
 /*
 *第一引数　Xファイル名（例："XFile\\kyu.x"）
@@ -199,8 +198,6 @@ void C3DDraw::Initialize(LPCSTR FileName)
 	m_skinmodel = new CSkinModelData;
 	m_skinmodel->LoadModelData(FileName,&m_animation);
 	m_currentSetEffectCallback = &m_defaultSetEffectCallback;
-
-	
 }
 
 void C3DDraw::AddAnimation()
@@ -293,7 +290,7 @@ void C3DDraw::DrawMeshContainer(
 				}
 			}
 			//シェーダー適用開始。
-			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib, m_matRot, &NormalTex, rens);
+			m_currentSetEffectCallback->OnRenderAnime(pMeshContainer, viewProj, pBoneComb, iAttrib, m_matRot, rens);
 		}
 	}
 	else {
@@ -309,16 +306,14 @@ void C3DDraw::DrawMeshContainer(
 
 		m_currentSetEffectCallback->OnBeginRender(m_light, 1);
 
-		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, mWorld, viewProj, m_matRot, &NormalTex, rens);
+		m_currentSetEffectCallback->OnRenderNonAnime(pMeshContainer, mWorld, viewProj, m_matRot, rens);
 	}
 	m_currentSetEffectCallback->OnEndRender();
 }
 
-void C3DDraw::SetNormalMap(LPCSTR DffFileName, LPCSTR NorFileName)
+void C3DDraw::SetNormalMap( LPCSTR NorFileName)
 {
-	IDirect3DTexture9* nor;
-	D3DXCreateTextureFromFile(graphicsDevice(), NorFileName, &nor);
-	NormalTex.insert(std::map<const char*, IDirect3DTexture9*>::value_type(DffFileName, nor));
+	D3DXCreateTextureFromFile(graphicsDevice(), NorFileName, &rens.normal);
 }
 
 C3DDraw::~C3DDraw()
