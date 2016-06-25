@@ -172,8 +172,8 @@ technique SamplingLuminance
 {
 	pass p0
 	{
-		VertexShader = compile vs_2_0 VSSamplingLuminance();
-		PixelShader = compile ps_2_0 PSSamplingLuminance();
+		VertexShader = compile vs_3_0 VSSamplingLuminance();
+		PixelShader = compile ps_3_0 PSSamplingLuminance();
 	}
 }
 
@@ -184,8 +184,8 @@ technique XBlur
 {
 	pass p0
 	{
-		VertexShader = compile vs_2_0 VSXBlur();
-		PixelShader = compile ps_2_0 PSXBlur();
+		VertexShader = compile vs_3_0 VSXBlur();
+		PixelShader = compile ps_3_0 PSXBlur();
 	}
 }
 
@@ -196,15 +196,15 @@ technique YBlur
 {
 	pass p0
 	{
-		VertexShader = compile vs_2_0 VSYBlur();
-		PixelShader = compile ps_2_0 PSYBlur();
+		VertexShader = compile vs_3_0 VSYBlur();
+		PixelShader = compile ps_3_0 PSYBlur();
 	}
 }
 technique Final
 {
 	pass p0
 	{
-		VertexShader = compile vs_2_0 VSFinal();
-		PixelShader = compile ps_2_0 PSFinal();
+		VertexShader = compile vs_3_0 VSFinal();
+		PixelShader = compile ps_3_0 PSFinal();
 	}
 }
