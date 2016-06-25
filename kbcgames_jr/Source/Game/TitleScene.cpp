@@ -1,7 +1,7 @@
 #include"TitleScene.h"
 #include "..\Frame\Audio.h"
 #include"..\Frame\Stage\CStageManager.h"
-
+#include"CDataLoad.h"
 
 void CTitleScene::Initialize()
 {
@@ -68,6 +68,19 @@ void CTitleScene::Select()
 			m_pAudio->PlayCue("start");//スタート
 
 		}
+		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_B))
+		{
+			CDataLoad dl;
+			int num = dl.LoadData();
+			if (num > 0)
+			{
+				STAGEMANEGER->SelectStage(num);
+				SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
+
+				m_pAudio->StopCue("title");//タイトル音楽ストップ
+				m_pAudio->PlayCue("start");//スタート
+			}
+		}
 		
 	}
 	else
@@ -79,6 +92,20 @@ void CTitleScene::Select()
 
 				m_pAudio->StopCue("title");//タイトル音楽ストップ
 				m_pAudio->PlayCue("start");//スタート
+		}
+		else if (KEYDOWN(diks, DIK_B))
+		{
+			CDataLoad dl;
+			int num = dl.LoadData();
+			if (num > 0)
+			{
+				STAGEMANEGER->SelectStage(num);
+				SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
+
+				m_pAudio->StopCue("title");//タイトル音楽ストップ
+				m_pAudio->PlayCue("start");//スタート
+			}
+		
 		}
 		else
 		{

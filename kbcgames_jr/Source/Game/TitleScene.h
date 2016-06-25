@@ -12,7 +12,6 @@
 #include "TitleStart.h"
 #include "TitleUnitychan.h"
 
-
 class CSceneManager;
 class CAudio;
 

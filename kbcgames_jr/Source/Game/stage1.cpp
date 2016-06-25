@@ -84,6 +84,7 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
+
 	if (m_goal.GetGoal() != true)
 	{
 		if (GAMEPAD(CGamepad)->GetConnected())
@@ -154,6 +155,7 @@ void CStage1::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collisionInfoTable2D));
+			dl.SetData(2);
 			STAGEMANEGER->SelectStage(2);
 		}
 	}
