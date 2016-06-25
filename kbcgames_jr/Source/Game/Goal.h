@@ -27,6 +27,8 @@ public:
 	{
 		return goalflag;
 	}
+	void SetGoalAudio();
+	void StopGoalAudio();
 private:
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_aabbMin;
@@ -34,6 +36,7 @@ private:
 
 	CAudio* m_pAudio;
 	bool goalflag;
+	bool OnGoal;
 
 	CRandom random;
 	CParticleEmitter emi;//パーティクル

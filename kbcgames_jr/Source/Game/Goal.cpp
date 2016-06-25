@@ -48,9 +48,10 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 
 	/*GoalparticleParameterTbl.initPositionRandomMargin = initPositionRandomMargin;
 	GoalparticleParameterTbl.initVelocity = initSpeed * 5;*/
-	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, D3DXVECTOR3(m_position.x+2.5,m_position.y,m_position.z));
+	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), GoalparticleParameterTbl, D3DXVECTOR3(m_position.x+3.0f,m_position.y+3.0f,m_position.z));
 
 	goalflag = false;
+	OnGoal = false;
 }
 
 void CGoal::Update()
@@ -65,12 +66,7 @@ void CGoal::Update()
 			&& m_aabbMax.y > pos.y
 			)
 		{
-			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
-			exit(0);*/
 			goalflag = true;
-			
-			m_pAudio->PlayCue("goal");
-
 		}
 	}
 	else
@@ -83,14 +79,10 @@ void CGoal::Update()
 			&& m_aabbMax.z > pos.z
 			)
 		{
-			/*MessageBox(NULL, TEXT("Goal"), 0, MB_OK);
-			exit(0);*/
 			goalflag = true;
-			
-			m_pAudio->PlayCue("goal");
+
 		}
 	}
-	m_pAudio->StopCue("goal");
 	emi.Update();
 }
 
@@ -107,4 +99,23 @@ void CGoal::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	D3DXMatrixTranslation(&m_matWorld, m_position.x, m_position.y, m_position.z);
 	m_SkinModel.Draw(m_matWorld, view, proj, m_matRot);
 	(*graphicsDevice()).SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+}
+
+void CGoal::SetGoalAudio()
+{
+	if (OnGoal == false)
+	{
+		m_pAudio->PlayCue("goal");
+		OnGoal = true;
+	}
+}
+
+void CGoal::StopGoalAudio()
+{
+
+	if (OnGoal == true)
+	{
+		m_pAudio->StopCue("goal");
+		OnGoal = false;
+	}
 }
