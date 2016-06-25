@@ -136,7 +136,7 @@ void CAlwaysWind::Update()
 			&& m_aabbMax.x > pos.x
 			&& m_aabbMax.y > pos.y
 			){
-			m_force = D3DXVECTOR3(17.0f, 0.0f, 0.0f);
+			m_force = D3DXVECTOR3(70.0f, 0.0f, 0.0f);
 			D3DXVECTOR4 force;
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;
@@ -161,7 +161,7 @@ void CAlwaysWind::Update()
 			&& m_aabbMax.y > pos.y
 			&& m_aabbMax.z > pos.z
 			){
-			m_force = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+			m_force = D3DXVECTOR3(70.0f, 0.0f, 0.0f);
 			D3DXVECTOR4 force;
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;
@@ -179,7 +179,10 @@ void CAlwaysWind::Update()
 			}
 		}
 	}
-	player->ApplyForce(m_force);
+	if (D3DXVec3LengthSq(&m_force) > 0.01f) {
+		player->ApplyForce(m_force);
+		player->SetMoveSpeed(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	}
 
 	emi.Update();
 }

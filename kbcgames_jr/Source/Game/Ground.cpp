@@ -11,7 +11,7 @@ void CGround::Initialize()
 	m_position.x = 0.0f;
 	m_position.y = 0.0f;
 	m_position.z = 0.0f;
-	m_SkinModel.GetLight()->m_ambientLight = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_SkinModel.GetLight()->m_ambientLight = D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[0] = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[1] = D3DXVECTOR4(-1.0f, 0.0f, 0.0f, 1.0f);
 	m_SkinModel.GetLight()->m_diffuseLightDirection[2] = D3DXVECTOR4(0.0f, 0.0f, -1.0f, 1.0f);

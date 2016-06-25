@@ -78,6 +78,7 @@ namespace Frame
 		}
 		void SetDepthSurfaceDX(LPDIRECT3DSURFACE9 depthSurface)
 		{
+
 			m_depthSurface = depthSurface;
 		}
 		void SetSurfaceDX(LPDIRECT3DSURFACE9 surface)
