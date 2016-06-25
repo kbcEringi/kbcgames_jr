@@ -2,6 +2,7 @@
 #include "Stage1.h"
 #include "..\Frame\Stage\CStageManager.h"
 #include "CGameFlg.h"
+#include "..\Frame\Audio.h"
 
 /*!
 *@brief	ID3DXMeshからAABBのサイズを計算する関数。
@@ -120,6 +121,13 @@ void CAlwaysWind::Initialize()
 	particleParameterTbl.initVelocity = initSpeed *5;
 	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), particleParameterTbl, m_data.position);
 
+	//オーディオ初期化
+	m_pAudio = new CAudio();
+	m_pAudio->Initialize(
+		"Audio\\Audio.xgs",
+		"Audio\\Wave Bank.xwb",
+		"Audio\\Audio.xsb");
+	AudioFlag = false;
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
 }
@@ -141,7 +149,7 @@ void CAlwaysWind::Update()
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;
 			m_force.y = force.y;
-
+			//SetWindAudio();
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
@@ -167,12 +175,14 @@ void CAlwaysWind::Update()
 			m_force.x = force.x;
 			m_force.y = force.y;
 			m_force.z = force.z;
+			//SetWindAudio();
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
 				m_force.x = 0.0f;
 				m_force.y = 0.0f;
 				m_force.z = 0.0f;
+				
 			}
 			else{
 				m_force *= 0.95f;
@@ -180,10 +190,11 @@ void CAlwaysWind::Update()
 		}
 	}
 	if (D3DXVec3LengthSq(&m_force) > 0.01f) {
+		
 		player->ApplyForce(m_force);
 		player->SetMoveSpeed(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	}
-
+	//StopWindAudio();
 	emi.Update();
 }
 
@@ -196,3 +207,21 @@ void CAlwaysWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	//m_SkinModel.Draw(m_matWorld, view, proj);
 }
 
+void CAlwaysWind::SetWindAudio()
+{
+	if (AudioFlag == false)
+	{
+		m_pAudio->PlayCue("wind");
+		AudioFlag = true;
+	}
+	
+}
+
+void CAlwaysWind::StopWindAudio()
+{
+	if (AudioFlag == true)
+	{
+		m_pAudio->StopCue("wind");
+		AudioFlag = false;
+	}
+}
