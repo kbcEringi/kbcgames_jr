@@ -6,20 +6,20 @@
 
 
 SCollisionInfo collision5InfoTable3D[] = {
-#include "Collision3D_stage03.h"
-};
+#include "Collision3D_stage05.h"
 
+};
 SCollisionInfo collision5InfoTable2D[] = {
 #include "Collision2D_stage03.h"
 };
 
-//SGimmickData gimmick3dobj[] = {
-//#include"..\Game\Gimmick3DInfo.h"
-//};
-//
-//SGimmickData gimmick2dobj[] = {
-//#include"..\Game\Gimmick2DInfo.h"
-//};
+SGimmickData gimmick3dobj5[] = {
+#include"..\Game\Gimmick3D_stage05.h"
+};
+
+SGimmickData gimmick2dobj5[] = {
+#include"..\Game\Gimmick3D_stage05.h"
+};
 
 void CStage5::Initialize()
 {
@@ -66,7 +66,7 @@ void CStage5::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision5InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
+	m_gimmick.InitGimmick(gimmick3dobj5, ARRAYSIZE(gimmick3dobj5), gimmick2dobj5, ARRAYSIZE(gimmick2dobj5));
 
 	GoalCount = 0;
 }
@@ -132,6 +132,7 @@ void CStage5::Update()
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
+		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
@@ -140,6 +141,7 @@ void CStage5::Update()
 
 		if (GoalCount >= 300)
 		{
+			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision5InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision5InfoTable2D));
 			STAGEMANEGER->SelectStage(6);
