@@ -18,7 +18,7 @@ SGimmickData gimmick3dobj5[] = {
 };
 
 SGimmickData gimmick2dobj5[] = {
-#include"..\Game\Gimmick3D_stage05.h"
+#include"..\Game\Gimmick2D_stage05.h"
 };
 
 void CStage5::Initialize()
