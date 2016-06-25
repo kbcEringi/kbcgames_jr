@@ -131,6 +131,7 @@ void CStage5::Update()
 	{
 		m_pAudio->StopCue("stage1");	//ステージ音楽再生
 		m_Player.StopRunAudio();
+		m_Player.StopJumpAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
