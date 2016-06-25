@@ -7,6 +7,7 @@
 #include "..\..\Game\GameCursor3D.h"
 #include "..\..\Game\GameCursorWind.h"
 #include"..\Shadow.h"
+#include"..\..\Game\CDataLoad.h"
 
 #define MAX_COLLISION 100
 
@@ -75,6 +76,8 @@ protected:
 	btDefaultMotionState* m_myMotionState;
 	bool				m_isAdd2DCollision;
 	bool				m_isAdd3DCollision;
+
+	CDataLoad dl;
 };
 
 extern CShadowMap g_Shadow;
