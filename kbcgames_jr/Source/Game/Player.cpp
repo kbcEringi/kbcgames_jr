@@ -20,7 +20,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_SkinModel.Initialize("XFile\\Unity.x");	//プレイヤーXファイル
-	m_SkinModel.SetNormalMap("utc_all2.tga", "Texture\\utc_nomal.tga");
+	m_SkinModel.SetNormalMap("Texture\\utc_nomal.tga");
 	m_SkinModel.Setshadowflg(false);
 	m_SkinModel.Sethureneruflg(true);
 
@@ -32,7 +32,7 @@ void CPlayer::Initialize()
 		"Audio\\Audio.xsb");
 
 	m_position.x = 0.0f;				//X座標
-	m_position.y = 13.0f;				//Y座標
+	m_position.y = 15.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
@@ -232,7 +232,7 @@ void CPlayer::Died()
 		if (m_position.y <= -15.0f)//この位置にきたら初期位置に戻す
 		{
 			m_position.x = 0.0f;				//X座標
-			m_position.y = 13.0f;				//Y座標
+			m_position.y = 15.0f;				//Y座標
 			m_position.z = 0.0f;				//Z座標
 
 			m_moveSpeed.x = 0.0f;				//移動速度

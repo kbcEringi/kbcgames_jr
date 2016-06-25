@@ -115,6 +115,9 @@ void CGimmickManager::InitGimmick(SGimmickData* gimmick3dobj, int num3d, SGimmic
 			m_2DGimmick.push_back(lost);
 			break;
 		default:
+			CWood* wood2;
+			wood2 = new CWood;
+			m_2DGimmick.push_back(wood2);
 			break;
 		}
 	}
