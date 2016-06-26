@@ -127,6 +127,9 @@
     <ClCompile Include="Source\Game\Ground4.cpp" />
     <ClCompile Include="Source\Game\Ground5.cpp" />
     <ClCompile Include="Source\Game\Ground6.cpp" />
+    <ClCompile Include="Source\Game\Ground7.cpp" />
+    <ClCompile Include="Source\Game\Ground8.cpp" />
+    <ClCompile Include="Source\Game\Ground9.cpp" />
     <ClCompile Include="Source\Game\Hasu.cpp" />
     <ClCompile Include="Source\Game\LostGround.cpp" />
     <ClCompile Include="Source\Game\Movefloor.cpp" />
@@ -142,6 +145,10 @@
     <ClCompile Include="Source\Game\Stage4.cpp" />
     <ClCompile Include="Source\Game\Stage5.cpp" />
     <ClCompile Include="Source\Game\Stage6.cpp" />
+    <ClCompile Include="Source\Game\Stage7.cpp" />
+    <ClCompile Include="Source\Game\Stage8.cpp" />
+    <ClCompile Include="Source\Game\Stage9.cpp" />
+    <ClCompile Include="Source\Game\StageClear.cpp" />
     <ClCompile Include="Source\Game\stagetest.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
@@ -200,6 +207,9 @@
     <ClInclude Include="Source\Game\Ground4.h" />
     <ClInclude Include="Source\Game\Ground5.h" />
     <ClInclude Include="Source\Game\Ground6.h" />
+    <ClInclude Include="Source\Game\Ground7.h" />
+    <ClInclude Include="Source\Game\Ground8.h" />
+    <ClInclude Include="Source\Game\Ground9.h" />
     <ClInclude Include="Source\Game\Hasu.h" />
     <ClInclude Include="Source\Game\LostGround.h" />
     <ClInclude Include="Source\Game\Movefloor.h" />
@@ -215,6 +225,10 @@
     <ClInclude Include="Source\Game\Stage4.h" />
     <ClInclude Include="Source\Game\Stage5.h" />
     <ClInclude Include="Source\Game\Stage6.h" />
+    <ClInclude Include="Source\Game\Stage7.h" />
+    <ClInclude Include="Source\Game\Stage8.h" />
+    <ClInclude Include="Source\Game\Stage9.h" />
+    <ClInclude Include="Source\Game\StageClear.h" />
     <ClInclude Include="Source\Game\stagetest.h" />
     <ClInclude Include="Source\Game\Title.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />

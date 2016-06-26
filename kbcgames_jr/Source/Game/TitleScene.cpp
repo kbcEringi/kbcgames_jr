@@ -23,7 +23,7 @@ void CTitleScene::Initialize()
 	m_camera.Update();
 	m_title.Initialize();
 	m_start.Initialize();
-	m_Unitychan.Initialize();
+	m_Unitychan.Init(m_Unitychan.Run);
 }
 
 void CTitleScene::Update()
