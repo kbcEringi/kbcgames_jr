@@ -5,21 +5,25 @@
 
 
 SCollisionInfo collision4InfoTable3D[] = {
-#include "Collision3D_stage03.h"
+#include "Collision3D_stage04.h"
 
 };
 
 SCollisionInfo collision4InfoTable2D[] = {
-#include "Collision2D_stage03.h"
+#include "Collision2D_stage04.h"
 };
 
-//SGimmickData gimmick3dobj[] = {
-//#include"..\Game\Gimmick3DInfo.h"
-//};
-//
-//SGimmickData gimmick2dobj[] = {
-//#include"..\Game\Gimmick2DInfo.h"
-//};
+SGimmickData gimmick3dobj4[] = {
+#include"..\Game\Gimmick3D_stage04.h"
+};
+
+SGimmickData gimmick2dobj4[] = {
+#include"..\Game\Gimmick2D_stage04.h"
+};
+
+D3DXVECTOR3 playerpos_stage4 = {
+#include"Player_stage4.h"
+};
 
 void CStage4::Initialize()
 {
@@ -32,6 +36,7 @@ void CStage4::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage4);
 	m_Ground4.Initialize();
 
 	m_camera.Initialize();
@@ -61,13 +66,14 @@ void CStage4::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision4InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
+	m_gimmick.InitGimmick(gimmick3dobj4, ARRAYSIZE(gimmick3dobj4), gimmick2dobj4, ARRAYSIZE(gimmick2dobj4));
 
 	GoalCount = 0;
 }
 
 void CStage4::Update()
 {
+	m_Player.Died(playerpos_stage4);
 
 	if (m_goal.GetGoal() != true)
 	{

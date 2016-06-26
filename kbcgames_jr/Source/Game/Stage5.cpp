@@ -9,7 +9,7 @@ SCollisionInfo collision5InfoTable3D[] = {
 
 };
 SCollisionInfo collision5InfoTable2D[] = {
-#include "Collision2D_stage03.h"
+#include "Collision2D_stage05.h"
 };
 
 SGimmickData gimmick3dobj5[] = {
@@ -18,6 +18,10 @@ SGimmickData gimmick3dobj5[] = {
 
 SGimmickData gimmick2dobj5[] = {
 #include"..\Game\Gimmick2D_stage05.h"
+};
+
+D3DXVECTOR3 playerpos_stage5 = {
+#include"Player_stage5.h"
 };
 
 void CStage5::Initialize()
@@ -31,6 +35,7 @@ void CStage5::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage5);
 	m_Ground5.Initialize();
 
 	m_camera.Initialize();
@@ -67,6 +72,7 @@ void CStage5::Initialize()
 
 void CStage5::Update()
 {
+	m_Player.Died(playerpos_stage5);
 
 	if (m_goal.GetGoal() != true)
 	{

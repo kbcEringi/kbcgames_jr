@@ -160,7 +160,7 @@ void CAudio::Run(){
 
 //CleanupXACT関数実装
 void CAudio::CleanupXACT(){
-	if (m_audio.pEngine){
+/*	if (m_audio.pEngine){
 		m_audio.pEngine->ShutDown();    //XACTをシャットダウン
 		SAFE_RELEASE(m_audio.pEngine);    //XACTエンジンを解放
 	}
@@ -174,7 +174,7 @@ void CAudio::CleanupXACT(){
 	m_audio.pbWaveBank = NULL;
 	m_audio.pWaveBank->Destroy();
 	m_audio.pSoundBank->Destroy();
-	CoUninitialize();
+	CoUninitialize();*/
 }
 
 void CAudio::PlayCue(const char* cue){

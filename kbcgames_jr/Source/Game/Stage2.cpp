@@ -21,6 +21,10 @@ SGimmickData gimmick2dobj2[] = {
 #include"..\Game\Gimmick2D_stage02.h"
 };
 
+D3DXVECTOR3 playerpos_stage2 = {
+#include"Player_stage2.h"
+};
+
 void CStage2::Initialize()
 {
 	m_isAdd2DCollision = false;
@@ -32,6 +36,7 @@ void CStage2::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage2);
 	m_Ground2.Initialize();
 
 	m_camera.Initialize();
@@ -68,7 +73,9 @@ void CStage2::Initialize()
 
 void CStage2::Update()
 {
-	
+
+	m_Player.Died(playerpos_stage2);
+
 	if (m_goal.GetGoal() != true)
 	{
 		if (GAMEPAD(CGamepad)->GetConnected())

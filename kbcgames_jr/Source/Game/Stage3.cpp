@@ -18,7 +18,11 @@ SGimmickData gimmick3dobj3[] = {
 };
 
 SGimmickData gimmick2dobj3[] = {
-#include"..\Game\Gimmick2D_stage03.h"
+#include"..\Game\Gimmick2D_stage02.h"
+};
+
+D3DXVECTOR3 playerpos_stage3 = {
+#include"Player_stage3.h"
 };
 
 void CStage3::Initialize()
@@ -32,6 +36,7 @@ void CStage3::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage3);
 	m_Ground3.Initialize();
 
 	m_camera.Initialize();
@@ -68,6 +73,7 @@ void CStage3::Initialize()
 
 void CStage3::Update()
 {
+	m_Player.Died(playerpos_stage3);
 
 	if (m_goal.GetGoal() != true)
 	{

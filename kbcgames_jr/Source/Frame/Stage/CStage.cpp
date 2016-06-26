@@ -57,7 +57,6 @@ void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
 
 void CStage::Update()
 {
-	m_Player.Died();
 
 	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) 
 		&& STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly

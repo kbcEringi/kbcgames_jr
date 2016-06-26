@@ -3,7 +3,6 @@
 #include "..\Frame\SceneManager.h"
 #include "..\Frame\Stage\CStageManager.h"
 
-
 SCollisionInfo collisionInfoTable3D[] = {
 #include "Collision3D_stage01.h"
 };
@@ -78,6 +77,7 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
+	m_Player.Died(playerpos_stage1);
 
 	if (m_goal.GetGoal() != true)
 	{
