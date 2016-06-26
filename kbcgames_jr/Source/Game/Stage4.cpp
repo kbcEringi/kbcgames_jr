@@ -1,5 +1,4 @@
 #include "Stage4.h"
-#include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
 #include"..\Frame\Stage\CStageManager.h"
@@ -26,13 +25,8 @@ void CStage4::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	//オーディオ初期化
-	m_pAudio = new CAudio();
-	m_pAudio->Initialize(
-		"Audio\\Audio.xgs",
-		"Audio\\Wave Bank.xwb",
-		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+
+	CStage::Initialize();
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
@@ -107,7 +101,6 @@ void CStage4::Update()
 			}
 		}
 
-		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
 		m_Player.Update();//プレイヤー
 		CStage::Update();
@@ -130,7 +123,7 @@ void CStage4::Update()
 	}
 	else if (m_goal.GetGoal() == true)
 	{
-		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
 		m_goal.SetGoalAudio();

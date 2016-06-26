@@ -1,7 +1,7 @@
 #include "Audio.h"
 
 CAudio::CAudio(){
-	memset(&m_audio, 0, sizeof(m_audio));
+	//memset(&m_audio, 0, sizeof(m_audio));
 }//コンストラクタ
 CAudio::~CAudio()//デストラクタ
 {
