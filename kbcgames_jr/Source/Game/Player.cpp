@@ -25,7 +25,7 @@ void CPlayer::Initialize()
 	m_SkinModel.Sethureneruflg(true);
 
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",

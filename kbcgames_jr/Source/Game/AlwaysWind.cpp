@@ -122,7 +122,7 @@ void CAlwaysWind::Initialize()
 	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), particleParameterTbl, m_data.position);
 
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",

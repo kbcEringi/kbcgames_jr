@@ -1,6 +1,7 @@
 #include "Audio.h"
 
 CAudio::CAudio(){
+	isInited = false;
 	//memset(&m_audio, 0, sizeof(m_audio));
 }//コンストラクタ
 CAudio::~CAudio()//デストラクタ
@@ -11,6 +12,10 @@ CAudio::~CAudio()//デストラクタ
 //グローバル設定ファイルを用いたXACTエンジン初期化
 HRESULT CAudio::Initialize(const char* engineName, const char* wbName, const char* sbName)
 {
+	if (isInited) {
+		return S_OK;
+	}
+	isInited = true;
 	if (FAILED(CreateEngine(engineName))){ return E_FAIL; }
 	if (FAILED(CreateWaveBank(wbName))){ return E_FAIL; }//ウェーブバンク
 	if (FAILED(CreateSoundBank(sbName))){ return E_FAIL; }//サウンドバンク
