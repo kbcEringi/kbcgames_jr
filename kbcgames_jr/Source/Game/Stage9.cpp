@@ -20,6 +20,10 @@ SCollisionInfo collision9InfoTable2D[] = {
 //#include"..\Game\Gimmick2D_stage06.h"
 //};
 
+D3DXVECTOR3 playerpos_stage9 = {
+#include"Player_stage10.h"
+};
+
 void CStage9::Initialize()
 {
 	m_isAdd2DCollision = false;
@@ -31,6 +35,7 @@ void CStage9::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage9);
 	m_Ground9.Initialize();
 
 	m_camera.Initialize();
@@ -67,7 +72,7 @@ void CStage9::Initialize()
 
 void CStage9::Update()
 {
-	m_Player.Died(D3DXVECTOR3(231.0f, 10.0f, 0.0f));
+	m_Player.Died(playerpos_stage9);
 
 	if (m_goal.GetGoal() != true)
 	{

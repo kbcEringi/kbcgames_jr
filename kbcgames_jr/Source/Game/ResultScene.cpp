@@ -11,13 +11,15 @@ void CResultScene::Initialize()
 		"Audio\\Audio.xsb");
 	m_pAudio->PlayCue("yuniyu-ni");
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
+	GAMEFLG->Set3D();
 	m_camera.Initialize();
 	m_camera.SetNear(0.1f);
 	m_camera.SetDistance(4.0f);
 	m_camera.RotLongitudinal(D3DXToRadian(-20.0f));
 	m_camera.SetLookat(D3DXVECTOR3(-1.0f, 0.0f, 0.0f));
-	//m_camera.UpdateProjectionMatrix();
 	m_camera.Update();
+
+	
 
 	m_StageClear.Initialize();
 	m_Select.Initialize();
