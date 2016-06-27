@@ -20,6 +20,7 @@ SGimmickData gimmick2dobj7[] = {
 #include"..\Game\Gimmick2D_stage07.h"
 };
 
+
 D3DXVECTOR3 playerpos_stage7 = {
 #include"Player_stage7.h"
 };
@@ -132,6 +133,7 @@ void CStage7::Update()
 		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
+		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
@@ -140,6 +142,7 @@ void CStage7::Update()
 
 		if (GoalCount >= 300)
 		{
+			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision7InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision7InfoTable2D));
 			dl.SetData(8);
