@@ -6,7 +6,7 @@
 void CTitleScene::Initialize()
 {
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
@@ -24,7 +24,7 @@ void CTitleScene::Initialize()
 	m_title.Initialize();
 	m_continue.Initialize();
 	m_start.Initialize();
-	m_Unitychan.Initialize();
+	m_Unitychan.Init(m_Unitychan.Run);
 }
 
 void CTitleScene::Update()
@@ -44,7 +44,7 @@ void CTitleScene::Draw()
 	m_title.Draw();
 	CDataLoad dl;
 	int num = dl.LoadData();
-	if (num > 0)
+	if (num > 0 || num<10)
 	{
 		m_continue.Draw();
 	}
@@ -80,7 +80,7 @@ void CTitleScene::Select()
 		{
 			CDataLoad dl;
 			int num = dl.LoadData();
-			if (num > 0)
+			if (num > 0 || num<10)
 			{
 				STAGEMANEGER->SelectStage(num);
 				SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);

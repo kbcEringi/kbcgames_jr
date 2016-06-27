@@ -140,7 +140,11 @@ public:
 	void SetNormalMap(LPCSTR);
 	void Release()
 	{
-		SAFE_DELETE(m_skinmodel);
+		if (m_skinmodel)
+		{
+			delete m_skinmodel;
+			m_skinmodel = NULL;
+		}
 	}
 	~C3DDraw();
 protected:

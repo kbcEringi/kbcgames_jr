@@ -18,6 +18,8 @@ struct SCollisionInfo {
 	D3DXVECTOR3 scale;
 };
 
+class CAudio;
+
 //今後ステージは此奴を継承する
 class CStage
 {
@@ -27,6 +29,8 @@ public:
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	void SetStageAudio();
+	void StopStageAudio();
 	CPlayer* GetPlayer()
 	{
 		return &m_Player;
@@ -78,6 +82,8 @@ protected:
 	bool				m_isAdd3DCollision;
 
 	CDataLoad dl;
+
+	CAudio* m_pAudio;
 };
 
 extern CShadowMap g_Shadow;

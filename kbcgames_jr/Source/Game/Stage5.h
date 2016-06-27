@@ -22,7 +22,6 @@
 
 #define MAX_COLLISION 100
 
-class CAudio;
 class C3DObject;
 
 
@@ -45,7 +44,6 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 
-	CAudio* m_pAudio;
 	CRayCursor m_Ray;
 
 	CGround5 m_Ground5;

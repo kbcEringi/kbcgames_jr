@@ -1,9 +1,7 @@
 #include "Stage1.h"
-#include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
 #include "..\Frame\Stage\CStageManager.h"
-
 
 SCollisionInfo collisionInfoTable3D[] = {
 #include "Collision3D_stage01.h"
@@ -33,13 +31,8 @@ void CStage1::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	//オーディオ初期化
-	m_pAudio = new CAudio();
-	m_pAudio->Initialize(
-		"Audio\\Audio.xgs",
-		"Audio\\Wave Bank.xwb",
-		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+
+	CStage::Initialize();
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
@@ -84,6 +77,7 @@ void CStage1::Initialize()
 
 void CStage1::Update()
 {
+	m_Player.Died(playerpos_stage1);
 
 	if (m_goal.GetGoal() != true)
 	{
@@ -122,7 +116,6 @@ void CStage1::Update()
 			}
 		}
 
-		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
 		m_Player.Update();//プレイヤー
 		CStage::Update();
@@ -145,10 +138,9 @@ void CStage1::Update()
 	}
 	else if (m_goal.GetGoal() == true)
 	{
-		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
-		
 		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();

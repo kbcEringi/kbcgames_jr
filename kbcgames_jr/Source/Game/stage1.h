@@ -20,7 +20,6 @@
 
 #include"FlowerManager.h"
 
-class CAudio;
 class C3DObject;
 
 enum GIMMICK{ AlwaysWind };
@@ -43,7 +42,6 @@ private:
 	D3DXMATRIX matWorld, m_projMatrix;
 	D3DXVECTOR3 m_position;
 
-	CAudio* m_pAudio;
 	CRayCursor m_Ray;
 	CGround m_Ground;
 	CStage1Back m_Back1;

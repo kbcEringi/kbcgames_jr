@@ -1,5 +1,4 @@
 #include "Stage3.h"
-#include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
 #include"..\Frame\Stage\CStageManager.h"
@@ -19,25 +18,25 @@ SGimmickData gimmick3dobj3[] = {
 };
 
 SGimmickData gimmick2dobj3[] = {
-#include"..\Game\Gimmick2D_stage03.h"
+#include"..\Game\Gimmick2D_stage02.h"
+};
+
+D3DXVECTOR3 playerpos_stage3 = {
+#include"Player_stage3.h"
 };
 
 void CStage3::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	//オーディオ初期化
-	m_pAudio = new CAudio();
-	m_pAudio->Initialize(
-		"Audio\\Audio.xgs",
-		"Audio\\Wave Bank.xwb",
-		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+
+	CStage::Initialize();
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage3);
 	m_Ground3.Initialize();
 
 	m_camera.Initialize();
@@ -74,6 +73,7 @@ void CStage3::Initialize()
 
 void CStage3::Update()
 {
+	m_Player.Died(playerpos_stage3);
 
 	if (m_goal.GetGoal() != true)
 	{
@@ -107,7 +107,6 @@ void CStage3::Update()
 			}
 		}
 
-		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
 		m_Player.Update();//プレイヤー
 		CStage::Update();
@@ -130,7 +129,7 @@ void CStage3::Update()
 	}
 	else if (m_goal.GetGoal() == true)
 	{
-		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
 		m_goal.SetGoalAudio();

@@ -6,6 +6,9 @@
 #include"..\Frame\SceneManager.h"
 #include"..\Frame\Input.h"
 #include"..\Frame\CGamepad.h"
+#include "..\Frame\Ccamera.h"
+#include "..\Game\StageClear.h"
+#include "..\Game\TitleUnitychan.h"
 
 class CSceneManager;
 class CAudio;
@@ -23,5 +26,7 @@ private:
 
 	CAudio* m_pAudio;
 	BYTE diks[256];
-
+	Ccamera m_camera;
+	CStageClear m_StageClear;
+	CTitleUnitychan CTUnitychan;
 };
