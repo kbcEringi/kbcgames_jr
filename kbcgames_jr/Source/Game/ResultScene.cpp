@@ -16,7 +16,7 @@ void CResultScene::Initialize()
 	m_camera.SetDistance(4.0f);
 	m_camera.RotLongitudinal(D3DXToRadian(-20.0f));
 	m_camera.SetLookat(D3DXVECTOR3(-1.0f, 0.0f, 0.0f));
-	m_camera.UpdateProjectionMatrix();
+	//m_camera.UpdateProjectionMatrix();
 	m_camera.Update();
 
 	m_StageClear.Initialize();
