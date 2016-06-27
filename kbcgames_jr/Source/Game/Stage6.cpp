@@ -131,6 +131,7 @@ void CStage6::Update()
 		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
+		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
@@ -139,6 +140,7 @@ void CStage6::Update()
 
 		if (GoalCount >= 300)
 		{
+			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision6InfoTable2D));
 			dl.SetData(1);

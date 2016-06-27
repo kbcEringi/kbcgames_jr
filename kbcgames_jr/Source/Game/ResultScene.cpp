@@ -20,6 +20,7 @@ void CResultScene::Initialize()
 	m_camera.Update();
 
 	m_StageClear.Initialize();
+	m_Select.Initialize();
 	CTUnitychan.Init(CTUnitychan.Jump);
 	
 }
@@ -29,21 +30,16 @@ void CResultScene::Update()
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.Update();
 	m_StageClear.Update();
+	m_Select.Update();
 	CTUnitychan.Update();
 
-	if (GetAsyncKeyState(VK_RETURN) || GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A))
-	{
-		SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
-	}
-
-	GAMEPAD(CGamepad)->UpdateControllerState();
-
-	//Select();//セレクト
+	Select();//セレクト
 }
 
 void CResultScene::Draw()
 {
 	m_StageClear.Draw();
+	m_Select.Draw();
 	(*graphicsDevice()).Clear(
 		0,
 		NULL,
@@ -52,4 +48,50 @@ void CResultScene::Draw()
 		1.0f,
 		0);
 	CTUnitychan.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+}
+
+void CResultScene::Select()
+{
+	(*GetKeyDevice()).GetDeviceState(
+		sizeof(diks),	// パラメータ バッファサイズ
+		&diks);
+
+
+	if (GAMEPAD(CGamepad)->GetConnected())
+	{
+		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_A))
+		{
+			SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
+			m_pAudio->StopCue("yuniyu-ni");//タイトル音楽ストップ
+			m_pAudio->PlayCue("unitychanderu");//スタート
+
+		}
+		if (GAMEPAD(CGamepad)->isButtonsTrg(GAMEPAD_B))
+		{
+			exit(0);
+		}
+
+	}
+	else
+	{
+		if (KEYDOWN(diks, DIK_RETURN))
+		{
+			SINSTANCE(CSceneManager)->ChangeScene(SCENE::TITLE);
+			m_pAudio->StopCue("yuniyu-ni");//タイトル音楽ストップ
+			m_pAudio->PlayCue("unitychanderu");//スタート
+		}
+		else if (KEYDOWN(diks, DIK_B))
+		{
+			
+			exit(0);
+
+		}
+		else
+		{
+			(*GetKeyDevice()).Acquire();//キーデバイス取得
+		}
+	}
+
+	GAMEPAD(CGamepad)->UpdateControllerState();
+
 }
