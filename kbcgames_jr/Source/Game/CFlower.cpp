@@ -15,14 +15,8 @@ CFlower::~CFlower()
 
 void CFlower::Init(SFlower Data)
 {
-	if (Data.type == 2)
-	{
-		m_Model.Initialize("");
-	}
-	else
-	{
-		m_Model.Initialize("");
-	}
+
+	m_Model.Initialize("XFile\\flower.x");
 	m_vPos = Data.pos;
 }
 
