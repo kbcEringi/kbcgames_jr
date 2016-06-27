@@ -1,4 +1,5 @@
 #include"TitleContinue.h"
+#include"..\Frame\haba.h"
 
 void CTitleContinue::Initialize()
 {
@@ -6,7 +7,7 @@ void CTitleContinue::Initialize()
 	m_2Dobj.Initialize("Texture\\conte.png");
 	vec3Scale = D3DXVECTOR3(180.0f, 80.0f, 1.0f);
 	//vec3Position = D3DXVECTOR3(450.0f, 250.0f, 0.0f);
-	vec3Position = D3DXVECTOR3(480.0f, 450.0f, 0.0f);
+	vec3Position = D3DXVECTOR3(WINDOW_WIDTH / 2, 530.0f, 0.0f);
 	scale = MAXC;
 }
 

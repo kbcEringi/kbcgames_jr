@@ -44,7 +44,7 @@ void CTitleScene::Draw()
 	m_title.Draw();
 	CDataLoad dl;
 	int num = dl.LoadData();
-	if (num > 0 && num<10)
+	//if (num > 0 && num<10)
 	{
 		m_continue.Draw();
 	}
