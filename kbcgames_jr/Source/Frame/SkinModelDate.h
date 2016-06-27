@@ -6,6 +6,7 @@
 #include"CAnimation.h"
 
 
+
 struct D3DXFRAME_DERIVED : public D3DXFRAME {
 	D3DXMATRIXA16	CombinedTransformationMatrix;	//‡¬Ï‚İs—ñB
 };

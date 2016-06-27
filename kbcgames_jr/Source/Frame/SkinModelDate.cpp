@@ -417,7 +417,7 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 				}
 
 				// don't remember a pointer into the dynamic memory, just forget the name after loading
-				//pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
+				pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
 			}
 		}
 	}
@@ -598,16 +598,19 @@ CSkinModelData::CSkinModelData() :
 */
 CSkinModelData::~CSkinModelData()
 {
+	Release();
 }
 /*!
 * @brief	ƒŠƒŠ[ƒXB
 */
 void CSkinModelData::Release()
 {
-	if (m_pAnimController) {
-		m_pAnimController->Release();
-		m_pAnimController = NULL;
-	}
+	//if (m_pAnimController) {
+	//	m_pAnimController->Release();
+	//	m_pAnimController = NULL;
+	//}
+	SAFE_DELETE(m_FrameRoot);
+	SAFE_RELEASE(m_pAnimController);
 }
 
 /*!

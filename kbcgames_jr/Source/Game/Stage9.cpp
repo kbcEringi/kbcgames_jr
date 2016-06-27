@@ -138,7 +138,7 @@ void CStage9::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision9InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision9InfoTable2D));
-			dl.SetData(1);
+			dl.SetData(0);
 			SINSTANCE(CSceneManager)->ChangeScene(SCENE::RESULT);
 		}
 	}

@@ -29,6 +29,12 @@ public:
 	}
 	void SetGoalAudio();
 	void StopGoalAudio();
+
+	//デバッグ
+	void SetGoal()
+	{
+		goalflag = true;
+	}
 private:
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_aabbMin;

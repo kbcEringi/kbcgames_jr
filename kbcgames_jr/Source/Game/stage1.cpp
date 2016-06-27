@@ -84,6 +84,8 @@ void CStage1::Update()
 		if (GAMEPAD(CGamepad)->GetConnected())
 		{
 			ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
+
+			
 		}
 		else
 		{
