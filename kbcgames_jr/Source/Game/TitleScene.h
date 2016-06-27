@@ -11,7 +11,7 @@
 #include"Title.h"
 #include "TitleStart.h"
 #include "TitleUnitychan.h"
-
+#include"TitleContinue.h"
 class CSceneManager;
 class CAudio;
 
@@ -27,6 +27,7 @@ public:
 private:
 	CTitle  m_title;
 	CTitleStart m_start;
+	CTitleContinue m_continue;
 	CAudio* m_pAudio;
 	BYTE diks[256];
 	Ccamera m_camera;

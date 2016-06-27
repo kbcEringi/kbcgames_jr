@@ -72,7 +72,6 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
 	RECT recDisplay;
-	hInst = hInstance;
 	hWnd = GetDesktopWindow();
 	GetWindowRect(hWnd, &recDisplay);
 	hWnd = CreateWindow(

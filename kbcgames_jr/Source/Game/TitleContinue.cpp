@@ -1,33 +1,33 @@
-#include"TitleStart.h"
+#include"TitleContinue.h"
 
-void CTitleStart::Initialize()
+void CTitleContinue::Initialize()
 {
 	//m_2Dobj.Initialize("Texture\\Title.jpg");
-	m_2Dobj.Initialize("Texture\\titl_start.png");
-	vec3Scale = D3DXVECTOR3(200.0f, 100.0f, 1.0f);
+	m_2Dobj.Initialize("Texture\\conte.png");
+	vec3Scale = D3DXVECTOR3(180.0f, 80.0f, 1.0f);
 	//vec3Position = D3DXVECTOR3(450.0f, 250.0f, 0.0f);
-	vec3Position = D3DXVECTOR3(480.0f, 360.0f, 0.0f);
-	scale = MAX;
+	vec3Position = D3DXVECTOR3(480.0f, 450.0f, 0.0f);
+	scale = MAXC;
 }
 
-void CTitleStart::Update()
+void CTitleContinue::Update()
 {
 	Scale();
 }
 
-void CTitleStart::Draw()
+void CTitleContinue::Draw()
 {
 	m_2Dobj.Draw(vec3Position, vec3Scale);
 }
 
-void CTitleStart::Scale()
+void CTitleContinue::Scale()
 {
 	if (vec3Scale.x < scale)
 	{
 		vec3Scale.x += 1.0f;
 		if (vec3Scale.x == scale)
 		{
-			scale = MIN;
+			scale = MINC;
 		}
 	}
 	if (vec3Scale.x > scale)
@@ -35,7 +35,7 @@ void CTitleStart::Scale()
 		vec3Scale.x -= 1.0f;
 		if (vec3Scale.x == scale)
 		{
-			scale = MAX;
+			scale = MAXC;
 		}
 	}
 }

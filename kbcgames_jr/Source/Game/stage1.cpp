@@ -90,6 +90,11 @@ void CStage1::Update()
 		if (GAMEPAD(CGamepad)->GetConnected())
 		{
 			ExecuteChangeCamera(ARRAYSIZE(collisionInfoTable2D), ARRAYSIZE(collisionInfoTable3D));
+
+			if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_Y))
+			{
+				m_goal.SetGoal();
+			}
 		}
 		else
 		{

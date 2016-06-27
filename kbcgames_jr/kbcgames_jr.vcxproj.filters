@@ -193,6 +193,9 @@
     <ClCompile Include="Source\Game\CDataLoad.cpp">
       <Filter>Game\System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\TitleContinue.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Ccamera.h">
@@ -407,6 +410,9 @@
     </ClInclude>
     <ClInclude Include="Source\Game\CDataLoad.h">
       <Filter>Game\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TitleContinue.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

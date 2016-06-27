@@ -22,6 +22,7 @@ void CTitleScene::Initialize()
 	m_camera.UpdateProjectionMatrix();
 	m_camera.Update();
 	m_title.Initialize();
+	m_continue.Initialize();
 	m_start.Initialize();
 	m_Unitychan.Initialize();
 }
@@ -31,6 +32,7 @@ void CTitleScene::Update()
 	m_pAudio->Run();	//周期タスク実行
 	m_camera.Update();
 	m_title.Update();
+	m_continue.Update();
 	m_start.Update();
 	m_Unitychan.Update();
 
@@ -40,6 +42,12 @@ void CTitleScene::Update()
 void CTitleScene::Draw()
 {
 	m_title.Draw();
+	CDataLoad dl;
+	int num = dl.LoadData();
+	if (num > 0)
+	{
+		m_continue.Draw();
+	}
 	m_start.Draw();
 	(*graphicsDevice()).Clear(
 		0,

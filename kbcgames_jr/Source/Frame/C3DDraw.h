@@ -138,6 +138,10 @@ public:
 	void SetLuminance(bool is, float lum = 0){ rens.isLuminance = is; rens.Luminance = lum; }
 	//ディフューズテクスチャパス、ノーマルマップパス
 	void SetNormalMap(LPCSTR);
+	void Release()
+	{
+		SAFE_DELETE(m_skinmodel);
+	}
 	~C3DDraw();
 protected:
 	CSkinModelData* m_skinmodel;

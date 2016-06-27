@@ -1,14 +1,6 @@
 #include"SkinModelDate.h"
 
-#ifndef SAFE_DELETE
-#define SAFE_DELETE(p)       { if (p) { delete (p);     (p)=NULL; } }
-#endif    
-#ifndef SAFE_DELETE_ARRAY
-#define SAFE_DELETE_ARRAY(p) { if (p) { delete[] (p);   (p)=NULL; } }
-#endif    
-#ifndef SAFE_RELEASE
-#define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p)=NULL; } }
-#endif
+
 
 UINT                        g_NumBoneMatricesMax = 0;
 D3DXMATRIXA16*              g_pBoneMatrices = NULL;
@@ -417,7 +409,7 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(
 				}
 
 				// don't remember a pointer into the dynamic memory, just forget the name after loading
-				//pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
+				pMeshContainer->pMaterials[iMaterial].pTextureFilename = NULL;
 			}
 		}
 	}
@@ -598,16 +590,19 @@ CSkinModelData::CSkinModelData() :
 */
 CSkinModelData::~CSkinModelData()
 {
+	Release();
 }
 /*!
 * @brief	ƒŠƒŠ[ƒXB
 */
 void CSkinModelData::Release()
 {
-	if (m_pAnimController) {
-		m_pAnimController->Release();
-		m_pAnimController = NULL;
-	}
+	//if (m_pAnimController) {
+	//	m_pAnimController->Release();
+	//	m_pAnimController = NULL;
+	//}
+	SAFE_DELETE(m_FrameRoot);
+	SAFE_RELEASE(m_pAnimController);
 }
 
 /*!

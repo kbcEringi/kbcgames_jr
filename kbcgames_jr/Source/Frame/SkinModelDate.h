@@ -5,6 +5,15 @@
 #include<d3dx9anim.h>
 #include"CAnimation.h"
 
+#ifndef SAFE_DELETE
+#define SAFE_DELETE(p)       { if (p) { delete (p);     (p)=NULL; } }
+#endif    
+#ifndef SAFE_DELETE_ARRAY
+#define SAFE_DELETE_ARRAY(p) { if (p) { delete[] (p);   (p)=NULL; } }
+#endif    
+#ifndef SAFE_RELEASE
+#define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p)=NULL; } }
+#endif
 
 struct D3DXFRAME_DERIVED : public D3DXFRAME {
 	D3DXMATRIXA16	CombinedTransformationMatrix;	//‡¬Ï‚İs—ñB
