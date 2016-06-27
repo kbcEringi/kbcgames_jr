@@ -9,6 +9,7 @@
 #include "..\Frame\Ccamera.h"
 #include "..\Game\StageClear.h"
 #include "..\Game\TitleUnitychan.h"
+#include "..\Game\ClearSelect.h"
 
 class CSceneManager;
 class CAudio;
@@ -22,6 +23,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	void Select();
 private:
 
 	CAudio* m_pAudio;
@@ -29,4 +31,6 @@ private:
 	Ccamera m_camera;
 	CStageClear m_StageClear;
 	CTitleUnitychan CTUnitychan;
+	CClearSelect m_Select;
+	
 };

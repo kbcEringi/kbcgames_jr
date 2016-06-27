@@ -5,7 +5,7 @@
 
 
 
-class CTitleStart
+class CClearSelect
 {
 public:
 	void Initialize();
@@ -19,8 +19,8 @@ private:
 	D3DXVECTOR3 vec3Scale;
 
 	BYTE diks[256];
-	
+
 	float scale;
-	const float MAX = 250.0f;
-	const float MIN = 200.0f;
+	const float MAX = 400.0f;
+	const float MIN = 300.0f;
 };
