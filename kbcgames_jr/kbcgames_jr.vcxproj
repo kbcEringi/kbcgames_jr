@@ -114,6 +114,7 @@
     <ClCompile Include="Source\Game\CDataLoad.cpp" />
     <ClCompile Include="Source\Game\CFlower.cpp" />
     <ClCompile Include="Source\Game\CGameFlg.cpp" />
+    <ClCompile Include="Source\Game\ClearSelect.cpp" />
     <ClCompile Include="Source\Game\CSelectCursor.cpp" />
     <ClCompile Include="Source\Game\FlowerManager.cpp" />
     <ClCompile Include="Source\Game\GameCursor.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Source\Game\CDataLoad.h" />
     <ClInclude Include="Source\Game\CFlower.h" />
     <ClInclude Include="Source\Game\CGameFlg.h" />
+    <ClInclude Include="Source\Game\ClearSelect.h" />
     <ClInclude Include="Source\Game\CSelectCursor.h" />
     <ClInclude Include="Source\Game\FlowerManager.h" />
     <ClInclude Include="Source\Game\GameCursor.h" />

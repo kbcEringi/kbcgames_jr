@@ -40,6 +40,5 @@ private:
 
 	CAudio* m_pAudio;
 	bool AudioFlag;
-	bool isIn;//ïóÇ…Ç†ÇΩÇ¡ÇΩÅH
 };
 
