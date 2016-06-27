@@ -1,5 +1,6 @@
 #include "CStage.h"
 #include "CStageManager.h"
+#include "..\Audio.h"
 
 CShadowMap g_Shadow;
 
@@ -7,8 +8,17 @@ CStage::CStage()
 {
 	GAMEFLG->Set3D();
 }
+
 void CStage::Initialize()
 {
+	//オーディオ初期化
+	m_pAudio = &Audio();
+	m_pAudio->Initialize(
+		"Audio\\Audio.xgs",
+		"Audio\\Wave Bank.xwb",
+		"Audio\\Audio.xsb");
+	SetStageAudio();
+
 	isButtomTriger = false;		//ボタンが押されているか？
 	isDied = false;
 	
@@ -47,7 +57,6 @@ void CStage::ExecuteChangeCamera(int araySize2D, int araySize3D)
 
 void CStage::Update()
 {
-	m_Player.Died();
 
 	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_B) 
 		&& STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly
@@ -160,4 +169,14 @@ void CStage::Remove3DRigidBody(int arraySize)//ワールドから削除
 				g_bulletPhysics.RemoveRigidBody(m_rigidBody3D[i]);
 		}
 	}
+}
+
+void CStage::SetStageAudio()
+{
+	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+}
+
+void CStage::StopStageAudio()
+{
+	m_pAudio->StopCue("stage1");	//ステージ音楽ストップ
 }

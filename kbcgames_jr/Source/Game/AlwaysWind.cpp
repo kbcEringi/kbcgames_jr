@@ -122,12 +122,13 @@ void CAlwaysWind::Initialize()
 	emi.Init(random, *STAGEMANEGER->GetStage()->GetCamera(), particleParameterTbl, m_data.position);
 
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 	AudioFlag = false;
+	isIn = false;
 	/*size = D3DXVECTOR3(2.0f, 2.0f, 2.0f);*/
 
 }
@@ -149,12 +150,13 @@ void CAlwaysWind::Update()
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;
 			m_force.y = force.y;
-			//SetWindAudio();
+			isIn = true;
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
 				m_force.x = 0.0f;
 				m_force.y = 0.0f;
+				isIn = false;
 			}
 			else{
 				m_force *= 0.95f;
@@ -175,14 +177,15 @@ void CAlwaysWind::Update()
 			m_force.x = force.x;
 			m_force.y = force.y;
 			m_force.z = force.z;
-			//SetWindAudio();
+			isIn = true;
+			
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
 				m_force.x = 0.0f;
 				m_force.y = 0.0f;
 				m_force.z = 0.0f;
-				
+				isIn = false;
 			}
 			else{
 				m_force *= 0.95f;
@@ -194,7 +197,7 @@ void CAlwaysWind::Update()
 		player->ApplyForce(m_force);
 		player->SetMoveSpeed(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	}
-	//StopWindAudio();
+
 	emi.Update();
 }
 

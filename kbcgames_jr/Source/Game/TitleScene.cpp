@@ -6,7 +6,7 @@
 void CTitleScene::Initialize()
 {
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
@@ -23,7 +23,7 @@ void CTitleScene::Initialize()
 	m_camera.Update();
 	m_title.Initialize();
 	m_start.Initialize();
-	m_Unitychan.Initialize();
+	m_Unitychan.Init(m_Unitychan.Run);
 }
 
 void CTitleScene::Update()

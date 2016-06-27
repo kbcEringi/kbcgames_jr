@@ -2,19 +2,14 @@
 #include "Stage1.h"
 #include"..\Frame\Stage\CStageManager.h"
 
-enum UnitychanAnim{
-	Stand,
-	Walk,
-	Run,
-	Jump,
-};
+
 
 CTitleUnitychan::~CTitleUnitychan()
 {
 
 }
 
-void CTitleUnitychan::Initialize()
+void CTitleUnitychan::Init(UnitychanAnim ani)
 {
 	m_SkinModel.Initialize("XFile\\Unity.x");	//ぽいんたXファイル
 	m_SkinModel.Setshadowflg(false);
@@ -47,7 +42,7 @@ void CTitleUnitychan::Initialize()
 
 
 	m_SkinModel.Setunitychanflg();
-	m_SkinModel.SetAnimation(Run);//スタンドアニメーション
+	m_SkinModel.SetAnimation(ani);
 }
 
 void CTitleUnitychan::Update()

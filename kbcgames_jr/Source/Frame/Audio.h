@@ -18,9 +18,14 @@ typedef struct AUDIO_SET{
 
 //XACT初期化
 class CAudio{
-public:
 	CAudio();
 	~CAudio();
+public:
+	static CAudio& GetAudio()
+	{
+		static CAudio instance;
+		return instance;
+	}
 	//XACT初期化関数（エンジン名、ウェーブバンク名、サウンドバンク名)
 	HRESULT Initialize(const char*, const char*, const char*);
 	//エンジン作成
@@ -45,8 +50,13 @@ public:
 	/****************************************************/
 	void StopCue(const char*);
 private:
+	bool isInited;
 	AUDIO_SET m_audio;	//XACTデータ用
 	CAudio* m_pAudio;
 };
 
+static inline CAudio& Audio()
+{
+	return CAudio::GetAudio();
+}
 //WaveBank生成

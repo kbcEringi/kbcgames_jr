@@ -25,14 +25,14 @@ void CPlayer::Initialize()
 	m_SkinModel.Sethureneruflg(true);
 
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 
 	m_position.x = 0.0f;				//X座標
-	m_position.y = 15.0f;				//Y座標
+	m_position.y = 18.0f;				//Y座標
 	m_position.z = 0.0f;				//Z座標
 	m_moveSpeed.x = 0.0f;				//移動速度
 	m_moveSpeed.y = 0.0f;
@@ -223,7 +223,7 @@ void CPlayer::Pos2D()
 		);
 }
 
-void CPlayer::Died()
+void CPlayer::Died(D3DXVECTOR3 pos)
 {
 	if (m_position.y <= -5.0)//死亡判定位置
 	{
@@ -231,9 +231,7 @@ void CPlayer::Died()
 		m_died = true;
 		if (m_position.y <= -15.0f)//この位置にきたら初期位置に戻す
 		{
-			m_position.x = 0.0f;				//X座標
-			m_position.y = 15.0f;				//Y座標
-			m_position.z = 0.0f;				//Z座標
+			m_position = pos;//プレイヤー位置設定
 
 			m_moveSpeed.x = 0.0f;				//移動速度
 			m_moveSpeed.y = 0.0f;

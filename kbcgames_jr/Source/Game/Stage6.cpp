@@ -1,42 +1,41 @@
 #include "Stage6.h"
-#include "..\Frame\Audio.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
 #include"..\Frame\Stage\CStageManager.h"
 
 
 SCollisionInfo collision6InfoTable3D[] = {
-#include "Collision3D_stage03.h"
+#include "Collision3D_stage06.h"
 };
 
 SCollisionInfo collision6InfoTable2D[] = {
-#include "Collision2D_stage03.h"
+#include "Collision2D_stage06.h"
 };
 
-//SGimmickData gimmick3dobj[] = {
-//#include"..\Game\Gimmick3DInfo.h"
-//};
-//
-//SGimmickData gimmick2dobj[] = {
-//#include"..\Game\Gimmick2DInfo.h"
-//};
+SGimmickData gimmick3dobj6[] = {
+#include"..\Game\Gimmick3D_stage06.h"
+};
+
+SGimmickData gimmick2dobj6[] = {
+#include"..\Game\Gimmick2D_stage06.h"
+};
+
+D3DXVECTOR3 playerpos_stage6 = {
+#include"Player_stage6.h"
+};
 
 void CStage6::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
-	//オーディオ初期化
-	m_pAudio = new CAudio();
-	m_pAudio->Initialize(
-		"Audio\\Audio.xgs",
-		"Audio\\Wave Bank.xwb",
-		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+
+	CStage::Initialize();
 
 	D3DXMatrixPerspectiveFovLH(&m_projMatrix, D3DX_PI / 4, 960.0f / 580.0f, 1.0f, 100.0f);
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
+	m_Player.SetPosition(playerpos_stage6);
 	m_Ground6.Initialize();
 
 	m_camera.Initialize();
@@ -66,13 +65,14 @@ void CStage6::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
+	//m_gimmick.InitGimmick(gimmick3dobj6, ARRAYSIZE(gimmick3dobj6), gimmick2dobj6, ARRAYSIZE(gimmick2dobj6));
 
 	GoalCount = 0;
 }
 
 void CStage6::Update()
 {
+	m_Player.Died(playerpos_stage6);
 
 	if (m_goal.GetGoal() != true)
 	{
@@ -106,7 +106,6 @@ void CStage6::Update()
 			}
 		}
 
-		m_pAudio->Run();	//周期タスク実行
 		m_camera.Update();
 		m_Player.Update();//プレイヤー
 		CStage::Update();
@@ -129,7 +128,7 @@ void CStage6::Update()
 	}
 	else if (m_goal.GetGoal() == true)
 	{
-		m_pAudio->StopCue("stage1");	//ステージ音楽再生
+		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
 		m_pointa.SetDraw(false);

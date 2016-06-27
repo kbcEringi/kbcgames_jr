@@ -1,7 +1,8 @@
 #include "Audio.h"
 
 CAudio::CAudio(){
-	memset(&m_audio, 0, sizeof(m_audio));
+	isInited = false;
+	//memset(&m_audio, 0, sizeof(m_audio));
 }//コンストラクタ
 CAudio::~CAudio()//デストラクタ
 {
@@ -11,6 +12,10 @@ CAudio::~CAudio()//デストラクタ
 //グローバル設定ファイルを用いたXACTエンジン初期化
 HRESULT CAudio::Initialize(const char* engineName, const char* wbName, const char* sbName)
 {
+	if (isInited) {
+		return S_OK;
+	}
+	isInited = true;
 	if (FAILED(CreateEngine(engineName))){ return E_FAIL; }
 	if (FAILED(CreateWaveBank(wbName))){ return E_FAIL; }//ウェーブバンク
 	if (FAILED(CreateSoundBank(sbName))){ return E_FAIL; }//サウンドバンク
@@ -155,7 +160,7 @@ void CAudio::Run(){
 
 //CleanupXACT関数実装
 void CAudio::CleanupXACT(){
-	if (m_audio.pEngine){
+/*	if (m_audio.pEngine){
 		m_audio.pEngine->ShutDown();    //XACTをシャットダウン
 		SAFE_RELEASE(m_audio.pEngine);    //XACTエンジンを解放
 	}
@@ -169,7 +174,7 @@ void CAudio::CleanupXACT(){
 	m_audio.pbWaveBank = NULL;
 	m_audio.pWaveBank->Destroy();
 	m_audio.pSoundBank->Destroy();
-	CoUninitialize();
+	CoUninitialize();*/
 }
 
 void CAudio::PlayCue(const char* cue){

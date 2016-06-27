@@ -1,31 +1,31 @@
-#include "Stage3.h"
+#include "Stage8.h"
 #include"CGameFlg.h"
 #include "..\Frame\SceneManager.h"
 #include"..\Frame\Stage\CStageManager.h"
 
 
-SCollisionInfo collision3InfoTable3D[] = {
-#include "Collision3D_stage03.h"
-
+SCollisionInfo collision8InfoTable3D[] = {
+#include "Collision3D_stage08.h"
 };
 
-SCollisionInfo collision3InfoTable2D[] = {
-#include "Collision2D_stage03.h"
+SCollisionInfo collision8InfoTable2D[] = {
+#include "Collision2D_stage08.h"
 };
 
-SGimmickData gimmick3dobj3[] = {
-#include"..\Game\Gimmick3D_stage03.h"
+SGimmickData gimmick3dobj8[] = {
+#include"..\Game\Gimmick3D_stage08.h"
 };
 
-SGimmickData gimmick2dobj3[] = {
-#include"..\Game\Gimmick2D_stage02.h"
+SGimmickData gimmick2dobj8[] = {
+#include"..\Game\Gimmick2D_stage08.h"
 };
 
-D3DXVECTOR3 playerpos_stage3 = {
-#include"Player_stage3.h"
+D3DXVECTOR3 playerpos_stage8 = {
+#include"Player_stage8.h"
 };
 
-void CStage3::Initialize()
+
+void CStage8::Initialize()
 {
 	m_isAdd2DCollision = false;
 	m_isAdd3DCollision = false;
@@ -36,8 +36,8 @@ void CStage3::Initialize()
 
 	m_Player.Initialize();
 	m_Player.SetPointa(&m_pointa);
-	m_Player.SetPosition(playerpos_stage3);
-	m_Ground3.Initialize();
+	m_Player.SetPosition(playerpos_stage8);
+	m_Ground8.Initialize();
 
 	m_camera.Initialize();
 	m_camera.SetEyePt(D3DXVECTOR3(0.0f, 1.0f, -3.0f));
@@ -50,7 +50,7 @@ void CStage3::Initialize()
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 
-	m_goal.Initialize(D3DXVECTOR3(187.0f, 12.0f, 0.0f));
+	m_goal.Initialize(D3DXVECTOR3(425.0f, 31.0f, 0.0f));
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);
@@ -64,22 +64,22 @@ void CStage3::Initialize()
 
 	this->CreateCollision3D();
 	this->CreateCollision2D();
-	this->Add3DRigidBody(ARRAYSIZE(collision3InfoTable3D));
+	this->Add3DRigidBody(ARRAYSIZE(collision8InfoTable3D));
 
-	m_gimmick.InitGimmick(gimmick3dobj3, ARRAYSIZE(gimmick3dobj3), gimmick2dobj3, ARRAYSIZE(gimmick2dobj3));
+	//m_gimmick.InitGimmick(gimmick3dobj8, ARRAYSIZE(gimmick3dobj8), gimmick2dobj8, ARRAYSIZE(gimmick2dobj8));
 
 	GoalCount = 0;
 }
 
-void CStage3::Update()
+void CStage8::Update()
 {
-	m_Player.Died(playerpos_stage3);
+	m_Player.Died(playerpos_stage8);
 
 	if (m_goal.GetGoal() != true)
 	{
 		if (GAMEPAD(CGamepad)->GetConnected())
 		{
-			ExecuteChangeCamera(ARRAYSIZE(collision3InfoTable2D), ARRAYSIZE(collision3InfoTable3D));
+			ExecuteChangeCamera(ARRAYSIZE(collision8InfoTable2D), ARRAYSIZE(collision8InfoTable3D));
 		}
 		else
 		{
@@ -115,8 +115,8 @@ void CStage3::Update()
 		D3DXVECTOR3 lightDir = m_Player.GetPosition() - lightPos;
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
-		m_Ground3.Update();//地面
-		m_gimmick.Update();
+		m_Ground8.Update();//地面
+		//m_gimmick.Update();
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ
@@ -132,7 +132,6 @@ void CStage3::Update()
 		CStage::StopStageAudio();
 		m_Player.StopRunAudio();
 		m_Player.StopJumpAudio();
-		m_goal.SetGoalAudio();
 		m_pointa.SetDraw(false);
 		m_Player.Update();
 		m_goal.Update();
@@ -141,22 +140,21 @@ void CStage3::Update()
 
 		if (GoalCount >= 300)
 		{
-			m_goal.StopGoalAudio();
-			Remove3DRigidBody(ARRAYSIZE(collision3InfoTable3D));
-			Remove2DRigidBody(ARRAYSIZE(collision3InfoTable2D));
-			dl.SetData(4);
-			STAGEMANEGER->SelectStage(4);
+			Remove3DRigidBody(ARRAYSIZE(collision8InfoTable3D));
+			Remove2DRigidBody(ARRAYSIZE(collision8InfoTable2D));
+			dl.SetData(1);
+			STAGEMANEGER->SelectStage(9);
 		}
 	}
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
 }
 
-void CStage3::Draw()
+void CStage8::Draw()
 {
 	g_Shadow.Draw(m_camera.GetProjectionMatrix());
 	m_Back1.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	m_Ground3.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
+	m_Ground8.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ステージ１を描画
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ポインタ描画
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Playerを描画
 	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
@@ -190,15 +188,15 @@ void CStage3::Draw()
 
 }
 
-void CStage3::CreateCollision3D()
+void CStage8::CreateCollision3D()
 {
-	int arraySize = ARRAYSIZE(collision3InfoTable3D);
+	int arraySize = ARRAYSIZE(collision8InfoTable3D);
 	if (arraySize >= MAX_COLLISION)
 	{
 		std::abort();
 	}
 	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collision3InfoTable3D[i];
+		SCollisionInfo& collision = collision8InfoTable3D[i];
 		//ここで剛体とかを登録する。
 		//剛体を初期化。
 		{
@@ -221,15 +219,15 @@ void CStage3::CreateCollision3D()
 	}
 }
 
-void CStage3::CreateCollision2D()
+void CStage8::CreateCollision2D()
 {
-	int arraySize = ARRAYSIZE(collision3InfoTable2D);
+	int arraySize = ARRAYSIZE(collision8InfoTable2D);
 	if (arraySize >= MAX_COLLISION)
 	{
 		std::abort();
 	}
 	for (int i = 0; i < arraySize; i++) {
-		SCollisionInfo& collision = collision3InfoTable2D[i];
+		SCollisionInfo& collision = collision8InfoTable2D[i];
 		//ここで剛体とかを登録する。
 		//剛体を初期化。
 		{

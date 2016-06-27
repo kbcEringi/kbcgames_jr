@@ -35,7 +35,7 @@ public:
 	void Update()override;
 	void Draw(D3DXMATRIX, D3DXMATRIX)override;
 	void Move(D3DXVECTOR3 pos);					//Moveä÷êî
-	void Died();
+	void Died(D3DXVECTOR3 pos);
 	D3DXVECTOR3 Get2DPos()
 	{
 		Pos2D();

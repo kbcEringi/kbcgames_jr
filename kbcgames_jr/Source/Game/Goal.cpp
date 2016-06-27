@@ -32,7 +32,7 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 	m_SkinModel.Initialize("XFile\\Goal.x");
 	m_SkinModel.SetLuminance(false, 0.0f);
 	//オーディオ初期化
-	m_pAudio = new CAudio();
+	m_pAudio = &Audio();
 	m_pAudio->Initialize(
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",

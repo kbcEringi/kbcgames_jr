@@ -9,7 +9,7 @@
 /********オブジェクト2D********/
 /********オブジェクト3D********/
 #include"..\Frame\C3DObject.h"
-#include "Ground6.h"
+#include "Ground7.h"
 #include "Stage1Back.h"
 #include "Goal.h"
 
@@ -27,11 +27,11 @@ class C3DObject;
 
 //enum GIMMICK{ AlwaysWind };
 
-class CStage6 : public CStage
+class CStage7 : public CStage
 {
 public:
-	CStage6(){}
-	~CStage6(){}
+	CStage7(){}
+	~CStage7(){}
 	void Initialize();
 	void Update();
 	void Draw();
@@ -46,7 +46,7 @@ private:
 
 	CRayCursor m_Ray;
 
-	CGround6 m_Ground6;
+	CGround7 m_Ground7;
 	CStage1Back m_Back1;
 	CGoal m_goal;
 
