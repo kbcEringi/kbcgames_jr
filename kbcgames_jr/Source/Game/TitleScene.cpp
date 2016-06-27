@@ -11,7 +11,7 @@ void CTitleScene::Initialize()
 		"Audio\\Audio.xgs",
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
-	m_pAudio->PlayCue("title");	//タイトル音楽再生
+	//m_pAudio->PlayCue("title");	//タイトル音楽再生
 	ZeroMemory(diks, sizeof(diks));		//キーインプット初期化
 	m_camera.Initialize();
 	m_camera.SetNear(0.1f);
@@ -44,7 +44,7 @@ void CTitleScene::Draw()
 	m_title.Draw();
 	CDataLoad dl;
 	int num = dl.LoadData();
-	if (num > 0 || num<10)
+	if (num > 0 && num<10)
 	{
 		m_continue.Draw();
 	}
@@ -80,7 +80,7 @@ void CTitleScene::Select()
 		{
 			CDataLoad dl;
 			int num = dl.LoadData();
-			if (num > 0 || num<10)
+			if (num > 0 && num<10)
 			{
 				STAGEMANEGER->SelectStage(num);
 				SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
@@ -105,7 +105,7 @@ void CTitleScene::Select()
 		{
 			CDataLoad dl;
 			int num = dl.LoadData();
-			if (num > 0)
+			if (num > 0 && num<10)
 			{
 				STAGEMANEGER->SelectStage(num);
 				SINSTANCE(CSceneManager)->ChangeScene(SCENE::GAME);
