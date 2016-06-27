@@ -142,7 +142,7 @@ void CStage7::Update()
 		{
 			Remove3DRigidBody(ARRAYSIZE(collision7InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision7InfoTable2D));
-			dl.SetData(1);
+			dl.SetData(8);
 			STAGEMANEGER->SelectStage(8);
 		}
 	}

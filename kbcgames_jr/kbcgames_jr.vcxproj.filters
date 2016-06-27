@@ -196,6 +196,27 @@
     <ClCompile Include="Source\Game\TitleContinue.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Ground7.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Ground8.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Ground9.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage7.cpp">
+      <Filter>Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage8.cpp">
+      <Filter>Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Stage9.cpp">
+      <Filter>Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\StageClear.cpp">
+      <Filter>Game\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Frame\Ccamera.h">
@@ -413,6 +434,27 @@
     </ClInclude>
     <ClInclude Include="Source\Game\TitleContinue.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Ground7.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Ground8.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Ground9.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage7.h">
+      <Filter>Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage8.h">
+      <Filter>Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Stage9.h">
+      <Filter>Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\StageClear.h">
+      <Filter>Game\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
