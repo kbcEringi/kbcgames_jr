@@ -9,7 +9,7 @@
 //Gimmick_00 (1)
 {
 	D3DXVECTOR3(27.10f, 18.57f, 2.80f),             //平行移動
-	D3DXQUATERNION(0.00, 0.27f, 0.00f, 0.96f ),    //回転
+	D3DXQUATERNION(0.00, 0.00f, 0.00f, 1.00f ),    //回転
 	D3DXVECTOR3(1.50f, 1.50f, 3.00f ),            //拡大
 	D3DXVECTOR3(0.00f, 0.00f, 0.00f ),            //自由に使えるよ
 	0,                                              //ギミックタイプ
@@ -49,7 +49,7 @@
 //Gimmick_00 (8)
 {
 	D3DXVECTOR3(66.50f, 18.57f, -3.00f),             //平行移動
-	D3DXQUATERNION(0.00, -0.14f, 0.00f, 0.99f ),    //回転
+	D3DXQUATERNION(0.00, 0.00f, 0.00f, 1.00f ),    //回転
 	D3DXVECTOR3(1.50f, 1.50f, 3.00f ),            //拡大
 	D3DXVECTOR3(0.00f, 0.00f, 0.00f ),            //自由に使えるよ
 	0,                                              //ギミックタイプ
@@ -73,7 +73,7 @@
 //Gimmick_00 (11)
 {
 	D3DXVECTOR3(93.08f, 18.57f, 2.20f),             //平行移動
-	D3DXQUATERNION(0.00, 0.11f, 0.00f, 0.99f ),    //回転
+	D3DXQUATERNION(0.00, 0.00f, 0.00f, 1.00f ),    //回転
 	D3DXVECTOR3(1.50f, 1.50f, 3.00f ),            //拡大
 	D3DXVECTOR3(0.00f, 0.00f, 0.00f ),            //自由に使えるよ
 	0,                                              //ギミックタイプ
