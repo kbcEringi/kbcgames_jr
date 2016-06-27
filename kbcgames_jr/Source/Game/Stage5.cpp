@@ -13,7 +13,7 @@ SCollisionInfo collision5InfoTable2D[] = {
 };
 
 SGimmickData gimmick3dobj5[] = {
-#include"..\Game\Gimmick3D_stage05.h"
+#include"..\Game\Gimmick3D_stage05 .h"
 };
 
 SGimmickData gimmick2dobj5[] = {
