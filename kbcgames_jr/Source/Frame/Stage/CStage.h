@@ -84,6 +84,7 @@ protected:
 	CDataLoad dl;
 
 	CAudio* m_pAudio;
+	D3DXVECTOR3 syokipos;
 };
 
 extern CShadowMap g_Shadow;

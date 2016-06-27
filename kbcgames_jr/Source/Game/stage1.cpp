@@ -70,7 +70,7 @@ void CStage1::Initialize()
 	this->Add3DRigidBody(ARRAYSIZE(collisionInfoTable3D));
 
 	m_gimmick.InitGimmick(gimmick3dobj, ARRAYSIZE(gimmick3dobj), gimmick2dobj, ARRAYSIZE(gimmick2dobj));
-	m_flower.InitFlower(flower, ARRAYSIZE(flower));
+	//m_flower.InitFlower(flower, ARRAYSIZE(flower));
 
 	GoalCount = 0;
 }
@@ -166,7 +166,7 @@ void CStage1::Draw()
 	m_pointa.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//ƒ|ƒCƒ“ƒ^•`‰æ
 	m_Player.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());//Player‚ğ•`‰æ
 	m_gimmick.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
-	m_flower.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
+	//m_flower.Draw(m_camera.GetViewMatrix(), m_camera.GetProjectionMatrix());
 	
 	if (GAMEFLG->Getflg() == false)
 	{

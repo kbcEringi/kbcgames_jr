@@ -1,13 +1,14 @@
 #include"GameCursor.h"
 #include "Stage1.h"
 #include"..\Frame\Stage\CStageManager.h"
+#include"..\Frame\haba.h"
 
 void CGameCursor::Initialize()
 {
 	m_2Dobj.Initialize("Texture\\buttefly.png");
 	m_2Dobj.SetLuminance(true, 0.2);
 	vec3Scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
-	vec3Position = D3DXVECTOR3(480.0f, 280.0f, 0.0f);
+	vec3Position = D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0);
 	state = view;//表示している
 }
 
@@ -57,18 +58,19 @@ void CGameCursor::Move()
 			(*GetKeyDevice()).Acquire();//キーデバイス取得
 		}
 	}
-
-	D3DXVECTOR3 v;
-	v = vec3Position - STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos();
-	float length = 0.0f;
-	length = D3DXVec3Length(&v);
-	if (length >= LENGTH)
+	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly && STAGEMANEGER->GetStage()->GetPlayer()->GetDied() == true)
 	{
-		D3DXVec3Normalize(&v, &v);
-		v *= LENGTH;
-		vec3Position = STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos() + v;
+		D3DXVECTOR3 v;
+		v = vec3Position - STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos();
+		float length = 0.0f;
+		length = D3DXVec3Length(&v);
+		if (length >= LENGTH)
+		{
+			D3DXVec3Normalize(&v, &v);
+			v *= LENGTH;
+			vec3Position = STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos() + v;
+		}
 	}
-
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
 }
