@@ -173,7 +173,7 @@ void CStage::Remove3DRigidBody(int arraySize)//ワールドから削除
 
 void CStage::SetStageAudio()
 {
-	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 }
 
 void CStage::StopStageAudio()
