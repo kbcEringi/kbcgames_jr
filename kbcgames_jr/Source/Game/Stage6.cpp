@@ -58,8 +58,8 @@ void CStage6::Initialize()
 	m_Ray.SetPointa(&m_pointa);
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 
-	//g_Shadow.Create(512, 512);
-	//g_Shadow.Entry(&m_Player);
+	g_Shadow.Create(512, 512);
+	g_Shadow.Entry(&m_Player);
 
 	this->CreateCollision3D();
 	this->CreateCollision2D();
@@ -143,7 +143,8 @@ void CStage6::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision6InfoTable2D));
-			dl.SetData(1);
+			dl.SetData(7);
+
 			STAGEMANEGER->SelectStage(7);
 		}
 	}

@@ -2,6 +2,9 @@
 #include"..\Frame\Stage\CStageManager.h"
 #include"..\Frame\SceneManager.h"
 #include "..\Frame\Audio.h"
+#ifdef _DEBUG
+#include"..\Frame\CGamepad.h"
+#endif
 
 SParicleEmitParameter GoalparticleParameterTbl
 {
@@ -56,6 +59,12 @@ void CGoal::Initialize(D3DXVECTOR3 pos)
 
 void CGoal::Update()
 {
+#ifdef _DEBUG
+	if (GAMEPAD(CGamepad)->isButtonsDown(GAMEPAD_Y))
+	{
+		goalflag = true;
+	}
+#endif
 	m_pAudio->Run();
 	D3DXVECTOR3 pos = STAGEMANEGER->GetStage()->GetPlayer()->GetPosition();
 	if (GAMEFLG->Getflg() == true)

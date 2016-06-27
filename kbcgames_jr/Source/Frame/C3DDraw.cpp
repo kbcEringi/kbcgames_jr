@@ -318,11 +318,4 @@ void C3DDraw::SetNormalMap( LPCSTR NorFileName)
 
 C3DDraw::~C3DDraw()
 {
-	if (m_skinmodel != NULL)
-	{
-		m_skinmodel->Release();
-		//delete m_skinmodel;
-		m_skinmodel = NULL;
-	}
-
 }

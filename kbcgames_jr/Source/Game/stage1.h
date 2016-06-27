@@ -35,7 +35,7 @@ public:
 	void CreateCollision3D();
 	void CreateCollision2D();
 	
-
+	
 private:
 
 	C3DDraw Obj;

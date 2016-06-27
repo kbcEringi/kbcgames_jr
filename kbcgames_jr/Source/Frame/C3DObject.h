@@ -18,13 +18,17 @@ class C3DObject
 {
 public:
 	C3DObject(){ D3DXMatrixIdentity(&m_matWorld); D3DXMatrixIdentity(&m_matRot); }
-	virtual ~C3DObject(){}
+	virtual ~C3DObject(){ Release(); }
 public:
 	virtual void Initialize()=0;
 	virtual void Update()=0;
 	virtual void Draw(D3DXMATRIX, D3DXMATRIX) = 0;
 	C3DDraw* GetSkinModel(){ return &m_SkinModel; }
 	void SetObjectData(ObjectData obj){ m_data = obj; }
+	void Release()
+	{
+		m_SkinModel.Release();
+	}
 protected:
 	C3DDraw m_SkinModel;
 	ObjectData m_data;

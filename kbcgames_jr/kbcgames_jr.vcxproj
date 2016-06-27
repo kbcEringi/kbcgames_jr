@@ -152,6 +152,7 @@
     <ClCompile Include="Source\Game\StageClear.cpp" />
     <ClCompile Include="Source\Game\stagetest.cpp" />
     <ClCompile Include="Source\Game\Title.cpp" />
+    <ClCompile Include="Source\Game\TitleContinue.cpp" />
     <ClCompile Include="Source\Game\TitleScene.cpp" />
     <ClCompile Include="Source\Game\TitleStart.cpp" />
     <ClCompile Include="Source\Game\TitleUnitychan.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="Source\Game\StageClear.h" />
     <ClInclude Include="Source\Game\stagetest.h" />
     <ClInclude Include="Source\Game\Title.h" />
+    <ClInclude Include="Source\Game\TitleContinue.h" />
     <ClInclude Include="Source\Game\TitleScene.h" />
     <ClInclude Include="Source\Game\TitleStart.h" />
     <ClInclude Include="Source\Game\TitleUnitychan.h" />

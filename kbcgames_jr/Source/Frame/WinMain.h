@@ -9,7 +9,6 @@
 
 TCHAR gName[100] = _T("3DRogueDungeons");
 
-HINSTANCE hInst;
 HWND hWnd;
 CGraphicsDevice g_graphicsDevice;
 Dinput g_input;

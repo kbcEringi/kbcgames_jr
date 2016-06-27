@@ -59,8 +59,8 @@ void CStage4::Initialize()
 	m_Ray.SetPointa(&m_pointa);
 	D3DXVECTOR3 boxPosition(m_position.x, m_position.y, m_position.z);
 
-	//g_Shadow.Create(512, 512);
-	//g_Shadow.Entry(&m_Player);
+	g_Shadow.Create(512, 512);
+	g_Shadow.Entry(&m_Player);
 
 	this->CreateCollision3D();
 	this->CreateCollision2D();

@@ -144,7 +144,7 @@ void CStage8::Update()
 			m_goal.StopGoalAudio();
 			Remove3DRigidBody(ARRAYSIZE(collision8InfoTable3D));
 			Remove2DRigidBody(ARRAYSIZE(collision8InfoTable2D));
-			dl.SetData(1);
+			dl.SetData(9);
 			STAGEMANEGER->SelectStage(9);
 		}
 	}
