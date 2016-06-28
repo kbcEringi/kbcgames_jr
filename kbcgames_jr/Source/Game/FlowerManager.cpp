@@ -30,5 +30,6 @@ void FlowerManager::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	while (p != m_Flower.end())
 	{
 		(*p)->Render(view, proj);
+		p++;
 	}
 }

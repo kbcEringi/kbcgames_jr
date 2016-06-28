@@ -20,7 +20,7 @@ SGimmickData gimmick2dobj[] = {
 };
 
 SFlower flower[] = {
-#include"Flower_stage1.h"
+#include"Flower_stage01.h"
 };
 
 D3DXVECTOR3 playerpos_stage1 = {

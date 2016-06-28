@@ -1,6 +1,7 @@
 #include "CStage.h"
 #include "CStageManager.h"
 #include "..\Audio.h"
+#include"..\haba.h"
 
 CShadowMap g_Shadow;
 
@@ -18,7 +19,7 @@ void CStage::Initialize()
 		"Audio\\Wave Bank.xwb",
 		"Audio\\Audio.xsb");
 	SetStageAudio();
-
+	syokipos = D3DXVECTOR3(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0);
 	isButtomTriger = false;		//ボタンが押されているか？
 	isDied = false;
 	
@@ -104,7 +105,8 @@ void CStage::Update()
 				m_Player.StopDied();
 				//初期化
 				m_pointa.SetPos(&m_Player.GetPosition());//ポインタ位置初期化
-				m_GameCursor.SetPos(m_GCursorWind.Get2DPosition());
+				//m_GameCursor.SetPos(m_GCursorWind.Get2DPosition());
+				m_GameCursor.SetPos(syokipos);
 				m_camera.RotLongitudinal(D3DXToRadian(-20.0f));//カメラ初期回転位置
 			}
 			isDied = false;
@@ -173,7 +175,7 @@ void CStage::Remove3DRigidBody(int arraySize)//ワールドから削除
 
 void CStage::SetStageAudio()
 {
-	//m_pAudio->PlayCue("stage1");	//ステージ音楽再生
+	m_pAudio->PlayCue("stage1");	//ステージ音楽再生
 }
 
 void CStage::StopStageAudio()
