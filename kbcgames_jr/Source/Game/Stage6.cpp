@@ -12,9 +12,9 @@ SCollisionInfo collision6InfoTable2D[] = {
 #include "Collision2D_stage06.h"
 };
 
-//SGimmickData gimmick3dobj6[] = {
-//#include"..\Game\Gimmick3D_stage06.h"
-//};
+SGimmickData gimmick3dobj6[] = {
+#include"..\Game\Gimmick3D_stage06.h"
+};
 
 SGimmickData gimmick2dobj6[] = {
 #include"..\Game\Gimmick2D_stage06.h"
