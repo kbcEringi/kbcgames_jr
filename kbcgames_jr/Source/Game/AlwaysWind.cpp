@@ -149,13 +149,11 @@ void CAlwaysWind::Update()
 			D3DXVec3Transform(&force, &m_force, &m_rotationMatrix);
 			m_force.x = force.x;
 			m_force.y = force.y;
-			SetWindAudio();
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
 				m_force.x = 0.0f;
 				m_force.y = 0.0f;
-				StopWindAudio();
 			}
 			else{
 				m_force *= 0.95f;
@@ -176,14 +174,12 @@ void CAlwaysWind::Update()
 			m_force.x = force.x;
 			m_force.y = force.y;
 			m_force.z = force.z;
-			SetWindAudio();
 		}
 		else{
 			if (D3DXVec3Length(&m_force) < 0.1f){
 				m_force.x = 0.0f;
 				m_force.y = 0.0f;
 				m_force.z = 0.0f;
-				StopWindAudio();
 			}
 			else{
 				m_force *= 0.95f;
@@ -195,7 +191,6 @@ void CAlwaysWind::Update()
 		player->ApplyForce(m_force);
 		player->SetMoveSpeed(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	}
-	
 	emi.Update();
 }
 
@@ -206,23 +201,4 @@ void CAlwaysWind::Draw(D3DXMATRIX view, D3DXMATRIX proj)
 	D3DXMatrixTranslation(&m_matWorld, m_data.position.x, m_data.position.y, m_data.position.z);
 	
 	//m_SkinModel.Draw(m_matWorld, view, proj);
-}
-
-void CAlwaysWind::SetWindAudio()
-{
-	if (AudioFlag == false)
-	{
-		m_pAudio->PlayCue("wind");
-		AudioFlag = true;
-	}
-	
-}
-
-void CAlwaysWind::StopWindAudio()
-{
-	if (AudioFlag == true)
-	{
-		m_pAudio->StopCue("wind");
-		AudioFlag = false;
-	}
 }
