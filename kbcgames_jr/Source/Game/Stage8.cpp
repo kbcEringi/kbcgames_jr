@@ -116,7 +116,7 @@ void CStage8::Update()
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground8.Update();//地面
-		//m_gimmick.Update();
+		m_gimmick.Update();
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ

@@ -65,7 +65,7 @@ void CStage6::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj6, ARRAYSIZE(gimmick3dobj6), gimmick2dobj6, ARRAYSIZE(gimmick2dobj6));
+	m_gimmick.InitGimmick(gimmick3dobj6, ARRAYSIZE(gimmick3dobj6), gimmick2dobj6, ARRAYSIZE(gimmick2dobj6));
 
 	GoalCount = 0;
 }
@@ -115,7 +115,7 @@ void CStage6::Update()
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground6.Update();//地面
-		//m_gimmick.Update();
+		m_gimmick.Update();
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ
