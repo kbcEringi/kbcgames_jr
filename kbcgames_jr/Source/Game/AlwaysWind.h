@@ -21,13 +21,11 @@ public:
 	{
 		return m_data.position;
 	}
-	void SetObjectData(ObjectData obj){ 
+	void SetObjectData(ObjectData obj){
 		C3DObject::SetObjectData(obj);
 		m_aabbMax += obj.position;
 		m_aabbMin += obj.position;
 	}
-	void SetWindAudio();
-	void StopWindAudio();
 
 private:
 	CRandom random;

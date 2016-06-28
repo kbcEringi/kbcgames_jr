@@ -33,7 +33,7 @@ void CGameCursor::Move()
 		sizeof(diks),	// パラメータ バッファサイズ
 		&diks);
 
-	const float LENGTH = 360.0f;
+	const float LENGTH = 100.0f;
 
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
