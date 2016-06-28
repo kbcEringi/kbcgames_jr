@@ -37,4 +37,6 @@ private:
 	D3DXVECTOR3 vec3Scale;
 	BYTE diks[256];
 	State state;
+
+	bool flg;
 };
