@@ -12,13 +12,13 @@ SCollisionInfo collision9InfoTable2D[] = {
 #include "Collision2D_stage10.h"
 };
 
-//SGimmickData gimmick3dobj9[] = {
-//#include"..\Game\Gimmick3D_stage06.h"
-//};
-//
-//SGimmickData gimmick2dobj9[] = {
-//#include"..\Game\Gimmick2D_stage06.h"
-//};
+SGimmickData gimmick3dobj9[] = {
+#include"..\Game\Gimmick3D_stage09.h"
+};
+
+SGimmickData gimmick2dobj9[] = {
+#include"..\Game\Gimmick2D_stage09.h"
+};
 
 D3DXVECTOR3 playerpos_stage9 = {
 #include"Player_stage10.h"

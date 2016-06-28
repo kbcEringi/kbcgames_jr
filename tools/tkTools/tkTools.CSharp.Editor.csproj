@@ -122,7 +122,11 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\OutputCollitionInfo.cs" />
     <Compile Include="Assets\Editor\OutputCourseDef.cs" />
+    <Compile Include="Assets\Editor\gimmickRestoration.cs" />
+    <Compile Include="Assets\Editor\outputFlower.cs" />
+    <Compile Include="Assets\Editor\outputPlayerPos.cs" />
     <Compile Include="Assets\Editor\outputgimmick.cs" />
+    <Compile Include="Assets\Editor\stagecollitionRestoration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
