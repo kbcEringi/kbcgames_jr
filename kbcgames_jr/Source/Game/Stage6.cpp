@@ -65,7 +65,7 @@ void CStage6::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision6InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj6, ARRAYSIZE(gimmick3dobj6), gimmick2dobj6, ARRAYSIZE(gimmick2dobj6));
+	m_gimmick.InitGimmick(gimmick3dobj6, ARRAYSIZE(gimmick3dobj6), gimmick2dobj6, ARRAYSIZE(gimmick2dobj6));
 
 	GoalCount = 0;
 }
