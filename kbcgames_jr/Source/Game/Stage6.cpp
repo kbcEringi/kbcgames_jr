@@ -12,9 +12,9 @@ SCollisionInfo collision6InfoTable2D[] = {
 #include "Collision2D_stage06.h"
 };
 
-SGimmickData gimmick3dobj6[] = {
-#include"..\Game\Gimmick3D_stage06.h"
-};
+//SGimmickData gimmick3dobj6[] = {
+//#include"..\Game\Gimmick3D_stage06.h"
+//};
 
 SGimmickData gimmick2dobj6[] = {
 #include"..\Game\Gimmick2D_stage06.h"
@@ -115,7 +115,7 @@ void CStage6::Update()
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground6.Update();//地面
-		//m_gimmick.Update();
+		m_gimmick.Update();
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ
