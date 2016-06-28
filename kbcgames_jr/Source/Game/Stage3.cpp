@@ -18,7 +18,7 @@ SGimmickData gimmick3dobj3[] = {
 };
 
 SGimmickData gimmick2dobj3[] = {
-#include"..\Game\Gimmick2D_stage02.h"
+#include"..\Game\Gimmick2D_stage03.h"
 };
 
 D3DXVECTOR3 playerpos_stage3 = {
@@ -50,7 +50,7 @@ void CStage3::Initialize()
 	g_Shadow.Create(512, 512);
 	g_Shadow.Entry(&m_Player);
 
-	m_goal.Initialize(D3DXVECTOR3(187.0f, 12.0f, 0.0f));
+	m_goal.Initialize(D3DXVECTOR3(174.0f, 12.0f, 0.0f));
 
 	m_Back1.Initialize();
 	m_Back1.SetPointa(&m_Player);

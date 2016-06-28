@@ -7,7 +7,7 @@
 #include"Input.h"
 #include"haba.h"
 
-TCHAR gName[100] = _T("fly fly flying");
+TCHAR gName[100] = _T("Fly Fly Flying");
 
 HWND hWnd;
 CGraphicsDevice g_graphicsDevice;
