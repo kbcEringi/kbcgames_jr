@@ -10,6 +10,7 @@ void CGameCursor::Initialize()
 	vec3Scale = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	vec3Position = D3DXVECTOR3(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0);
 	state = view;//表示している
+	flg = false;
 }
 
 void CGameCursor::Update()
@@ -29,36 +30,39 @@ void CGameCursor::Draw()
 
 void CGameCursor::Move()
 {
-	(*GetKeyDevice()).GetDeviceState(
-		sizeof(diks),	// パラメータ バッファサイズ
-		&diks);
 
 	const float LENGTH = 360.0f;
 
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
-		if (KEYDOWN(diks, DIK_RIGHT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()>0)//右
+		if (GAMEPAD(CGamepad)->GetStickL_X()>0)//右
 		{
 			vec3Position.x += 6.0f;
+			flg = true;
 		}
-		if (KEYDOWN(diks, DIK_LEFT) & 0x80 || GAMEPAD(CGamepad)->GetStickL_X()<0)//左
+		if (GAMEPAD(CGamepad)->GetStickL_X()<0)//左
 		{
 			vec3Position.x -= 6.0f;
+			flg = true;
 		}
-		if (KEYDOWN(diks, DIK_UP) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() > 0)//上
+		if (GAMEPAD(CGamepad)->GetStickL_Y() > 0)//上
 		{
 			vec3Position.y -= 6.0f;
+			flg = true;
 		}
-		if (KEYDOWN(diks, DIK_DOWN) & 0x80 || GAMEPAD(CGamepad)->GetStickL_Y() < 0)//下
+		if (GAMEPAD(CGamepad)->GetStickL_Y() < 0)//下
 		{
 			vec3Position.y += 6.0f;
+			flg = true;
 		}
-		else
+		if (GAMEPAD(CGamepad)->GetStickL_X() == 0 && GAMEPAD(CGamepad)->GetStickL_X() == 0 &&
+			GAMEPAD(CGamepad)->GetStickL_Y() == 0 && GAMEPAD(CGamepad)->GetStickL_Y() == 0)
 		{
-			(*GetKeyDevice()).Acquire();//キーデバイス取得
+			flg == false;
 		}
+
 	}
-	if (STAGEMANEGER->GetStage()->GetPlayer()->GetState() != CPlayer::StateFly && STAGEMANEGER->GetStage()->GetPlayer()->GetDied() == true)
+	if (flg==true)
 	{
 		D3DXVECTOR3 v;
 		v = vec3Position - STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos();
@@ -70,6 +74,8 @@ void CGameCursor::Move()
 			v *= LENGTH;
 			vec3Position = STAGEMANEGER->GetStage()->GetPlayer()->Get2DPos() + v;
 		}
+		flg = false;
+
 	}
 	GAMEPAD(CGamepad)->UpdateControllerState();
 
