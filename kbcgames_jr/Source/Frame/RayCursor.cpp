@@ -156,7 +156,7 @@ void CRayCursor::Update(D3DXVECTOR3 pos, D3DXMATRIX ViewMatrix, D3DXMATRIX Proje
 				if (GAMEFLG->Getflg() == true)
 				{
 					//ヒットしたXZ座標とPlayerの足元に設置(2D)
-					D3DXVECTOR3 pos = D3DXVECTOR3(callback.hitPos.x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y - 0.5f, callback.hitPos.z);
+					D3DXVECTOR3 pos = D3DXVECTOR3(callback.hitPos.x, STAGEMANEGER->GetStage()->GetPlayer()->GetPosition().y - 0.5f, 0); //callback.hitPos.z);
 					m_Pointa->SetPos(&pos);
 				}
 				else
