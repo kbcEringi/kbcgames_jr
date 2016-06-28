@@ -5,20 +5,20 @@
 
 
 SCollisionInfo collision9InfoTable3D[] = {
-#include "Collision3D_stage10.h"
+#include "Collision3D_stage09.h"
 };
 
 SCollisionInfo collision9InfoTable2D[] = {
-#include "Collision2D_stage10.h"
+#include "Collision2D_stage09.h"
 };
 
-//SGimmickData gimmick3dobj9[] = {
-//#include"..\Game\Gimmick3D_stage06.h"
-//};
-//
-//SGimmickData gimmick2dobj9[] = {
-//#include"..\Game\Gimmick2D_stage06.h"
-//};
+SGimmickData gimmick3dobj9[] = {
+#include"..\Game\Gimmick3D_stage09.h"
+};
+
+SGimmickData gimmick2dobj9[] = {
+#include"..\Game\Gimmick2D_stage09.h"
+};
 
 D3DXVECTOR3 playerpos_stage9 = {
 #include"Player_stage10.h"
@@ -65,7 +65,7 @@ void CStage9::Initialize()
 	this->CreateCollision2D();
 	this->Add3DRigidBody(ARRAYSIZE(collision9InfoTable3D));
 
-	//m_gimmick.InitGimmick(gimmick3dobj9, ARRAYSIZE(gimmick3dobj9), gimmick2dobj9, ARRAYSIZE(gimmick2dobj9));
+	m_gimmick.InitGimmick(gimmick3dobj9, ARRAYSIZE(gimmick3dobj9), gimmick2dobj9, ARRAYSIZE(gimmick2dobj9));
 
 	GoalCount = 0;
 }
@@ -115,7 +115,7 @@ void CStage9::Update()
 		D3DXVec3Normalize(&lightDir, &lightDir);
 		g_Shadow.SetLightDirection(lightDir);
 		m_Ground9.Update();//地面
-		//m_gimmick.Update();
+		m_gimmick.Update();
 		m_pointa.Update();//ポインタ
 		m_GameCursor.Update();//ゲームカーソル
 		m_GCursorWind.Update();//ゲームカーソルかぜ
