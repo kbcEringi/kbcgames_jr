@@ -31,7 +31,7 @@ void CGameCursor::Draw()
 void CGameCursor::Move()
 {
 
-	const float LENGTH = 360.0f;
+	const float LENGTH = 480.0f;
 
 	if (GAMEPAD(CGamepad)->GetConnected())
 	{
