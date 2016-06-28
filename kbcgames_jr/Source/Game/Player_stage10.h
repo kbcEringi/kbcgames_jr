@@ -1,4 +1,4 @@
 ﻿//Player_stage10
 {
-	D3DXVECTOR3(0.94f, 0.50f, -0.50f),             //平行移動
+	D3DXVECTOR3(1.08f, 1.86f, 0.00f),             //平行移動
 },
